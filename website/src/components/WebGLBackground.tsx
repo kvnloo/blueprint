@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 import { useReducedMotion, useLocalStorage, useMediaQuery } from '../hooks';
 
 /**
@@ -215,6 +215,8 @@ export const WebGLBackground: React.FC = () => {
   const glRef = useRef<WebGL2RenderingContext | null>(null);
   const programRef = useRef<WebGLProgram | null>(null);
   const startTimeRef = useRef<number>(0);
+  const frameCountRef = useRef<number>(0);
+  const [isReady, setIsReady] = useState(false);
 
   const prefersReducedMotion = useReducedMotion();
   const [animationsEnabled] = useLocalStorage('bg-animations-enabled', true);
@@ -236,6 +238,12 @@ export const WebGLBackground: React.FC = () => {
 
     // Draw
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+    // Wait for a few frames before showing to ensure stable render
+    frameCountRef.current++;
+    if (frameCountRef.current === 10) {
+      setIsReady(true);
+    }
 
     // Continue animation loop
     animationFrameRef.current = requestAnimationFrame(render);
@@ -355,10 +363,7 @@ export const WebGLBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full -z-10 pointer-events-none"
-      style={{
-        imageRendering: isMobile ? 'auto' : 'auto',
-      }}
+      className={`fixed inset-0 w-full h-full -z-10 pointer-events-none transition-opacity duration-700 ease-out ${isReady ? 'opacity-100' : 'opacity-0'}`}
       aria-hidden="true"
     />
   );
