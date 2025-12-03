@@ -1,0 +1,593 @@
+/**
+ * BLUEPRINT SOLARPUNK ANIMATION SYSTEM
+ * Organic, nature-inspired animations with performance optimization
+ */
+
+/* ============================================
+   1. ENTRY ANIMATIONS
+   ============================================ */
+
+/* Organic growth/unfold effect */
+@keyframes organic-bloom {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+    filter: blur(4px);
+  }
+  60% {
+    transform: scale(1.02) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Unfold from seed to full element */
+@keyframes seed-unfold {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-12deg);
+    transform-origin: center bottom;
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.6) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Natural fade with easing */
+@keyframes fade-in-natural {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Slide up with organic timing */
+@keyframes rise-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered list reveal */
+@keyframes stagger-reveal {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Leaf-like flutter in */
+@keyframes flutter-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) rotate(-15deg);
+  }
+  60% {
+    transform: translateY(5px) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* ============================================
+   2. HOVER STATES
+   ============================================ */
+
+/* Organic pulse for buttons */
+@keyframes organic-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Glow bloom effect */
+@keyframes glow-bloom {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(var(--accent-rgb), 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+  }
+}
+
+/* Card lift with organic shadow */
+@keyframes lift-bloom {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(var(--accent-rgb), 0.15),
+                0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Underline growth animation */
+@keyframes underline-grow {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* Subtle background shift */
+@keyframes bg-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Ripple effect */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   3. SCROLL ANIMATIONS
+   ============================================ */
+
+/* Parallax float */
+@keyframes parallax-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Progress bar fill */
+@keyframes progress-fill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Section slide transition */
+@keyframes section-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Reveal mask */
+@keyframes reveal-mask {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Scroll indicator bounce */
+@keyframes scroll-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* ============================================
+   4. MICRO-INTERACTIONS
+   ============================================ */
+
+/* Input focus bloom */
+@keyframes input-focus {
+  0% {
+    border-color: var(--border);
+    box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+  }
+  100% {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
+  }
+}
+
+/* Success check animation */
+@keyframes success-check {
+  0% {
+    stroke-dashoffset: 100;
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    transform: scale(1);
+  }
+}
+
+/* Error shake */
+@keyframes error-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+/* Loading spinner (organic) */
+@keyframes organic-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Skeleton shimmer */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Toggle switch slide */
+@keyframes toggle-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+/* ============================================
+   5. SPECIAL EFFECTS
+   ============================================ */
+
+/* Floating particles (spores, leaves, light dots) */
+@keyframes particle-float {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(30px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Organic path animation (vine-like) */
+@keyframes vine-grow {
+  0% {
+    stroke-dashoffset: 1000;
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* Water ripple effect */
+@keyframes water-ripple {
+  0% {
+    transform: scale(1) translateZ(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5) translateZ(0);
+    opacity: 0;
+  }
+}
+
+/* Sun ray rotation */
+@keyframes sun-rays {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* Light beam scan */
+@keyframes light-beam {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+/* Breathing glow */
+@keyframes breathing-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(var(--accent-rgb), 0.8));
+  }
+}
+
+/* Gradient shift */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Border beam (inspired by template) */
+@keyframes border-beam {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+/* Mask pan */
+@keyframes mask-pan {
+  0% {
+    mask-position: 0% 0%;
+  }
+  100% {
+    mask-position: 100% 0%;
+  }
+}
+
+/* ============================================
+   6. UTILITY CLASSES
+   ============================================ */
+
+/* Entry animations */
+.animate-bloom {
+  animation: organic-bloom 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-unfold {
+  animation: seed-unfold 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in-natural 0.6s ease-out forwards;
+}
+
+.animate-rise {
+  animation: rise-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-flutter {
+  animation: flutter-in 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Stagger delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Hover states */
+.hover-pulse:hover {
+  animation: organic-pulse 1.5s ease-in-out infinite;
+}
+
+.hover-bloom:hover {
+  animation: glow-bloom 1.5s ease-in-out;
+}
+
+.hover-lift:hover {
+  animation: lift-bloom 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Special effects */
+.animate-particle {
+  animation: particle-float 8s linear infinite;
+}
+
+.animate-vine {
+  stroke-dasharray: 1000;
+  animation: vine-grow 3s ease-out forwards;
+}
+
+.animate-sun-rays {
+  animation: sun-rays 20s linear infinite;
+}
+
+.animate-breathing {
+  animation: breathing-glow 3s ease-in-out infinite;
+}
+
+/* Loading states */
+.animate-spin {
+  animation: organic-spin 1s linear infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+/* Micro-interactions */
+.animate-error {
+  animation: error-shake 0.5s ease-in-out;
+}
+
+.animate-success {
+  animation: success-check 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ============================================
+   7. REDUCED MOTION ALTERNATIVES
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Preserve essential feedback animations */
+  .animate-error {
+    animation-duration: 0.3s !important;
+  }
+
+  .animate-success {
+    animation-duration: 0.3s !important;
+  }
+}
+
+/* ============================================
+   8. PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* GPU acceleration for animations */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+.will-animate-after {
+  will-change: auto;
+}
+
+/* Contain layout shifts */
+.contain-layout {
+  contain: layout style paint;
+}
+
+/* ============================================
+   9. MOBILE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Reduce animation complexity */
+  .animate-bloom {
+    animation-duration: 0.5s;
+  }
+
+  .animate-particle {
+    animation-duration: 5s;
+  }
+
+  /* Disable expensive effects */
+  .animate-sun-rays {
+    animation: none;
+  }
+
+  /* Simplify hover effects to tap */
+  .hover-lift:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease-out;
+    animation: none;
+  }
+}
+
+/* ============================================
+   10. DARK MODE ADJUSTMENTS
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  @keyframes glow-bloom {
+    0% {
+      box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+    }
+    50% {
+      box-shadow: 0 0 30px 15px rgba(var(--accent-rgb), 0.4);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+    }
+  }
+
+  @keyframes breathing-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 12px rgba(var(--accent-rgb), 0.6));
+    }
+    50% {
+      filter: drop-shadow(0 0 24px rgba(var(--accent-rgb), 1));
+    }
+  }
+}

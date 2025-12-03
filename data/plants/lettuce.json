@@ -1,0 +1,189 @@
+{
+  "plant": "lettuce",
+  "scientific_name": "Lactuca sativa",
+  "varieties": [
+    {
+      "name": "Butterhead",
+      "days_to_harvest": 45,
+      "yield_per_plant_oz": 6,
+      "notes": "Loose heads, tender leaves"
+    },
+    {
+      "name": "Romaine",
+      "days_to_harvest": 55,
+      "yield_per_plant_oz": 10,
+      "notes": "Upright growth, crisp texture"
+    },
+    {
+      "name": "Leaf Lettuce",
+      "days_to_harvest": 40,
+      "yield_per_plant_oz": 5,
+      "notes": "Continuous harvest, fast growing"
+    },
+    {
+      "name": "Bibb",
+      "days_to_harvest": 50,
+      "yield_per_plant_oz": 5,
+      "notes": "Small heads, sweet flavor"
+    }
+  ],
+  "growing_parameters": {
+    "ph": {
+      "min": 5.5,
+      "optimal_low": 5.8,
+      "optimal_high": 6.2,
+      "max": 6.8,
+      "unit": "pH"
+    },
+    "ec": {
+      "seedling": {
+        "min": 400,
+        "max": 800,
+        "unit": "µS/cm"
+      },
+      "vegetative": {
+        "min": 800,
+        "max": 1200,
+        "unit": "µS/cm"
+      },
+      "mature": {
+        "min": 1000,
+        "max": 1400,
+        "unit": "µS/cm"
+      }
+    },
+    "temperature": {
+      "air": {
+        "min_c": 15,
+        "optimal_day_c": 21,
+        "optimal_night_c": 17,
+        "max_c": 25,
+        "notes": "Heat causes bolting"
+      },
+      "water": {
+        "min_c": 15,
+        "optimal_c": 20,
+        "max_c": 24,
+        "notes": "Cool roots preferred"
+      }
+    },
+    "light": {
+      "dli": {
+        "min": 12,
+        "optimal": 17,
+        "max": 22,
+        "unit": "mol/m²/day",
+        "notes": "Higher DLI = faster growth but more tipburn risk"
+      },
+      "ppfd": {
+        "min": 150,
+        "optimal": 250,
+        "max": 400,
+        "unit": "µmol/m²/s",
+        "notes": "At 16 hour photoperiod"
+      },
+      "photoperiod": {
+        "min_hours": 12,
+        "optimal_hours": 16,
+        "max_hours": 18,
+        "notes": "Longer days speed growth"
+      }
+    },
+    "humidity": {
+      "min_pct": 50,
+      "optimal_pct": 65,
+      "max_pct": 80,
+      "notes": "High humidity increases disease risk"
+    },
+    "co2": {
+      "ambient_ppm": 400,
+      "supplemented_ppm": 1000,
+      "max_ppm": 1500,
+      "notes": "Supplementation optional, increases yield 20-30%"
+    }
+  },
+  "nutrient_requirements": {
+    "nitrogen_ppm": {
+      "min": 100,
+      "optimal": 150,
+      "max": 200
+    },
+    "phosphorus_ppm": {
+      "min": 30,
+      "optimal": 50,
+      "max": 80
+    },
+    "potassium_ppm": {
+      "min": 150,
+      "optimal": 200,
+      "max": 250
+    },
+    "calcium_ppm": {
+      "min": 150,
+      "optimal": 200,
+      "max": 250,
+      "notes": "Critical for preventing tipburn"
+    },
+    "magnesium_ppm": {
+      "min": 30,
+      "optimal": 50,
+      "max": 75
+    }
+  },
+  "common_issues": [
+    {
+      "issue": "Tipburn",
+      "cause": "Calcium deficiency at leaf tips due to transpiration issues",
+      "prevention": "Increase air movement, reduce humidity, increase Ca in solution",
+      "severity": "Common"
+    },
+    {
+      "issue": "Bolting",
+      "cause": "Temperature too high (>25°C) or photoperiod stress",
+      "prevention": "Maintain cool temperatures, consistent light schedule",
+      "severity": "Common"
+    },
+    {
+      "issue": "Root rot",
+      "cause": "Pythium infection from warm, poorly oxygenated solution",
+      "prevention": "Keep water cool (<22°C), add air stones, use beneficial bacteria",
+      "severity": "Moderate"
+    },
+    {
+      "issue": "Nutrient burn",
+      "cause": "EC too high, especially for seedlings",
+      "prevention": "Start with low EC, increase gradually",
+      "severity": "Common"
+    }
+  ],
+  "harvest_info": {
+    "first_harvest_days": 21,
+    "full_harvest_days": 45,
+    "harvest_method": "Cut-and-come-again for leaf types, full head for butterhead/romaine",
+    "storage": "Refrigerate 34-38°F, high humidity, 1-2 weeks shelf life",
+    "yield_per_sqft_year_lbs": 15,
+    "notes": "Stagger plantings every 2 weeks for continuous harvest"
+  },
+  "economics": {
+    "seed_cost_per_plant": 0.02,
+    "nutrient_cost_per_plant": 0.05,
+    "electricity_per_plant_kwh": 0.8,
+    "total_cost_per_plant": 0.15,
+    "retail_price_per_lb": 4.00,
+    "profit_per_plant": 0.35,
+    "notes": "Based on $0.12/kWh electricity"
+  },
+  "sources": [
+    {
+      "title": "Cornell CEA Lettuce Handbook",
+      "url": "https://cea.cals.cornell.edu/",
+      "credibility": 0.95
+    },
+    {
+      "title": "NASA VEGGIE Experiment Results",
+      "url": "https://www.nasa.gov/mission_pages/station/research/experiments/explorer/Investigation.html?#id=2032",
+      "credibility": 0.98
+    }
+  ],
+  "last_updated": "2025-11-29"
+}
