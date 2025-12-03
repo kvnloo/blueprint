@@ -179,13 +179,21 @@ const Pipeline = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {/* Blueprint Track */}
             <motion.div
-              whileHover={{ y: -4, scale: 1.02 }}
+              whileHover="hover"
+              initial="idle"
               transition={{ duration: 0.3 }}
+              variants={{
+                idle: { y: 0, scale: 1 },
+                hover: { y: -4, scale: 1.02 }
+              }}
               className="group bg-teal-500/10 rounded-xl border border-teal-500/20 p-6 text-center cursor-pointer hover:border-teal-500/40 hover:bg-teal-500/15 transition-colors duration-300"
             >
               <motion.div
                 className="mx-auto mb-3 w-8 h-8"
-                whileHover={{ scale: [1, 1.2, 1], transition: { repeat: Infinity, duration: 0.8 } }}
+                variants={{
+                  idle: { scale: 1 },
+                  hover: { scale: [1, 1.2, 1], transition: { repeat: Infinity, duration: 0.8 } }
+                }}
               >
                 <Heart className="w-8 h-8 text-teal-400" />
               </motion.div>
@@ -196,13 +204,22 @@ const Pipeline = () => {
 
             {/* World Sim Track */}
             <motion.div
-              whileHover={{ y: -4, scale: 1.02 }}
+              whileHover="hover"
+              initial="idle"
               transition={{ duration: 0.3 }}
+              variants={{
+                idle: { y: 0, scale: 1 },
+                hover: { y: -4, scale: 1.02 }
+              }}
               className="group bg-amber-500/10 rounded-xl border border-amber-500/20 p-6 text-center cursor-pointer hover:border-amber-500/40 hover:bg-amber-500/15 transition-colors duration-300"
             >
               <motion.div
                 className="mx-auto mb-3 w-8 h-8"
-                whileHover={{ rotate: 360, transition: { duration: 2, ease: "linear" } }}
+                style={{ perspective: 200 }}
+                variants={{
+                  idle: { rotateY: 0 },
+                  hover: { rotateY: 360, transition: { duration: 3, ease: "linear", repeat: Infinity } }
+                }}
               >
                 <Globe className="w-8 h-8 text-amber-400" />
               </motion.div>
@@ -213,13 +230,21 @@ const Pipeline = () => {
 
             {/* Evolve Track */}
             <motion.div
-              whileHover={{ y: -4, scale: 1.02 }}
+              whileHover="hover"
+              initial="idle"
               transition={{ duration: 0.3 }}
+              variants={{
+                idle: { y: 0, scale: 1 },
+                hover: { y: -4, scale: 1.02 }
+              }}
               className="group bg-emerald-500/10 rounded-xl border border-emerald-500/20 p-6 text-center cursor-pointer hover:border-emerald-500/40 hover:bg-emerald-500/15 transition-colors duration-300"
             >
               <motion.div
                 className="mx-auto mb-3 w-8 h-8"
-                whileHover={{ filter: ["brightness(1)", "brightness(1.4)", "brightness(1)"], transition: { repeat: Infinity, duration: 1 } }}
+                variants={{
+                  idle: { filter: "brightness(1)" },
+                  hover: { filter: ["brightness(1)", "brightness(1.4)", "brightness(1)"], transition: { repeat: Infinity, duration: 1 } }
+                }}
               >
                 <Cpu className="w-8 h-8 text-emerald-400" />
               </motion.div>
