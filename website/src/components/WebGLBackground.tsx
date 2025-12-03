@@ -170,10 +170,9 @@ void main() {
   float vignette = 1.0 - smoothstep(vignetteRadius * 0.5, vignetteRadius, vignetteDist);
   color *= vignette;
 
-  // Dark overlay for readability + wisps visible on top
-  vec3 darkBase = vec3(0.0, 0.0, 0.0);
-  vec3 finalColor = darkBase + color;
-  fragColor = vec4(finalColor, 0.9);
+  // Output wisps only with transparency - dark overlay is handled by CSS
+  float alpha = brightness * 0.9;
+  fragColor = vec4(color, alpha);
 }`;
 
 // Create and compile shader

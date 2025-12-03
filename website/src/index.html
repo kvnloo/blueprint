@@ -15,12 +15,44 @@
 
     <!-- Critical inline styles - prevents white flash -->
     <style>
-      /* Base styles applied immediately */
-      html, body {
+      /* Base styles applied immediately - transparent body allows background image to show */
+      html {
         margin: 0;
         padding: 0;
         background-color: #050505;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
         color: #ffffff;
+      }
+
+      /* Loading overlay - transparent so background shows through */
+      #loading-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        transition: opacity 0.5s ease-out;
+      }
+      #loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .loading-spinner {
+        width: 48px;
+        height: 48px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-top-color: rgba(20, 184, 166, 0.8);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
       }
 
       /* Font-face declarations with font-display: swap */
@@ -84,7 +116,7 @@
     </script>
     <style>
       body {
-        background-color: #050505;
+        background-color: transparent;
         color: #ffffff;
       }
       .perspective-1000 {
@@ -113,6 +145,10 @@
 <link rel="stylesheet" href="/index.css">
 </head>
   <body>
+    <!-- Loading spinner - shows while React loads, transparent background -->
+    <div id="loading-overlay">
+      <div class="loading-spinner"></div>
+    </div>
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

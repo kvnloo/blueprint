@@ -21,6 +21,21 @@ export default function App() {
   const [animationsEnabled] = useLocalStorage('bg-animations-enabled', true);
 
   useEffect(() => {
+    // Hide loading overlay once React has mounted
+    const overlay = document.getElementById('loading-overlay');
+
+    if (overlay) {
+      // Small delay to ensure smooth transition
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        // Remove from DOM after transition completes
+        setTimeout(() => overlay.remove(), 500);
+      }, 100);
+    }
+
+  }, []);
+
+  useEffect(() => {
     // Don't load WebGL if user prefers reduced motion or has disabled animations
     if (prefersReducedMotion || !animationsEnabled) return;
 
@@ -38,6 +53,16 @@ export default function App() {
       <div
         className="fixed inset-0 -z-20 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${backgroundImage})` }}
+        aria-hidden="true"
+      />
+
+      {/* Dark vignette overlay for text readability - loads with background */}
+      <div
+        className="fixed inset-0 pointer-events-none"
+        style={{
+          zIndex: -15,
+          background: 'radial-gradient(ellipse 70% 40% at 50% 20%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.92) 100%)',
+        }}
         aria-hidden="true"
       />
 
