@@ -20,12 +20,28 @@ const Hero = () => {
             C(RAID) PIPELINE
           </div>
 
-          {/* Headline */}
+          {/* Headline - Animated text reveal */}
           <h1 className="text-5xl lg:text-7xl font-display font-bold leading-tight">
-            Research to <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-teal-200">
+            {['Research', 'to'].map((word, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
+                className="inline-block mr-4"
+              >
+                {word}
+              </motion.span>
+            ))}
+            <br />
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-teal-200 inline-block"
+            >
               Production.
-            </span>
+            </motion.span>
           </h1>
 
           {/* Subtitle */}

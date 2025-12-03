@@ -1,5 +1,37 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
+
+// Animated counter component
+const AnimatedCounter = ({ value, label }: { value: string; label: string }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, Math.round);
+
+  // Check if value is a number
+  const isNumber = !isNaN(parseInt(value));
+
+  useEffect(() => {
+    if (isInView && isNumber) {
+      animate(count, parseInt(value), { duration: 2, ease: "easeOut" });
+    }
+  }, [isInView, isNumber, value, count]);
+
+  return (
+    <motion.div
+      ref={ref}
+      whileHover={{ y: -5 }}
+      className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-teal-500/30 transition-colors"
+    >
+      <div className="text-4xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-2">
+        {isNumber ? <motion.span>{rounded}</motion.span> : value}
+      </div>
+      <div className="text-sm font-medium text-teal-500/80 uppercase tracking-wide">
+        {label}
+      </div>
+    </motion.div>
+  );
+};
 
 const About = () => {
   return (
@@ -38,18 +70,7 @@ const About = () => {
                     { val: '6', label: 'Pipeline Stages' },
                     { val: '∞', label: 'Automation Loop' }
                 ].map((stat, i) => (
-                    <motion.div
-                        whileHover={{ y: -5 }}
-                        className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-teal-500/30 transition-colors"
-                        key={i}
-                    >
-                        <div className="text-4xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-2">
-                            {stat.val}
-                        </div>
-                        <div className="text-sm font-medium text-teal-500/80 uppercase tracking-wide">
-                            {stat.label}
-                        </div>
-                    </motion.div>
+                    <AnimatedCounter key={i} value={stat.val} label={stat.label} />
                 ))}
             </div>
         </div>
