@@ -4,10 +4,79 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>zer0 | Building Autonomous Futures</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Critical: Preconnect to font servers -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Critical: Preload fonts to prevent FOUT -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/spacegrotesk/v16/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7oUXskPMBBSSJLm2E.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Critical inline styles - prevents white flash -->
+    <style>
+      /* Base styles applied immediately - transparent body allows background image to show */
+      html {
+        margin: 0;
+        padding: 0;
+        background-color: #050505;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        color: #ffffff;
+      }
+
+      /* Loading overlay - transparent so background shows through */
+      #loading-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        transition: opacity 0.5s ease-out;
+      }
+      #loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .loading-spinner {
+        width: 48px;
+        height: 48px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-top-color: rgba(20, 184, 166, 0.8);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      /* Font-face declarations with font-display: swap */
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 300 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2) format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        font-style: normal;
+        font-weight: 500 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/spacegrotesk/v16/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7oUXskPMBBSSJLm2E.woff2) format('woff2');
+      }
+    </style>
+
+    <!-- Load Google Fonts CSS (with font-display already set via &display=swap) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -47,7 +116,7 @@
     </script>
     <style>
       body {
-        background-color: #050505;
+        background-color: transparent;
         color: #ffffff;
       }
       .perspective-1000 {
@@ -76,6 +145,10 @@
 <link rel="stylesheet" href="/index.css">
 </head>
   <body>
+    <!-- Loading spinner - shows while React loads, transparent background -->
+    <div id="loading-overlay">
+      <div class="loading-spinner"></div>
+    </div>
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

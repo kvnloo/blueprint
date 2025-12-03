@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 import { useReducedMotion, useLocalStorage, useMediaQuery } from '../hooks';
 
 /**
@@ -25,7 +25,7 @@ void main() {
   gl_Position = a_position;
 }`;
 
-// Fragment shader - wisps with gradient mapping, motion trails, stretch wind effect, and vignette
+// Fragment shader - wisps matching exact Aura/Unicorn Studio parameters
 const FRAGMENT_SHADER = `#version 300 es
 precision highp float;
 
@@ -35,7 +35,7 @@ out vec4 fragColor;
 
 const float PI = 3.14159265359;
 
-// Hash function for Voronoi
+// Hash function for Voronoi (exact match to original)
 vec2 hash(vec2 p) {
   p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
   return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
@@ -43,9 +43,7 @@ vec2 hash(vec2 p) {
 
 // Rotation matrix
 mat2 rot(float a) {
-  float c = cos(a);
-  float s = sin(a);
-  return mat2(c, -s, s, c);
+  return mat2(cos(a), -sin(a), sin(a), cos(a));
 }
 
 // Gradient color mapping (orange/amber - matching hero section theme)
@@ -73,155 +71,108 @@ vec3 gradientColor(float luma) {
   }
 }
 
-// Voronoi additive pattern - creates individual "stars" that glow
-float voronoi_additive(vec2 st, float radius, float time) {
+// Voronoi additive pattern - EXACT match to Aura original
+float voronoi_additive(vec2 st, float radius) {
   vec2 i_st = floor(st);
-  float total = 0.0;
+  float total_contribution = 0.0;
 
-  // 5x5 neighborhood search
+  // 5x5 neighborhood search (exact match)
   for (int y = -2; y <= 2; y++) {
     for (int x = -2; x <= 2; x++) {
-      vec2 cell_id = i_st + vec2(float(x), float(y));
+      vec2 neighbor = vec2(float(x), float(y));
+      vec2 cell_id = i_st + neighbor;
       vec2 point = hash(cell_id);
 
-      // Static point positions (no wandering as per original)
+      // Static point positions - wander = 0 in original
       point = 0.5 + 0.5 * sin(5.0 + 6.2831 * point);
 
-      vec2 starPos = cell_id + point;
-      float dist = length(starPos - st);
+      vec2 starAbsPos = cell_id + point;
+      vec2 diff = starAbsPos - st;
+      float dist = length(diff);
 
-      // Inverse distance for glow effect - smaller radius = tighter glow
+      // Inverse distance glow (original formula)
       float contribution = radius / max(dist, radius * 0.1);
 
-      // Fast shimmer effect (creates twinkling)
-      float shimmer_phase = dot(point, vec2(1.0)) * 10.0 + hash(cell_id).x * 5.0 + time * 2.0;
-      float shimmer = (sin(shimmer_phase) + 1.0) * 0.5 + 0.5;
+      // Shimmer effect
+      float shimmer_phase = dot(point, vec2(1.0)) * 10.0 + hash(cell_id).x * 5.0 + uTime * 0.5;
+      float shimmer = mix(1.0, (sin(shimmer_phase) + 1.0), 1.0);
       contribution *= shimmer;
 
-      // Blend squared and linear
-      total += mix(contribution * contribution, contribution * 2.0, 0.6);
+      // Blend formula
+      total_contribution += mix(contribution * contribution, contribution * 2.0, 0.6);
     }
   }
-  return total;
-}
-
-// Sample with motion blur trail (creates comet effect) - clean trails
-float sampleWithTrail(vec2 uv, vec2 aspect, float time, float trailLength) {
-  float total = 0.0;
-  const int TRAIL_SAMPLES = 6;
-
-  // Trail direction: UP and to the LEFT (opposite of movement = down-right)
-  vec2 trailDir = vec2(-0.3, 1.0);
-
-  for (int i = 0; i < TRAIL_SAMPLES; i++) {
-    float t = float(i) / float(TRAIL_SAMPLES - 1);
-    float weight = 1.0 - t * 0.85; // Fade along trail
-
-    // Clean straight trail
-    vec2 trailOffset = trailDir * t * trailLength;
-    vec2 sampleUV = uv + trailOffset;
-
-    // Two-pass voronoi at different scales
-    float pass1 = voronoi_additive(sampleUV * aspect * 0.95, 0.035, time);
-    float pass2 = voronoi_additive(sampleUV * aspect * 1.2 + vec2(10.0), 0.035, time);
-
-    float brightness = pass1 * 0.015 + pass2 * 0.025;
-    total += brightness * weight;
-  }
-
-  return total / float(TRAIL_SAMPLES) * 2.0;
-}
-
-// Wind/Stretch post-processing distortion (from Unicorn Studio Layer 4 "stretch")
-// This distorts UV coordinates to create wind-swept appearance
-vec2 applyWindStretch(vec2 uv, vec2 aspect, float time) {
-  // Stretch center position (slightly above center)
-  vec2 stretchCenter = vec2(0.5, 0.48);
-
-  // Wind angle - animated slowly over time for gentle swaying
-  // Base angle ~-270 degrees with subtle time-based variation
-  float baseAngle = (0.75 - 0.25) * -2.0 * PI;  // ~-270 degrees
-  float windSway = sin(time * 0.15) * 0.1;       // Gentle swaying
-  float angle = baseAngle + windSway;
-
-  // Stretch amounts (from extracted shader, scaled down for subtlety)
-  float stretchX = 0.08;   // Horizontal stretch intensity
-  float stretchY = 0.4;    // Vertical stretch intensity (stronger = more wind streaks)
-
-  // Get direction from center
-  vec2 dir = uv - stretchCenter;
-  dir.x *= aspect.x;  // Correct for aspect ratio
-
-  // Rotate to align with wind direction
-  vec2 rotDir = dir * rot(angle);
-
-  // Only stretch on the "downwind" side (positive x after rotation)
-  // This creates the one-directional wind sweep effect
-  float stretchMask = smoothstep(-0.1, 0.3, rotDir.x);
-
-  // Exponential falloff from center for natural wind feel
-  float distFromCenter = length(dir);
-  float falloff = 1.0 - exp(-distFromCenter * 3.0);
-  falloff *= falloff;  // Quadratic falloff for softer edges
-
-  // Calculate stretch offset
-  vec2 stretchOffset = vec2(0.0);
-  if (stretchMask > 0.0) {
-    // Stretch in the wind direction
-    vec2 windDir = vec2(cos(angle), sin(angle));
-    float stretchAmount = stretchMask * falloff * (stretchX + stretchY * abs(rotDir.y));
-    stretchOffset = windDir * stretchAmount * 0.05;
-  }
-
-  return uv + stretchOffset;
+  return total_contribution;
 }
 
 void main() {
   vec2 uv = gl_FragCoord.xy / uResolution;
-  vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
+  vec2 aspectRatio = vec2(uResolution.x / uResolution.y, 1.0);
 
-  // Apply wind stretch distortion to UV (post-process style)
-  vec2 windUV = applyWindStretch(uv, aspect, uTime);
+  // Center and apply aspect ratio
+  vec2 st = uv - vec2(0.5, 0.5);
+  st *= aspectRatio;
 
-  // Center UV for wisps calculation
-  vec2 centered = windUV - 0.5;
-  centered *= aspect;
+  // Rotation: 0.3194 * 2 * PI (~115 degrees) - exact from original
+  st = st * rot(0.3194 * 2.0 * PI);
 
-  // Rotation (115.4 degrees)
-  centered = centered * rot(0.3194 * 2.0 * PI);
+  // Scale: 40.0 * 0.54 = 21.6 - exact from original
+  st *= 40.0 * 0.54;
 
-  // Base scale
-  centered *= 18.0;
+  // Y-stretch: mix(vec2(1.0), vec2(1.0, 0.0), 0.96) - exact from original
+  // This creates the vertical wisp effect
+  st *= mix(vec2(1.0), vec2(1.0, 0.0), 0.96);
 
-  // Y-stretch (creates vertical wisps)
-  centered.y *= 0.06;
+  // Restore aspect ratio
+  st /= aspectRatio;
 
-  // Restore aspect
-  centered /= aspect;
+  // Movement: vertical only, speed increased 6x for much faster animation
+  vec2 movementOffset = vec2(0.0, uTime * 4.5 * -0.05);
 
-  // Movement direction: DOWN and to the RIGHT
-  float moveSpeed = 0.25;
-  vec2 movement = vec2(uTime * moveSpeed * 0.3, -uTime * moveSpeed);
+  // Two passes at different scales (exact from original)
+  // Pass 1: scale 38 * 0.54 = 20.52
+  // Pass 2: scale 48 * 0.54 = 25.92
+  vec2 st1 = st;
+  vec2 st2 = st;
 
-  vec2 animatedUV = centered + movement;
+  vec2 mouse1 = st1 + movementOffset;
+  vec2 mouse2 = st2 + movementOffset;
 
-  // Sample with motion trail for comet effect
-  float brightness = sampleWithTrail(animatedUV, aspect, uTime, 0.15);
+  // Radius: 0.5 * 0.09 = 0.045 (exact from original)
+  float radius = 0.5 * 0.09;
+
+  // Two-pass voronoi with exact scale ratios
+  float pass1 = voronoi_additive(mouse1 * aspectRatio * (38.0/40.0), radius);
+  float pass2 = voronoi_additive(mouse2 * aspectRatio * (48.0/40.0) + vec2(10.0), radius);
+
+  // Exact intensity multipliers from original
+  pass1 *= 0.02;
+  pass2 *= 0.04;
+
+  // Combine passes
+  float brightness = pass1 + pass2;
   brightness = clamp(brightness, 0.0, 1.0);
 
   // Apply gradient color mapping
   vec3 color = gradientColor(brightness);
 
-  // Vignette effect
-  vec2 vignetteCenter = vec2(0.5, 0.6);
-  float vignetteRadius = 0.7;
-  float vignette = 1.0 - smoothstep(vignetteRadius * 0.4, vignetteRadius, length((uv - vignetteCenter) * vec2(aspect.x * 0.8, 1.0)));
+  // Progressive blur from top - wisps fade/shrink toward top of screen
+  float blurGradient = smoothstep(0.0, 0.6, uv.y);
+  brightness *= mix(1.0, 0.3, blurGradient * blurGradient);
+
+  // Re-apply color after blur adjustment
+  color = gradientColor(brightness);
+
+  // Vignette effect (matching original position and radius)
+  vec2 vignettePos = vec2(0.49, 0.73);
+  float vignetteRadius = 0.622;
+  float vignetteDist = distance(uv * vec2(aspectRatio.x, 1.0), vignettePos * vec2(aspectRatio.x, 1.0));
+  float vignette = 1.0 - smoothstep(vignetteRadius * 0.5, vignetteRadius, vignetteDist);
   color *= vignette;
 
-  // Add subtle glow bloom
-  color += color * color * 0.3;
-
-  fragColor = vec4(color, 1.0);
+  // Output wisps only with transparency - dark overlay is handled by CSS
+  float alpha = brightness * 0.9;
+  fragColor = vec4(color, alpha);
 }`;
 
 // Create and compile shader
@@ -263,6 +214,8 @@ export const WebGLBackground: React.FC = () => {
   const glRef = useRef<WebGL2RenderingContext | null>(null);
   const programRef = useRef<WebGLProgram | null>(null);
   const startTimeRef = useRef<number>(0);
+  const frameCountRef = useRef<number>(0);
+  const [isReady, setIsReady] = useState(false);
 
   const prefersReducedMotion = useReducedMotion();
   const [animationsEnabled] = useLocalStorage('bg-animations-enabled', true);
@@ -284,6 +237,12 @@ export const WebGLBackground: React.FC = () => {
 
     // Draw
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+    // Wait for a few frames before showing to ensure stable render
+    frameCountRef.current++;
+    if (frameCountRef.current === 10) {
+      setIsReady(true);
+    }
 
     // Continue animation loop
     animationFrameRef.current = requestAnimationFrame(render);
@@ -319,13 +278,13 @@ export const WebGLBackground: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Initialize WebGL2
+    // Initialize WebGL2 with alpha for transparency
     const gl = canvas.getContext('webgl2', {
-      alpha: false,
+      alpha: true,
       antialias: false,
       depth: false,
       stencil: false,
-      premultipliedAlpha: false,
+      premultipliedAlpha: true,
       preserveDrawingBuffer: false,
     });
 
@@ -403,10 +362,7 @@ export const WebGLBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full -z-10 pointer-events-none"
-      style={{
-        imageRendering: isMobile ? 'auto' : 'auto',
-      }}
+      className={`fixed inset-0 w-full h-full -z-10 pointer-events-none transition-opacity duration-700 ease-out ${isReady ? 'opacity-100' : 'opacity-0'}`}
       aria-hidden="true"
     />
   );
