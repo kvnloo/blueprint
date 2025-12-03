@@ -48,6 +48,16 @@ export default function App() {
         )}
       </Suspense>
 
+      {/* Semi-transparent overlay to push animation into background */}
+      <div
+        className="fixed inset-0 pointer-events-none"
+        style={{
+          zIndex: -5,
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.8) 100%)',
+        }}
+        aria-hidden="true"
+      />
+
       {/* Background animation controls (accessibility) */}
       <BackgroundControls />
 
