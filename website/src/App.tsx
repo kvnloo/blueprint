@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect, useCallback } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -15,84 +15,22 @@ import backgroundImage from './assets/background.png';
 // Lazy load WebGL background for performance
 const WebGLBackground = lazy(() => import('./components/WebGLBackground'));
 
-// Helper to preload an image
-const preloadImage = (src: string): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve();
-    img.onerror = reject;
-    img.src = src;
-  });
-};
-
-// Helper to check if fonts are loaded
-const waitForFonts = (): Promise<void> => {
-  if (document.fonts && document.fonts.ready) {
-    return document.fonts.ready.then(() => {});
-  }
-  // Fallback: wait a bit for fonts
-  return new Promise(resolve => setTimeout(resolve, 100));
-};
-
 export default function App() {
   const [loadWebGL, setLoadWebGL] = useState(false);
-  const [isAppReady, setIsAppReady] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const [animationsEnabled] = useLocalStorage('bg-animations-enabled', true);
 
-  // Hide loading overlay and show content
-  const revealApp = useCallback(() => {
-    const overlay = document.getElementById('loading-overlay');
-    const root = document.getElementById('root');
-
-    if (overlay) {
-      overlay.classList.add('hidden');
-    }
-    if (root) {
-      root.classList.add('ready');
-    }
-    setIsAppReady(true);
-  }, []);
-
-  // Preload critical resources
-  useEffect(() => {
-    // Preload background image
-    preloadImage(backgroundImage)
-      .then(() => setImageLoaded(true))
-      .catch(() => setImageLoaded(true)); // Continue even if image fails
-
-    // Wait for fonts
-    waitForFonts()
-      .then(() => setFontsLoaded(true));
-  }, []);
-
-  // Reveal app when critical resources are ready
-  useEffect(() => {
-    if (imageLoaded && fontsLoaded) {
-      // Small delay to ensure React has rendered
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          revealApp();
-        });
-      });
-    }
-  }, [imageLoaded, fontsLoaded, revealApp]);
-
-  // Load WebGL after app is revealed
   useEffect(() => {
     // Don't load WebGL if user prefers reduced motion or has disabled animations
     if (prefersReducedMotion || !animationsEnabled) return;
-    if (!isAppReady) return;
 
-    // Lazy load WebGL after app is ready
+    // Lazy load WebGL after initial render
     if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(() => setLoadWebGL(true), { timeout: 1000 });
+      (window as any).requestIdleCallback(() => setLoadWebGL(true), { timeout: 2000 });
     } else {
-      setTimeout(() => setLoadWebGL(true), 500);
+      setTimeout(() => setLoadWebGL(true), 1000);
     }
-  }, [prefersReducedMotion, animationsEnabled, isAppReady]);
+  }, [prefersReducedMotion, animationsEnabled]);
 
   return (
     <div className="relative min-h-screen overflow-hidden text-white selection:bg-teal-500/30 selection:text-teal-200">
