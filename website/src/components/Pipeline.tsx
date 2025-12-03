@@ -1,8 +1,34 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Search, BarChart3, GitMerge, Rocket, ArrowRight, Heart, Globe, Cpu, ChefHat } from 'lucide-react';
+import { useReducedMotion, useMediaQuery } from '../hooks';
 
 const Pipeline = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  // Reduce blur intensity on mobile for performance
+  const blurAmount = isMobile ? 3 : 8;
+
+  // Animation variants with blur effect
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 30,
+      filter: prefersReducedMotion ? 'blur(0px)' : `blur(${blurAmount}px)`
+    },
+    visible: (delay: number) => ({
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        delay: delay * 0.15,
+        duration: 0.6,
+        ease: [0.2, 0.8, 0.2, 1]
+      }
+    })
+  };
+
   const phases = [
     {
       abbr: 'R',
@@ -62,65 +88,49 @@ const Pipeline = () => {
         </div>
 
         {/* Pipeline Flow */}
-        <div className="relative mb-24 pt-6">
-          {/* LAYER 1: Pure SVG Loop (z-0, decorative) - Animated on scroll */}
-          <motion.svg
-            className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {/* Single path draws entire loop with gap for label */}
-            <motion.path
-              d="
-                M 8,4 L 42,4
-                M 58,4 L 92,4
-                Q 98,4 98,10 L 98,50
-                L 98,90 Q 98,96 92,96
-                L 8,96 Q 2,96 2,90
-                L 2,50 L 2,10 Q 2,4 8,4
-              "
-              fill="none"
-              stroke="rgb(75,85,99)"
-              strokeOpacity="0.5"
-              strokeWidth="1.5"
-              vectorEffect="non-scaling-stroke"
-              variants={{
-                hidden: { pathLength: 0 },
-                visible: { pathLength: 1 }
-              }}
-              transition={{ duration: 2, ease: "easeInOut" }}
-            />
-          </motion.svg>
+        <div className="relative mb-24">
+          {/* "Continuous" label with bracket visualization */}
+          <div className="hidden lg:flex items-center justify-center mb-8">
+            {/* Left bracket arm */}
+            <div className="flex items-center">
+              <svg width="40" height="24" viewBox="0 0 40 24" className="text-gray-600">
+                <path d="M38 22 C20 22, 8 22, 8 12 C8 2, 20 2, 38 2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </div>
 
-          {/* LAYER 2: "Continuous" Label (z-10) */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0A0A0A] px-4 z-10 hidden lg:block">
-            <span className="text-xs text-gray-500 tracking-widest uppercase">Continuous</span>
+            {/* Label */}
+            <div className="px-6 flex items-center gap-3">
+              <div className="h-px w-8 bg-gradient-to-r from-transparent to-gray-600" />
+              <span className="text-sm font-medium text-gray-400 tracking-widest uppercase">Continuous</span>
+              <div className="h-px w-8 bg-gradient-to-l from-transparent to-gray-600" />
+            </div>
+
+            {/* Right bracket arm */}
+            <div className="flex items-center">
+              <svg width="40" height="24" viewBox="0 0 40 24" className="text-gray-600">
+                <path d="M2 2 C20 2, 32 2, 32 12 C32 22, 20 22, 2 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </div>
           </div>
 
-          {/* LAYER 3: Cards container with connection line (z-20) */}
-          <div className="relative z-20">
+
+          {/* Cards container with connection line */}
+          <div className="relative">
             {/* Connection line - centered on cards */}
             <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-teal-500/30 -translate-y-1/2 hidden lg:block" />
-
-            {/* Arrow on left side pointing into R card */}
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-2 text-gray-500 hidden lg:block">
-              <ArrowRight className="w-5 h-5" />
-            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {phases.map((phase, idx) => (
               <motion.div
                 key={phase.abbr}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.15, duration: 0.6 }}
-                whileHover={{ y: -4, transition: { duration: 0.3 } }}
+                custom={idx}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15, margin: "0px 0px -10% 0px" }}
+                whileHover={prefersReducedMotion ? {} : { y: -8, transition: { duration: 0.3 } }}
                 className="group relative"
+                style={{ willChange: 'transform, opacity, filter' }}
               >
                 {/* Arrow connector */}
                 {idx < phases.length - 1 && (
@@ -161,6 +171,26 @@ const Pipeline = () => {
             </div>
           </div>
 
+          {/* Feedback loop indicator - subtle curved arrow from D back to R */}
+          <div className="hidden lg:flex justify-center mt-6">
+            <div className="flex items-center gap-2 text-gray-600">
+              <svg width="200" height="20" viewBox="0 0 200 20" className="text-gray-600">
+                <defs>
+                  <marker id="feedbackArrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
+                  </marker>
+                </defs>
+                <path
+                  d="M180 5 C140 5, 100 15, 60 15 C40 15, 25 10, 20 5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeDasharray="4 3"
+                  markerEnd="url(#feedbackArrow)"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
 
         {/* Integration Diagram */}
@@ -178,80 +208,28 @@ const Pipeline = () => {
           {/* Integration Flow Diagram */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {/* Blueprint Track */}
-            <motion.div
-              whileHover="hover"
-              initial="idle"
-              transition={{ duration: 0.3 }}
-              variants={{
-                idle: { y: 0, scale: 1 },
-                hover: { y: -4, scale: 1.02 }
-              }}
-              className="group bg-teal-500/10 rounded-xl border border-teal-500/20 p-6 text-center cursor-pointer hover:border-teal-500/40 hover:bg-teal-500/15 transition-colors duration-300"
-            >
-              <motion.div
-                className="mx-auto mb-3 w-8 h-8"
-                variants={{
-                  idle: { scale: 1 },
-                  hover: { scale: [1, 1.2, 1], transition: { repeat: Infinity, duration: 0.8 } }
-                }}
-              >
-                <Heart className="w-8 h-8 text-teal-400" />
-              </motion.div>
+            <div className="bg-teal-500/10 rounded-xl border border-teal-500/20 p-6 text-center">
+              <Heart className="w-8 h-8 text-teal-400 mx-auto mb-3" />
               <div className="font-bold text-white mb-1">Blueprint</div>
               <div className="text-sm text-teal-400 mb-3">Health Tracker</div>
               <div className="text-xs text-gray-500">Nutrition needs + seed selection</div>
-            </motion.div>
+            </div>
 
             {/* World Sim Track */}
-            <motion.div
-              whileHover="hover"
-              initial="idle"
-              transition={{ duration: 0.3 }}
-              variants={{
-                idle: { y: 0, scale: 1 },
-                hover: { y: -4, scale: 1.02 }
-              }}
-              className="group bg-amber-500/10 rounded-xl border border-amber-500/20 p-6 text-center cursor-pointer hover:border-amber-500/40 hover:bg-amber-500/15 transition-colors duration-300"
-            >
-              <motion.div
-                className="mx-auto mb-3 w-8 h-8"
-                style={{ perspective: 200 }}
-                variants={{
-                  idle: { rotateY: 0 },
-                  hover: { rotateY: 360, transition: { duration: 3, ease: "linear", repeat: Infinity } }
-                }}
-              >
-                <Globe className="w-8 h-8 text-amber-400" />
-              </motion.div>
+            <div className="bg-amber-500/10 rounded-xl border border-amber-500/20 p-6 text-center">
+              <Globe className="w-8 h-8 text-amber-400 mx-auto mb-3" />
               <div className="font-bold text-white mb-1">World Sim</div>
               <div className="text-sm text-amber-400 mb-3">+ Robotics</div>
               <div className="text-xs text-gray-500">Autonomous farm + robot training</div>
-            </motion.div>
+            </div>
 
             {/* Evolve Track */}
-            <motion.div
-              whileHover="hover"
-              initial="idle"
-              transition={{ duration: 0.3 }}
-              variants={{
-                idle: { y: 0, scale: 1 },
-                hover: { y: -4, scale: 1.02 }
-              }}
-              className="group bg-emerald-500/10 rounded-xl border border-emerald-500/20 p-6 text-center cursor-pointer hover:border-emerald-500/40 hover:bg-emerald-500/15 transition-colors duration-300"
-            >
-              <motion.div
-                className="mx-auto mb-3 w-8 h-8"
-                variants={{
-                  idle: { filter: "brightness(1)" },
-                  hover: { filter: ["brightness(1)", "brightness(1.4)", "brightness(1)"], transition: { repeat: Infinity, duration: 1 } }
-                }}
-              >
-                <Cpu className="w-8 h-8 text-emerald-400" />
-              </motion.div>
+            <div className="bg-emerald-500/10 rounded-xl border border-emerald-500/20 p-6 text-center">
+              <Cpu className="w-8 h-8 text-emerald-400 mx-auto mb-3" />
               <div className="font-bold text-white mb-1">Evolve</div>
               <div className="text-sm text-emerald-400 mb-3">Orchestration</div>
               <div className="text-xs text-gray-500">Agent coordination + documentation</div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Arrow pointing down */}
@@ -263,20 +241,11 @@ const Pipeline = () => {
           </div>
 
           {/* Final Output */}
-          <motion.div
-            whileHover={{ y: -4, scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-            className="bg-gradient-to-r from-teal-500/10 via-amber-500/10 to-emerald-500/10 rounded-xl border border-white/10 p-6 text-center max-w-md mx-auto cursor-pointer hover:border-white/25 hover:from-teal-500/15 hover:via-amber-500/15 hover:to-emerald-500/15 transition-all duration-300"
-          >
-            <motion.div
-              whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-              transition={{ duration: 0.5 }}
-            >
-              <ChefHat className="w-10 h-10 text-white mx-auto mb-3" />
-            </motion.div>
+          <div className="bg-gradient-to-r from-teal-500/10 via-amber-500/10 to-emerald-500/10 rounded-xl border border-white/10 p-6 text-center max-w-md mx-auto">
+            <ChefHat className="w-10 h-10 text-white mx-auto mb-3" />
             <div className="font-bold text-white text-lg mb-2">Robot Chef Output</div>
             <div className="text-sm text-gray-400">Personalized, automated meals based on your health data</div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

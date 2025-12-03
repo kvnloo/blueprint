@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, Heart, Globe, ArrowRight, ExternalLink, FlaskConical, Apple, Dumbbell, Moon, Map, Bot, Leaf, ChefHat, FileCode, Workflow, GitBranch, Container } from 'lucide-react';
+import { useReducedMotion, useMediaQuery } from '../hooks';
 
 const products = [
   {
@@ -60,6 +61,29 @@ const products = [
 ];
 
 const Products = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const blurAmount = isMobile ? 3 : 8;
+
+  // Animation variants with blur effect
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 30,
+      filter: prefersReducedMotion ? 'blur(0px)' : `blur(${blurAmount}px)`
+    },
+    visible: (delay: number) => ({
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        delay: delay * 0.15,
+        duration: 0.6,
+        ease: [0.2, 0.8, 0.2, 1]
+      }
+    })
+  };
+
   return (
     <section id="products" className="py-32 relative">
       {/* Background glow */}
@@ -88,12 +112,14 @@ const Products = () => {
           {products.map((product, idx) => (
             <motion.div
               key={product.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.15, duration: 0.6 }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              custom={idx}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15, margin: "0px 0px -10% 0px" }}
+              whileHover={prefersReducedMotion ? {} : { y: -8, transition: { duration: 0.3 } }}
               className="group relative"
+              style={{ willChange: 'transform, opacity, filter' }}
             >
               {/* Card */}
               <div className="relative h-full bg-[#0A0A0A] rounded-2xl border border-white/10 p-8 overflow-hidden hover:border-white/20 transition-all duration-300">

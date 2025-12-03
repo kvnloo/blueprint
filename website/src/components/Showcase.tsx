@@ -1,7 +1,67 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { CheckCircle2, Zap, BarChart3, Globe2 } from 'lucide-react';
+import { useReducedMotion, useMediaQuery } from '../hooks';
 
 const Showcase = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const blurAmount = isMobile ? 3 : 8;
+
+  // Animation variants with blur effect
+  const phoneVariants = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+      filter: prefersReducedMotion ? 'blur(0px)' : `blur(${blurAmount}px)`
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: 0.8,
+        ease: [0.2, 0.8, 0.2, 1]
+      }
+    }
+  };
+
+  const contentVariants = {
+    hidden: {
+      opacity: 0,
+      x: 30,
+      filter: prefersReducedMotion ? 'blur(0px)' : `blur(${blurAmount}px)`
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: 0.8,
+        delay: 0.2,
+        ease: [0.2, 0.8, 0.2, 1]
+      }
+    }
+  };
+
+  const statVariants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+      filter: prefersReducedMotion ? 'blur(0px)' : `blur(${blurAmount}px)`
+    },
+    visible: (delay: number) => ({
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        delay: 0.4 + delay * 0.1,
+        duration: 0.5,
+        ease: [0.2, 0.8, 0.2, 1]
+      }
+    })
+  };
+
   return (
     <section className="py-32 relative overflow-hidden">
       {/* Background radial gradient */}
@@ -10,7 +70,14 @@ const Showcase = () => {
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
         
         {/* Phone Mockup */}
-        <div className="relative mx-auto lg:mx-0 order-2 lg:order-1">
+        <motion.div
+          variants={phoneVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="relative mx-auto lg:mx-0 order-2 lg:order-1"
+          style={{ willChange: 'transform, opacity, filter' }}
+        >
             <div className="relative z-10 w-[300px] h-[600px] bg-[#0A0A0A] rounded-[3rem] border-8 border-[#1a1a1a] shadow-2xl overflow-hidden ring-1 ring-white/10">
                 {/* Dynamic Island */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-3xl z-20" />
@@ -51,10 +118,17 @@ const Showcase = () => {
             
             {/* Glow behind phone */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-teal-500/10 blur-3xl -z-10 rounded-full" />
-        </div>
+        </motion.div>
 
         {/* Text Content */}
-        <div className="order-1 lg:order-2 space-y-12">
+        <motion.div
+          variants={contentVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="order-1 lg:order-2 space-y-12"
+          style={{ willChange: 'transform, opacity, filter' }}
+        >
             <div>
                 <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">
                     <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Monitor & Control</span>
@@ -72,15 +146,24 @@ const Showcase = () => {
                     { title: 'Efficiency Gains', val: '1,800%', icon: Zap },
                     { title: 'Autonomous', val: '24/7', icon: CheckCircle2 },
                 ].map((item, i) => (
-                    <div key={i} className="flex flex-col gap-2">
+                    <motion.div
+                      key={i}
+                      custom={i}
+                      variants={statVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      className="flex flex-col gap-2"
+                      style={{ willChange: 'transform, opacity, filter' }}
+                    >
                         <item.icon className="w-6 h-6 text-teal-500 mb-2" />
                         <div className="text-3xl font-bold text-white">{item.val}</div>
                         <div className="text-sm text-gray-500">{item.title}</div>
                         <div className="h-px w-full bg-gradient-to-r from-white/10 to-transparent mt-4" />
-                    </div>
+                    </motion.div>
                 ))}
             </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

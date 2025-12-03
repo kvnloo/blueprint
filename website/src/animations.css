@@ -299,6 +299,26 @@
    5. SPECIAL EFFECTS
    ============================================ */
 
+/* Floating particles for buttons - inspired by Aura template */
+@keyframes floating-points {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-55px);
+    opacity: 0;
+  }
+}
+
+/* Utility class for button particles */
+.animate-floating-point {
+  animation: floating-points infinite ease-in-out;
+}
+
 /* Floating particles (spores, leaves, light dots) */
 @keyframes particle-float {
   0% {
