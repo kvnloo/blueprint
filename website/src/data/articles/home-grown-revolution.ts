@@ -32,66 +32,102 @@ export const homeGrownRevolution: Article = {
       text: 'This document follows a problem-solving journey. We start with why (the nutrition gap most people don\'t know exists), move to how (the science NASA pioneered), and end with what (exact builds at three budget levels).'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE HOME-GROWN REVOLUTION
-Knowledge Map
-═══════════════════════════════════════════════════════════════════════════
-
-                         ┌────────────────────────────────────────┐
-                         │  PART I: THE PROBLEM                   │
-                         │  Why Store-Bought Isn\'t What You Think │
-                         └────────────────────┬───────────────────┘
-                                              │
-              ┌───────────────────────────────┼───────────────────────────────┐
-              │                               │                               │
-              ▼                               ▼                               ▼
-    ┌─────────────────┐            ┌─────────────────┐            ┌─────────────────┐
-    │  The Nutrient   │            │  The Time       │            │  The Taste      │
-    │  Degradation    │            │  Problem        │            │  You\'re         │
-    │  Curve          │            │                 │            │  Missing        │
-    │                 │            │  Farm → Store   │            │                 │
-    │  Vitamins lost  │            │  = 5-14 days    │            │  Peak ripeness  │
-    │  every hour     │            │  on average     │            │  never shipped  │
-    └─────────────────┘            └─────────────────┘            └─────────────────┘
-                                              │
-                         ┌────────────────────┴───────────────────┐
-                         │  PART II: THE SCIENCE                  │
-                         │  What NASA Figured Out                 │
-                         └────────────────────┬───────────────────┘
-                                              │
-              ┌───────────────────────────────┼───────────────────────────────┐
-              │                               │                               │
-              ▼                               ▼                               ▼
-    ┌─────────────────┐            ┌─────────────────┐            ┌─────────────────┐
-    │  LED Spectrum   │            │  Water &        │            │  Environment    │
-    │  Optimization   │            │  Nutrient       │            │  Control        │
-    │                 │            │  Delivery       │            │                 │
-    │  Red + Blue +   │            │  NFT, DWC,      │            │  Temp, humidity │
-    │  Far-Red        │            │  Aeroponics     │            │  CO₂, airflow   │
-    └─────────────────┘            └─────────────────┘            └─────────────────┘
-                                              │
-                         ┌────────────────────┴───────────────────┐
-                         │  PART III: THE BUILDS                  │
-                         │  Three Budget Tiers                    │
-                         └────────────────────┬───────────────────┘
-                                              │
-              ┌───────────────────────────────┼───────────────────────────────┐
-              │                               │                               │
-              ▼                               ▼                               ▼
-    ┌─────────────────┐            ┌─────────────────┐            ┌─────────────────┐
-    │  TIER 1: $50-   │            │  TIER 2: $150-  │            │  TIER 3: $400-  │
-    │  $100           │            │  $300           │            │  $800           │
-    │                 │            │                 │            │                 │
-    │  Kratky method  │            │  Tower garden   │            │  Full CEA       │
-    │  Basic LED      │            │  Quality LED    │            │  Automated      │
-    │  Manual care    │            │  Semi-auto      │            │  Sensors        │
-    └─────────────────┘            └─────────────────┘            └─────────────────┘
-                                              │
-                         ┌────────────────────┴───────────────────┐
-                         │  PART IV: OPTIMIZATION                 │
-                         │  Continuous Improvement Loop           │
-                         └────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'hierarchy',
+      data: {
+        title: 'THE HOME-GROWN REVOLUTION - Knowledge Map',
+        root: {
+          id: 'root',
+          label: 'The Home-Grown Revolution',
+          icon: 'leaf',
+          children: [
+            {
+              id: 'part1',
+              label: 'PART I: THE PROBLEM',
+              description: 'Why Store-Bought Isn\'t What You Think',
+              icon: 'target',
+              children: [
+                {
+                  id: 'nutrient',
+                  label: 'The Nutrient Degradation Curve',
+                  description: 'Vitamins lost every hour after harvest',
+                  icon: 'droplets'
+                },
+                {
+                  id: 'time',
+                  label: 'The Time Problem',
+                  description: 'Farm → Store = 5-14 days on average',
+                  icon: 'clock'
+                },
+                {
+                  id: 'taste',
+                  label: 'The Taste You\'re Missing',
+                  description: 'Peak ripeness never shipped',
+                  icon: 'leaf'
+                }
+              ]
+            },
+            {
+              id: 'part2',
+              label: 'PART II: THE SCIENCE',
+              description: 'What NASA Figured Out',
+              icon: 'brain',
+              children: [
+                {
+                  id: 'led',
+                  label: 'LED Spectrum Optimization',
+                  description: 'Red + Blue + Far-Red',
+                  icon: 'sun'
+                },
+                {
+                  id: 'water',
+                  label: 'Water & Nutrient Delivery',
+                  description: 'NFT, DWC, Aeroponics',
+                  icon: 'droplets'
+                },
+                {
+                  id: 'environment',
+                  label: 'Environment Control',
+                  description: 'Temp, humidity, CO₂, airflow',
+                  icon: 'home'
+                }
+              ]
+            },
+            {
+              id: 'part3',
+              label: 'PART III: THE BUILDS',
+              description: 'Three Budget Tiers',
+              icon: 'layers',
+              children: [
+                {
+                  id: 'tier1',
+                  label: 'TIER 1: $50-$100',
+                  description: 'Kratky method, Basic LED, Manual care',
+                  icon: 'leaf'
+                },
+                {
+                  id: 'tier2',
+                  label: 'TIER 2: $150-$300',
+                  description: 'Tower garden, Quality LED, Semi-auto',
+                  icon: 'layers'
+                },
+                {
+                  id: 'tier3',
+                  label: 'TIER 3: $400-$800',
+                  description: 'Full CEA, Automated, Sensors',
+                  icon: 'sparkles'
+                }
+              ]
+            },
+            {
+              id: 'part4',
+              label: 'PART IV: OPTIMIZATION',
+              description: 'Continuous Improvement Loop',
+              icon: 'target'
+            }
+          ]
+        }
+      }
     },
     {
       type: 'header',
@@ -160,32 +196,79 @@ Knowledge Map
       text: 'But here\'s the catch: you\'re not getting produce at Day 0. The supply chain looks like this:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE JOURNEY FROM FARM TO YOUR FORK
-═══════════════════════════════════════════════════════════════════════════
-
-                              TOTAL: 5-21 DAYS
-         ◄────────────────────────────────────────────────────────►
-
-    ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
-    │          │    │          │    │          │    │          │    │          │
-    │  HARVEST │───►│ TRANSIT  │───►│ DISTRIB. │───►│  STORE   │───►│   YOU    │
-    │          │    │          │    │  CENTER  │    │  SHELF   │    │          │
-    │  Day 0   │    │ 1-5 days │    │ 1-3 days │    │ 1-3 days │    │ 1-7 days │
-    │          │    │          │    │          │    │          │    │          │
-    └──────────┘    └──────────┘    └──────────┘    └──────────┘    └──────────┘
-
-    INTERNATIONAL PRODUCE (Southern hemisphere, winter imports):
-
-    ┌──────────┐    ┌──────────────────────┐    ┌──────────────────────────────┐
-    │          │    │                      │    │                              │
-    │  HARVEST │───►│   SHIP (2-4 weeks)   │───►│   Same distribution chain   │
-    │          │    │   or AIR (1-3 days)  │    │                              │
-    │          │    │                      │    │                              │
-    └──────────┘    └──────────────────────┘    └──────────────────────────────┘
-
-    By the time you eat that "fresh" salad, it might be 2-3 weeks old.`
+      type: 'diagram',
+      diagramType: 'process-flow',
+      data: {
+        title: 'THE JOURNEY FROM FARM TO YOUR FORK',
+        subtitle: 'Total: 5-21 days',
+        stages: [
+          {
+            id: 'harvest',
+            label: 'HARVEST',
+            description: 'Day 0',
+            icon: 'leaf',
+            status: 'success'
+          },
+          {
+            id: 'transit',
+            label: 'TRANSIT',
+            description: '1-5 days',
+            icon: 'target',
+            status: 'warning'
+          },
+          {
+            id: 'distribution',
+            label: 'DISTRIBUTION CENTER',
+            description: '1-3 days',
+            icon: 'home',
+            status: 'warning'
+          },
+          {
+            id: 'store',
+            label: 'STORE SHELF',
+            description: '1-3 days',
+            icon: 'home',
+            status: 'warning'
+          },
+          {
+            id: 'you',
+            label: 'YOU',
+            description: '1-7 days in your fridge',
+            icon: 'clock',
+            status: 'danger'
+          }
+        ],
+        alternatives: [
+          {
+            title: 'INTERNATIONAL PRODUCE',
+            description: 'Southern hemisphere, winter imports',
+            stages: [
+              {
+                id: 'intl-harvest',
+                label: 'HARVEST',
+                description: 'Day 0',
+                icon: 'leaf',
+                status: 'success'
+              },
+              {
+                id: 'intl-ship',
+                label: 'SHIP',
+                description: '2-4 weeks (ship) or 1-3 days (air)',
+                icon: 'target',
+                status: 'danger'
+              },
+              {
+                id: 'intl-dist',
+                label: 'DISTRIBUTION',
+                description: 'Same distribution chain as domestic',
+                icon: 'home',
+                status: 'danger'
+              }
+            ]
+          }
+        ],
+        footer: 'By the time you eat that "fresh" salad, it might be 2-3 weeks old.'
+      }
     },
     {
       type: 'text',
@@ -204,41 +287,45 @@ Knowledge Map
       text: 'The tomatoes you buy at the supermarket are picked green-weeks before they\'re ripe-because ripe tomatoes don\'t survive shipping. They\'re then treated with ethylene gas to trigger color change. The result? A tomato that looks red but never developed the complex sugars, acids, and volatile aromatics that make a vine-ripened tomato taste like summer.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE RIPENESS-SHIPPING TRADEOFF
-═══════════════════════════════════════════════════════════════════════════
-
-                        FLAVOR/NUTRITION
-                              ▲
-                              │
-                    PERFECT   │               ★ VINE-RIPENED
-                              │              ╱   (Home-grown)
-                              │             ╱
-                              │            ╱
-                              │           ╱
-                              │          ╱
-                              │         ╱
-                              │        ╱    ← This gap is what
-                              │       ╱       you\'re missing
-                              │      ╱
-                              │     ╱
-                              │    ╱
-                    POOR      │   ★ COMMERCIALLY PICKED
-                              │   (Harvested green, gassed)
-                              │
-                              └─────────────────────────────────────► TIME
-                                      │                         │
-                                   PICKED                    RIPE
-                                   (Commercial)          (When you\'d pick it
-                                                          from your garden)
-
-    WHAT'S LOST:
-    ────────────
-    • Complex sugars (develop in final ripening)
-    • Volatile aromatics (responsible for "fresh" smell)
-    • Peak vitamin content (many vitamins increase during ripening)
-    • Optimal texture (cell walls soften naturally vs. artificially)`
+      type: 'diagram',
+      diagramType: 'comparison-matrix',
+      data: {
+        title: 'THE RIPENESS-SHIPPING TRADEOFF',
+        subtitle: 'Commercial vs. Home-Grown Produce',
+        items: [
+          {
+            label: 'Commercial (Harvested Green, Gassed)',
+            metrics: [
+              { name: 'Flavor/Nutrition', value: 20, max: 100, status: 'danger' },
+              { name: 'Time to Harvest', value: 60, max: 100, status: 'warning', description: 'Picked early' },
+              { name: 'Complex Sugars', value: 15, max: 100, status: 'danger' },
+              { name: 'Volatile Aromatics', value: 10, max: 100, status: 'danger' },
+              { name: 'Vitamin Content', value: 25, max: 100, status: 'warning' },
+              { name: 'Optimal Texture', value: 30, max: 100, status: 'warning' }
+            ],
+            icon: 'target',
+            description: 'Harvested weeks before ripe for shipping durability'
+          },
+          {
+            label: 'Vine-Ripened (Home-Grown)',
+            metrics: [
+              { name: 'Flavor/Nutrition', value: 100, max: 100, status: 'success' },
+              { name: 'Time to Harvest', value: 100, max: 100, status: 'success', description: 'Peak ripeness' },
+              { name: 'Complex Sugars', value: 100, max: 100, status: 'success' },
+              { name: 'Volatile Aromatics', value: 100, max: 100, status: 'success' },
+              { name: 'Vitamin Content', value: 100, max: 100, status: 'success' },
+              { name: 'Optimal Texture', value: 100, max: 100, status: 'success' }
+            ],
+            icon: 'leaf',
+            description: 'Picked when the plant says it\'s ready'
+          }
+        ],
+        callout: {
+          text: 'The gap between commercial and home-grown is what you\'re missing',
+          type: 'info'
+        },
+        footer: 'What\'s lost in commercial produce: Complex sugars develop in final ripening • Volatile aromatics responsible for "fresh" smell • Peak vitamin content increases during ripening • Optimal texture from natural cell wall softening'
+      }
     },
     {
       type: 'text',
@@ -253,35 +340,53 @@ Knowledge Map
       text: 'This isn\'t just a problem to understand-it\'s a puzzle to solve. And the solution has three components:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE HOME-GROWING ADVANTAGE
-═══════════════════════════════════════════════════════════════════════════
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                      │
-    │   1. ZERO TRANSIT TIME                                              │
-    │      ─────────────────                                              │
-    │      Harvest at 6 PM. Eat at 6:01 PM.                               │
-    │      Nutrient degradation: Effectively zero.                        │
-    │                                                                      │
-    │   2. PEAK RIPENESS HARVEST                                          │
-    │      ─────────────────────                                          │
-    │      Pick when the plant says it\'s ready, not when a shipping       │
-    │      schedule demands it.                                           │
-    │      Flavor and nutrition: Maximum possible.                        │
-    │                                                                      │
-    │   3. VARIETY SELECTION                                              │
-    │      ─────────────────                                              │
-    │      Commercial growers optimize for shipping durability.           │
-    │      You can optimize for taste and nutrition.                      │
-    │      Heirloom varieties, unusual cultivars, whatever you want.      │
-    │                                                                      │
-    └─────────────────────────────────────────────────────────────────────┘
-
-    THE QUESTION ISN'T "SHOULD I GROW MY OWN?"
-
-    THE QUESTION IS "HOW CAN I DO IT MOST EFFECTIVELY?"`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'THE HOME-GROWING ADVANTAGE',
+        cards: [
+          {
+            id: 'transit',
+            title: '1. ZERO TRANSIT TIME',
+            description: 'Harvest at 6 PM. Eat at 6:01 PM.',
+            metrics: [
+              { label: 'Nutrient Degradation', value: 'Effectively Zero', icon: 'droplets', status: 'success' }
+            ],
+            icon: 'clock',
+            status: 'success'
+          },
+          {
+            id: 'ripeness',
+            title: '2. PEAK RIPENESS HARVEST',
+            description: 'Pick when the plant says it\'s ready, not when a shipping schedule demands it.',
+            metrics: [
+              { label: 'Flavor', value: 'Maximum', icon: 'leaf', status: 'success' },
+              { label: 'Nutrition', value: 'Maximum', icon: 'sparkles', status: 'success' }
+            ],
+            icon: 'leaf',
+            status: 'success'
+          },
+          {
+            id: 'variety',
+            title: '3. VARIETY SELECTION',
+            description: 'Commercial growers optimize for shipping durability. You can optimize for taste and nutrition.',
+            metrics: [
+              { label: 'Options', value: 'Unlimited', icon: 'layers', status: 'success' }
+            ],
+            details: [
+              'Heirloom varieties',
+              'Unusual cultivars',
+              'Whatever you want'
+            ],
+            icon: 'sparkles',
+            status: 'success'
+          }
+        ],
+        callout: {
+          text: 'The question isn\'t "SHOULD I GROW MY OWN?" The question is "HOW CAN I DO IT MOST EFFECTIVELY?"',
+          type: 'info'
+        }
+      }
     },
     {
       type: 'text',
@@ -366,36 +471,68 @@ Knowledge Map
       text: 'One of NASA\'s most significant contributions was proving that LEDs could replace sunlight for plant growth-and in fact, could be optimized beyond what sunlight offers.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE SPECTRUM OF PLANT LIGHT
-═══════════════════════════════════════════════════════════════════════════
-
-WHAT PLANTS ACTUALLY USE (Photosynthetically Active Radiation):
-
-    UV     BLUE      GREEN      YELLOW    RED       FAR-RED    INFRARED
-    │      │         │          │         │         │          │
-    ▼      ▼         ▼          ▼         ▼         ▼          ▼
-
-         ┌───────────────────────────────────────────────────────────┐
-         │                                                           │
-         │              CHLOROPHYLL A ABSORPTION                     │
-    100% │        ┌──┐                              ┌────┐          │
-         │       ┌┘  └┐                            ┌┘    └┐         │
-     80% │      ┌┘    │                           ┌┘      └┐        │
-         │     ┌┘     └┐                         ┌┘        └┐       │
-     60% │    ┌┘       │                        ┌┘          │       │
-         │   ┌┘        └┐                      ┌┘           └┐      │
-     40% │  ┌┘          └┐                    ┌┘             └┐     │
-         │ ┌┘            └┐                  ┌┘               │     │
-     20% │┌┘              └──────────────────┘                └┐    │
-         │                                                      └───│
-         └───────────────────────────────────────────────────────────┘
-           400    450    500    550    600    650    700    750  nm
-                  │                           │           │
-                  ▼                           ▼           ▼
-              BLUE PEAK                   RED PEAK    FAR-RED
-              (430-450nm)                 (640-680nm) (700-750nm)`
+      type: 'diagram',
+      diagramType: 'spectrum',
+      data: {
+        title: 'THE SPECTRUM OF PLANT LIGHT',
+        subtitle: 'What Plants Actually Use (Photosynthetically Active Radiation)',
+        wavelengthRange: { min: 400, max: 750, unit: 'nm' },
+        spectrumBands: [
+          { label: 'UV', start: 350, end: 400, color: '#8B00FF' },
+          { label: 'BLUE', start: 400, end: 500, color: '#0066FF' },
+          { label: 'GREEN', start: 500, end: 565, color: '#00FF00' },
+          { label: 'YELLOW', start: 565, end: 590, color: '#FFFF00' },
+          { label: 'RED', start: 590, end: 700, color: '#FF0000' },
+          { label: 'FAR-RED', start: 700, end: 750, color: '#8B0000' },
+          { label: 'INFRARED', start: 750, end: 800, color: '#4B0000' }
+        ],
+        absorptionCurve: {
+          label: 'Chlorophyll A Absorption',
+          dataPoints: [
+            { wavelength: 400, absorption: 20 },
+            { wavelength: 420, absorption: 70 },
+            { wavelength: 430, absorption: 95 },
+            { wavelength: 440, absorption: 100 },
+            { wavelength: 450, absorption: 95 },
+            { wavelength: 460, absorption: 70 },
+            { wavelength: 500, absorption: 30 },
+            { wavelength: 550, absorption: 20 },
+            { wavelength: 600, absorption: 20 },
+            { wavelength: 640, absorption: 40 },
+            { wavelength: 660, absorption: 90 },
+            { wavelength: 680, absorption: 100 },
+            { wavelength: 700, absorption: 80 },
+            { wavelength: 730, absorption: 40 },
+            { wavelength: 750, absorption: 20 }
+          ]
+        },
+        keyPeaks: [
+          {
+            label: 'BLUE PEAK',
+            wavelength: '430-450nm',
+            position: 440,
+            description: 'Primary photosynthesis driver',
+            icon: 'sun',
+            status: 'success'
+          },
+          {
+            label: 'RED PEAK',
+            wavelength: '640-680nm',
+            position: 660,
+            description: 'Maximum absorption for photosynthesis',
+            icon: 'droplets',
+            status: 'success'
+          },
+          {
+            label: 'FAR-RED',
+            wavelength: '700-750nm',
+            position: 730,
+            description: 'Growth regulation and flowering',
+            icon: 'leaf',
+            status: 'warning'
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -740,34 +877,72 @@ WHAT PLANTS ACTUALLY USE (Photosynthetically Active Radiation):
       text: 'The result? You can grow produce that\'s demonstrably more nutritious, more flavorful, and more sustainable than anything you can buy-using technology that ranges from $50 mason jar setups to $800 automated systems.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE HOME-GROWING VALUE PROPOSITION
-═══════════════════════════════════════════════════════════════════════════
-
-                         STORE-BOUGHT              HOME-GROWN
-                         ───────────               ──────────
-
-    Nutrient content     50-85% of peak            100% (harvested at peak)
-
-    Flavor               Optimized for shipping    Optimized for eating
-
-    Time from harvest    5-21 days                 5 seconds (literally)
-
-    Variety selection    ~15 standard cultivars    Hundreds of heirloom
-                                                   and specialty varieties
-
-    Control over inputs  None                      Complete
-
-    Annual cost*         $500-1000+ for            $50-200 in nutrients
-                         equivalent fresh produce  and electricity
-
-    Environmental        Transport, refrigeration, Minimal (closed-loop
-    footprint            packaging, waste          water, LED efficiency)
-
-    Satisfaction         Low (transaction)         High (creation)
-
-    * For equivalent quantity and quality of leafy greens and herbs`
+      type: 'diagram',
+      diagramType: 'comparison',
+      data: {
+        title: 'THE HOME-GROWING VALUE PROPOSITION',
+        description: 'Why home-grown beats store-bought in every metric',
+        headers: ['Store-Bought', 'Home-Grown'],
+        rows: [
+          {
+            category: 'Nutrient content',
+            items: [
+              { value: '50-85% of peak' },
+              { value: '100% (harvested at peak)', highlight: true }
+            ]
+          },
+          {
+            category: 'Flavor',
+            items: [
+              { value: 'Optimized for shipping' },
+              { value: 'Optimized for eating', highlight: true }
+            ]
+          },
+          {
+            category: 'Time from harvest',
+            items: [
+              { value: '5-21 days' },
+              { value: '5 seconds (literally)', highlight: true }
+            ]
+          },
+          {
+            category: 'Variety selection',
+            items: [
+              { value: '~15 standard cultivars' },
+              { value: 'Hundreds of heirloom and specialty varieties', highlight: true }
+            ]
+          },
+          {
+            category: 'Control over inputs',
+            items: [
+              { value: 'None' },
+              { value: 'Complete', highlight: true }
+            ]
+          },
+          {
+            category: 'Annual cost*',
+            items: [
+              { value: '$500-1000+ for equivalent fresh produce' },
+              { value: '$50-200 in nutrients and electricity', highlight: true }
+            ]
+          },
+          {
+            category: 'Environmental footprint',
+            items: [
+              { value: 'Transport, refrigeration, packaging, waste' },
+              { value: 'Minimal (closed-loop water, LED efficiency)', highlight: true }
+            ]
+          },
+          {
+            category: 'Satisfaction',
+            items: [
+              { value: 'Low (transaction)' },
+              { value: 'High (creation)', highlight: true }
+            ]
+          }
+        ],
+        footer: '* For equivalent quantity and quality of leafy greens and herbs'
+      }
     },
     {
       type: 'text',

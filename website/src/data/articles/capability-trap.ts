@@ -23,49 +23,29 @@ export const capabilityTrap: Article = {
       text: 'A zer0 Research Document - December 2025'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE UNCOMFORTABLE QUESTION
-═══════════════════════════════════════════════════════════════════════════
-
-    Deep Blue beat Garry Kasparov in 1997.
-
-    Could Deep Blue play checkers?
-
-    No.
-
-    Could it have a conversation about chess?
-
-    No.
-
-    Did it understand what a "game" was?
-
-    No.
-
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  Deep Blue wasn\'t intelligent.                                     │
-    │  It was capable.                                                   │
-    │                                                                     │
-    │  There\'s a difference.                                             │
-    │                                                                     │
-    │  And understanding that difference changes how you build           │
-    │  systems that actually work.                                       │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘
-
-
-    This isn\'t a philosophical distinction.
-    It\'s an engineering choice.
-
-    And the most successful AI systems in the world
-    are making the same choice Deep Blue made:
-
-    They\'re optimizing for capability.
-    Not intelligence.
-
-    This document explains why.`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'THE UNCOMFORTABLE QUESTION',
+        cards: [
+          {
+            title: 'Deep Blue beat Garry Kasparov in 1997',
+            description: 'Could Deep Blue play checkers? No.\n\nCould it have a conversation about chess? No.\n\nDid it understand what a "game" was? No.',
+            icon: 'brain'
+          },
+          {
+            title: 'Deep Blue wasn\'t intelligent. It was capable.',
+            description: 'There\'s a difference.\n\nAnd understanding that difference changes how you build systems that actually work.',
+            icon: 'zap',
+            highlight: true
+          },
+          {
+            title: 'This isn\'t a philosophical distinction. It\'s an engineering choice.',
+            description: 'The most successful AI systems in the world are making the same choice Deep Blue made:\n\nThey\'re optimizing for capability. Not intelligence.\n\nThis document explains why.',
+            icon: 'target'
+          }
+        ]
+      }
     },
     {
       type: 'header',
@@ -157,44 +137,29 @@ export const capabilityTrap: Article = {
       text: 'But when you look closely at how these systems are actually designed, a different pattern emerges:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE PATTERN
-═══════════════════════════════════════════════════════════════════════════
-
-    WHAT IT LOOKS LIKE FROM OUTSIDE:
-    ─────────────────────────────────
-
-    "This AI beat the world champion at [X]!"
-    "This AI can generate [X] better than most humans!"
-    "This AI learned to [X] in just [Y] hours!"
-
-
-    WHAT'S ACTUALLY HAPPENING:
-    ──────────────────────────
-
-    Massive compute → Thousands of trials → Statistical selection
-
-    The system doesn\'t UNDERSTAND what it\'s doing.
-    It has found patterns that produce results.
-
-
-    WHY THIS MATTERS:
-    ─────────────────
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  If you\'re trying to BUILD AI systems:                             │
-    │  └── You need to decide which tradeoff to make                     │
-    │                                                                     │
-    │  If you\'re trying to USE AI systems:                               │
-    │  └── You need to understand what they can and can\'t do             │
-    │                                                                     │
-    │  If you\'re trying to COMPETE with AI systems:                      │
-    │  └── You need to know where capability ends and intelligence       │
-    │      begins-because that\'s where humans still have an edge         │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'THE PATTERN',
+        cards: [
+          {
+            title: 'What it looks like from outside',
+            description: '"This AI beat the world champion at [X]!"\n\n"This AI can generate [X] better than most humans!"\n\n"This AI learned to [X] in just [Y] hours!"',
+            icon: 'sparkles'
+          },
+          {
+            title: 'What\'s actually happening',
+            description: 'Massive compute → Thousands of trials → Statistical selection\n\nThe system doesn\'t UNDERSTAND what it\'s doing. It has found patterns that produce results.',
+            icon: 'cpu',
+            highlight: true
+          },
+          {
+            title: 'Why this matters',
+            description: 'If you\'re trying to BUILD AI systems: You need to decide which tradeoff to make\n\nIf you\'re trying to USE AI systems: You need to understand what they can and can\'t do\n\nIf you\'re trying to COMPETE with AI systems: You need to know where capability ends and intelligence begins—because that\'s where humans still have an edge',
+            icon: 'lightbulb'
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -289,107 +254,41 @@ export const capabilityTrap: Article = {
       text: 'But Voyager\'s architecture is different from Eureka\'s. It\'s a hybrid-trading some pure capability for something that looks more like intelligence.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `VOYAGER: THE HYBRID STRATEGY
-═══════════════════════════════════════════════════════════════════════════
-
-    WHAT MAKES VOYAGER DIFFERENT:
-    ─────────────────────────────
-
-    Voyager doesn\'t just generate and test.
-    It ACCUMULATES SKILLS over time.
-
-    And it uses documentation as a form of knowledge transfer.
-
-
-    THE THREE COMPONENTS:
-    ─────────────────────
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  COMPONENT 1: AUTOMATIC CURRICULUM                                 │
-    │  ─────────────────────────────────                                 │
-    │                                                                     │
-    │  Instead of random exploration, Voyager generates its own          │
-    │  learning objectives: progressively harder challenges              │
-    │  calibrated to current skill level.                                │
-    │                                                                     │
-    │  This isn\'t "intelligence" in the human sense-                     │
-    │  but it\'s more than pure capability.                               │
-    │  It\'s adaptive self-direction.                                     │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  COMPONENT 2: SKILL LIBRARY                                        │
-    │  ───────────────────────────                                       │
-    │                                                                     │
-    │  Every successful behavior becomes a reusable skill.               │
-    │  Skills are stored as executable code with semantic labels.        │
-    │  New tasks retrieve and compose existing skills.                   │
-    │                                                                     │
-    │  Example skill chain:                                              │
-    │  mineDiamond() = mineIron() + craftIronPickaxe() + findDiamondOre()│
-    │                                                                     │
-    │  This creates COMPOUND LEARNING-                                   │
-    │  new capabilities build on previous ones.                          │
-    │                                                                     │
-    │  96.5% retrieval accuracy for finding relevant skills              │
-    │  3.3x more item discovery than baselines                           │
-    │  2.3x longer exploration distances                                 │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  COMPONENT 3: ITERATIVE PROMPTING WITH THREE FEEDBACK TYPES        │
-    │  ───────────────────────────────────────────────────────────       │
-    │                                                                     │
-    │  When a skill fails, Voyager doesn\'t just retry.                   │
-    │  It analyzes WHY it failed:                                        │
-    │                                                                     │
-    │  ├── Environment state (what happened in the game?)                │
-    │  ├── Execution errors (did the code crash?)                        │
-    │  └── Self-verification (did we achieve the goal?)                  │
-    │                                                                     │
-    │  This is closer to reasoning-but still limited.                    │
-    │  It\'s diagnosis, not deep understanding.                           │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘
-
-
-    THE INTELLIGENCE SOURCE:
-    ────────────────────────
-
-    Here\'s the subtle part: Voyager\'s "intelligence" comes from GPT-4.
-
-    GPT-4 already knows Minecraft-game mechanics, crafting recipes,
-    community strategies, everything from its training data.
-
-    Voyager doesn\'t LEARN Minecraft from scratch.
-    It uses GPT-4\'s knowledge as "documentation" it can read.
-
-    The skill library then converts that knowledge into
-    EXECUTABLE CAPABILITY that persists and compounds.
-
-
-    WHAT THIS REVEALS:
-    ──────────────────
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  You can trade between intelligence and capability.                │
-    │                                                                     │
-    │  Voyager imports intelligence (GPT-4\'s knowledge)                  │
-    │  and exports capability (executable skill library)                 │
-    │                                                                     │
-    │  The system itself isn\'t smart.                                    │
-    │  But it\'s connected to something that is.                          │
-    │  And it builds on that connection systematically.                  │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'VOYAGER: THE HYBRID STRATEGY',
+        subtitle: 'What makes Voyager different: It doesn\'t just generate and test. It ACCUMULATES SKILLS over time. And it uses documentation as a form of knowledge transfer.',
+        cards: [
+          {
+            title: 'Component 1: Automatic Curriculum',
+            icon: 'target',
+            description: 'Instead of random exploration, Voyager generates its own learning objectives: progressively harder challenges calibrated to current skill level.\n\nThis isn\'t "intelligence" in the human sense—but it\'s more than pure capability. It\'s adaptive self-direction.'
+          },
+          {
+            title: 'Component 2: Skill Library',
+            icon: 'book',
+            description: 'Every successful behavior becomes a reusable skill. Skills are stored as executable code with semantic labels. New tasks retrieve and compose existing skills.\n\nExample: mineDiamond() = mineIron() + craftIronPickaxe() + findDiamondOre()\n\nThis creates COMPOUND LEARNING—new capabilities build on previous ones.',
+            metrics: ['96.5% retrieval accuracy', '3.3x more item discovery', '2.3x longer exploration']
+          },
+          {
+            title: 'Component 3: Iterative Prompting',
+            icon: 'refresh',
+            description: 'When a skill fails, Voyager doesn\'t just retry. It analyzes WHY it failed:\n\n• Environment state (what happened in the game?)\n• Execution errors (did the code crash?)\n• Self-verification (did we achieve the goal?)\n\nThis is closer to reasoning—but still limited. It\'s diagnosis, not deep understanding.'
+          },
+          {
+            title: 'The Intelligence Source',
+            icon: 'brain',
+            description: 'Voyager\'s "intelligence" comes from GPT-4. GPT-4 already knows Minecraft—game mechanics, crafting recipes, community strategies.\n\nVoyager doesn\'t LEARN Minecraft from scratch. It uses GPT-4\'s knowledge as "documentation" it can read.\n\nThe skill library converts that knowledge into EXECUTABLE CAPABILITY that persists and compounds.',
+            highlight: true
+          },
+          {
+            title: 'What This Reveals',
+            icon: 'lightbulb',
+            description: 'You can trade between intelligence and capability.\n\nVoyager imports intelligence (GPT-4\'s knowledge) and exports capability (executable skill library)\n\nThe system itself isn\'t smart. But it\'s connected to something that is. And it builds on that connection systematically.'
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -412,101 +311,66 @@ export const capabilityTrap: Article = {
       text: 'AlphaEvolve\'s approach is different from both Eureka and Voyager:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `ALPHAEVOLVE: EVOLUTION AS OPTIMIZATION
-═══════════════════════════════════════════════════════════════════════════
-
-    WHAT ALPHAEVOLVE DOES:
-    ──────────────────────
-
-    Finds novel solutions to problems with clear evaluation criteria.
-
-    Results:
-    ├── 48-multiplication algorithm for 4×4 complex matrices
-    │   (first improvement since 1969)
-    ├── 0.7% recovery of Google data center compute resources
-    ├── 23% Gemini kernel speedup (reducing total training time by 1%)
-    └── Matched or improved state-of-the-art on 75% of 50 math problems
-
-
-    HOW IT WORKS:
-    ─────────────
-
-    NOT hierarchical task decomposition (as the name might suggest)
-    INSTEAD: evolutionary iterative refinement
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  STAGE 1: PROBLEM DEFINITION                                       │
-    │  ───────────────────────────                                       │
-    │  Define the problem with marked "evolution blocks"                 │
-    │  These are code sections that will be modified                     │
-    │                                                                     │
-    │  STAGE 2: DATABASE INITIALIZATION                                  │
-    │  ────────────────────────────────                                  │
-    │  Use MAP-Elites algorithm to maintain diverse population           │
-    │  Not just "best" solutions-diverse good solutions                  │
-    │                                                                     │
-    │  STAGE 3: PROMPT SAMPLING                                          │
-    │  ─────────────────────────                                         │
-    │  Select parent programs for improvement                            │
-    │  Bias toward high-performing but underexplored regions             │
-    │                                                                     │
-    │  STAGE 4: LLM ENSEMBLE GENERATION                                  │
-    │  ────────────────────────────────                                  │
-    │  Gemini 2.0 Flash for breadth (many variations)                    │
-    │  Gemini Pro for depth (careful improvements)                       │
-    │  Generate mutated versions of parent programs                      │
-    │                                                                     │
-    │  STAGE 5: AUTOMATED EVALUATION                                     │
-    │  ─────────────────────────────                                     │
-    │  Correctness verification (does it produce right answer?)          │
-    │  Performance profiling (how fast/efficient is it?)                 │
-    │  Must have automated objective evaluation                          │
-    │                                                                     │
-    │  STAGE 6: SELECTION WITH DIVERSITY                                 │
-    │  ──────────────────────────────                                    │
-    │  Keep solutions that are good AND different                        │
-    │  Prevents convergence to local optima                              │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘
-
-
-    THE KEY DIFFERENCE:
-    ───────────────────
-
-    AlphaEvolve operates over DAYS to WEEKS.
-    Thousands of evaluations.
-    1000x greater sample efficiency than naive LLM sampling.
-
-    It finds solutions humans have never found-
-    but only for problems where:
-    ├── You can automatically evaluate correctness
-    ├── You can automatically measure performance
-    └── You can wait days for results
-
-
-    WHAT IT REVEALS ABOUT INTELLIGENCE:
-    ────────────────────────────────────
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  AlphaEvolve discovers breakthrough algorithms.                    │
-    │  It does NOT understand why they work.                             │
-    │                                                                     │
-    │  The 48-multiplication matrix algorithm is correct.                │
-    │  AlphaEvolve cannot explain its mathematical significance.         │
-    │                                                                     │
-    │  This is capability without understanding.                         │
-    │  Discovery without comprehension.                                  │
-    │                                                                     │
-    │  The implications are strange:                                     │
-    │  We may end up using algorithms we can\'t explain,                  │
-    │  discovered by systems that don\'t understand them,                 │
-    │  verified only by empirical testing.                               │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'process',
+      data: {
+        title: 'ALPHAEVOLVE: EVOLUTION AS OPTIMIZATION',
+        description: 'NOT hierarchical task decomposition (as the name might suggest). INSTEAD: evolutionary iterative refinement',
+        subtitle: 'Finds novel solutions to problems with clear evaluation criteria',
+        results: [
+          '48-multiplication algorithm for 4×4 complex matrices (first improvement since 1969)',
+          '0.7% recovery of Google data center compute resources',
+          '23% Gemini kernel speedup (reducing total training time by 1%)',
+          'Matched or improved state-of-the-art on 75% of 50 math problems'
+        ],
+        steps: [
+          {
+            id: 'define',
+            label: 'Problem Definition',
+            icon: 'target',
+            description: 'Define the problem with marked "evolution blocks"—code sections that will be modified'
+          },
+          {
+            id: 'init',
+            label: 'Database Initialization',
+            icon: 'database',
+            description: 'Use MAP-Elites algorithm to maintain diverse population. Not just "best" solutions—diverse good solutions'
+          },
+          {
+            id: 'sample',
+            label: 'Prompt Sampling',
+            icon: 'search',
+            description: 'Select parent programs for improvement. Bias toward high-performing but underexplored regions'
+          },
+          {
+            id: 'generate',
+            label: 'LLM Ensemble Generation',
+            icon: 'sparkles',
+            description: 'Gemini 2.0 Flash for breadth (many variations). Gemini Pro for depth (careful improvements). Generate mutated versions of parent programs'
+          },
+          {
+            id: 'evaluate',
+            label: 'Automated Evaluation',
+            icon: 'check',
+            description: 'Correctness verification (does it produce right answer?). Performance profiling (how fast/efficient is it?). Must have automated objective evaluation'
+          },
+          {
+            id: 'select',
+            label: 'Selection with Diversity',
+            icon: 'filter',
+            description: 'Keep solutions that are good AND different. Prevents convergence to local optima'
+          }
+        ],
+        insight: {
+          title: 'The Key Difference',
+          text: 'AlphaEvolve operates over DAYS to WEEKS. Thousands of evaluations. 1000x greater sample efficiency than naive LLM sampling.\n\nIt finds solutions humans have never found—but only for problems where:\n• You can automatically evaluate correctness\n• You can automatically measure performance\n• You can wait days for results'
+        },
+        conclusion: {
+          title: 'What It Reveals About Intelligence',
+          text: 'AlphaEvolve discovers breakthrough algorithms. It does NOT understand why they work.\n\nThe 48-multiplication matrix algorithm is correct. AlphaEvolve cannot explain its mathematical significance.\n\nThis is capability without understanding. Discovery without comprehension.\n\nThe implications are strange: We may end up using algorithms we can\'t explain, discovered by systems that don\'t understand them, verified only by empirical testing.',
+          highlight: true
+        }
+      }
     },
     {
       type: 'header',
@@ -521,62 +385,75 @@ export const capabilityTrap: Article = {
       text: 'Across all three systems, a pattern emerges: the ability to accumulate and compose skills is more valuable than raw intelligence for getting things done.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE SKILL LIBRARY PATTERN
-═══════════════════════════════════════════════════════════════════════════
-
-    WHAT A SKILL IS:
-    ────────────────
-
-    A skill is a unit of executable capability with:
-
-    ├── Clear trigger conditions (when to use it)
-    ├── Defined inputs and outputs
-    ├── Success criteria (how to verify it worked)
-    ├── Failure modes (what can go wrong)
-    └── Composition potential (how it combines with other skills)
-
-
-    WHY SKILLS COMPOUND:
-    ────────────────────
-
-    Linear learning: Each new thing is independent
-
-        Skill 1    Skill 2    Skill 3    Skill 4
-           ○          ○          ○          ○
-
-        Capability = 4 skills
-
-
-    Compositional learning: Skills combine into new capabilities
-
-                         Skill 5 (= 1 + 2)
-                              ○
-                             / \\
-        Skill 1 ─────────── ○   ○ ─────────── Skill 2
-                           / \\ / \\
-                          ○   ○   ○
-                         /   / \\   \\
-                        ○   ○   ○   ○
-                       1   2   3   4
-
-        Base skills = 4
-        Composite skills = 2^4 - 1 = 15 potential combinations
-        Capability grows EXPONENTIALLY with linear skill addition
-
-
-    THIS IS WHY VOYAGER WORKS:
-    ──────────────────────────
-
-    mineDiamond() isn\'t learned from scratch.
-    It composes: mineIron() + craftIronPickaxe() + findDiamondOre()
-
-    Each base skill was learned once.
-    Complex behaviors emerge from composition.
-
-    96.5% retrieval accuracy means the right skills are found.
-    Composition means capability grows faster than learning time.`
+      type: 'diagram',
+      diagramType: 'hierarchy',
+      data: {
+        title: 'THE SKILL LIBRARY PATTERN',
+        description: 'A skill is a unit of executable capability with: clear trigger conditions, defined inputs/outputs, success criteria, failure modes, and composition potential',
+        nodes: [
+          {
+            id: 'base1',
+            label: 'Skill 1: mineIron()',
+            level: 0,
+            description: 'Base skill learned independently',
+            icon: 'box'
+          },
+          {
+            id: 'base2',
+            label: 'Skill 2: craftPickaxe()',
+            level: 0,
+            description: 'Base skill learned independently',
+            icon: 'box'
+          },
+          {
+            id: 'base3',
+            label: 'Skill 3: findOre()',
+            level: 0,
+            description: 'Base skill learned independently',
+            icon: 'box'
+          },
+          {
+            id: 'base4',
+            label: 'Skill 4: navigate()',
+            level: 0,
+            description: 'Base skill learned independently',
+            icon: 'box'
+          },
+          {
+            id: 'comp1',
+            label: 'craftIronPickaxe()',
+            level: 1,
+            description: 'Composes: mineIron() + craftPickaxe()',
+            icon: 'layers',
+            children: ['base1', 'base2']
+          },
+          {
+            id: 'comp2',
+            label: 'findDiamondOre()',
+            level: 1,
+            description: 'Composes: findOre() + navigate()',
+            icon: 'layers',
+            children: ['base3', 'base4']
+          },
+          {
+            id: 'comp3',
+            label: 'mineDiamond()',
+            level: 2,
+            description: 'Composes: mineIron() + craftIronPickaxe() + findDiamondOre()',
+            icon: 'star',
+            children: ['base1', 'comp1', 'comp2'],
+            highlight: true
+          }
+        ],
+        insight: {
+          title: 'Why Skills Compound',
+          text: 'Linear learning: Each new thing is independent → Capability = 4 skills\n\nCompositional learning: Skills combine into new capabilities → Base skills = 4, Composite skills = 2⁴ - 1 = 15 potential combinations\n\nCapability grows EXPONENTIALLY with linear skill addition'
+        },
+        conclusion: {
+          title: 'This Is Why Voyager Works',
+          text: 'mineDiamond() isn\'t learned from scratch. It composes existing skills.\n\nEach base skill was learned once. Complex behaviors emerge from composition.\n\n96.5% retrieval accuracy means the right skills are found. Composition means capability grows faster than learning time.'
+        }
+      }
     },
     {
       type: 'subheader',
@@ -587,87 +464,29 @@ export const capabilityTrap: Article = {
       text: 'One of the most important design patterns in these systems is treating the skill library as a form of external memory-a persistent store that survives beyond any single task or session.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `SKILL LIBRARY ARCHITECTURE
-═══════════════════════════════════════════════════════════════════════════
-
-    STORAGE FORMAT:
-    ───────────────
-
-    Each skill is stored with rich metadata:
-
-    {
-      "name": "mine_iron_ore",
-      "description": "Locate and mine iron ore deposits",
-
-      "prerequisites": [
-        "craft_stone_pickaxe",
-        "navigate_underground"
-      ],
-
-      "implementation": "// executable code...",
-
-      "success_criteria": "inventory contains iron_ore >= 1",
-
-      "failure_modes": [
-        "pickaxe breaks mid-mining",
-        "fall damage in caves",
-        "mob encounters"
-      ],
-
-      "complexity_level": 4,
-
-      "composition_potential": [
-        "smelt_iron_ore",
-        "craft_iron_tools",
-        "build_iron_golem"
-      ],
-
-      "success_count": 47,
-      "failure_count": 3,
-      "success_rate": 0.94,
-
-      "last_used": "2025-12-03T14:22:00Z",
-      "last_improved": "2025-11-28T09:15:00Z"
-    }
-
-
-    RETRIEVAL MECHANISM:
-    ────────────────────
-
-    When facing a new task:
-
-    1. SEMANTIC SEARCH
-       ─────────────────
-       Embed the task description
-       Find skills with similar embeddings
-
-    2. PREREQUISITE CHECK
-       ───────────────────
-       For each candidate skill, verify prerequisites are met
-       If not, recursively retrieve prerequisites
-
-    3. COMPOSITION PLANNING
-       ─────────────────────
-       If no single skill matches, attempt composition
-       "mine_diamond" = compose(mine_iron, craft_iron_pickaxe, find_diamond)
-
-    4. GAP IDENTIFICATION
-       ───────────────────
-       If composition still fails, identify missing skill
-       Add to learning curriculum
-
-
-    EVOLUTIONARY PRESSURE:
-    ──────────────────────
-
-    Skills that consistently fail get pruned.
-    Skills that consistently succeed get promoted.
-    Skills that are never used decay in priority.
-
-    This creates natural optimization:
-    The library evolves toward higher-value skills.`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'SKILL LIBRARY ARCHITECTURE',
+        cards: [
+          {
+            title: 'Storage Format',
+            icon: 'database',
+            description: 'Each skill is stored with rich metadata including:\n\n• name and description\n• prerequisites (required skills)\n• implementation (executable code)\n• success_criteria (how to verify it worked)\n• failure_modes (what can go wrong)\n• complexity_level\n• composition_potential (what it enables)\n• performance metrics (success_count, failure_count, success_rate)\n• timestamps (last_used, last_improved)'
+          },
+          {
+            title: 'Retrieval Mechanism',
+            icon: 'search',
+            description: 'When facing a new task:\n\n1. SEMANTIC SEARCH: Embed task description, find skills with similar embeddings\n\n2. PREREQUISITE CHECK: For each candidate, verify prerequisites are met. If not, recursively retrieve prerequisites\n\n3. COMPOSITION PLANNING: If no single skill matches, attempt composition. Example: mine_diamond = compose(mine_iron, craft_iron_pickaxe, find_diamond)\n\n4. GAP IDENTIFICATION: If composition fails, identify missing skill and add to learning curriculum'
+          },
+          {
+            title: 'Evolutionary Pressure',
+            icon: 'zap',
+            description: 'The library self-optimizes:\n\n• Skills that consistently fail get pruned\n• Skills that consistently succeed get promoted\n• Skills that are never used decay in priority\n\nThis creates natural optimization: The library evolves toward higher-value skills.',
+            highlight: true
+          }
+        ]
+      }
     },
     {
       type: 'subheader',
@@ -813,76 +632,48 @@ export const capabilityTrap: Article = {
       text: 'In practice, the most effective systems combine elements from all three approaches:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE HYBRID PATTERN
-═══════════════════════════════════════════════════════════════════════════
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │                    ORCHESTRATOR LAYER                              │
-    │                    ─────────────────                               │
-    │         (Uses pre-trained LLM intelligence)                        │
-    │                                                                     │
-    │    ┌──────────────────────────────────────────────────────────┐    │
-    │    │                                                          │    │
-    │    │  • Task decomposition                                    │    │
-    │    │  • Skill selection                                       │    │
-    │    │  • Failure diagnosis                                     │    │
-    │    │  • Curriculum generation                                 │    │
-    │    │                                                          │    │
-    │    └──────────────────────────────────────────────────────────┘    │
-    │                            │                                       │
-    │              ┌─────────────┼─────────────┐                         │
-    │              ▼             ▼             ▼                         │
-    │    ┌──────────────┐ ┌──────────────┐ ┌──────────────┐              │
-    │    │              │ │              │ │              │              │
-    │    │ SKILL        │ │ EVOLUTIONARY │ │ SEARCH       │              │
-    │    │ LIBRARY      │ │ REFINEMENT   │ │ MECHANISM    │              │
-    │    │              │ │              │ │              │              │
-    │    │ (Voyager)    │ │ (AlphaEvolve)│ │ (Eureka)     │              │
-    │    │              │ │              │ │              │              │
-    │    └──────────────┘ └──────────────┘ └──────────────┘              │
-    │           │                │                │                      │
-    │           └────────────────┼────────────────┘                      │
-    │                            ▼                                       │
-    │                    ┌──────────────┐                                │
-    │                    │              │                                │
-    │                    │  EXECUTION   │                                │
-    │                    │  ENVIRONMENT │                                │
-    │                    │              │                                │
-    │                    │  (Real world │                                │
-    │                    │   or sim)    │                                │
-    │                    │              │                                │
-    │                    └──────────────┘                                │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘
-
-
-    HOW THE LAYERS INTERACT:
-    ────────────────────────
-
-    1. New task arrives at orchestrator
-
-    2. Orchestrator checks skill library:
-       - If matching skill exists: execute directly
-       - If composable from existing skills: compose and execute
-       - If gap identified: send to evolutionary refinement
-
-    3. Evolutionary refinement generates candidates:
-       - Uses search mechanism to explore variations
-       - Tests candidates in execution environment
-       - Promotes successful patterns to skill library
-
-    4. Skill library grows over time:
-       - New skills added from successful evolutionary runs
-       - Underperforming skills pruned
-       - Compound skills emerge from composition
-
-    5. Orchestrator learns which approach works for which task type:
-       - Direct skill retrieval for routine tasks
-       - Evolutionary refinement for novel challenges
-       - Full search for breakthrough problems`
+      type: 'diagram',
+      diagramType: 'hierarchy',
+      data: {
+        title: 'THE HYBRID PATTERN',
+        subtitle: 'Combining capability, intelligence, and evolution',
+        root: {
+          label: 'ORCHESTRATOR LAYER',
+          description: 'Uses pre-trained LLM intelligence for task decomposition, skill selection, failure diagnosis, and curriculum generation',
+          children: [
+            {
+              label: 'SKILL LIBRARY',
+              description: 'Voyager-style accumulated capabilities with direct execution and composition'
+            },
+            {
+              label: 'EVOLUTIONARY REFINEMENT',
+              description: 'AlphaEvolve-style optimization generating and testing candidate solutions'
+            },
+            {
+              label: 'SEARCH MECHANISM',
+              description: 'Eureka-style reward search exploring variations and breakthrough solutions'
+            }
+          ]
+        },
+        output: {
+          label: 'EXECUTION ENVIRONMENT',
+          description: 'Real world or simulation testing ground'
+        }
+      }
+    },
+    {
+      type: 'text',
+      text: 'How the layers interact:'
+    },
+    {
+      type: 'list',
+      items: [
+        'New task arrives at orchestrator',
+        'Orchestrator checks skill library: if matching skill exists, execute directly; if composable from existing skills, compose and execute; if gap identified, send to evolutionary refinement',
+        'Evolutionary refinement generates candidates: uses search mechanism to explore variations, tests candidates in execution environment, promotes successful patterns to skill library',
+        'Skill library grows over time: new skills added from successful evolutionary runs, underperforming skills pruned, compound skills emerge from composition',
+        'Orchestrator learns which approach works for which task type: direct skill retrieval for routine tasks, evolutionary refinement for novel challenges, full search for breakthrough problems'
+      ]
     },
     {
       type: 'header',
@@ -897,64 +688,22 @@ export const capabilityTrap: Article = {
       text: 'Here\'s the part that might be personally relevant: the capability-vs-intelligence tradeoff applies to humans too.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE HUMAN PARALLEL
-═══════════════════════════════════════════════════════════════════════════
-
-    CONSIDER TWO APPROACHES TO LEARNING:
-    ────────────────────────────────────
-
-    APPROACH A: INTELLIGENCE-FIRST
-    ──────────────────────────────
-
-    "I need to deeply understand the theory before I can do anything."
-
-    ├── Study fundamentals exhaustively
-    ├── Build complete mental model
-    ├── Understand WHY before HOW
-    └── Only then attempt practice
-
-    Feels rigorous.
-    Often leads to paralysis.
-
-
-    APPROACH B: CAPABILITY-FIRST
-    ────────────────────────────
-
-    "I\'ll learn by doing and pick up theory as needed."
-
-    ├── Start with simplest executable task
-    ├── Build skill through repetition
-    ├── Add theory when current skills plateau
-    └── Compound skills into complex capabilities
-
-    Feels messy.
-    Often produces faster results.
-
-
-    THE VOYAGER LESSON FOR HUMANS:
-    ──────────────────────────────
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  Voyager doesn\'t understand Minecraft deeply.                      │
-    │  It has a library of things it can DO in Minecraft.                │
-    │                                                                     │
-    │  Each skill was learned through attempt → feedback → refinement.   │
-    │  Complex capabilities emerged from composing simple skills.        │
-    │                                                                     │
-    │  The intelligence (GPT-4\'s knowledge) was used to GUIDE            │
-    │  skill acquisition-not to replace it.                              │
-    │                                                                     │
-    │  This is remarkably similar to how expertise develops in humans:   │
-    │                                                                     │
-    │  Expert performance = accumulated skills + strategic knowledge     │
-    │                                                                     │
-    │  Not: deep understanding → automatic performance                   │
-    │  But: practiced skills + understanding of when to use them         │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'comparison',
+      data: {
+        title: 'THE HUMAN PARALLEL',
+        subtitle: 'Two approaches to learning',
+        rows: [
+          { metric: 'Philosophy', approach_a: '"I need to deeply understand the theory before I can do anything."', approach_b: '"I\'ll learn by doing and pick up theory as needed."' },
+          { metric: 'Starting Point', approach_a: 'Study fundamentals exhaustively', approach_b: 'Start with simplest executable task' },
+          { metric: 'Method', approach_a: 'Build complete mental model', approach_b: 'Build skill through repetition' },
+          { metric: 'Theory', approach_a: 'Understand WHY before HOW', approach_b: 'Add theory when current skills plateau' },
+          { metric: 'Practice', approach_a: 'Only then attempt practice', approach_b: 'Compound skills into complex capabilities' },
+          { metric: 'Feel', approach_a: 'Rigorous → Often paralysis', approach_b: 'Messy → Faster results' }
+        ],
+        columns: ['APPROACH A: Intelligence-First', 'APPROACH B: Capability-First'],
+        insight: 'Voyager Lesson: Expert performance = accumulated skills + strategic knowledge. Not: deep understanding → automatic performance, but: practiced skills + understanding of when to use them.'
+      }
     },
     {
       type: 'subheader',
@@ -1117,29 +866,33 @@ export const capabilityTrap: Article = {
                                         by intelligent orchestration)
 
     Breakthrough discoveries           EVOLUTIONARY
-    in well-defined spaces             (Massive search with auto-eval)
-
-
-    THE SYSTEMS WE BUILD:
-    ─────────────────────
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  Digital twins of autonomous facilities need:                      │
-    │                                                                     │
-    │  ├── CAPABILITY for routine operations                             │
-    │  │   (monitoring, control, optimization)                           │
-    │  │                                                                 │
-    │  ├── INTELLIGENCE for novel problems                               │
-    │  │   (diagnosis, adaptation, planning)                             │
-    │  │                                                                 │
-    │  └── EVOLUTION for continuous improvement                          │
-    │      (discovering better configurations over time)                 │
-    │                                                                     │
-    │  The same hybrid architecture.                                     │
-    │  Applied to real-world systems.                                    │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘`
+    in well-defined spaces             (Massive search with auto-eval)`
+    },
+    {
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'THE SYSTEMS WE BUILD',
+        subtitle: 'Digital twins of autonomous facilities need:',
+        cards: [
+          {
+            title: 'CAPABILITY',
+            description: 'For routine operations',
+            items: ['Monitoring', 'Control', 'Optimization']
+          },
+          {
+            title: 'INTELLIGENCE',
+            description: 'For novel problems',
+            items: ['Diagnosis', 'Adaptation', 'Planning']
+          },
+          {
+            title: 'EVOLUTION',
+            description: 'For continuous improvement',
+            items: ['Discovering better configurations over time']
+          }
+        ],
+        footer: 'The same hybrid architecture. Applied to real-world systems.'
+      }
     },
     {
       type: 'header',

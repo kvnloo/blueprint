@@ -286,47 +286,111 @@ export const atlasRoadmap: Article = {
       content: 'We propose a purpose-built data collection facility with overhead camera arrays, thermal cameras, audio arrays, eye tracking, force plates, smart tools (knife with F/T sensors, spatula with flex sensors, pan with load cells), and participant instrumentation (IMU gloves, pressure films, markerless mocap).'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `┌─────────────────────────────────────────────────────────────────────────┐
-│                     INSTRUMENTED KITCHEN LAYOUT                         │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│   ┌───────────────────────────────────────────────────────────────┐    │
-│   │              OVERHEAD CAMERA ARRAY (8x 4K + 4x Depth)         │    │
-│   │              [Synchronized at 30Hz, PTP timing]                │    │
-│   └───────────────────────────────────────────────────────────────┘    │
-│                                                                         │
-│   ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐        │
-│   │    THERMAL      │  │     AUDIO       │  │    EYE          │        │
-│   │    CAMERAS (2x) │  │    ARRAY (8ch)  │  │    TRACKING     │        │
-│   │    [FLIR A700]  │  │    [48kHz]      │  │    [Pupil Labs] │        │
-│   └─────────────────┘  └─────────────────┘  └─────────────────┘        │
-│                                                                         │
-│   ┌─────────────────────────────────────────────────────────────┐      │
-│   │                    COOKING STATION                           │      │
-│   │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐        │      │
-│   │  │ FORCE   │  │ SMART   │  │ SMART   │  │ INSTRU- │        │      │
-│   │  │ PLATES  │  │ KNIFE   │  │ SPATULA │  │ MENTED  │        │      │
-│   │  │ (4x)    │  │ (F/T+   │  │ (F/T+   │  │ PAN     │        │      │
-│   │  │         │  │  IMU)   │  │  Flex)  │  │         │        │      │
-│   │  └─────────┘  └─────────┘  └─────────┘  └─────────┘        │      │
-│   │                                                              │      │
-│   │  ┌─────────────────────────────────────────────────────┐    │      │
-│   │  │         INSTRUMENTED COUNTERTOP                      │    │      │
-│   │  │         [Pressure-sensitive surface, 1mm resolution] │    │      │
-│   │  └─────────────────────────────────────────────────────┘    │      │
-│   └─────────────────────────────────────────────────────────────┘      │
-│                                                                         │
-│   ┌─────────────────────────────────────────────────────────────┐      │
-│   │                    PARTICIPANT INSTRUMENTATION               │      │
-│   │  • IMU Gloves (StretchSense): Finger articulation, 100Hz   │      │
-│   │  • Pressure Films (Tekscan): Grip force distribution        │      │
-│   │  • Markerless Mocap (MediaPipe): Body pose, 30Hz           │      │
-│   │  • Egocentric Camera: First-person view                     │      │
-│   └─────────────────────────────────────────────────────────────┘      │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'floorplan',
+      data: {
+        title: 'INSTRUMENTED KITCHEN LAYOUT',
+        zones: [
+          {
+            id: 'overhead',
+            name: 'Overhead Camera Array',
+            subtitle: '8x 4K + 4x Depth',
+            description: 'Synchronized at 30Hz, PTP timing',
+            icon: 'video',
+            color: 'blue',
+            position: 'top'
+          },
+          {
+            id: 'sensors-row',
+            name: 'Sensor Array',
+            type: 'group',
+            items: [
+              {
+                id: 'thermal',
+                name: 'Thermal Cameras',
+                subtitle: '2x FLIR A700',
+                icon: 'flame',
+                color: 'red'
+              },
+              {
+                id: 'audio',
+                name: 'Audio Array',
+                subtitle: '8ch, 48kHz',
+                icon: 'mic',
+                color: 'purple'
+              },
+              {
+                id: 'eyetrack',
+                name: 'Eye Tracking',
+                subtitle: 'Pupil Labs',
+                icon: 'eye',
+                color: 'green'
+              }
+            ]
+          },
+          {
+            id: 'cooking-station',
+            name: 'Cooking Station',
+            type: 'group',
+            items: [
+              {
+                id: 'force-plates',
+                name: 'Force Plates',
+                subtitle: '4x sensors',
+                icon: 'maximize-2',
+                color: 'orange'
+              },
+              {
+                id: 'smart-knife',
+                name: 'Smart Knife',
+                subtitle: 'F/T + IMU sensors',
+                icon: 'scissors',
+                color: 'gray'
+              },
+              {
+                id: 'smart-spatula',
+                name: 'Smart Spatula',
+                subtitle: 'F/T + Flex sensors',
+                icon: 'tool',
+                color: 'gray'
+              },
+              {
+                id: 'instrumented-pan',
+                name: 'Instrumented Pan',
+                subtitle: 'Load cells',
+                icon: 'circle',
+                color: 'gray'
+              }
+            ],
+            features: [
+              {
+                name: 'Instrumented Countertop',
+                description: 'Pressure-sensitive surface, 1mm resolution',
+                icon: 'layers'
+              }
+            ]
+          },
+          {
+            id: 'participant',
+            name: 'Participant Instrumentation',
+            type: 'list',
+            items: [
+              'IMU Gloves (StretchSense): Finger articulation, 100Hz',
+              'Pressure Films (Tekscan): Grip force distribution',
+              'Markerless Mocap (MediaPipe): Body pose, 30Hz',
+              'Egocentric Camera: First-person view'
+            ],
+            icon: 'user',
+            color: 'indigo'
+          }
+        ],
+        stats: {
+          dataRate: '~2 GB/minute of cooking',
+          storagePerDay: '~4 TB per 8-hour collection day',
+          targetRecipes: '2,000 recipe executions',
+          totalHours: '1,000 hours of dense multimodal data'
+        }
+      }
     },
     {
       type: 'text',
@@ -361,26 +425,63 @@ export const atlasRoadmap: Article = {
       content: 'Food manipulation involves physics phenomena that are poorly represented in standard simulators: material heterogeneity (onions have layers with different properties), cutting and fracture mechanics, deformable materials (dough, batter), phase transitions during cooking (protein denaturation, Maillard reaction, caramelization, water evaporation), and complex fluid dynamics (oils, sauces, foams, emulsions).'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `ONION CROSS-SECTION
-──────────────────
-
-┌─────────────────────┐
-│     Outer Skin      │  → Brittle, tears irregularly
-├─────────────────────┤
-│   Outer Flesh       │  → Crisp, high water content
-├─────────────────────┤
-│   Middle Layers     │  → Decreasing stiffness toward center
-├─────────────────────┤
-│     Inner Core      │  → Dense, different cutting feel
-└─────────────────────┘
-
-Each layer has different:
-- Yield stress
-- Fracture energy
-- Friction coefficient
-- Moisture content`
+      type: 'diagram',
+      diagramType: 'stack',
+      data: {
+        title: 'ONION CROSS-SECTION',
+        subtitle: 'Material Heterogeneity in Food Physics',
+        layers: [
+          {
+            id: 'outer-skin',
+            name: 'Outer Skin',
+            description: 'Brittle, tears irregularly',
+            color: 'amber',
+            properties: {
+              yieldStress: 'High',
+              fractureEnergy: 'Low',
+              frictionCoeff: 'Variable',
+              moistureContent: 'Low (~5%)'
+            }
+          },
+          {
+            id: 'outer-flesh',
+            name: 'Outer Flesh',
+            description: 'Crisp, high water content',
+            color: 'yellow',
+            properties: {
+              yieldStress: 'Medium-High',
+              fractureEnergy: 'Medium',
+              frictionCoeff: 'Medium',
+              moistureContent: 'High (~89%)'
+            }
+          },
+          {
+            id: 'middle-layers',
+            name: 'Middle Layers',
+            description: 'Decreasing stiffness toward center',
+            color: 'lime',
+            properties: {
+              yieldStress: 'Medium → Low',
+              fractureEnergy: 'Medium',
+              frictionCoeff: 'Medium-Low',
+              moistureContent: 'High (~88%)'
+            }
+          },
+          {
+            id: 'inner-core',
+            name: 'Inner Core',
+            description: 'Dense, different cutting feel',
+            color: 'green',
+            properties: {
+              yieldStress: 'Low',
+              fractureEnergy: 'High',
+              frictionCoeff: 'Low',
+              moistureContent: 'Very High (~90%)'
+            }
+          }
+        ],
+        physicsNote: 'Each layer requires different simulation parameters for accurate cutting and fracture mechanics'
+      }
     },
     {
       type: 'subheader',
@@ -403,54 +504,60 @@ Each layer has different:
       content: 'Cooking requires coordinating skills at multiple abstraction levels: high-level policy (LLM/VLM-based) for skill sequencing, mid-level policy for primitive sequences, and low-level policy for motor control.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `POLICY HIERARCHY
-────────────────
-
-┌─────────────────────────────────────────────────────────────┐
-│                    HIGH-LEVEL POLICY                        │
-│                    (LLM/VLM-based)                          │
-│                                                             │
-│  Input: Recipe description, scene state                     │
-│  Output: Skill sequence                                     │
-│                                                             │
-│  Example:                                                   │
-│  "Make scrambled eggs" →                                    │
-│  [crack_egg, crack_egg, beat_eggs, heat_pan,               │
-│   add_butter, pour_eggs, stir_continuously]                │
-│                                                             │
-└─────────────────────────────┬───────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    MID-LEVEL POLICY                         │
-│                    (Learned skill selector)                 │
-│                                                             │
-│  Input: Skill command, visual observation                   │
-│  Output: Primitive sequence + parameters                    │
-│                                                             │
-│  Example:                                                   │
-│  crack_egg →                                                │
-│  [reach(egg), grasp(egg, precision_grip),                  │
-│   transport(over_bowl), tap(edge, force=5N),               │
-│   split(symmetric), pour(yolk_first=False)]                │
-│                                                             │
-└─────────────────────────────┬───────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    LOW-LEVEL POLICY                         │
-│                    (Motor controller)                       │
-│                                                             │
-│  Input: Primitive command, proprioception, vision           │
-│  Output: Joint torques / velocities                         │
-│                                                             │
-│  Example:                                                   │
-│  grasp(egg, precision_grip) →                              │
-│  τ(t) for all joints over 2-second trajectory              │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'hierarchy',
+      data: {
+        title: 'POLICY HIERARCHY',
+        subtitle: 'Multi-level abstraction for cooking tasks',
+        root: {
+          id: 'high-level',
+          name: 'High-Level Policy',
+          subtitle: 'LLM/VLM-based',
+          description: 'Recipe interpretation and skill sequencing',
+          icon: 'brain',
+          color: 'purple',
+          input: 'Recipe description, scene state',
+          output: 'Skill sequence',
+          example: {
+            query: '"Make scrambled eggs"',
+            result: '[crack_egg, crack_egg, beat_eggs, heat_pan, add_butter, pour_eggs, stir_continuously]'
+          },
+          children: [
+            {
+              id: 'mid-level',
+              name: 'Mid-Level Policy',
+              subtitle: 'Learned skill selector',
+              description: 'Decomposes skills into primitive sequences',
+              icon: 'target',
+              color: 'blue',
+              input: 'Skill command, visual observation',
+              output: 'Primitive sequence + parameters',
+              example: {
+                query: 'crack_egg',
+                result: '[reach(egg), grasp(egg, precision_grip), transport(over_bowl), tap(edge, force=5N), split(symmetric), pour(yolk_first=False)]'
+              },
+              children: [
+                {
+                  id: 'low-level',
+                  name: 'Low-Level Policy',
+                  subtitle: 'Motor controller',
+                  description: 'Converts primitives to joint commands',
+                  icon: 'zap',
+                  color: 'orange',
+                  input: 'Primitive command, proprioception, vision',
+                  output: 'Joint torques / velocities',
+                  example: {
+                    query: 'grasp(egg, precision_grip)',
+                    result: 'τ(t) for all joints over 2-second trajectory'
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        learningApproach: 'Hierarchical reinforcement learning with skill library',
+        keyAdvantage: 'Compositional generalization: learn skills once, reuse in new recipes'
+      }
     },
     {
       type: 'subheader',
@@ -734,84 +841,110 @@ Each layer has different:
       content: 'All modules connect through a unified orchestration layer that handles daily planning (biometric assessment, garden inventory, nutrition optimization, meal plan generation, cooking task scheduling), meal execution (task graph retrieval, ingredient harvesting, robot cooking, biometric logging), and continuous optimization (hourly biometric checks, model updates, garden adjustments).'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `                                    ┌─────────────────────┐
-                                    │   KNOWLEDGE BASE    │
-                                    │                     │
-                                    │  ┌───────────────┐  │
-                                    │  │ Recipes       │  │
-                                    │  │ (YouTube+Web) │  │
-                                    │  └───────┬───────┘  │
-                                    │          │          │
-                                    │  ┌───────▼───────┐  │
-                                    │  │ Nutrition     │  │
-                                    │  │ Science       │  │
-                                    │  └───────┬───────┘  │
-                                    │          │          │
-                                    │  ┌───────▼───────┐  │
-                                    │  │ Longevity     │  │
-                                    │  │ Research      │  │
-                                    │  └───────────────┘  │
-                                    └──────────┬──────────┘
-                                               │
-                    ┌──────────────────────────┼──────────────────────────┐
-                    │                          │                          │
-                    ▼                          ▼                          ▼
-        ┌───────────────────┐      ┌───────────────────┐      ┌───────────────────┐
-        │   MEAL PLANNING   │      │   GARDEN CONTROL  │      │   SKILL TRAINING  │
-        │                   │      │                   │      │                   │
-        │  Optimize for:    │      │  Grow what\'s      │      │  Learn to cook    │
-        │  - Biomarkers     │      │  needed for       │      │  from video +     │
-        │  - Preferences    │◄────►│  optimized        │◄────►│  simulation       │
-        │  - Seasonality    │      │  nutrition        │      │                   │
-        │  - Cost           │      │                   │      │                   │
-        └─────────┬─────────┘      └─────────┬─────────┘      └─────────┬─────────┘
-                  │                          │                          │
-                  └──────────────────────────┼──────────────────────────┘
-                                             │
-                                             ▼
-                                 ┌───────────────────────┐
-                                 │    ROBOT EXECUTION    │
-                                 │                       │
-                                 │  Execute cooking      │
-                                 │  tasks using learned  │
-                                 │  skills in user\'s     │
-                                 │  specific kitchen     │
-                                 └───────────┬───────────┘
-                                             │
-                                             ▼
-                                 ┌───────────────────────┐
-                                 │    USER CONSUMES      │
-                                 │    OPTIMIZED MEAL     │
-                                 └───────────┬───────────┘
-                                             │
-                                             ▼
-                                 ┌───────────────────────┐
-                                 │   BIOMETRIC FEEDBACK  │
-                                 │                       │
-                                 │  CGM, HRV, Sleep,     │
-                                 │  Blood Panels         │
-                                 └───────────┬───────────┘
-                                             │
-                                             │
-                    ┌────────────────────────┘
-                    │
-                    ▼
-        ┌───────────────────────┐
-        │   OPTIMIZATION ENGINE │
-        │                       │
-        │  Update models based  │
-        │  on observed outcomes │
-        │                       │
-        │  Adjust:              │
-        │  - Meal composition   │
-        │  - Timing             │
-        │  - Crop selection     │
-        │  - Cooking methods    │
-        └───────────┬───────────┘
-                    │
-                    └──────────► [LOOP BACK TO MEAL PLANNING]`
+      type: 'diagram',
+      diagramType: 'process',
+      data: {
+        title: 'ATLAS Closed-Loop System Integration',
+        description: 'Complete feedback loop from knowledge to execution to biological optimization',
+        steps: [
+          {
+            id: 'knowledge',
+            label: 'Knowledge Base',
+            description: 'Foundation of recipes, nutrition science, and longevity research',
+            icon: 'book',
+            substeps: [
+              'Recipes (YouTube + Web)',
+              'Nutrition Science',
+              'Longevity Research'
+            ]
+          },
+          {
+            id: 'planning',
+            label: 'Meal Planning',
+            description: 'Multi-objective optimization for personalized nutrition',
+            icon: 'brain',
+            substeps: [
+              'Optimize for biomarkers',
+              'Personal preferences',
+              'Seasonality',
+              'Cost constraints'
+            ]
+          },
+          {
+            id: 'garden',
+            label: 'Garden Control',
+            description: 'Autonomous cultivation of optimally nutritious crops',
+            icon: 'leaf',
+            substeps: [
+              'Grow optimized crops',
+              'Nutrient-dense selection',
+              'CEA automation',
+              'Real-time monitoring'
+            ]
+          },
+          {
+            id: 'training',
+            label: 'Skill Training',
+            description: 'Learn cooking techniques from video and simulation',
+            icon: 'target',
+            substeps: [
+              'Video understanding',
+              'Simulation training',
+              'Policy learning',
+              'Skill library'
+            ]
+          },
+          {
+            id: 'execution',
+            label: 'Robot Execution',
+            description: 'Execute cooking tasks using learned skills in user-specific kitchen',
+            icon: 'zap',
+            substeps: [
+              'Task planning',
+              'Manipulation primitives',
+              'Quality monitoring',
+              'Error recovery'
+            ]
+          },
+          {
+            id: 'consumption',
+            label: 'User Consumes Meal',
+            description: 'User consumes optimized, personalized nutrition',
+            icon: 'heart',
+            substeps: [
+              'Meal delivery',
+              'Nutritional tracking',
+              'Subjective feedback'
+            ]
+          },
+          {
+            id: 'biometrics',
+            label: 'Biometric Feedback',
+            description: 'Continuous and periodic health monitoring',
+            icon: 'activity',
+            substeps: [
+              'CGM (glucose)',
+              'HRV (stress/recovery)',
+              'Sleep quality',
+              'Blood panels'
+            ]
+          },
+          {
+            id: 'optimization',
+            label: 'Optimization Engine',
+            description: 'Bayesian optimization updates system parameters based on outcomes',
+            icon: 'sparkles',
+            substeps: [
+              'Update meal composition',
+              'Adjust timing',
+              'Refine crop selection',
+              'Optimize cooking methods'
+            ]
+          }
+        ],
+        cyclic: true,
+        subtitle: 'Complete closed-loop system: from knowledge through execution to biological feedback and continuous optimization'
+      }
     },
     {
       type: 'header',

@@ -267,29 +267,37 @@ export const limitlessProtocol: Article = {
       text: 'Bryan Johnson\'s Sleep Protocol'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `BRYAN JOHNSON'S SLEEP METRICS
-═══════════════════════════════════════════════════════════════════════════
-
-Target Metrics (from his public data):
-• Sleep duration: 8+ hours
-• Sleep efficiency: >95%
-• Deep sleep: >1.5 hours
-• REM sleep: >1.5 hours
-• Heart rate variability during sleep: increasing trend
-• Resting heart rate: decreasing trend
-
-Protocol:
-• Fixed 8:30 PM bedtime (no exceptions)
-• Temperature-controlled sleep environment
-• Blue light blocking glasses after sunset
-• No food after 11 AM (long fasting window)
-• Morning light exposure within minutes of waking
-• Sleep tracking with Oura Ring + WHOOP
-
-Key Insight: Johnson treats sleep as a competitive sport with
-objective metrics, not a vague "I feel rested" assessment.`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: "BRYAN JOHNSON'S SLEEP PROTOCOL",
+        cards: [
+          {
+            title: "Target Metrics",
+            icon: "target",
+            content: "Sleep duration: 8+ hours\\nSleep efficiency: >95%\\nDeep sleep: >1.5 hours\\nREM sleep: >1.5 hours\\nHRV during sleep: ↑ trend\\nResting heart rate: ↓ trend",
+            tags: ["metrics", "tracking"]
+          },
+          {
+            title: "Daily Protocol",
+            icon: "moon",
+            content: "Fixed 8:30 PM bedtime\\nTemp-controlled environment\\nBlue light blocking after sunset\\nNo food after 11 AM\\nMorning light within minutes",
+            tags: ["protocol", "consistency"]
+          },
+          {
+            title: "Tracking Tools",
+            icon: "heart",
+            content: "Oura Ring for sleep stages\\nWHOOP for recovery\\nObjective data over feelings",
+            tags: ["tools", "data"]
+          },
+          {
+            title: "Key Insight",
+            icon: "brain",
+            content: 'Johnson treats sleep as a competitive sport with objective metrics, not a vague "I feel rested" assessment.',
+            tags: ["philosophy", "mindset"]
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -304,113 +312,132 @@ objective metrics, not a vague "I feel rested" assessment.`
       text: 'Exercise is the single most evidence-backed intervention for cognitive enhancement. It outperforms every nootropic.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `EXERCISE → BRAIN EFFECTS
-═══════════════════════════════════════════════════════════════════════════
-
-IMMEDIATE (During & 0-2 hours after):
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  Norepinephrine ↑        ──▶  Alertness, attention                      │
-│  Dopamine ↑              ──▶  Motivation, learning signals              │
-│  Serotonin ↑             ──▶  Mood, anxiety reduction                   │
-│  Endorphins ↑            ──▶  Pain modulation, euphoria                 │
-│  Cerebral blood flow ↑   ──▶  Oxygen/glucose delivery to brain          │
-│                                                                          │
-│  NET EFFECT: 20-30% boost in cognitive performance for 2-4 hours        │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-
-CHRONIC (Weeks to months of consistent exercise):
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  BDNF ↑↑                 ──▶  "Miracle-Gro for the brain"               │
-│                               Promotes neurogenesis, synaptogenesis      │
-│                                                                          │
-│  Hippocampal volume ↑    ──▶  1-2% per year (vs. 1% loss without)       │
-│                               Improves memory encoding                   │
-│                                                                          │
-│  Prefrontal cortex ↑     ──▶  Enhanced executive function               │
-│                               Better working memory                      │
-│                                                                          │
-│  White matter integrity ↑──▶  Faster information processing             │
-│                               Better inter-regional communication        │
-│                                                                          │
-│  Inflammation ↓          ──▶  Reduced CRP, IL-6                         │
-│                               Lower neuroinflammation                    │
-│                                                                          │
-│  Insulin sensitivity ↑   ──▶  Better glucose regulation in brain        │
-│                               Reduced Alzheimer\'s risk                   │
-│                                                                          │
-│  NET EFFECT: Structural brain changes that compound over years          │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'comparison',
+      data: {
+        title: 'EXERCISE → BRAIN EFFECTS',
+        subtitle: 'Immediate vs long-term cognitive benefits',
+        categories: [
+          {
+            name: 'IMMEDIATE EFFECTS',
+            subtitle: 'During & 0-2 hours after',
+            icon: 'zap',
+            color: 'yellow',
+            items: [
+              {
+                name: 'Norepinephrine ↑',
+                description: 'Alertness, attention',
+                impact: 'high'
+              },
+              {
+                name: 'Dopamine ↑',
+                description: 'Motivation, learning signals',
+                impact: 'high'
+              },
+              {
+                name: 'Serotonin ↑',
+                description: 'Mood, anxiety reduction',
+                impact: 'medium'
+              },
+              {
+                name: 'Endorphins ↑',
+                description: 'Pain modulation, euphoria',
+                impact: 'medium'
+              },
+              {
+                name: 'Cerebral blood flow ↑',
+                description: 'Oxygen/glucose delivery to brain',
+                impact: 'high'
+              }
+            ],
+            netEffect: '20-30% boost in cognitive performance for 2-4 hours'
+          },
+          {
+            name: 'CHRONIC EFFECTS',
+            subtitle: 'Weeks to months of consistent exercise',
+            icon: 'brain',
+            color: 'purple',
+            items: [
+              {
+                name: 'BDNF ↑↑',
+                description: '"Miracle-Gro for the brain" - Promotes neurogenesis, synaptogenesis',
+                impact: 'critical'
+              },
+              {
+                name: 'Hippocampal volume ↑',
+                description: '1-2% per year (vs. 1% loss without) - Improves memory encoding',
+                impact: 'critical'
+              },
+              {
+                name: 'Prefrontal cortex ↑',
+                description: 'Enhanced executive function, better working memory',
+                impact: 'high'
+              },
+              {
+                name: 'White matter integrity ↑',
+                description: 'Faster information processing, better inter-regional communication',
+                impact: 'high'
+              },
+              {
+                name: 'Inflammation ↓',
+                description: 'Reduced CRP, IL-6, lower neuroinflammation',
+                impact: 'medium'
+              },
+              {
+                name: 'Insulin sensitivity ↑',
+                description: 'Better glucose regulation in brain, reduced Alzheimer\'s risk',
+                impact: 'high'
+              }
+            ],
+            netEffect: 'Structural brain changes that compound over years'
+          }
+        ]
+      }
     },
     {
       type: 'subheader',
       text: 'The Optimal Protocol (Rhonda Patrick / Peter Attia Synthesis)'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `WEEKLY EXERCISE PRESCRIPTION FOR COGNITIVE OPTIMIZATION
-═══════════════════════════════════════════════════════════════════════════
-
-┌────────────────────────────────────────────────────────────────────────┐
-│  ZONE 2 CARDIO (Aerobic Base)                     Evidence: ★★★★★     │
-│                                                                         │
-│  What: Exercise at ~60-70% max HR where you can hold a conversation    │
-│        but couldn\'t sing                                                │
-│  How much: 150-200+ minutes/week (3-5 sessions × 30-60 min)            │
-│  Why: Maximizes mitochondrial density, BDNF, cardiovascular base       │
-│                                                                         │
-│  Rhonda Patrick: "Zone 2 is the single most important exercise         │
-│  modality for longevity and brain health."                             │
-│                                                                         │
-└────────────────────────────────────────────────────────────────────────┘
-
-┌────────────────────────────────────────────────────────────────────────┐
-│  HIGH-INTENSITY INTERVALS (VO2 Max Training)       Evidence: ★★★★★    │
-│                                                                         │
-│  What: 80-95% max HR for 30 sec - 4 min, repeated                      │
-│  How much: 1-2 sessions/week, 20-30 min total                          │
-│  Why: Maximum BDNF release, VO2max improvement, growth hormone         │
-│                                                                         │
-│  Example protocol (Norwegian 4×4):                                      │
-│  • 10 min warmup                                                        │
-│  • 4 min at 90-95% max HR                                               │
-│  • 3 min active recovery                                                │
-│  • Repeat 4 times                                                       │
-│  • 5 min cooldown                                                       │
-│                                                                         │
-└────────────────────────────────────────────────────────────────────────┘
-
-┌────────────────────────────────────────────────────────────────────────┐
-│  RESISTANCE TRAINING                               Evidence: ★★★★☆    │
-│                                                                         │
-│  What: Compound movements with progressive overload                    │
-│  How much: 2-4 sessions/week, 45-60 min                                │
-│  Why: Preserves muscle mass, improves insulin sensitivity,             │
-│       releases IGF-1 (neuroprotective), hormone optimization           │
-│                                                                         │
-│  Key movements: Squat, deadlift, bench press, row, overhead press      │
-│                                                                         │
-└────────────────────────────────────────────────────────────────────────┘
-
-┌────────────────────────────────────────────────────────────────────────┐
-│  TIMING FOR COGNITIVE ENHANCEMENT                                       │
-│                                                                         │
-│  • For learning: Exercise 1-2 hours BEFORE studying                     │
-│    (elevates catecholamines for encoding)                               │
-│                                                                         │
-│  • For consolidation: Light exercise (walking) AFTER learning           │
-│    (enhances hippocampal activity during consolidation)                 │
-│                                                                         │
-│  • Avoid intense exercise late evening                                  │
-│    (can disrupt sleep architecture)                                     │
-│                                                                         │
-└────────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'WEEKLY EXERCISE PRESCRIPTION',
+        subtitle: 'For Cognitive Optimization',
+        cards: [
+          {
+            title: "Zone 2 Cardio",
+            subtitle: "Aerobic Base",
+            icon: "heart",
+            content: "What: ~60-70% max HR\\n(can talk, can't sing)\\n\\nHow much: 150-200+ min/week\\n(3-5 sessions × 30-60 min)\\n\\nWhy: Maximizes mitochondrial density, BDNF, cardiovascular base\\n\\nEvidence: ★★★★★",
+            tags: ["critical", "foundation"],
+            quote: 'Rhonda Patrick: "Zone 2 is the single most important exercise modality for longevity and brain health."'
+          },
+          {
+            title: "High-Intensity Intervals",
+            subtitle: "VO2 Max Training",
+            icon: "flame",
+            content: "What: 80-95% max HR\\n(30 sec - 4 min repeated)\\n\\nHow much: 1-2 sessions/week\\n(20-30 min total)\\n\\nWhy: Maximum BDNF release, VO2max improvement, growth hormone\\n\\nEvidence: ★★★★★",
+            tags: ["intensity", "BDNF"],
+            protocol: "Norwegian 4×4:\\n• 10 min warmup\\n• 4 min at 90-95% max HR\\n• 3 min active recovery\\n• Repeat 4 times\\n• 5 min cooldown"
+          },
+          {
+            title: "Resistance Training",
+            subtitle: "Strength & Muscle",
+            icon: "dumbbell",
+            content: "What: Compound movements\\n(progressive overload)\\n\\nHow much: 2-4 sessions/week\\n(45-60 min)\\n\\nWhy: Muscle preservation, insulin sensitivity, IGF-1 release, hormones\\n\\nEvidence: ★★★★☆",
+            tags: ["strength", "neuroprotection"],
+            movements: "Squat, deadlift, bench press, row, overhead press"
+          },
+          {
+            title: "Timing Strategy",
+            subtitle: "Cognitive Enhancement",
+            icon: "clock",
+            content: "For learning:\\nExercise 1-2 hours BEFORE studying\\n(elevates catecholamines)\\n\\nFor consolidation:\\nLight exercise AFTER learning\\n(enhances hippocampus)\\n\\nAvoid intense exercise late evening\\n(disrupts sleep)",
+            tags: ["timing", "optimization"]
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -425,35 +452,71 @@ CHRONIC (Weeks to months of consistent exercise):
       text: 'The brain represents 2% of body weight but consumes 20-25% of total energy. It\'s extraordinarily sensitive to what you feed it.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `NUTRITIONAL FRAMEWORK FOR COGNITIVE OPTIMIZATION
-═══════════════════════════════════════════════════════════════════════════
-
-┌────────────────────────────────────────────────────────────────────────┐
-│                        GLUCOSE STABILITY                                │
-│                                                                         │
-│   Problem: Glucose spikes → crashes → brain fog, mood swings           │
-│                                                                         │
-│   ┌──────────────────────────────────────────────────────────────┐     │
-│   │ Glucose                                                       │     │
-│   │    │    ╱╲                                                    │     │
-│   │    │   ╱  ╲      "Post-meal crash"                            │     │
-│   │    │  ╱    ╲     cognitive impairment                         │     │
-│   │    │ ╱      ╲                                                  │     │
-│   │ ───┼╱────────╲─────────────────────────────────────▶ Time    │     │
-│   │    │          ╲                                               │     │
-│   │    │           ╲╱   ← Here you crave sugar/caffeine           │     │
-│   │                                                               │     │
-│   └──────────────────────────────────────────────────────────────┘     │
-│                                                                         │
-│   Solution: Glycemic load management                                    │
-│   • Protein + fat + fiber with every meal                              │
-│   • Avoid refined carbs, especially in isolation                       │
-│   • Time carbs for evening (better sleep, less daytime crash)          │
-│   • Consider CGM for personalized glucose response data                │
-│                                                                         │
-└────────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'metrics',
+      data: {
+        title: 'GLUCOSE STABILITY',
+        subtitle: 'Nutritional Framework for Cognitive Optimization',
+        metrics: [
+          {
+            id: 'problem',
+            label: 'The Problem',
+            value: 'Glucose Spikes → Crashes',
+            change: 'negative',
+            icon: 'droplets',
+            description: 'Post-meal spikes lead to brain fog, mood swings, sugar cravings',
+            details: [
+              'Glucose spike after refined carbs',
+              'Energy crash 2-3 hours later',
+              'Cognitive impairment',
+              'Craving for sugar/caffeine',
+              'Cycle repeats'
+            ]
+          },
+          {
+            id: 'solution1',
+            label: 'Meal Composition',
+            value: 'Protein + Fat + Fiber',
+            change: 'positive',
+            icon: 'leaf',
+            description: 'Every meal should include all three macros',
+            details: [
+              'Slows glucose absorption',
+              'Extends satiety',
+              'Prevents spikes/crashes',
+              'Stable energy for 3-5 hours'
+            ]
+          },
+          {
+            id: 'solution2',
+            label: 'Carb Timing',
+            value: 'Evening > Daytime',
+            change: 'positive',
+            icon: 'moon',
+            description: 'Time carbs strategically for better sleep and daytime energy',
+            details: [
+              'Carbs in evening → better sleep',
+              'Low-carb daytime → stable focus',
+              'Avoid refined carbs anytime',
+              'Match to activity level'
+            ]
+          },
+          {
+            id: 'tool',
+            label: 'Tracking Tool',
+            value: 'Continuous Glucose Monitor',
+            change: 'neutral',
+            icon: 'target',
+            description: 'Personalized data for YOUR glucose response',
+            details: [
+              'Real-time glucose tracking',
+              'Identify personal triggers',
+              'Optimize meal composition',
+              'Track response to exercise'
+            ]
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -570,100 +633,145 @@ CHRONIC (Weeks to months of consistent exercise):
       text: '3.1 The Neuroscience of Flow'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `THE FLOW STATE NEUROCHEMICAL CASCADE
-═══════════════════════════════════════════════════════════════════════════
-
-BEFORE FLOW: Struggle Phase
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  Brain State: High beta waves (stress, effortful attention)             │
-│  Experience: Frustration, difficulty, mental effort                     │
-│  Duration: Minutes to hours                                              │
-│                                                                          │
-│  What\'s happening: Loading information into implicit processing         │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    │ TRANSITION
-                                    ▼
-DURING FLOW: Release Phase
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  Brain changes:                                                          │
-│  • Prefrontal cortex DEACTIVATES (transient hypofrontality)            │
-│  • Inner critic goes offline                                            │
-│  • Sense of time distorts                                                │
-│  • Self-consciousness disappears                                         │
-│                                                                          │
-│  Neurochemical release:                                                  │
-│  ┌─────────────────────────────────────────────────────────────────┐    │
-│  │                                                                  │    │
-│  │  Norepinephrine ↑↑   →  Arousal, attention, pattern recognition │    │
-│  │  Dopamine ↑↑         →  Reward, motivation, learning signals    │    │
-│  │  Anandamide ↑↑       →  Lateral thinking, anxiety reduction     │    │
-│  │  Endorphins ↑↑       →  Pain blocking, euphoria                 │    │
-│  │  Serotonin ↑         →  Wellbeing (mostly post-flow)            │    │
-│  │                                                                  │    │
-│  │  This combination = "flow cocktail"                              │    │
-│  │  Most potent natural neurochemical stack available               │    │
-│  │                                                                  │    │
-│  └─────────────────────────────────────────────────────────────────┘    │
-│                                                                          │
-│  Brainwave shift: Beta → Alpha → Theta (at deep flow)                   │
-│                                                                          │
-│  Performance boost: 400-500% in optimal conditions (McKinsey study)     │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    │ EXIT
-                                    ▼
-AFTER FLOW: Recovery Phase
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  Brain State: Returning to baseline                                      │
-│  Experience: Satisfaction, fatigue, enhanced creativity (48-72 hrs)     │
-│                                                                          │
-│  Critical: Neurochemical systems need recovery time                     │
-│  Cannot force another flow state immediately                            │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'process',
+      data: {
+        title: 'THE FLOW STATE NEUROCHEMICAL CASCADE',
+        subtitle: 'Three phases of peak performance',
+        steps: [
+          {
+            id: 'struggle',
+            name: 'Struggle Phase',
+            timeframe: 'Minutes to hours',
+            subtitle: 'BEFORE FLOW',
+            description: 'Loading information into implicit processing',
+            icon: 'flame',
+            details: [
+              'Brain State: High beta waves',
+              'Stress, effortful attention',
+              'Experience: Frustration, difficulty',
+              'Mental effort required',
+              'System is preparing for flow'
+            ],
+            importance: 'critical',
+            color: 'red'
+          },
+          {
+            id: 'flow',
+            name: 'Release Phase',
+            timeframe: 'Variable duration',
+            subtitle: 'DURING FLOW',
+            description: 'The flow cocktail - most potent natural neurochemical stack',
+            icon: 'zap',
+            details: [
+              'Brain: Prefrontal cortex DEACTIVATES',
+              '→ Inner critic goes offline',
+              '→ Time distorts',
+              '→ Self-consciousness disappears',
+              '',
+              'Neurochemical Cocktail:',
+              '• Norepinephrine ↑↑ → Arousal, attention, pattern recognition',
+              '• Dopamine ↑↑ → Reward, motivation, learning',
+              '• Anandamide ↑↑ → Lateral thinking, anxiety reduction',
+              '• Endorphins ↑↑ → Pain blocking, euphoria',
+              '• Serotonin ↑ → Wellbeing (post-flow)',
+              '',
+              'Brainwaves: Beta → Alpha → Theta',
+              'Performance boost: 400-500% (McKinsey)'
+            ],
+            importance: 'critical',
+            color: 'yellow'
+          },
+          {
+            id: 'recovery',
+            name: 'Recovery Phase',
+            timeframe: '48-72 hours',
+            subtitle: 'AFTER FLOW',
+            description: 'Neurochemical systems need recovery time',
+            icon: 'heart',
+            details: [
+              'Brain State: Returning to baseline',
+              'Experience: Satisfaction, fatigue',
+              'Enhanced creativity (48-72 hrs)',
+              '',
+              'CRITICAL:',
+              'Cannot force another flow state immediately',
+              'Recovery time is essential',
+              'Trying to force flow = diminishing returns'
+            ],
+            importance: 'high',
+            color: 'blue'
+          }
+        ],
+        insight: {
+          title: 'THE CRITICAL INSIGHT',
+          description: 'Flow is not a switch - it\'s a cycle. You cannot maintain flow indefinitely. Respect the recovery phase.',
+          impacts: [
+            'Struggle phase is necessary (not a failure)',
+            'Flow requires neurochemical depletion',
+            'Recovery enables next flow cycle',
+            'Attempting 8+ hours/day of flow = burnout'
+          ]
+        }
+      }
     },
     {
       type: 'subheader',
       text: '3.2 The 4% Rule for Optimal Challenge'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `THE 4% RULE FOR OPTIMAL CHALLENGE
-═══════════════════════════════════════════════════════════════════════════
-
-                    CHALLENGE LEVEL (relative to skill)
-
-        -20%    -10%     0%      +4%     +10%    +20%
-          │       │       │        │        │       │
-          ▼       ▼       ▼        ▼        ▼       ▼
-    ┌─────────────────────────────────────────────────────┐
-    │                                                      │
-    │  BOREDOM  │ COMFORT │ FLOW  │ STRETCH │  ANXIETY    │
-    │           │         │ ZONE  │         │             │
-    │   😴      │   😐    │  🔥   │   😤    │    😰       │
-    │           │         │       │         │             │
-    │  Checked  │  Auto-  │ Peak  │ High    │  Over-      │
-    │  out      │  pilot  │ perf. │ growth  │  whelmed    │
-    │           │         │       │         │             │
-    └─────────────────────────────────────────────────────┘
-
-    PRACTICAL APPLICATION:
-
-    1. Assess current skill level honestly
-    2. Choose task difficulty ~4% beyond current ability
-    3. Adjust in real-time based on experience:
-       • If bored → increase difficulty
-       • If anxious → decrease difficulty
-       • If in flow → maintain current level`
+      type: 'diagram',
+      diagramType: 'radial',
+      data: {
+        title: 'THE 4% RULE FOR OPTIMAL CHALLENGE',
+        subtitle: 'Challenge level relative to skill',
+        centerLabel: 'FLOW ZONE',
+        zones: [
+          {
+            name: 'BOREDOM',
+            value: -20,
+            description: 'Checked out',
+            icon: '😴',
+            color: 'gray'
+          },
+          {
+            name: 'COMFORT',
+            value: -10,
+            description: 'Auto-pilot',
+            icon: '😐',
+            color: 'blue'
+          },
+          {
+            name: 'FLOW ZONE',
+            value: 4,
+            description: 'Peak performance',
+            icon: '🔥',
+            color: 'green',
+            highlight: true
+          },
+          {
+            name: 'STRETCH',
+            value: 10,
+            description: 'High growth',
+            icon: '😤',
+            color: 'yellow'
+          },
+          {
+            name: 'ANXIETY',
+            value: 20,
+            description: 'Overwhelmed',
+            icon: '😰',
+            color: 'red'
+          }
+        ],
+        guidance: [
+          'Assess current skill level honestly',
+          'Choose task difficulty ~4% beyond current ability',
+          'Adjust in real-time: If bored → increase difficulty',
+          'If anxious → decrease difficulty',
+          'If in flow → maintain current level'
+        ]
+      }
     },
     {
       type: 'header',
@@ -678,69 +786,67 @@ AFTER FLOW: Recovery Phase
       text: '4.1 The Neuroscience of Habit Formation'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `THE HABIT LOOP (Basal Ganglia)
-═══════════════════════════════════════════════════════════════════════════
-
-                    ┌────────────────────────────────────┐
-                    │           TRIGGER/CUE              │
-                    │   (Environmental or internal)      │
-                    │                                    │
-                    │   • Location                       │
-                    │   • Time                           │
-                    │   • Emotional state                │
-                    │   • Other people                   │
-                    │   • Preceding action               │
-                    │                                    │
-                    └─────────────────┬──────────────────┘
-                                      │
-                                      ▼
-                    ┌────────────────────────────────────┐
-                    │           CRAVING                  │
-                    │   (Anticipation of reward)         │
-                    │                                    │
-                    │   Dopamine release on CUE          │
-                    │   (not reward-anticipation!)       │
-                    │                                    │
-                    └─────────────────┬──────────────────┘
-                                      │
-                                      ▼
-                    ┌────────────────────────────────────┐
-                    │           RESPONSE                 │
-                    │   (The actual habit behavior)      │
-                    │                                    │
-                    │   Requires less and less           │
-                    │   conscious effort over time       │
-                    │                                    │
-                    └─────────────────┬──────────────────┘
-                                      │
-                                      ▼
-                    ┌────────────────────────────────────┐
-                    │           REWARD                   │
-                    │   (Satisfies the craving)          │
-                    │                                    │
-                    │   Teaches brain to remember        │
-                    │   and repeat the loop              │
-                    │                                    │
-                    └─────────────────┬──────────────────┘
-                                      │
-                                      └──────────────────────────────────┐
-                                                                          │
-                                      ┌───────────────────────────────────┘
-                                      │
-                                      ▼
-                              LOOP STRENGTHENS
-                              ─────────────────
-                              Repetition = Stronger neural pathways
-                              Eventually runs on "autopilot"
-
-KEY INSIGHT (Wendy Wood\'s Research):
-~43% of daily behaviors are habitual-performed automatically
-while thinking about something else.
-
-The brain WANTS to automate behaviors to save cognitive resources.
-Use this tendency deliberately.`
+      type: 'diagram',
+      diagramType: 'process',
+      data: {
+        title: 'THE HABIT LOOP',
+        subtitle: 'Basal Ganglia Circuit',
+        cyclic: true,
+        steps: [
+          {
+            id: 'trigger',
+            label: 'TRIGGER/CUE',
+            icon: 'target',
+            description: 'Environmental or internal signal',
+            details: [
+              '• Location',
+              '• Time',
+              '• Emotional state',
+              '• Other people',
+              '• Preceding action'
+            ]
+          },
+          {
+            id: 'craving',
+            label: 'CRAVING',
+            icon: 'zap',
+            description: 'Anticipation of reward',
+            details: [
+              'Dopamine release on CUE',
+              '(not reward-anticipation!)'
+            ]
+          },
+          {
+            id: 'response',
+            label: 'RESPONSE',
+            icon: 'brain',
+            description: 'The actual habit behavior',
+            details: [
+              'Requires less and less',
+              'conscious effort over time'
+            ]
+          },
+          {
+            id: 'reward',
+            label: 'REWARD',
+            icon: 'award',
+            description: 'Satisfies the craving',
+            details: [
+              'Teaches brain to remember',
+              'and repeat the loop'
+            ]
+          }
+        ],
+        insight: {
+          title: 'KEY INSIGHT (Wendy Wood\'s Research)',
+          points: [
+            '~43% of daily behaviors are habitual',
+            'Performed automatically while thinking about something else',
+            'The brain WANTS to automate behaviors to save cognitive resources',
+            'Use this tendency deliberately'
+          ]
+        }
+      }
     },
     {
       type: 'header',
@@ -759,33 +865,56 @@ Use this tendency deliberately.`
       text: 'The Defense Advanced Research Projects Agency has invested hundreds of millions in human performance enhancement.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `DARPA COGNITIVE ENHANCEMENT PROGRAMS
-═══════════════════════════════════════════════════════════════════════════
-
-TARGETED NEUROPLASTICITY TRAINING (TNT) - 2016-2020
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  Mechanism: Peripheral nerve stimulation during learning                │
-│                                                                          │
-│  How it works:                                                           │
-│  • Electrical stimulation of vagus/trigeminal nerves                    │
-│  • Increases release of plasticity-enhancing neurochemicals:            │
-│    acetylcholine, dopamine, serotonin, norepinephrine                  │
-│  • Applied during training tasks                                         │
-│                                                                          │
-│  Results:                                                                │
-│  • 490% improvement in skill acquisition (marksmanship study)           │
-│  • Accelerated language learning                                         │
-│  • Enhanced intelligence analysis training                               │
-│                                                                          │
-│  Research institutions: Arizona State, Johns Hopkins, Wright State,     │
-│  University of Florida, University of Texas-Dallas                      │
-│                                                                          │
-│  Status: Technology being developed for field deployment                │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'DARPA COGNITIVE ENHANCEMENT PROGRAMS',
+        subtitle: 'Targeted Neuroplasticity Training (TNT) - 2016-2020',
+        cards: [
+          {
+            id: 'mechanism',
+            title: 'Mechanism',
+            icon: 'brain',
+            content: [
+              'Peripheral nerve stimulation during learning',
+              'Electrical stimulation of vagus/trigeminal nerves',
+              'Increases plasticity-enhancing neurochemicals:',
+              '• Acetylcholine',
+              '• Dopamine',
+              '• Serotonin',
+              '• Norepinephrine',
+              'Applied during training tasks'
+            ]
+          },
+          {
+            id: 'results',
+            title: 'Results',
+            icon: 'zap',
+            highlight: true,
+            content: [
+              '490% improvement in skill acquisition',
+              '(marksmanship study)',
+              'Accelerated language learning',
+              'Enhanced intelligence analysis training'
+            ]
+          },
+          {
+            id: 'status',
+            title: 'Status & Research',
+            icon: 'target',
+            content: [
+              'Technology being developed for field deployment',
+              '',
+              'Research institutions:',
+              '• Arizona State University',
+              '• Johns Hopkins',
+              '• Wright State University',
+              '• University of Florida',
+              '• University of Texas-Dallas'
+            ]
+          }
+        ]
+      }
     },
     {
       type: 'subheader',
@@ -804,48 +933,66 @@ TARGETED NEUROPLASTICITY TRAINING (TNT) - 2016-2020
       text: 'Thermal stress triggers powerful adaptive responses.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `DELIBERATE COLD EXPOSURE
-═══════════════════════════════════════════════════════════════════════════
-
-EVIDENCE: ★★★★☆ (for specific outcomes)
-
-MECHANISMS:
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  Immediate effects:                                                      │
-│  • Norepinephrine ↑↑ (200-500%) - alertness, focus                     │
-│  • Dopamine ↑↑ (200-250%) - mood, motivation (lasts hours)             │
-│  • Cortisol ↑ (brief spike, then enhanced recovery)                    │
-│                                                                          │
-│  Chronic adaptations:                                                    │
-│  • Brown fat activation (metabolic boost)                               │
-│  • Improved immune function (controversial)                             │
-│  • Enhanced stress resilience                                            │
-│  • Better mood regulation                                                │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-
-PROTOCOL (Evidence-Based):
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  Target: 11 minutes total per week of deliberate cold exposure          │
-│  (Huberman synthesis of research)                                        │
-│                                                                          │
-│  Method options:                                                         │
-│  • Cold shower: End with 30-60 seconds of coldest water                │
-│  • Cold plunge: 1-3 minutes at 50-59°F (10-15°C)                        │
-│  • Cold water immersion: Up to neck, 1-5 minutes                        │
-│                                                                          │
-│  Guidelines:                                                             │
-│  • Temperature: Uncomfortably cold but safe                             │
-│  • "Cold enough that you want to get out but can stay in safely"       │
-│  • End on cold (don\'t warm up immediately-delays adaptation)           │
-│  • Timing: Not immediately after strength training (blunts hypertrophy)│
-│  • Best timing: Morning (aligns with cortisol awakening response)      │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'DELIBERATE COLD EXPOSURE',
+        subtitle: 'EVIDENCE: ★★★★☆ (for specific outcomes)',
+        cards: [
+          {
+            id: 'immediate',
+            title: 'Immediate Effects',
+            icon: 'zap',
+            highlight: true,
+            content: [
+              'Norepinephrine ↑↑ (200-500%)',
+              '→ Alertness, focus',
+              '',
+              'Dopamine ↑↑ (200-250%)',
+              '→ Mood, motivation (lasts hours)',
+              '',
+              'Cortisol ↑',
+              '→ Brief spike, then enhanced recovery'
+            ]
+          },
+          {
+            id: 'chronic',
+            title: 'Chronic Adaptations',
+            icon: 'flame',
+            content: [
+              'Brown fat activation',
+              '(metabolic boost)',
+              '',
+              'Improved immune function',
+              '(controversial)',
+              '',
+              'Enhanced stress resilience',
+              '',
+              'Better mood regulation'
+            ]
+          },
+          {
+            id: 'protocol',
+            title: 'Protocol (Evidence-Based)',
+            icon: 'droplets',
+            content: [
+              'Target: 11 min/week total',
+              '(Huberman synthesis)',
+              '',
+              'Methods:',
+              '• Cold shower: 30-60 sec end',
+              '• Cold plunge: 1-3 min at 50-59°F',
+              '• Cold immersion: 1-5 min',
+              '',
+              'Guidelines:',
+              '• Uncomfortably cold but safe',
+              '• End on cold (no immediate warmup)',
+              '• Best timing: Morning',
+              '• Not after strength training'
+            ]
+          }
+        ]
+      }
     },
     {
       type: 'header',
@@ -860,152 +1007,186 @@ PROTOCOL (Evidence-Based):
       text: '6.1 Systems Thinking: The Performance Meta-Model'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `THE INTERCONNECTED PERFORMANCE SYSTEM
-═══════════════════════════════════════════════════════════════════════════
-
-                                   ┌─────────────┐
-                                   │   SLEEP     │
-                                   │             │
-                                   └──────┬──────┘
-                                          │
-                    ┌─────────────────────┼─────────────────────┐
-                    │                     │                     │
-                    ▼                     ▼                     ▼
-            ┌─────────────┐       ┌─────────────┐       ┌─────────────┐
-            │  EXERCISE   │◄─────▶│  NUTRITION  │◄─────▶│   STRESS    │
-            │             │       │             │       │             │
-            └──────┬──────┘       └──────┬──────┘       └──────┬──────┘
-                   │                     │                     │
-                   └─────────────────────┼─────────────────────┘
-                                         │
-                                         ▼
-                              ┌─────────────────────┐
-                              │   COGNITIVE         │
-                              │   CAPACITY          │
-                              │                     │
-                              │ • Working memory    │
-                              │ • Executive function│
-                              │ • Processing speed  │
-                              └──────────┬──────────┘
-                                         │
-                   ┌─────────────────────┼─────────────────────┐
-                   │                     │                     │
-                   ▼                     ▼                     ▼
-          ┌─────────────┐       ┌─────────────┐       ┌─────────────┐
-          │  LEARNING   │       │   FLOW      │       │   HABITS    │
-          │             │◄─────▶│   STATES    │◄─────▶│             │
-          └──────┬──────┘       └──────┬──────┘       └──────┬──────┘
-                 │                     │                     │
-                 └─────────────────────┼─────────────────────┘
-                                       │
-                                       ▼
-                            ┌─────────────────────┐
-                            │    PERFORMANCE      │
-                            │    OUTCOMES         │
-                            └─────────────────────┘
-
-
-FEEDBACK LOOPS:
-
-1. POSITIVE REINFORCING LOOP (Virtuous Cycle)
-   ┌────────────────────────────────────────────────────────────────────┐
-   │                                                                     │
-   │  Good sleep → More energy → Better workouts → Easier sleep →       │
-   │  Better mood → Better food choices → Improved cognition →          │
-   │  More flow → Higher motivation → Maintained habits → REPEATS       │
-   │                                                                     │
-   └────────────────────────────────────────────────────────────────────┘
-
-2. NEGATIVE REINFORCING LOOP (Vicious Cycle)
-   ┌────────────────────────────────────────────────────────────────────┐
-   │                                                                     │
-   │  Poor sleep → Low energy → Skip workout → Worse sleep →            │
-   │  Low mood → Poor food choices → Impaired cognition →               │
-   │  Can\'t focus → Less motivation → Broken habits → REPEATS           │
-   │                                                                     │
-   └────────────────────────────────────────────────────────────────────┘
-
-LEVERAGE POINTS:
-
-The question isn\'t "what should I optimize?"
-The question is "WHERE does a small change create maximum ripple effects?"
-
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  HIGHEST LEVERAGE: Sleep                                                 │
-│  Why: Affects every other system. Fixing sleep improves everything.    │
-│                                                                          │
-│  SECOND HIGHEST: Exercise                                                │
-│  Why: Directly improves cognition, mood, sleep, and stress resilience. │
-│                                                                          │
-│  THIRD HIGHEST: Morning routine                                          │
-│  Why: First domino of the day. Win the morning, win the day.           │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'hierarchy',
+      data: {
+        title: 'THE INTERCONNECTED PERFORMANCE SYSTEM',
+        subtitle: 'Everything connects and amplifies',
+        root: {
+          id: 'sleep',
+          label: 'SLEEP',
+          icon: 'moon',
+          description: 'Foundation of all systems'
+        },
+        nodes: [
+          {
+            id: 'exercise',
+            label: 'EXERCISE',
+            icon: 'dumbbell',
+            parentId: 'sleep',
+            bidirectional: ['nutrition', 'stress']
+          },
+          {
+            id: 'nutrition',
+            label: 'NUTRITION',
+            icon: 'flame',
+            parentId: 'sleep',
+            bidirectional: ['exercise', 'stress']
+          },
+          {
+            id: 'stress',
+            label: 'STRESS',
+            icon: 'wind',
+            parentId: 'sleep',
+            bidirectional: ['exercise', 'nutrition']
+          },
+          {
+            id: 'cognitive',
+            label: 'COGNITIVE CAPACITY',
+            icon: 'brain',
+            parentId: 'exercise',
+            description: 'Working memory • Executive function • Processing speed'
+          },
+          {
+            id: 'learning',
+            label: 'LEARNING',
+            icon: 'book',
+            parentId: 'cognitive',
+            bidirectional: ['flow', 'habits']
+          },
+          {
+            id: 'flow',
+            label: 'FLOW STATES',
+            icon: 'zap',
+            parentId: 'cognitive',
+            bidirectional: ['learning', 'habits']
+          },
+          {
+            id: 'habits',
+            label: 'HABITS',
+            icon: 'target',
+            parentId: 'cognitive',
+            bidirectional: ['learning', 'flow']
+          },
+          {
+            id: 'performance',
+            label: 'PERFORMANCE OUTCOMES',
+            icon: 'award',
+            parentId: 'learning'
+          }
+        ],
+        feedbackLoops: [
+          {
+            type: 'positive',
+            title: 'Virtuous Cycle',
+            description: 'Good sleep → More energy → Better workouts → Easier sleep → Better mood → Better food choices → Improved cognition → More flow → Higher motivation → Maintained habits → REPEATS'
+          },
+          {
+            type: 'negative',
+            title: 'Vicious Cycle',
+            description: 'Poor sleep → Low energy → Skip workout → Worse sleep → Low mood → Poor food choices → Impaired cognition → Can\'t focus → Less motivation → Broken habits → REPEATS'
+          }
+        ],
+        leveragePoints: [
+          {
+            rank: 1,
+            label: 'Sleep',
+            icon: 'moon',
+            reason: 'Affects every other system. Fixing sleep improves everything.'
+          },
+          {
+            rank: 2,
+            label: 'Exercise',
+            icon: 'dumbbell',
+            reason: 'Directly improves cognition, mood, sleep, and stress resilience.'
+          },
+          {
+            rank: 3,
+            label: 'Morning routine',
+            icon: 'sunrise',
+            reason: 'First domino of the day. Win the morning, win the day.'
+          }
+        ]
+      }
     },
     {
       type: 'subheader',
       text: '6.3 The Compound Effect'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `THE COMPOUND EFFECT OF OPTIMIZED SYSTEMS
-═══════════════════════════════════════════════════════════════════════════
-
-                    INDIVIDUAL INTERVENTIONS
-
-    Sleep      Exercise    Nutrition    Flow      Learning
-   (+10%)      (+10%)      (+10%)     (+15%)     (+20%)
-      │           │           │          │          │
-      └───────────┴───────────┴──────────┴──────────┘
-                              │
-                              ▼
-                     MULTIPLICATIVE
-                     (not additive)
-                              │
-                              ▼
-              ┌───────────────────────────────────┐
-              │                                   │
-              │   1.1 × 1.1 × 1.1 × 1.15 × 1.2   │
-              │                                   │
-              │         = 1.84 (84% gain)         │
-              │                                   │
-              │   NOT: 10+10+10+15+20 = 65%       │
-              │                                   │
-              └───────────────────────────────────┘
-                              │
-                              ▼
-              ┌───────────────────────────────────┐
-              │                                   │
-              │        COMPOUNDED OVER TIME       │
-              │                                   │
-              │   Year 1: 84% better than start   │
-              │   Year 2: 239% better             │
-              │   Year 3: 500%+ better            │
-              │                                   │
-              │   (If improvements maintained     │
-              │    and compounded)                │
-              │                                   │
-              └───────────────────────────────────┘
-
-THE UNCOMFORTABLE TRUTH:
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  • There is no shortcut                                                  │
-│  • The "limitless pill" is daily systems executed over years            │
-│  • Most people fail not from lack of knowledge but lack of patience    │
-│  • The gap between you and peak performers is consistency, not secrets │
-│                                                                          │
-│  The good news:                                                          │
-│  • Small changes compound enormously                                     │
-│  • You don\'t need to be extreme-you need to be consistent              │
-│  • The process itself becomes rewarding                                  │
-│  • Results come faster than you expect if you stay the course          │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'metrics',
+      data: {
+        title: 'THE COMPOUND EFFECT OF OPTIMIZED SYSTEMS',
+        subtitle: 'Multiplicative, not additive gains',
+        metrics: [
+          {
+            label: 'Sleep',
+            value: '+10%',
+            icon: 'moon',
+            category: 'individual'
+          },
+          {
+            label: 'Exercise',
+            value: '+10%',
+            icon: 'dumbbell',
+            category: 'individual'
+          },
+          {
+            label: 'Nutrition',
+            value: '+10%',
+            icon: 'flame',
+            category: 'individual'
+          },
+          {
+            label: 'Flow',
+            value: '+15%',
+            icon: 'zap',
+            category: 'individual'
+          },
+          {
+            label: 'Learning',
+            value: '+20%',
+            icon: 'book',
+            category: 'individual'
+          },
+          {
+            label: 'Year 1 Total',
+            value: '84%',
+            icon: 'award',
+            highlight: true,
+            description: '1.1 × 1.1 × 1.1 × 1.15 × 1.2 = 1.84',
+            note: 'NOT: 10+10+10+15+20 = 65%'
+          },
+          {
+            label: 'Year 2',
+            value: '239%',
+            icon: 'trending-up',
+            category: 'compound'
+          },
+          {
+            label: 'Year 3',
+            value: '500%+',
+            icon: 'rocket',
+            category: 'compound',
+            highlight: true
+          }
+        ],
+        insights: {
+          uncomfortable: [
+            'There is no shortcut',
+            'The "limitless pill" is daily systems executed over years',
+            'Most people fail not from lack of knowledge but lack of patience',
+            'The gap between you and peak performers is consistency, not secrets'
+          ],
+          hopeful: [
+            'Small changes compound enormously',
+            'You don\'t need to be extreme-you need to be consistent',
+            'The process itself becomes rewarding',
+            'Results come faster than you expect if you stay the course'
+          ]
+        }
+      }
     },
     {
       type: 'header',

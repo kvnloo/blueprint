@@ -173,39 +173,33 @@ export const livingRoom: Article = {
       content: 'This isn\'t poetry. It\'s evolutionary biology. For 99.9% of human history, we lived immersed in nature. Our brains evolved to find calm in green spaces, to feel alert at the sound of running water, to relax when surrounded by living things. The concrete boxes we now call "home" and "office" are-from an evolutionary perspective-a bizarre aberration that our nervous systems never adapted to handle.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `THE EVOLUTIONARY TIMELINE
-═══════════════════════════════════════════════════════════════════════════
-
-    HUMAN EVOLUTION: ~300,000 years
-
-    ████████████████████████████████████████████████████████████████████│
-    │                                                                    │
-    │  Living in nature: ~299,800 years                                 │
-    │  (99.93% of human history)                                        │
-    │                                                                    │
-    ████████████████████████████████████████████████████████████████████│█
-                                                                         │
-                                                                         │ Living indoors
-                                                                         │ ~200 years
-                                                                         │ (0.07%)
-
-    YOUR NERVOUS SYSTEM WAS DESIGNED FOR THIS:
-
-         🌲 🌲 🌲 🌲 🌲                    NOT THIS:
-              🦌
-         🌿 〰️💧〰️ 🌿                      ┌────────────────┐
-           🐟  🐟                          │ ┌──┐    ┌──┐   │
-         🌱 🌱 🌱 🌱 🌱                     │ │  │    │  │   │
-                                          │ └──┘    └──┘   │
-    Open sky, flowing water,              │     [====]     │
-    green everywhere, sounds              │                │
-    of life                               └────────────────┘
-
-                                          Fluorescent lights,
-                                          still air, beige walls,
-                                          silence or HVAC hum`
+      type: 'diagram',
+      diagramType: 'comparison',
+      data: {
+        title: 'THE EVOLUTIONARY TIMELINE',
+        subtitle: 'Human Evolution: ~300,000 years',
+        headers: ['Living Environment', 'Duration', 'Percentage of History'],
+        rows: [
+          {
+            category: 'In Nature',
+            items: [
+              { value: '~299,800 years' },
+              { value: '99.93%', highlight: true }
+            ]
+          },
+          {
+            category: 'Indoors',
+            items: [
+              { value: '~200 years' },
+              { value: '0.07%' }
+            ]
+          }
+        ],
+        notes: [
+          'Your nervous system was designed for: Open sky, flowing water, green everywhere, sounds of life',
+          'Not designed for: Fluorescent lights, still air, beige walls, silence or HVAC hum'
+        ]
+      }
     },
     {
       type: 'text',
@@ -232,48 +226,61 @@ export const livingRoom: Article = {
       content: 'A 2024 systematic review published in the Journal of Intelligent Buildings analyzed 74 peer-reviewed studies on biophilic design in workplaces. The findings were consistent and striking:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `BIOPHILIC DESIGN RESEARCH FINDINGS (2024)
-═══════════════════════════════════════════════════════════════════════════
-
-    PRODUCTIVITY IMPROVEMENTS
-    ─────────────────────────
-
-    Indoor plants present:           +15% productivity
-    Natural light present:           +15% productivity
-    Combined effect:                 Up to +25% productivity
-
-    STRESS REDUCTION
-    ─────────────────
-
-    Nature views during breaks:      Significant stress recovery
-    Plants at desk:                  Lower cortisol levels
-    Green walls in office:           25% reduction in reported stress
-
-    COGNITIVE FUNCTION
-    ──────────────────
-
-    Working memory:                  ↑ Improved
-    Attention span:                  ↑ Improved
-    Creative thinking:               ↑ Improved
-    Problem-solving:                 ↑ Improved
-
-    PHYSICAL HEALTH
-    ───────────────
-
-    Sick days:                       6% reduction with natural light
-    Headaches:                       Reduced in plant-filled spaces
-    Eye strain:                      Reduced with view of greenery
-
-    SATISFACTION
-    ────────────
-
-    Workplace satisfaction:          Significantly higher
-    Willingness to stay:             Higher retention rates
-
-    Source: "Investigating restorative effects of biophilic design
-             in workplaces" - Journal of Intelligent Buildings, 2024`
+      type: 'diagram',
+      diagramType: 'metrics',
+      data: {
+        title: 'BIOPHILIC DESIGN RESEARCH FINDINGS (2024)',
+        subtitle: 'Journal of Intelligent Buildings - 74 peer-reviewed studies',
+        metrics: [
+          {
+            label: 'Productivity with Plants',
+            value: '+15%',
+            icon: 'zap',
+            change: 15,
+            description: 'Indoor plants present'
+          },
+          {
+            label: 'Productivity with Light',
+            value: '+15%',
+            icon: 'sun',
+            change: 15,
+            description: 'Natural light present'
+          },
+          {
+            label: 'Combined Effect',
+            value: '+25%',
+            icon: 'trending-up',
+            change: 25,
+            description: 'Plants and natural light together'
+          },
+          {
+            label: 'Stress Reduction',
+            value: '-25%',
+            icon: 'heart',
+            change: -25,
+            description: 'Green walls in office spaces'
+          },
+          {
+            label: 'Sick Days',
+            value: '-6%',
+            icon: 'shield',
+            change: -6,
+            description: 'With natural light access'
+          },
+          {
+            label: 'Cognitive Function',
+            value: 'Improved',
+            icon: 'brain',
+            description: 'Working memory, attention, creativity, problem-solving'
+          },
+          {
+            label: 'Workplace Satisfaction',
+            value: 'Higher',
+            icon: 'smile',
+            description: 'Significantly increased retention rates'
+          }
+        ]
+      }
     },
     {
       type: 'subheader',
@@ -308,75 +315,93 @@ export const livingRoom: Article = {
       content: '**But here\'s what plants *do* effectively provide**:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `WHAT PLANTS ACTUALLY DO FOR YOUR AIR
-═══════════════════════════════════════════════════════════════════════════
-
-    WHAT THEY DO WELL:
-    ──────────────────
-
-    ✓ Increase humidity (great for dry indoor air)
-    ✓ Produce oxygen during daylight
-    ✓ Add beneficial microbes to your indoor microbiome
-    ✓ Provide psychological benefits that FEEL like cleaner air
-    ✓ Create visual breaks that rest your eyes
-
-    WHAT THEY DON'T DO WELL:
-    ────────────────────────
-
-    ✗ Purify large volumes of air in a typical home
-    ✗ Replace proper ventilation
-    ✗ Remove all toxins from your environment
-
-    THE HONEST CONCLUSION:
-    ──────────────────────
-
-    Plants improve your indoor environment primarily through
-    psychological and humidity benefits, not air filtration.
-
-    But those psychological benefits are REAL and MEASURABLE.
-    A space that FEELS fresh and alive IS healthier to be in,
-    even if the mechanism isn\'t chemical filtration.`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'WHAT PLANTS ACTUALLY DO FOR YOUR AIR',
+        subtitle: 'The honest assessment based on modern research',
+        cards: [
+          {
+            title: 'What They Do Well',
+            icon: 'check-circle',
+            items: [
+              'Increase humidity (great for dry indoor air)',
+              'Produce oxygen during daylight',
+              'Add beneficial microbes to your indoor microbiome',
+              'Provide psychological benefits that FEEL like cleaner air',
+              'Create visual breaks that rest your eyes'
+            ],
+            highlight: true
+          },
+          {
+            title: 'What They Don\'t Do Well',
+            icon: 'x-circle',
+            items: [
+              'Purify large volumes of air in a typical home',
+              'Replace proper ventilation',
+              'Remove all toxins from your environment'
+            ]
+          },
+          {
+            title: 'The Honest Conclusion',
+            icon: 'info',
+            description: 'Plants improve your indoor environment primarily through psychological and humidity benefits, not air filtration. But those psychological benefits are REAL and MEASURABLE. A space that FEELS fresh and alive IS healthier to be in, even if the mechanism isn\'t chemical filtration.',
+            highlight: true
+          }
+        ]
+      }
     },
     {
       type: 'text',
       content: 'The NASA study remains valuable because it identified which plants are most effective at VOC absorption in sealed environments-relevant if you\'re designing a space station, submarine, or very tightly sealed modern building. Here are the champions:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `NASA'S TOP AIR-PURIFYING PLANTS (1989 Study)
-═══════════════════════════════════════════════════════════════════════════
-
-    REMOVED ALL 5 VOCs TESTED (Benzene, Formaldehyde,
-    Trichloroethylene, Xylene, Ammonia):
-
-    🌿 Parlour Palm (Chamaedorea elegans)
-    🌿 Peace Lily (Spathiphyllum)
-    🌿 Florist\'s Chrysanthemum
-    🌿 Lady Palm (Rhapis excelsa)
-
-    REMOVED 4 OF 5 VOCs:
-
-    🌿 English Ivy (Hedera helix)
-    🌿 Dracaena 'Janet Craig'
-    🌿 Dracaena 'Warneckii'
-    🌿 Boston Fern
-    🌿 Areca Palm
-
-    BEST FOR FORMALDEHYDE:
-
-    🌿 Philodendron (multiple species)
-    🌿 Aloe Vera
-    🌿 Spider Plant
-    🌿 Golden Pothos
-
-    EASIEST TO CARE FOR (from this list):
-
-    🌿 Snake Plant (Sansevieria) - Nearly unkillable
-    🌿 Golden Pothos - Thrives on neglect
-    🌿 Spider Plant - Propagates itself`
+      type: 'diagram',
+      diagramType: 'checklist',
+      data: {
+        title: 'NASA\'S TOP AIR-PURIFYING PLANTS (1989 Study)',
+        subtitle: 'Most effective at VOC absorption in sealed environments',
+        sections: [
+          {
+            title: 'Champions: Removed All 5 VOCs',
+            description: 'Benzene, Formaldehyde, Trichloroethylene, Xylene, Ammonia',
+            items: [
+              { label: 'Parlour Palm (Chamaedorea elegans)', icon: 'leaf' },
+              { label: 'Peace Lily (Spathiphyllum)', icon: 'leaf' },
+              { label: 'Florist\'s Chrysanthemum', icon: 'leaf' },
+              { label: 'Lady Palm (Rhapis excelsa)', icon: 'leaf' }
+            ]
+          },
+          {
+            title: 'Excellent: Removed 4 of 5 VOCs',
+            items: [
+              { label: 'English Ivy (Hedera helix)', icon: 'leaf' },
+              { label: 'Dracaena \'Janet Craig\'', icon: 'leaf' },
+              { label: 'Dracaena \'Warneckii\'', icon: 'leaf' },
+              { label: 'Boston Fern', icon: 'leaf' },
+              { label: 'Areca Palm', icon: 'leaf' }
+            ]
+          },
+          {
+            title: 'Best for Formaldehyde',
+            items: [
+              { label: 'Philodendron (multiple species)', icon: 'leaf' },
+              { label: 'Aloe Vera', icon: 'leaf' },
+              { label: 'Spider Plant', icon: 'leaf' },
+              { label: 'Golden Pothos', icon: 'leaf' }
+            ]
+          },
+          {
+            title: 'Easiest to Care For',
+            highlight: true,
+            items: [
+              { label: 'Snake Plant (Sansevieria)', icon: 'star', description: 'Nearly unkillable' },
+              { label: 'Golden Pothos', icon: 'star', description: 'Thrives on neglect' },
+              { label: 'Spider Plant', icon: 'star', description: 'Propagates itself' }
+            ]
+          }
+        ]
+      }
     },
     {
       type: 'header',
@@ -395,55 +420,81 @@ export const livingRoom: Article = {
       content: 'Every living space should start here. Plants are the most accessible entry point into biophilic design, and even one or two can shift the feeling of a room.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `BEGINNER'S PLANT SELECTION GUIDE
-═══════════════════════════════════════════════════════════════════════════
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                      │
-    │   QUESTION 1: How much light do you have?                           │
-    │                                                                      │
-    │   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐            │
-    │   │  LOW LIGHT  │    │ MEDIUM LIGHT│    │ BRIGHT LIGHT│            │
-    │   │             │    │             │    │             │            │
-    │   │ No direct   │    │ Some direct │    │ 4+ hours    │            │
-    │   │ sunlight    │    │ sun, or     │    │ direct sun  │            │
-    │   │ North-facing│    │ bright      │    │ South/West  │            │
-    │   │ windows     │    │ indirect    │    │ windows     │            │
-    │   │             │    │             │    │             │            │
-    │   │ Snake Plant │    │ Pothos      │    │ Aloe Vera   │            │
-    │   │ ZZ Plant    │    │ Peace Lily  │    │ Jade Plant  │            │
-    │   │ Cast Iron   │    │ Spider Plant│    │ Succulents  │            │
-    │   │ Pothos      │    │ Dracaena    │    │ Herbs       │            │
-    │   │ Peace Lily  │    │ Ferns       │    │ Citrus      │            │
-    │   └─────────────┘    └─────────────┘    └─────────────┘            │
-    │                                                                      │
-    │   QUESTION 2: How often will you remember to water?                 │
-    │                                                                      │
-    │   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐            │
-    │   │   RARELY    │    │   WEEKLY    │    │   OFTEN     │            │
-    │   │  (Monthly)  │    │             │    │ (2-3x/week) │            │
-    │   │             │    │             │    │             │            │
-    │   │ Snake Plant │    │ Pothos      │    │ Ferns       │            │
-    │   │ ZZ Plant    │    │ Spider Plant│    │ Peace Lily  │            │
-    │   │ Succulents  │    │ Dracaena    │    │ Calathea    │            │
-    │   │ Cacti       │    │ Philodendron│    │ Herbs       │            │
-    │   │ Aloe        │    │ Rubber Plant│    │ Boston Fern │            │
-    │   └─────────────┘    └─────────────┘    └─────────────┘            │
-    │                                                                      │
-    │   QUESTION 3: Do you have pets?                                     │
-    │                                                                      │
-    │   ┌──────────────────────────────────────────────────────────────┐ │
-    │   │  PET-SAFE PLANTS:                                             │ │
-    │   │  Spider Plant, Boston Fern, Areca Palm, Prayer Plant,        │ │
-    │   │  Peperomia, African Violet, Polka Dot Plant, Parlour Palm    │ │
-    │   │                                                               │ │
-    │   │  TOXIC TO PETS (avoid if curious pets):                       │ │
-    │   │  Pothos, Peace Lily, Philodendron, Dracaena, Aloe, ZZ Plant │ │
-    │   └──────────────────────────────────────────────────────────────┘ │
-    │                                                                      │
-    └─────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'process',
+      data: {
+        title: 'BEGINNER\'S PLANT SELECTION GUIDE',
+        subtitle: 'Answer these questions to find your perfect plant match',
+        steps: [
+          {
+            title: 'Question 1: How much light do you have?',
+            icon: 'sun',
+            branches: [
+              {
+                title: 'Low Light',
+                description: 'No direct sunlight, North-facing windows',
+                icon: 'cloud',
+                items: ['Snake Plant', 'ZZ Plant', 'Cast Iron Plant', 'Pothos', 'Peace Lily']
+              },
+              {
+                title: 'Medium Light',
+                description: 'Some direct sun, or bright indirect light',
+                icon: 'cloud-sun',
+                items: ['Pothos', 'Peace Lily', 'Spider Plant', 'Dracaena', 'Ferns']
+              },
+              {
+                title: 'Bright Light',
+                description: '4+ hours direct sun, South/West windows',
+                icon: 'sun',
+                items: ['Aloe Vera', 'Jade Plant', 'Succulents', 'Herbs', 'Citrus']
+              }
+            ]
+          },
+          {
+            title: 'Question 2: How often will you remember to water?',
+            icon: 'droplet',
+            branches: [
+              {
+                title: 'Rarely (Monthly)',
+                description: 'Low-maintenance watering schedule',
+                icon: 'clock',
+                items: ['Snake Plant', 'ZZ Plant', 'Succulents', 'Cacti', 'Aloe']
+              },
+              {
+                title: 'Weekly',
+                description: 'Moderate watering needs',
+                icon: 'calendar',
+                items: ['Pothos', 'Spider Plant', 'Dracaena', 'Philodendron', 'Rubber Plant']
+              },
+              {
+                title: 'Often (2-3x/week)',
+                description: 'High water needs',
+                icon: 'droplets',
+                items: ['Ferns', 'Peace Lily', 'Calathea', 'Herbs', 'Boston Fern']
+              }
+            ]
+          },
+          {
+            title: 'Question 3: Do you have pets?',
+            icon: 'heart',
+            branches: [
+              {
+                title: 'Pet-Safe Plants',
+                description: 'Non-toxic options for homes with curious pets',
+                icon: 'check-circle',
+                items: ['Spider Plant', 'Boston Fern', 'Areca Palm', 'Prayer Plant', 'Peperomia', 'African Violet', 'Polka Dot Plant', 'Parlour Palm'],
+                highlight: true
+              },
+              {
+                title: 'Toxic to Pets',
+                description: 'Avoid if you have curious cats or dogs',
+                icon: 'alert-triangle',
+                items: ['Pothos', 'Peace Lily', 'Philodendron', 'Dracaena', 'Aloe', 'ZZ Plant']
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       type: 'subheader',
@@ -454,56 +505,82 @@ export const livingRoom: Article = {
       content: 'If you\'re just beginning, here\'s exactly what to buy:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `THE ABSOLUTE BEGINNER'S STARTER PACK
-═══════════════════════════════════════════════════════════════════════════
-
-    TOTAL COST: $30-50
-
-    1. SNAKE PLANT (Sansevieria) - $8-15
-       ─────────────────────────────────
-       • Tolerates: Low light, irregular watering, neglect
-       • Water: Every 2-4 weeks (seriously, less is more)
-       • Benefit: Releases oxygen at NIGHT (most plants do daytime)
-       • Perfect for: Bedroom, dark corners, forgetful people
-
-    2. POTHOS (Epipremnum aureum) - $5-12
-       ─────────────────────────────────
-       • Tolerates: Low to bright indirect light
-       • Water: When top inch of soil is dry (weekly-ish)
-       • Benefit: Trails beautifully, easy to propagate
-       • Perfect for: Shelves, hanging baskets, offices
-       • Note: Toxic to pets if eaten
-
-    3. SPIDER PLANT (Chlorophytum comosum) - $5-10
-       ─────────────────────────────────
-       • Tolerates: Wide range of conditions
-       • Water: Weekly, likes some humidity
-       • Benefit: Makes baby plants you can share
-       • Perfect for: Hanging, pet households, beginners
-       • Bonus: NASA\'s #1 for formaldehyde removal
-
-    4. PEACE LILY (Spathiphyllum) - $10-20
-       ─────────────────────────────────
-       • Tolerates: Low light (flowers more in medium light)
-       • Water: When leaves start to droop (it tells you!)
-       • Benefit: Beautiful white flowers, very forgiving
-       • Perfect for: Living rooms, bathrooms (likes humidity)
-       • Note: Toxic to pets
-
-    5. RUBBER PLANT (Ficus elastica) - $10-20
-       ─────────────────────────────────
-       • Tolerates: Medium to bright indirect light
-       • Water: When top 2 inches of soil are dry
-       • Benefit: Dramatic large leaves, structural presence
-       • Perfect for: Statement piece, corners, offices
-
-    WHERE TO BUY:
-    • IKEA (cheapest, decent quality)
-    • Home Depot / Lowes
-    • Local nurseries (best advice, healthiest plants)
-    • Facebook Marketplace (often free cuttings!)`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'The Absolute Beginner\'s Starter Pack',
+        subtitle: 'Total Cost: $30-50',
+        description: '5 nearly-impossible-to-kill plants perfect for absolute beginners',
+        cards: [
+          {
+            title: 'Snake Plant',
+            subtitle: 'Sansevieria • $8-15',
+            icon: 'leaf',
+            details: [
+              { label: 'Tolerates', value: 'Low light, irregular watering, neglect' },
+              { label: 'Water', value: 'Every 2-4 weeks (less is more!)' },
+              { label: 'Benefit', value: 'Releases oxygen at NIGHT' },
+              { label: 'Perfect for', value: 'Bedroom, dark corners, forgetful people' }
+            ]
+          },
+          {
+            title: 'Pothos',
+            subtitle: 'Epipremnum aureum • $5-12',
+            icon: 'leaf',
+            details: [
+              { label: 'Tolerates', value: 'Low to bright indirect light' },
+              { label: 'Water', value: 'When top inch of soil is dry (weekly-ish)' },
+              { label: 'Benefit', value: 'Trails beautifully, easy to propagate' },
+              { label: 'Perfect for', value: 'Shelves, hanging baskets, offices' },
+              { label: 'Note', value: 'Toxic to pets if eaten' }
+            ]
+          },
+          {
+            title: 'Spider Plant',
+            subtitle: 'Chlorophytum comosum • $5-10',
+            icon: 'leaf',
+            details: [
+              { label: 'Tolerates', value: 'Wide range of conditions' },
+              { label: 'Water', value: 'Weekly, likes some humidity' },
+              { label: 'Benefit', value: 'Makes baby plants you can share' },
+              { label: 'Perfect for', value: 'Hanging, pet households, beginners' },
+              { label: 'Bonus', value: 'NASA\'s #1 for formaldehyde removal' }
+            ]
+          },
+          {
+            title: 'Peace Lily',
+            subtitle: 'Spathiphyllum • $10-20',
+            icon: 'leaf',
+            details: [
+              { label: 'Tolerates', value: 'Low light (flowers more in medium light)' },
+              { label: 'Water', value: 'When leaves start to droop (it tells you!)' },
+              { label: 'Benefit', value: 'Beautiful white flowers, very forgiving' },
+              { label: 'Perfect for', value: 'Living rooms, bathrooms (likes humidity)' },
+              { label: 'Note', value: 'Toxic to pets' }
+            ]
+          },
+          {
+            title: 'Rubber Plant',
+            subtitle: 'Ficus elastica • $10-20',
+            icon: 'leaf',
+            details: [
+              { label: 'Tolerates', value: 'Medium to bright indirect light' },
+              { label: 'Water', value: 'When top 2 inches of soil are dry' },
+              { label: 'Benefit', value: 'Dramatic large leaves, structural presence' },
+              { label: 'Perfect for', value: 'Statement piece, corners, offices' }
+            ]
+          }
+        ],
+        footer: {
+          title: 'Where to Buy',
+          items: [
+            'IKEA (cheapest, decent quality)',
+            'Home Depot / Lowes',
+            'Local nurseries (best advice, healthiest plants)',
+            'Facebook Marketplace (often free cuttings!)'
+          ]
+        }
+      }
     },
     {
       type: 'subheader',
@@ -518,34 +595,65 @@ export const livingRoom: Article = {
       content: 'Understanding Your Options'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `LIVING WALL OPTIONS COMPARISON
-═══════════════════════════════════════════════════════════════════════════
-
-TYPE               COST        MAINTENANCE    BENEFITS           BEST FOR
-────────────────────────────────────────────────────────────────────────────
-
-PRESERVED MOSS     $50-500     None           No water needed    Low-effort
-WALL ART           (DIY)       (dust only)    Lasts 8-10 years   renters
-                                              Zero light needed
-                                              Acoustic benefits
-
-LIVE MOSS WALL     $75-300     Low            Air purifying      Humid spaces
-                   (DIY)       (mist 2x/wk)   Truly alive        bathrooms
-                                              Soft texture
-
-MODULAR PLANT      $100-400    Medium         Full plants        Dedicated
-WALL SYSTEMS       (per panel) (weekly)       Maximum impact     gardeners
-                                              Flowers possible
-
-DIY POCKET         $50-150     Medium         Customizable       Budget-
-PLANTERS                       (weekly)       Affordable         conscious
-                                              Easy to change
-
-FULL HYDROPONIC    $300-1000+  High           Maximum growth     Serious
-LIVING WALL                    (daily checks) Food production    hobbyists
-                                              Year-round green`
+      type: 'diagram',
+      diagramType: 'comparison',
+      data: {
+        title: 'Living Wall Options Comparison',
+        description: 'Compare different vertical garden approaches by cost, maintenance, benefits, and ideal use cases',
+        categories: ['Type', 'Cost', 'Maintenance', 'Benefits', 'Best For'],
+        items: [
+          {
+            name: 'Preserved Moss Wall Art',
+            values: [
+              'Preserved Moss',
+              '$50-500 (DIY)',
+              'None (dust only)',
+              'No water needed • Lasts 8-10 years • Zero light needed • Acoustic benefits',
+              'Low-effort renters'
+            ]
+          },
+          {
+            name: 'Live Moss Wall',
+            values: [
+              'Live Moss',
+              '$75-300 (DIY)',
+              'Low (mist 2x/week)',
+              'Air purifying • Truly alive • Soft texture',
+              'Humid spaces, bathrooms'
+            ]
+          },
+          {
+            name: 'Modular Plant Wall Systems',
+            values: [
+              'Full Plant System',
+              '$100-400 per panel',
+              'Medium (weekly)',
+              'Full plants • Maximum impact • Flowers possible',
+              'Dedicated gardeners'
+            ]
+          },
+          {
+            name: 'DIY Pocket Planters',
+            values: [
+              'Pocket System',
+              '$50-150',
+              'Medium (weekly)',
+              'Customizable • Affordable • Easy to change',
+              'Budget-conscious'
+            ]
+          },
+          {
+            name: 'Full Hydroponic Living Wall',
+            values: [
+              'Hydroponic System',
+              '$300-1000+',
+              'High (daily checks)',
+              'Maximum growth • Food production • Year-round green',
+              'Serious hobbyists'
+            ]
+          }
+        ]
+      }
     },
     {
       type: 'subheader',
@@ -556,83 +664,84 @@ LIVING WALL                    (daily checks) Food production    hobbyists
       content: 'This is the easiest entry into living walls. Preserved moss is real moss that\'s been treated with glycerin-it looks and feels natural but requires zero maintenance.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `DIY PRESERVED MOSS WALL ART
-═══════════════════════════════════════════════════════════════════════════
-
-MATERIALS NEEDED:
-─────────────────
-
-    • Picture frame or shadow box (any size)        $10-30
-    • Preserved moss (multiple types for texture)   $20-50
-      - Sheet moss (flat, carpet-like)
-      - Reindeer moss (fluffy, comes in colors)
-      - Mood moss (rounded, clumpy)
-    • Plywood or foam board backing               $5-10
-    • Hot glue gun + glue sticks                  $10
-    • Optional: dried flowers, twigs, stones      $0-20
-
-    TOTAL: $45-120 depending on size
-
-BUILD INSTRUCTIONS:
-───────────────────
-
-    STEP 1: DESIGN YOUR COMPOSITION (15 min)
-    ────────────────────────────────────────
-
-    Before gluing, arrange your moss on the backing.
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                      │
-    │  DESIGN PRINCIPLES:                                                 │
-    │                                                                      │
-    │  • Vary texture: Mix flat sheet moss with fluffy reindeer moss     │
-    │  • Create depth: Layer different types                              │
-    │  • Add focal points: A single dried flower or interesting twig     │
-    │  • Consider shape: Organic flowing shapes feel more natural        │
-    │                                                                      │
-    │  EXAMPLE LAYOUTS:                                                   │
-    │                                                                      │
-    │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐         │
-    │  │▒▒▒▒░░░▒▒▒▒▒ │    │   ▒▒▒▒▒▒▒    │    │▓▓▓░░░▒▒▒▒▒▒│         │
-    │  │▒▒░░░░░░░▒▒▒ │    │ ▒▒▒▒▓▓▓▒▒▒▒  │    │▓▓░░░░░▒▒▒▒▒│         │
-    │  │░░░░░▓▓░░░░░ │    │▒▒▒▓▓▓▓▓▓▒▒▒▒ │    │░░░░░░░░▒▒▒▒│         │
-    │  │░░░░▓▓▓▓░░░░ │    │▒▒▓▓▓▓▓▓▓▓▒▒▒ │    │░░░▓▓░░░░▒▒▒│         │
-    │  │▒▒░░░░░░░▒▒▒ │    │ ▒▒▒▒▓▓▓▒▒▒▒  │    │▒▒░░░░░░░▒▒▒│         │
-    │  │▒▒▒▒░░░▒▒▒▒▒ │    │   ▒▒▒▒▒▒▒    │    │▒▒▒▒░░░▒▒▒▒▒│         │
-    │  └──────────────┘    └──────────────┘    └──────────────┘         │
-    │    "Rolling Hills"    "Focal Center"      "Diagonal Flow"         │
-    │                                                                      │
-    │  ░ = Sheet moss  ▒ = Reindeer moss  ▓ = Mood moss or accent       │
-    │                                                                      │
-    └─────────────────────────────────────────────────────────────────────┘
-
-    STEP 2: PREPARE THE BACKING (10 min)
-    ─────────────────────────────────────
-
-    • Cut backing to fit inside frame
-    • Paint edges dark green or brown (optional but cleaner look)
-    • Ensure backing is secure in frame
-
-    STEP 3: GLUE YOUR MOSS (30-60 min)
-    ──────────────────────────────────
-
-    • Work in sections, applying hot glue to small areas
-    • Press moss firmly into glue
-    • Build up layers for depth
-    • Fill gaps with small pieces
-    • Let cool completely before hanging
-
-    STEP 4: ADD ACCENTS (optional, 15 min)
-    ──────────────────────────────────────
-
-    • Dried flowers, seed pods, or small stones
-    • A single branch or twig
-    • Small air plants (these ARE alive and need misting)
-
-    CARE: Dust occasionally. Keep out of direct sunlight.
-          Mist with water if moss seems dry (every few months).`
+      type: 'diagram',
+      diagramType: 'process',
+      data: {
+        title: 'DIY Preserved Moss Wall Art',
+        subtitle: 'Weekend Project: $50-150 • 2-3 hours',
+        description: 'Create a low-maintenance living art piece that lasts 8-10 years with zero watering',
+        materials: {
+          title: 'Materials Needed (Total: $45-120)',
+          items: [
+            { name: 'Picture frame or shadow box', cost: '$10-30' },
+            { name: 'Preserved moss (multiple types)', cost: '$20-50', details: 'Sheet moss (flat), Reindeer moss (fluffy), Mood moss (clumpy)' },
+            { name: 'Plywood or foam board backing', cost: '$5-10' },
+            { name: 'Hot glue gun + glue sticks', cost: '$10' },
+            { name: 'Optional: dried flowers, twigs, stones', cost: '$0-20' }
+          ]
+        },
+        steps: [
+          {
+            number: 1,
+            title: 'Design Your Composition',
+            duration: '15 min',
+            description: 'Before gluing, arrange your moss on the backing',
+            instructions: [
+              'Vary texture: Mix flat sheet moss with fluffy reindeer moss',
+              'Create depth: Layer different types',
+              'Add focal points: A single dried flower or interesting twig',
+              'Consider shape: Organic flowing shapes feel more natural'
+            ],
+            examples: [
+              { name: 'Rolling Hills', style: 'Horizontal waves of different moss types' },
+              { name: 'Focal Center', style: 'Accent moss clustered in middle' },
+              { name: 'Diagonal Flow', style: 'Natural cascade across frame' }
+            ]
+          },
+          {
+            number: 2,
+            title: 'Prepare the Backing',
+            duration: '10 min',
+            description: 'Set up your base for moss attachment',
+            instructions: [
+              'Cut backing to fit inside frame',
+              'Paint edges dark green or brown (optional but cleaner look)',
+              'Ensure backing is secure in frame'
+            ]
+          },
+          {
+            number: 3,
+            title: 'Glue Your Moss',
+            duration: '30-60 min',
+            description: 'Attach moss in layers for natural depth',
+            instructions: [
+              'Work in sections, applying hot glue to small areas',
+              'Press moss firmly into glue',
+              'Build up layers for depth',
+              'Fill gaps with small pieces',
+              'Let cool completely before hanging'
+            ]
+          },
+          {
+            number: 4,
+            title: 'Add Accents (Optional)',
+            duration: '15 min',
+            description: 'Enhance with natural decorative elements',
+            instructions: [
+              'Add dried flowers, seed pods, or small stones',
+              'Include a single branch or twig',
+              'Place small air plants (these ARE alive and need misting)'
+            ]
+          }
+        ],
+        care: [
+          'Dust occasionally with soft brush',
+          'Keep out of direct sunlight',
+          'Mist lightly with water if moss seems dry (every few months)',
+          'No watering or maintenance required',
+          'Lasts 8-10 years'
+        ]
+      }
     },
     {
       type: 'subheader',
@@ -643,55 +752,60 @@ BUILD INSTRUCTIONS:
       content: 'Here\'s where we start getting into truly transformative living design. Imagine a section of your home with real, living grass-softer than any carpet, connected to the earth, a tiny meadow inside your space.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      content: `THE INDOOR GRASS CONCEPT
-═══════════════════════════════════════════════════════════════════════════
-
-    WHY GRASS INDOORS?
-    ──────────────────
-
-    • Softer than carpet (grass + soil has natural cushioning)
-    • No chemicals (unlike synthetic carpet off-gassing VOCs)
-    • Grounding effect (literally connecting to earth)
-    • The sensory experience of walking barefoot in nature
-    • Humidity regulation (grass transpires moisture)
-    • Visual calm (a patch of green in your space)
-
-    THE CHALLENGES:
-    ───────────────
-
-    • Light requirements (grass needs significant light)
-    • Water management (can\'t let it flood your floor)
-    • Maintenance (needs mowing/trimming)
-    • Dirt and mess potential
-
-    THE SOLUTION: HYDROPONIC GRASS SYSTEMS
-    ──────────────────────────────────────
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                      │
-    │  Instead of soil, we grow grass in a contained hydroponic system:   │
-    │                                                                      │
-    │                    ~~~GRASS BLADES~~~                               │
-    │                    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓                               │
-    │      ROOTS →       ░░░░░░░░░░░░░░░░░  ← HYDROTON (clay balls)      │
-    │                    ╔═══════════════╗                                │
-    │      WATER →       ║ ~~~~~~~~~~~ ║  ← Shallow reservoir            │
-    │                    ╚═══════════════╝                                │
-    │                    ┌───────────────┐                                │
-    │                    │  WATERPROOF   │  ← Contained tray              │
-    │                    │    LINER      │                                │
-    │                    └───────────────┘                                │
-    │                                                                      │
-    │  BENEFITS:                                                          │
-    │  • No soil = no dirt tracking                                       │
-    │  • No soil = no insects                                             │
-    │  • Contained water = no floor damage                                │
-    │  • Hydroton drains perfectly = healthy roots                        │
-    │  • Easy to maintain nutrient levels                                 │
-    │                                                                      │
-    └─────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'hierarchy',
+      data: {
+        title: 'The Indoor Grass Concept',
+        subtitle: 'Real living grass softer than any carpet',
+        description: 'Transform a section of your home with walkable grass using hydroponic systems',
+        sections: [
+          {
+            title: 'Why Grass Indoors?',
+            icon: 'leaf',
+            items: [
+              'Softer than carpet (natural cushioning)',
+              'No chemicals (unlike synthetic carpet VOCs)',
+              'Grounding effect (connecting to earth)',
+              'Sensory experience of walking barefoot in nature',
+              'Humidity regulation (grass transpires moisture)',
+              'Visual calm (living green in your space)'
+            ]
+          },
+          {
+            title: 'The Challenges',
+            icon: 'alert-triangle',
+            items: [
+              'Light requirements (grass needs significant light)',
+              'Water management (can\'t flood your floor)',
+              'Maintenance (needs mowing/trimming)',
+              'Dirt and mess potential'
+            ]
+          },
+          {
+            title: 'The Solution: Hydroponic System',
+            icon: 'sparkles',
+            description: 'Grow grass without soil in a contained system',
+            layers: [
+              { name: 'Grass Blades', description: 'Living, soft, walkable surface' },
+              { name: 'Root Zone', description: 'Roots grow through Hydroton (clay balls)' },
+              { name: 'Water Reservoir', description: 'Shallow nutrient water layer' },
+              { name: 'Waterproof Liner', description: 'Contained tray prevents floor damage' }
+            ]
+          },
+          {
+            title: 'System Benefits',
+            icon: 'check-circle',
+            items: [
+              'No soil = no dirt tracking',
+              'No soil = no insects',
+              'Contained water = no floor damage',
+              'Hydroton drains perfectly = healthy roots',
+              'Easy to maintain nutrient levels',
+              'Clean, modern biophilic design'
+            ]
+          }
+        ]
+      }
     },
     {
       type: 'subheader',
