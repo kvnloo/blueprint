@@ -23,28 +23,49 @@ export const secondBrain: Article = {
       text: '*A zer0 Research Document - December 2025*'
     },
     {
-      type: 'diagram',
-      diagramType: 'quote',
-      data: {
-        title: 'THE REVELATION',
-        quote: 'You have a second brain. It has 500 million neurons. It produces 95% of your serotonin. It makes decisions independently of your conscious mind. You\'ve never had a direct conversation with it. And it\'s been influencing your thoughts your entire life.',
-        highlights: [
-          {
-            text: 'This isn\'t metaphor. This isn\'t self-help language. This is anatomy.',
-            emphasis: true
-          },
-          {
-            text: 'The enteric nervous system—the network of neurons embedded in your gastrointestinal tract—is so complex that neuroscientists gave it its own name: THE SECOND BRAIN'
-          },
-          {
-            text: 'The communication channel between your two brains is radically asymmetric. 80% of the signals travel FROM your gut TO your brain. Not the other way around.'
-          },
-          {
-            text: 'Your gut is talking to your brain constantly. Your brain is mostly just listening.'
-          }
-        ],
-        conclusion: 'This document is about understanding that conversation. And learning how to participate in it.'
-      }
+      type: 'code',
+      language: 'diagram',
+      text: `THE REVELATION
+═══════════════════════════════════════════════════════════════════════════
+
+    You have a second brain.
+
+    It has 500 million neurons.
+    It produces 95% of your serotonin.
+    It makes decisions independently of your conscious mind.
+
+    You\'ve never had a direct conversation with it.
+
+    And it\'s been influencing your thoughts your entire life.
+
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │                                                                     │
+    │  This isn\'t metaphor.                                              │
+    │  This isn\'t self-help language.                                    │
+    │  This is anatomy.                                                  │
+    │                                                                     │
+    │  The enteric nervous system-the network of neurons embedded        │
+    │  in your gastrointestinal tract-is so complex that               │
+    │  neuroscientists gave it its own name:                            │
+    │                                                                     │
+    │                    THE SECOND BRAIN                                │
+    │                                                                     │
+    │  And here\'s what makes it strange:                                 │
+    │                                                                     │
+    │  The communication channel between your two brains is              │
+    │  radically asymmetric.                                             │
+    │                                                                     │
+    │  80% of the signals travel FROM your gut TO your brain.            │
+    │  Not the other way around.                                         │
+    │                                                                     │
+    │  Your gut is talking to your brain constantly.                     │
+    │  Your brain is mostly just listening.                              │
+    │                                                                     │
+    └─────────────────────────────────────────────────────────────────────┘
+
+    This document is about understanding that conversation.
+
+    And learning how to participate in it.`
     },
     {
       type: 'header',
@@ -63,38 +84,59 @@ export const secondBrain: Article = {
       text: 'But here\'s the part that surprised researchers: the traffic is almost entirely one-way.'
     },
     {
-      type: 'diagram',
-      diagramType: 'hierarchy',
-      data: {
-        title: 'THE VAGUS NERVE: INFORMATION ASYMMETRY',
-        root: {
-          id: 'brain',
-          label: 'BRAIN',
-          description: 'Receiver',
-          icon: 'brain',
-          children: [
-            {
-              id: 'vagus',
-              label: 'VAGUS NERVE',
-              description: '▲▲▲▲▲▲▲▲ 80% Afferent (gut → brain) | ▼▼ 20% Efferent (brain → gut)',
-              icon: 'branch',
-              children: [
-                {
-                  id: 'gut',
-                  label: 'GUT',
-                  description: 'Sender: 500 million neurons, 100 trillion bacteria',
-                  icon: 'layers'
-                }
-              ]
-            }
-          ]
-        },
-        notes: [
-          'Your gut is not waiting for instructions. It\'s broadcasting a continuous signal.',
-          'Most of your conscious "decisions" about mood, energy, focus, and motivation are downstream of that signal.',
-          'The bacteria in your gut aren\'t passive passengers. They\'re active participants in your cognition.'
-        ]
-      }
+      type: 'code',
+      language: 'diagram',
+      text: `THE VAGUS NERVE: INFORMATION ASYMMETRY
+═══════════════════════════════════════════════════════════════════════════
+
+
+                         ┌─────────────────┐
+                         │                 │
+                         │   BRAIN         │
+                         │   (Receiver)    │
+                         │                 │
+                         └────────┬────────┘
+                                  │
+                                  │
+                    ┌─────────────┴─────────────┐
+                    │                           │
+                    │   VAGUS NERVE             │
+                    │   ─────────────           │
+                    │                           │
+                    │   ▲▲▲▲▲▲▲▲  80%          │
+                    │   Afferent (gut → brain)  │
+                    │                           │
+                    │   ▼▼        20%           │
+                    │   Efferent (brain → gut)  │
+                    │                           │
+                    └─────────────┬─────────────┘
+                                  │
+                                  │
+                         ┌────────┴────────┐
+                         │                 │
+                         │   GUT           │
+                         │   (Sender)      │
+                         │                 │
+                         │   500 million   │
+                         │   neurons       │
+                         │                 │
+                         │   100 trillion  │
+                         │   bacteria      │
+                         │                 │
+                         └─────────────────┘
+
+
+    WHAT THIS MEANS:
+    ─────────────────
+
+    Your gut is not waiting for instructions.
+    It\'s broadcasting a continuous signal.
+
+    And most of your conscious "decisions" about mood, energy,
+    focus, and motivation are downstream of that signal.
+
+    The bacteria in your gut aren\'t passive passengers.
+    They\'re active participants in your cognition.`
     },
     {
       type: 'text',
@@ -125,48 +167,52 @@ export const secondBrain: Article = {
       text: 'Serotonin is the neurotransmitter most associated with mood regulation, happiness, and well-being. It\'s what SSRIs (antidepressants) target. And almost all of it is made in your intestines.'
     },
     {
-      type: 'diagram',
-      diagramType: 'metrics',
-      data: {
-        title: 'WHERE YOUR NEUROTRANSMITTERS ACTUALLY COME FROM',
-        metrics: [
-          {
-            label: 'Serotonin from Gut',
-            sublabel: 'mood, well-being, sleep',
-            value: '95%',
-            icon: 'heart',
-            color: 'blue'
-          },
-          {
-            label: 'Serotonin from Brain',
-            value: '5%',
-            icon: 'brain',
-            color: 'purple'
-          },
-          {
-            label: 'Dopamine from Gut',
-            sublabel: 'motivation, reward, focus',
-            value: '50%',
-            icon: 'heart',
-            color: 'blue'
-          },
-          {
-            label: 'Dopamine from Brain',
-            value: '50%',
-            icon: 'brain',
-            color: 'purple'
-          },
-          {
-            label: 'GABA Production',
-            sublabel: 'calm, anxiety reduction, relaxation',
-            value: 'Direct',
-            description: 'Produced by gut bacteria: L. rhamnosus, B. dentium, L. brevis',
-            icon: 'heart',
-            color: 'green'
-          }
-        ],
-        conclusion: 'If you\'re trying to optimize your brain chemistry, you might be looking in the wrong organ.'
-      }
+      type: 'code',
+      language: 'diagram',
+      text: `WHERE YOUR NEUROTRANSMITTERS ACTUALLY COME FROM
+═══════════════════════════════════════════════════════════════════════════
+
+    SEROTONIN (mood, well-being, sleep)
+    ───────────────────────────────────
+
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │█████████████████████████████████████████████████████████████████ 95%│
+    │                              GUT                                    │
+    ├─────────────────────────────────────────────────────────────────────┤
+    │███ 5%                                                               │
+    │BRAIN                                                                │
+    └─────────────────────────────────────────────────────────────────────┘
+
+
+    DOPAMINE (motivation, reward, focus)
+    ────────────────────────────────────
+
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │██████████████████████████████████████████████████ 50%               │
+    │                              GUT                                    │
+    ├─────────────────────────────────────────────────────────────────────┤
+    │██████████████████████████████████████████████████ 50%               │
+    │                             BRAIN                                   │
+    └─────────────────────────────────────────────────────────────────────┘
+
+
+    GABA (calm, anxiety reduction, relaxation)
+    ──────────────────────────────────────────
+
+    Produced directly by gut bacteria including:
+    ├── Lactobacillus rhamnosus
+    ├── Bifidobacterium dentium
+    └── Lactobacillus brevis
+
+    These bacteria don\'t just influence GABA production.
+    They MAKE it. Directly.
+
+
+    THE IMPLICATION:
+    ────────────────
+
+    If you\'re trying to optimize your brain chemistry,
+    you might be looking in the wrong organ.`
     },
     {
       type: 'text',
@@ -189,45 +235,50 @@ export const secondBrain: Article = {
       text: 'This ecosystem is called the *microbiome*, and it functions like a biological operating system running beneath your conscious awareness.'
     },
     {
-      type: 'diagram',
-      diagramType: 'comparison',
-      data: {
-        title: 'THE MICROBIOME AS OPERATING SYSTEM',
-        items: [
-          {
-            label: 'Conscious Mind',
-            value: 'Application Layer',
-            description: 'What you interact with'
-          },
-          {
-            label: 'Brain',
-            value: 'Hardware',
-            description: 'The processor'
-          },
-          {
-            label: 'Microbiome',
-            value: 'Operating System',
-            description: 'Manages resources, I/O',
-            highlight: true
-          },
-          {
-            label: 'Bacteria',
-            value: 'Processes/Services',
-            description: 'Running in background'
-          }
-        ],
-        features: [
-          'Runs continuously without conscious input',
-          'Manages critical resources (nutrients, neurotransmitters)',
-          'Has processes that can be started/stopped (bacteria grow/die)',
-          'Can be configured through inputs (diet, probiotics)',
-          'Has APIs for communication (vagus nerve, metabolites)',
-          'Can crash or become unstable (dysbiosis, disease)',
-          'Influences everything running "on top" of it'
-        ],
-        conclusion: 'The difference: you didn\'t install it consciously. You inherited it, and it\'s been configuring itself.',
-        question: 'If the microbiome is an operating system, can you reprogram it? The answer is yes. But you need to understand the instruction set.'
-      }
+      type: 'code',
+      language: 'diagram',
+      text: `THE MICROBIOME AS OPERATING SYSTEM
+═══════════════════════════════════════════════════════════════════════════
+
+    COMPUTER METAPHOR:
+    ──────────────────
+
+    Your conscious mind     = Application layer (what you interact with)
+    Your brain              = Hardware (the processor)
+    Your microbiome         = Operating system (manages resources, I/O)
+    Individual bacteria     = Processes/services running in background
+
+
+    WHY THIS METAPHOR WORKS:
+    ────────────────────────
+
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │                                                                     │
+    │  Like an OS, the microbiome:                                       │
+    │                                                                     │
+    │  ├── Runs continuously without conscious input                     │
+    │  ├── Manages critical resources (nutrients, neurotransmitters)     │
+    │  ├── Has processes that can be started/stopped (bacteria grow/die)│
+    │  ├── Can be configured through inputs (diet, probiotics)           │
+    │  ├── Has APIs for communication (vagus nerve, metabolites)         │
+    │  ├── Can crash or become unstable (dysbiosis, disease)            │
+    │  └── Influences everything running "on top" of it                 │
+    │                                                                     │
+    │  The difference: you didn\'t install it consciously.               │
+    │  You inherited it, and it\'s been configuring itself.              │
+    │                                                                     │
+    └─────────────────────────────────────────────────────────────────────┘
+
+
+    THE PROGRAMMING QUESTION:
+    ─────────────────────────
+
+    If the microbiome is an operating system,
+    can you reprogram it?
+
+    The answer is yes.
+
+    But you need to understand the instruction set.`
     },
     {
       type: 'text',
@@ -254,59 +305,60 @@ export const secondBrain: Article = {
       text: 'When researchers study the effects of gut bacteria on cognition, they don\'t just test "probiotics." They test specific strains, identified by precise naming conventions. Understanding this naming system is essential for evaluating claims and choosing interventions.'
     },
     {
-      type: 'diagram',
-      diagramType: 'hierarchy',
-      data: {
-        title: 'BACTERIAL NOMENCLATURE: READING THE SPECIES CODE',
-        subtitle: 'Example: Lactobacillus plantarum PS128',
-        root: {
-          id: 'genus',
-          label: 'GENUS',
-          description: 'Lactobacillus (~200 genera in human gut)',
-          icon: 'layers',
-          children: [
-            {
-              id: 'species',
-              label: 'SPECIES',
-              description: 'plantarum (~20 species in Lactobacillus)',
-              icon: 'branch',
-              children: [
-                {
-                  id: 'strain',
-                  label: 'STRAIN',
-                  description: 'PS128 (Thousands of strains per species)',
-                  icon: 'code'
-                }
-              ]
-            }
-          ]
-        },
-        examples: [
-          {
-            label: 'L. rhamnosus GG',
-            description: 'Reduces anxiety, modulates GABA via vagus nerve. Extensively studied, strong safety profile.',
-            status: 'positive'
-          },
-          {
-            label: 'L. rhamnosus JB-1',
-            description: 'Different effects on stress response. Distinct metabolite production.',
-            status: 'positive'
-          },
-          {
-            label: 'L. rhamnosus (generic)',
-            description: 'Unknown effects. Could be helpful, neutral, or harmful. Most commercial products don\'t specify strain.',
-            status: 'warning'
-          }
-        ],
-        validation: {
-          good: '"Lactobacillus plantarum PS128" - Specific, researchable',
-          bad: [
-            '"Contains Lactobacillus plantarum" - Vague, possibly meaningless',
-            '"Probiotic blend" - Marketing, not science'
-          ],
-          conclusion: 'If a product doesn\'t specify the strain, you can\'t evaluate the evidence.'
-        }
-      }
+      type: 'code',
+      language: 'diagram',
+      text: `BACTERIAL NOMENCLATURE: READING THE SPECIES CODE
+═══════════════════════════════════════════════════════════════════════════
+
+    EXAMPLE: Lactobacillus plantarum PS128
+
+
+    ┌─────────────┬─────────────┬─────────────┐
+    │   GENUS     │   SPECIES   │   STRAIN    │
+    ├─────────────┼─────────────┼─────────────┤
+    │Lactobacillus│  plantarum  │    PS128    │
+    └─────────────┴─────────────┴─────────────┘
+          │              │              │
+          │              │              │
+          ▼              ▼              ▼
+       Broad         Narrower        Specific
+       category      category        variant
+
+       ~200          ~20 species     Thousands of
+       genera in     in Lacto-       strains per
+       human gut     bacillus        species
+
+
+    WHY STRAIN MATTERS:
+    ───────────────────
+
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │                                                                     │
+    │  Lactobacillus rhamnosus GG                                        │
+    │  └── Reduces anxiety, modulates GABA via vagus nerve               │
+    │      Extensively studied, strong safety profile                    │
+    │                                                                     │
+    │  Lactobacillus rhamnosus JB-1                                      │
+    │  └── Different effects on stress response                          │
+    │      Distinct metabolite production                                │
+    │                                                                     │
+    │  Lactobacillus rhamnosus (generic, no strain specified)            │
+    │  └── Unknown effects. Could be helpful, neutral, or harmful.       │
+    │      Most commercial products don\'t specify strain.                │
+    │                                                                     │
+    └─────────────────────────────────────────────────────────────────────┘
+
+
+    THE PRACTICAL IMPLICATION:
+    ──────────────────────────
+
+    When evaluating probiotic claims or products:
+
+    ✓ "Lactobacillus plantarum PS128" - Specific, researchable
+    ✗ "Contains Lactobacillus plantarum" - Vague, possibly meaningless
+    ✗ "Probiotic blend" - Marketing, not science
+
+    If a product doesn\'t specify the strain, you can\'t evaluate the evidence.`
     },
     {
       type: 'text',
@@ -321,74 +373,98 @@ export const secondBrain: Article = {
       text: 'After reviewing the clinical literature, a few strains emerge with robust evidence for cognitive and psychological effects. Here\'s what the research actually shows:'
     },
     {
-      type: 'diagram',
-      diagramType: 'cards',
-      data: {
-        title: 'PSYCHOBIOTICS: STRAINS WITH COGNITIVE EVIDENCE',
-        subtitle: 'Tier 1: Strong Clinical Evidence',
-        cards: [
-          {
-            title: 'LACTOBACILLUS PLANTARUM PS128',
-            badge: 'Memory Enhancement',
-            metrics: [
-              { label: 'Clinical Finding', value: '33% memory enhancement in human trials' },
-              { label: 'Dosage', value: '10 billion CFU daily' },
-              { label: 'Timeline', value: '8-12 weeks' }
-            ],
-            features: [
-              'Increases dopamine in prefrontal cortex',
-              'Modulates serotonin via vagus nerve pathway',
-              'Reduces neuroinflammation markers'
-            ],
-            quality: 'Multiple RCTs, human subjects, peer-reviewed journals'
-          },
-          {
-            title: 'BIFIDOBACTERIUM LONGUM 1714',
-            badge: 'Stress Response',
-            metrics: [
-              { label: 'Clinical Finding', value: 'Reduced cortisol response, improved memory under load' },
-              { label: 'Dosage', value: '1 billion CFU daily' },
-              { label: 'Timeline', value: '4-8 weeks' }
-            ],
-            features: [
-              'Modulates HPA axis (stress response system)',
-              'Reduces inflammatory cytokines',
-              'Alters tryptophan metabolism (serotonin precursor)'
-            ],
-            quality: 'Human RCT published in Translational Psychiatry'
-          },
-          {
-            title: 'LACTOBACILLUS RHAMNOSUS GG',
-            badge: 'Anxiety Reduction',
-            metrics: [
-              { label: 'Clinical Finding', value: 'Anxiety reduction, improved gut barrier' },
-              { label: 'Dosage', value: '10 billion CFU daily' },
-              { label: 'Timeline', value: '4-6 weeks' }
-            ],
-            features: [
-              'Direct GABA production in the gut',
-              'Vagus nerve signaling (cutting vagus eliminates effect)',
-              'Reduces intestinal permeability ("leaky gut")'
-            ],
-            quality: 'Vagus nerve dependency demonstrated by vagotomy experiments—strong causal evidence'
-          },
-          {
-            title: 'BIFIDOBACTERIUM INFANTIS 35624',
-            badge: 'Tier 2: Moderate Evidence',
-            metrics: [
-              { label: 'Clinical Finding', value: 'Reduced inflammation, mood improvement' },
-              { label: 'Dosage', value: '1 billion CFU daily' },
-              { label: 'Timeline', value: '6-8 weeks' }
-            ],
-            features: [
-              'Decreases pro-inflammatory cytokines (IL-6, TNF-α)',
-              'Increases tryptophan availability',
-              'Modulates immune-brain communication'
-            ],
-            quality: 'Primary research on IBS, but inflammation pathways directly relevant to cognition'
-          }
-        ]
-      }
+      type: 'code',
+      language: 'diagram',
+      text: `PSYCHOBIOTICS: STRAINS WITH COGNITIVE EVIDENCE
+═══════════════════════════════════════════════════════════════════════════
+
+    TIER 1: STRONG CLINICAL EVIDENCE
+    ─────────────────────────────────
+
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │                                                                     │
+    │  LACTOBACILLUS PLANTARUM PS128                                     │
+    │  ════════════════════════════                                      │
+    │                                                                     │
+    │  Clinical Finding: 33% memory enhancement in human trials          │
+    │                                                                     │
+    │  Mechanism:                                                        │
+    │  ├── Increases dopamine in prefrontal cortex                       │
+    │  ├── Modulates serotonin via vagus nerve pathway                   │
+    │  └── Reduces neuroinflammation markers                             │
+    │                                                                     │
+    │  Dosage: 10 billion CFU daily                                      │
+    │  Timeline: 8-12 weeks for measurable cognitive effects             │
+    │                                                                     │
+    │  Study Quality: Multiple RCTs, human subjects, published in        │
+    │  peer-reviewed journals                                            │
+    │                                                                     │
+    └─────────────────────────────────────────────────────────────────────┘
+
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │                                                                     │
+    │  BIFIDOBACTERIUM LONGUM 1714                                       │
+    │  ═══════════════════════════                                       │
+    │                                                                     │
+    │  Clinical Finding: Reduced cortisol response to stress,            │
+    │  improved memory under cognitive load                              │
+    │                                                                     │
+    │  Mechanism:                                                        │
+    │  ├── Modulates HPA axis (stress response system)                   │
+    │  ├── Reduces inflammatory cytokines                                │
+    │  └── Alters tryptophan metabolism (serotonin precursor)            │
+    │                                                                     │
+    │  Dosage: 1 billion CFU daily                                       │
+    │  Timeline: 4-8 weeks for stress response changes                   │
+    │                                                                     │
+    │  Study Quality: Human RCT published in Translational Psychiatry   │
+    │                                                                     │
+    └─────────────────────────────────────────────────────────────────────┘
+
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │                                                                     │
+    │  LACTOBACILLUS RHAMNOSUS GG                                        │
+    │  ═══════════════════════════                                       │
+    │                                                                     │
+    │  Clinical Finding: Anxiety reduction, improved gut barrier         │
+    │                                                                     │
+    │  Mechanism:                                                        │
+    │  ├── Direct GABA production in the gut                             │
+    │  ├── Vagus nerve signaling (cutting vagus eliminates effect)       │
+    │  └── Reduces intestinal permeability ("leaky gut")                 │
+    │                                                                     │
+    │  Dosage: 10 billion CFU daily                                      │
+    │  Timeline: 4-6 weeks for anxiety effects                           │
+    │                                                                     │
+    │  Study Quality: The vagus nerve dependency was demonstrated        │
+    │  by vagotomy experiments-when the nerve is cut, the effect         │
+    │  disappears. This is strong causal evidence.                       │
+    │                                                                     │
+    └─────────────────────────────────────────────────────────────────────┘
+
+
+    TIER 2: MODERATE EVIDENCE
+    ─────────────────────────
+
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │                                                                     │
+    │  BIFIDOBACTERIUM INFANTIS 35624                                    │
+    │  ══════════════════════════════                                    │
+    │                                                                     │
+    │  Clinical Finding: Reduced inflammation, mood improvement          │
+    │                                                                     │
+    │  Mechanism:                                                        │
+    │  ├── Decreases pro-inflammatory cytokines (IL-6, TNF-α)           │
+    │  ├── Increases tryptophan availability                             │
+    │  └── Modulates immune-brain communication                          │
+    │                                                                     │
+    │  Dosage: 1 billion CFU daily                                       │
+    │  Timeline: 6-8 weeks for inflammatory marker changes               │
+    │                                                                     │
+    │  Note: Primary research was on IBS, but inflammation pathways      │
+    │  are directly relevant to cognitive function.                      │
+    │                                                                     │
+    └─────────────────────────────────────────────────────────────────────┘`
     },
     {
       type: 'text',

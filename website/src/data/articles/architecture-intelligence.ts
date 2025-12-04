@@ -23,41 +23,50 @@ export const architectureIntelligence: Article = {
       text: '*A zer0 Research Document - December 2025*'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE PUZZLE
-═══════════════════════════════════════════════════════════════════════════
-
-    You want to build something that builds itself.
-
-    Not just code generation-that\'s 2023.
-    Not just agentic workflows-that\'s 2024.
-
-    You want a system that:
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  1. Understands your vision from any input                         │
-    │     (voice, sketch, screenshot, architecture diagram, vibes)       │
-    │                                                                     │
-    │  2. Decomposes it into executable specifications                   │
-    │     (products → projects → features → tasks → subtasks)            │
-    │                                                                     │
-    │  3. Orchestrates tools to build it                                 │
-    │     (Blender, Unity, code, documents, research)                    │
-    │                                                                     │
-    │  4. Learns from every attempt                                      │
-    │     (skill library, automatic curriculum, self-improvement)        │
-    │                                                                     │
-    │  5. Runs continuously without you                                  │
-    │     (overnight research, parallel development, autonomous ops)     │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘
-
-    This document traces the path from today\'s tools to that future.
-
-    Each section is a milestone.
-    Each milestone solves a piece of the puzzle.
-    Together, they form the EVOLVE framework.`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'THE PUZZLE - What We Want to Build',
+        subtitle: 'Not just code generation (2023) or agentic workflows (2024). A system that builds itself.',
+        cards: [
+          {
+            title: 'Understand Vision',
+            icon: 'brain',
+            content: 'From any input modality',
+            details: 'Voice, sketch, screenshot, architecture diagram, or just vibes',
+            tags: ['input']
+          },
+          {
+            title: 'Decompose Specs',
+            icon: 'layers',
+            content: 'Break down into executable units',
+            details: 'products → projects → features → tasks → subtasks',
+            tags: ['planning']
+          },
+          {
+            title: 'Orchestrate Tools',
+            icon: 'zap',
+            content: 'Coordinate diverse tooling',
+            details: 'Blender, Unity, code, documents, research',
+            tags: ['execution']
+          },
+          {
+            title: 'Learn & Improve',
+            icon: 'sparkles',
+            content: 'Continuous self-improvement',
+            details: 'Skill library, automatic curriculum, pattern recognition',
+            tags: ['learning']
+          },
+          {
+            title: 'Run Continuously',
+            icon: 'clock',
+            content: 'Autonomous operation',
+            details: 'Overnight research, parallel development, unattended execution',
+            tags: ['autonomous']
+          }
+        ],
+        footer: 'This document traces the path from today\'s tools to that future. Each section is a milestone. Together, they form the EVOLVE framework.'
+      }
     },
     {
       type: 'header',
@@ -72,46 +81,50 @@ export const architectureIntelligence: Article = {
       text: 'Before we build anything, we need to understand the playing field.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `THE COMPUTE REALITY
-═══════════════════════════════════════════════════════════════════════════
-
-    THE PROBLEM WITH CLOSED-SOURCE MODELS:
-    ───────────────────────────────────────
-
-    You cannot run Claude Sonnet 4.5, Claude Opus 4.5, or GPT-5.1 on
-    your own hardware.
-
-    Period.
-
-    These models have:
-    • Hundreds of billions of parameters
-    • Require distributed inference across many GPUs
-    • Are API-only by design
-    • Cost millions to train
-
-    YOUR HARDWARE (example: 3080Ti + 2080 Super):
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  GPU 1: RTX 3080Ti                                                 │
-    │  ├── VRAM: 12GB                                                    │
-    │  ├── Can run: 7B-14B models comfortably                            │
-    │  ├── Can run: 34B models with Q4 quantization                      │
-    │  └── Cannot run: 70B+ without extreme quantization (unusable)      │
-    │                                                                     │
-    │  GPU 2: RTX 2080 Super                                             │
-    │  ├── VRAM: 8GB                                                     │
-    │  ├── Can run: 7B models comfortably                                │
-    │  └── Useful for: Parallel embeddings, smaller routing models       │
-    │                                                                     │
-    │  TOTAL: 20GB VRAM                                                  │
-    │  REALITY: Cannot match API-level intelligence locally              │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘
-
-    THE SOLUTION ISN'T MORE HARDWARE.
-    IT'S BETTER ARCHITECTURE.`
+      type: 'diagram',
+      diagramType: 'metrics',
+      data: {
+        title: 'THE COMPUTE REALITY',
+        subtitle: 'Why you can\'t run Claude Sonnet 4.5 or GPT-5.1 locally',
+        sections: [
+          {
+            title: 'The Closed-Source Problem',
+            metrics: [
+              { label: 'Parameters', value: '100B+', description: 'Hundreds of billions' },
+              { label: 'Distribution', value: 'Multi-GPU', description: 'Requires GPU clusters' },
+              { label: 'Access', value: 'API Only', description: 'Proprietary inference' },
+              { label: 'Training Cost', value: '$M', description: 'Millions to train' }
+            ]
+          },
+          {
+            title: 'Your Hardware: RTX 3080Ti',
+            metrics: [
+              { label: 'VRAM', value: '12GB', description: 'GPU memory capacity' },
+              { label: 'Comfortable', value: '7-14B', description: 'Model size range' },
+              { label: 'With Q4', value: '34B', description: 'Quantized models' },
+              { label: '70B+ Models', value: '❌', description: 'Unusable with extreme quantization' }
+            ]
+          },
+          {
+            title: 'Your Hardware: RTX 2080 Super',
+            metrics: [
+              { label: 'VRAM', value: '8GB', description: 'GPU memory capacity' },
+              { label: 'Comfortable', value: '7B', description: 'Model size range' },
+              { label: 'Use Case', value: 'Embeddings', description: 'Parallel processing' },
+              { label: 'Routing', value: 'Small Models', description: 'Task coordination' }
+            ]
+          },
+          {
+            title: 'Combined Capabilities',
+            metrics: [
+              { label: 'Total VRAM', value: '20GB', description: 'Across both GPUs' },
+              { label: 'Local Intelligence', value: 'Limited', description: 'Cannot match API models' },
+              { label: 'Solution', value: 'Architecture', description: 'Not more hardware' },
+              { label: 'Strategy', value: 'Hybrid', description: 'Local + API coordination' }
+            ]
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -126,51 +139,72 @@ export const architectureIntelligence: Article = {
       text: 'Here\'s where the landscape shifted in 2024-2025. Researchers discovered that you can transfer the "intelligence" of massive models into much smaller ones through knowledge distillation.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `KNOWLEDGE DISTILLATION: THE CORE CONCEPT
-═══════════════════════════════════════════════════════════════════════════
-
-    TRADITIONAL TRAINING:
-    ─────────────────────
-
-    Data ────────────► Model ────────────► Predictions
-           (billions                        (hard labels)
-            of tokens)
-
-    The model learns from raw data. Expensive. Slow. Requires scale.
-
-
-    KNOWLEDGE DISTILLATION:
-    ───────────────────────
-
-    ┌──────────────────┐
-    │  TEACHER MODEL   │  (Claude, GPT-4, DeepSeek R1)
-    │  405B parameters │
-    │  "The Expert"    │
-    └────────┬─────────┘
-             │
-             │  Soft targets (probability distributions)
-             │  Reasoning traces (chain of thought)
-             │  Behavioral patterns (how it thinks)
-             ▼
-    ┌──────────────────┐
-    │  STUDENT MODEL   │  (Llama Nemotron Nano 8B)
-    │  8B parameters   │
-    │  "The Apprentice"│
-    └──────────────────┘
-
-    THE KEY INSIGHT:
-    ────────────────
-
-    The student doesn\'t learn from data.
-    The student learns from the TEACHER'S BEHAVIOR.
-
-    This includes:
-    • How the teacher distributes probability across options
-    • The teacher\'s reasoning process (when available)
-    • The teacher\'s mistakes and uncertainties
-    • The teacher\'s decision-making patterns`
+      type: 'diagram',
+      diagramType: 'hierarchy',
+      data: {
+        title: 'KNOWLEDGE DISTILLATION: THE CORE CONCEPT',
+        subtitle: 'How small models learn from large teachers',
+        nodes: [
+          {
+            id: 'teacher',
+            label: 'TEACHER MODEL',
+            description: '405B parameters',
+            details: [
+              'Claude, GPT-4, DeepSeek R1',
+              '"The Expert"',
+              'Learns from billions of tokens',
+              'Massive computational requirements'
+            ],
+            level: 0,
+            icon: 'brain'
+          },
+          {
+            id: 'transfer',
+            label: 'Knowledge Transfer',
+            description: 'Behavioral Learning',
+            details: [
+              'Soft targets (probability distributions)',
+              'Reasoning traces (chain of thought)',
+              'Behavioral patterns (how it thinks)',
+              'Mistakes and uncertainties',
+              'Decision-making patterns'
+            ],
+            level: 1,
+            icon: 'arrow-down'
+          },
+          {
+            id: 'student',
+            label: 'STUDENT MODEL',
+            description: '8B parameters',
+            details: [
+              'Llama Nemotron Nano',
+              '"The Apprentice"',
+              'Learns from teacher behavior',
+              'Runs on single GPU'
+            ],
+            level: 2,
+            icon: 'cpu'
+          }
+        ],
+        comparison: {
+          title: 'Traditional vs Distillation',
+          items: [
+            {
+              approach: 'Traditional Training',
+              flow: 'Raw Data → Model → Predictions',
+              cost: 'Expensive, slow, requires scale',
+              learning: 'Hard labels from data'
+            },
+            {
+              approach: 'Knowledge Distillation',
+              flow: 'Teacher Behavior → Student → Efficient Inference',
+              cost: 'Faster, cheaper, single GPU',
+              learning: 'Soft targets from expert'
+            }
+          ]
+        },
+        insight: 'The student doesn\'t learn from data. The student learns from the TEACHER\'S BEHAVIOR.'
+      }
     },
     {
       type: 'text',
@@ -181,56 +215,96 @@ export const architectureIntelligence: Article = {
       text: 'The Llama Nemotron Family: A Case Study'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `NVIDIA LLAMA NEMOTRON: DISTILLATION IN ACTION
-═══════════════════════════════════════════════════════════════════════════
-
-    THE FAMILY:
-    ───────────
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │  LLAMA NEMOTRON NANO (8B)                                          │
-    │  ├── Derived from: Llama 3.1 8B                                    │
-    │  ├── Training: SFT + RL (REINFORCE, RPO algorithms)                │
-    │  ├── Context: 128K tokens                                          │
-    │  ├── Key capability: Fits on SINGLE RTX GPU                        │
-    │  ├── Reasoning: Toggle on/off via system prompt                    │
-    │  └── Benchmarks: Outperforms larger models on tool calling         │
-    ├─────────────────────────────────────────────────────────────────────┤
-    │  LLAMA NEMOTRON SUPER (49B)                                        │
-    │  ├── Distilled from: Llama 3.3 70B                                 │
-    │  ├── Optimized for: Data center single-GPU deployment              │
-    │  └── Use case: Best accuracy with highest throughput               │
-    ├─────────────────────────────────────────────────────────────────────┤
-    │  LLAMA NEMOTRON ULTRA (253B)                                       │
-    │  ├── Distilled from: Llama 3.1 405B                                │
-    │  ├── Key achievement: Outperforms DeepSeek-R1                      │
-    │  ├── Fits on: Single 8xH100 node                                   │
-    │  └── Throughput: Higher than 405B original                         │
-    └─────────────────────────────────────────────────────────────────────┘
-
-
-    THE TRAINING PIPELINE:
-    ──────────────────────
-
-    Stage 1: Neural Architecture Search (NAS)
-             └── Optimize inference efficiency from base Llama
-
-    Stage 2: Continued Pre-Training (CPT)
-             └── Knowledge distillation with 65B-88B tokens
-             └── Teacher: Nemotron-4-340B-Instruct
-
-    Stage 3: Supervised Fine-Tuning (SFT)
-             └── Math, Code, Reasoning, Tool Calling
-             └── "Detailed thinking on/off" toggle training
-
-    Stage 4: Reinforcement Learning
-             └── REINFORCE (RLOO) algorithm
-             └── Online Reward-aware Preference Optimization (RPO)
-
-    Stage 5: Alignment
-             └── Chat and instruction-following optimization`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'NVIDIA LLAMA NEMOTRON: DISTILLATION IN ACTION',
+        subtitle: 'The model family that proves size isn\'t everything',
+        cards: [
+          {
+            title: 'NANO (8B)',
+            icon: 'cpu',
+            content: 'Consumer GPU powerhouse',
+            details: 'Derived from: Llama 3.1 8B',
+            tags: ['8B', 'local', '128K context'],
+            stats: [
+              { label: 'Training', value: 'SFT + RL (REINFORCE, RPO)' },
+              { label: 'Hardware', value: 'Single RTX GPU' },
+              { label: 'Reasoning', value: 'Toggle on/off' },
+              { label: 'Benchmark', value: 'Beats larger models' }
+            ]
+          },
+          {
+            title: 'SUPER (49B)',
+            icon: 'server',
+            content: 'Data center efficiency',
+            details: 'Distilled from: Llama 3.3 70B',
+            tags: ['49B', 'single-gpu', 'throughput'],
+            stats: [
+              { label: 'Target', value: 'Data center deployment' },
+              { label: 'Balance', value: 'Accuracy + throughput' },
+              { label: 'Hardware', value: 'Single GPU node' }
+            ]
+          },
+          {
+            title: 'ULTRA (253B)',
+            icon: 'zap',
+            content: 'Enterprise scale',
+            details: 'Distilled from: Llama 3.1 405B',
+            tags: ['253B', 'distributed', 'sota'],
+            stats: [
+              { label: 'Achievement', value: 'Beats DeepSeek-R1' },
+              { label: 'Hardware', value: 'Single 8xH100 node' },
+              { label: 'Throughput', value: 'Higher than 405B' }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      type: 'diagram',
+      diagramType: 'process',
+      data: {
+        title: 'THE TRAINING PIPELINE',
+        subtitle: 'How Nemotron models are created',
+        steps: [
+          {
+            id: 'nas',
+            label: 'Neural Architecture Search',
+            icon: 'search',
+            description: 'Stage 1: NAS',
+            details: ['Optimize inference efficiency', 'Starting from base Llama', 'Architecture optimization']
+          },
+          {
+            id: 'cpt',
+            label: 'Continued Pre-Training',
+            icon: 'database',
+            description: 'Stage 2: CPT',
+            details: ['Knowledge distillation', '65B-88B tokens', 'Teacher: Nemotron-4-340B-Instruct']
+          },
+          {
+            id: 'sft',
+            label: 'Supervised Fine-Tuning',
+            icon: 'book',
+            description: 'Stage 3: SFT',
+            details: ['Math, Code, Reasoning, Tool Calling', '"Detailed thinking on/off" toggle', 'Domain specialization']
+          },
+          {
+            id: 'rl',
+            label: 'Reinforcement Learning',
+            icon: 'target',
+            description: 'Stage 4: RL',
+            details: ['REINFORCE (RLOO) algorithm', 'Online Reward-aware Preference Optimization (RPO)', 'Behavioral refinement']
+          },
+          {
+            id: 'alignment',
+            label: 'Alignment',
+            icon: 'check',
+            description: 'Stage 5: Final Alignment',
+            details: ['Chat optimization', 'Instruction-following', 'Safety and helpfulness']
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -241,58 +315,87 @@ export const architectureIntelligence: Article = {
       text: 'Benchmark Reality: Small Models Can Win'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `BENCHMARK COMPARISON: SIZE VS. CAPABILITY
-═══════════════════════════════════════════════════════════════════════════
-
-    BFCL (Berkeley Function Calling Leaderboard):
-    ─────────────────────────────────────────────
-
-    The gold standard for evaluating tool use capabilities.
-    Tests: Serial calls, parallel calls, multi-turn, irrelevance detection
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  WHAT BFCL MEASURES:                                               │
-    │                                                                     │
-    │  ┌─────────────┐   ┌─────────────┐   ┌─────────────┐              │
-    │  │   SIMPLE    │   │  MULTIPLE   │   │  PARALLEL   │              │
-    │  │  One query  │   │ 2-4 options │   │ Multiple    │              │
-    │  │  One tool   │   │ Pick best   │   │ simultaneous│              │
-    │  └─────────────┘   └─────────────┘   └─────────────┘              │
-    │                                                                     │
-    │  ┌─────────────┐   ┌─────────────┐   ┌─────────────┐              │
-    │  │ IRRELEVANCE │   │ MULTI-TURN  │   │  COMPOSITE  │              │
-    │  │  Know when  │   │  Maintain   │   │ All of the  │              │
-    │  │  NOT to act │   │  context    │   │ above       │              │
-    │  └─────────────┘   └─────────────┘   └─────────────┘              │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘
-
-
-    THE SURPRISING RESULTS:
-    ───────────────────────
-
-    Nemotron Nano 8B consistently outperforms:
-    • GPT-4V on text recognition and spotting
-    • Gemini on specialized document benchmarks
-    • Many 70B+ models on tool orchestration
-
-    WHY?
-
-    1. SPECIALIZED TRAINING
-       └── Focused on tool calling, not general chat
-
-    2. BETTER ARCHITECTURE
-       └── NAS-optimized for inference efficiency
-
-    3. QUALITY OVER QUANTITY
-       └── Trained on curated synthetic data from 340B teacher
-
-    4. TOGGLE-ABLE REASONING
-       └── "Detailed thinking on" for complex tasks
-       └── "Detailed thinking off" for fast responses`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'BENCHMARK COMPARISON: SIZE VS. CAPABILITY',
+        subtitle: 'BFCL (Berkeley Function Calling Leaderboard) - The gold standard for tool use',
+        cards: [
+          {
+            title: 'Simple',
+            icon: 'target',
+            content: 'One query, one tool',
+            details: 'Basic function calling',
+            tags: ['basic']
+          },
+          {
+            title: 'Multiple',
+            icon: 'layers',
+            content: '2-4 options, pick best',
+            details: 'Tool selection',
+            tags: ['selection']
+          },
+          {
+            title: 'Parallel',
+            icon: 'zap',
+            content: 'Multiple simultaneous',
+            details: 'Concurrent tool calls',
+            tags: ['concurrent']
+          },
+          {
+            title: 'Irrelevance',
+            icon: 'x',
+            content: 'Know when NOT to act',
+            details: 'Avoid hallucinated tools',
+            tags: ['judgment']
+          },
+          {
+            title: 'Multi-Turn',
+            icon: 'repeat',
+            content: 'Maintain context',
+            details: 'Sequential operations',
+            tags: ['context']
+          },
+          {
+            title: 'Composite',
+            icon: 'grid',
+            content: 'All of the above',
+            details: 'Complete evaluation',
+            tags: ['comprehensive']
+          }
+        ],
+        results: {
+          title: 'The Surprising Results',
+          winner: 'Nemotron Nano 8B',
+          outperforms: [
+            'GPT-4V on text recognition and spotting',
+            'Gemini on specialized document benchmarks',
+            'Many 70B+ models on tool orchestration'
+          ],
+          reasons: [
+            {
+              title: 'Specialized Training',
+              description: 'Focused on tool calling, not general chat',
+              icon: 'target'
+            },
+            {
+              title: 'Better Architecture',
+              description: 'NAS-optimized for inference efficiency',
+              icon: 'cpu'
+            },
+            {
+              title: 'Quality Over Quantity',
+              description: 'Trained on curated synthetic data from 340B teacher',
+              icon: 'sparkles'
+            },
+            {
+              title: 'Toggle-able Reasoning',
+              description: '"Detailed thinking on" for complex tasks, "off" for fast responses',
+              icon: 'toggle-right'
+            }
+          ]
+        }
+      }
     },
     {
       type: 'text',
@@ -311,38 +414,42 @@ export const architectureIntelligence: Article = {
       text: 'Claude Code is the terminal-based interface to Claude\'s capabilities. It\'s the starting point, but not the end point.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `CLAUDE CODE: CAPABILITIES AND LIMITATIONS
-═══════════════════════════════════════════════════════════════════════════
-
-    WHAT CLAUDE CODE CAN DO:
-    ────────────────────────
-
-    ✓ Read and write files in your repository
-    ✓ Execute bash commands
-    ✓ Use MCP servers for external tools
-    ✓ Maintain context across a session
-    ✓ Multi-file editing with undo
-    ✓ Git operations
-
-    WHAT CLAUDE CODE CANNOT DO (NATIVELY):
-    ──────────────────────────────────────
-
-    ✗ Deep research (web browsing, multi-source synthesis)
-    ✗ Spawn parallel agents
-    ✗ Run overnight without human interaction
-    ✗ Manage complex project hierarchies
-    ✗ Self-improve through skill accumulation
-    ✗ Switch between models for cost optimization
-
-    THE GAP:
-    ────────
-
-    Claude Code is a powerful TOOL.
-    We need a powerful SYSTEM.
-
-    That\'s where the extension frameworks come in.`
+      type: 'diagram',
+      diagramType: 'comparison',
+      data: {
+        title: 'CLAUDE CODE: CAPABILITIES AND LIMITATIONS',
+        subtitle: 'Understanding what comes out of the box vs what needs to be built',
+        items: [
+          {
+            category: 'Native Capabilities',
+            type: 'positive',
+            features: [
+              { label: 'File Operations', description: 'Read and write files in your repository', icon: 'file' },
+              { label: 'Bash Commands', description: 'Execute terminal commands', icon: 'terminal' },
+              { label: 'MCP Servers', description: 'Use external tools via protocol', icon: 'plug' },
+              { label: 'Context', description: 'Maintain context across a session', icon: 'brain' },
+              { label: 'Multi-file Editing', description: 'Edit multiple files with undo', icon: 'edit' },
+              { label: 'Git Operations', description: 'Version control integration', icon: 'git-branch' }
+            ]
+          },
+          {
+            category: 'Missing Capabilities',
+            type: 'negative',
+            features: [
+              { label: 'Deep Research', description: 'Web browsing, multi-source synthesis', icon: 'search' },
+              { label: 'Parallel Agents', description: 'Spawn and coordinate multiple agents', icon: 'users' },
+              { label: 'Overnight Operation', description: 'Run without human interaction', icon: 'moon' },
+              { label: 'Project Hierarchies', description: 'Manage complex project structures', icon: 'folder-tree' },
+              { label: 'Skill Accumulation', description: 'Self-improve through learning', icon: 'trending-up' },
+              { label: 'Model Switching', description: 'Cost optimization across models', icon: 'shuffle' }
+            ]
+          }
+        ],
+        insight: {
+          title: 'THE GAP',
+          text: 'Claude Code is a powerful TOOL. We need a powerful SYSTEM. That\'s where the extension frameworks come in.'
+        }
+      }
     },
     {
       type: 'subheader',
@@ -353,66 +460,83 @@ export const architectureIntelligence: Article = {
       text: 'SuperClaude was one of the first comprehensive attempts to extend Claude Code\'s capabilities.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `SUPERCLAUDE: RESEARCH AND MULTI-AGENT EXTENSION
-═══════════════════════════════════════════════════════════════════════════
-
-    CORE CAPABILITIES:
-    ──────────────────
-
-    1. DEEP RESEARCH MODE
-       ├── Web search across multiple sources
-       ├── Multi-pass synthesis
-       ├── Citation and source tracking
-       └── NOT native to Claude Code-this was a key addition
-
-    2. PROJECT MANAGEMENT INTEGRATION
-       ├── Task decomposition templates
-       ├── Progress tracking
-       └── Living documentation as code
-
-    3. SUB-AGENT ORCHESTRATION
-       ├── Spawn specialized agents for parallel work
-       ├── Coordinate results back to main context
-       └── Early exploration of swarm patterns
-
-    4. ADVANCED CONTEXT MANAGEMENT
-       ├── Summary compression for long sessions
-       ├── Priority-based context loading
-       └── Knowledge base integration
-
-
-    ARCHITECTURE PATTERN:
-    ─────────────────────
-
-    ┌────────────────────────────────────────────────────────────────────┐
-    │                       SUPERCLAUDE LAYER                            │
-    ├────────────────────────────────────────────────────────────────────┤
-    │                                                                    │
-    │  ┌──────────────┐   ┌──────────────┐   ┌──────────────┐          │
-    │  │   RESEARCH   │   │   PROJECT    │   │   CONTEXT    │          │
-    │  │    AGENT     │   │   MANAGER    │   │   ENGINE     │          │
-    │  └──────┬───────┘   └──────┬───────┘   └──────┬───────┘          │
-    │         │                  │                  │                   │
-    │         └──────────────────┼──────────────────┘                   │
-    │                            │                                      │
-    │                   ┌────────▼────────┐                            │
-    │                   │  ORCHESTRATOR   │                            │
-    │                   └────────┬────────┘                            │
-    │                            │                                      │
-    └────────────────────────────┼──────────────────────────────────────┘
-                                 │
-    ┌────────────────────────────▼──────────────────────────────────────┐
-    │                       CLAUDE CODE                                  │
-    └────────────────────────────────────────────────────────────────────┘
-
-
-    KEY INSIGHT FROM SUPERCLAUDE:
-    ─────────────────────────────
-
-    The research capability gap was real and important.
-    Claude Code alone couldn\'t do what we needed for continuous learning.`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'SUPERCLAUDE: RESEARCH AND MULTI-AGENT EXTENSION',
+        subtitle: 'One of the first comprehensive attempts to extend Claude Code',
+        cards: [
+          {
+            title: 'Deep Research Mode',
+            icon: 'search',
+            content: 'Multi-source web research',
+            details: 'NOT native to Claude Code - key addition',
+            tags: ['research'],
+            features: [
+              'Web search across multiple sources',
+              'Multi-pass synthesis',
+              'Citation and source tracking'
+            ]
+          },
+          {
+            title: 'Project Management',
+            icon: 'folder-tree',
+            content: 'Task and documentation management',
+            details: 'Living documentation as code',
+            tags: ['pm'],
+            features: [
+              'Task decomposition templates',
+              'Progress tracking',
+              'Documentation generation'
+            ]
+          },
+          {
+            title: 'Sub-Agent Orchestration',
+            icon: 'users',
+            content: 'Parallel agent coordination',
+            details: 'Early exploration of swarm patterns',
+            tags: ['agents'],
+            features: [
+              'Spawn specialized agents',
+              'Coordinate parallel work',
+              'Result aggregation'
+            ]
+          },
+          {
+            title: 'Context Management',
+            icon: 'brain',
+            content: 'Advanced session handling',
+            details: 'Knowledge base integration',
+            tags: ['context'],
+            features: [
+              'Summary compression',
+              'Priority-based loading',
+              'Long session support'
+            ]
+          }
+        ],
+        architecture: {
+          title: 'Architecture Pattern',
+          layers: [
+            {
+              name: 'SuperClaude Layer',
+              components: ['Research Agent', 'Project Manager', 'Context Engine'],
+              role: 'Extension capabilities'
+            },
+            {
+              name: 'Orchestrator',
+              components: ['Coordination', 'Task Routing'],
+              role: 'Central coordination'
+            },
+            {
+              name: 'Claude Code',
+              components: ['Base capabilities'],
+              role: 'Foundation'
+            }
+          ]
+        },
+        insight: 'The research capability gap was real and important. Claude Code alone couldn\'t do what we needed for continuous learning.'
+      }
     },
     {
       type: 'subheader',
@@ -732,26 +856,31 @@ export const architectureIntelligence: Article = {
       }
     },
     {
-      type: 'code',
-      language: 'diagram',
-      code: `
-    KEY INNOVATIONS:
-    ────────────────
-
-    1. CUSTOM COMMANDS
-       └── Markdown-based command definitions
-       └── Hooks for lifecycle events
-       └── Skill builder for reusable patterns
-
-    2. DISCOVERY MODE
-       └── Explores capabilities autonomously
-       └── Maps available tools and resources
-       └── Self-documents for future sessions
-
-    3. WORKTREE INTEGRATION
-       └── Git worktrees for parallel development
-       └── Branch-per-agent patterns
-       └── Conflict resolution strategies`
+      type: 'diagram',
+      diagramType: 'cards',
+      data: {
+        title: 'KEY INNOVATIONS',
+        cards: [
+          {
+            title: 'Custom Commands',
+            icon: 'book',
+            content: 'Markdown-based command definitions with lifecycle hooks and skill builder for reusable patterns',
+            tags: ['commands', 'extensibility']
+          },
+          {
+            title: 'Discovery Mode',
+            icon: 'target',
+            content: 'Explores capabilities autonomously, maps available tools and resources, self-documents for future sessions',
+            tags: ['autonomous', 'learning']
+          },
+          {
+            title: 'Worktree Integration',
+            icon: 'branch',
+            content: 'Git worktrees for parallel development with branch-per-agent patterns and conflict resolution strategies',
+            tags: ['git', 'parallelism']
+          }
+        ]
+      }
     },
     {
       type: 'subheader',
@@ -762,79 +891,117 @@ export const architectureIntelligence: Article = {
       text: 'Claude Squad enabled true parallel development through git worktrees.'
     },
     {
+      type: 'text',
+      text: '**The Problem:** One Claude Code instance = one context = one task at a time. But real development is parallel: Feature A needs research, Feature B needs implementation, Bug C needs investigation, documentation needs updating.'
+    },
+    {
+      type: 'text',
+      text: '**The Solution:** Git worktrees + multiple Claude Code instances = parallelism.'
+    },
+    {
+      type: 'diagram',
+      diagramType: 'floorplan',
+      data: {
+        title: 'Claude Squad: Parallel Development Architecture',
+        areas: [
+          {
+            id: 'main',
+            label: 'Main Repository',
+            icon: 'layers',
+            color: 'primary',
+            x: 10,
+            y: 10,
+            width: 80,
+            height: 12,
+            details: [
+              'Shared .git/ directory',
+              'All worktrees reference this'
+            ]
+          },
+          {
+            id: 'worktree1',
+            label: 'Worktree 1: feature-a/',
+            icon: 'branch',
+            color: 'accent',
+            x: 10,
+            y: 25,
+            width: 24,
+            height: 28,
+            details: [
+              'Claude Code Instance 1',
+              'Working on: Research for new API',
+              'Branch: feature/new-api'
+            ]
+          },
+          {
+            id: 'worktree2',
+            label: 'Worktree 2: feature-b/',
+            icon: 'branch',
+            color: 'accent',
+            x: 38,
+            y: 25,
+            width: 24,
+            height: 28,
+            details: [
+              'Claude Code Instance 2',
+              'Working on: UI implementation',
+              'Branch: feature/ui-redesign'
+            ]
+          },
+          {
+            id: 'worktree3',
+            label: 'Worktree 3: bugfix-c/',
+            icon: 'branch',
+            color: 'accent',
+            x: 66,
+            y: 25,
+            width: 24,
+            height: 28,
+            details: [
+              'Claude Code Instance 3',
+              'Working on: Critical bug investigation',
+              'Branch: fix/memory-leak'
+            ]
+          },
+          {
+            id: 'coordination',
+            label: 'Coordination Layer',
+            icon: 'brain',
+            color: 'secondary',
+            x: 10,
+            y: 58,
+            width: 80,
+            height: 18,
+            details: [
+              '.coordination/status.json',
+              'Agent assignments',
+              'Progress tracking',
+              'Dependency mapping'
+            ]
+          }
+        ],
+        connections: [
+          { from: 'main', to: 'worktree1', label: 'shares .git/' },
+          { from: 'main', to: 'worktree2', label: 'shares .git/' },
+          { from: 'main', to: 'worktree3', label: 'shares .git/' },
+          { from: 'worktree1', to: 'coordination', label: 'reports to' },
+          { from: 'worktree2', to: 'coordination', label: 'reports to' },
+          { from: 'worktree3', to: 'coordination', label: 'reports to' }
+        ]
+      }
+    },
+    {
       type: 'code',
-      language: 'diagram',
-      code: `CLAUDE SQUAD: PARALLEL DEVELOPMENT
-═══════════════════════════════════════════════════════════════════════════
-
-    THE PROBLEM:
-    ────────────
-
-    One Claude Code instance = one context = one task at a time.
-
-    But real development is parallel:
-    • Feature A needs research
-    • Feature B needs implementation
-    • Bug C needs investigation
-    • Documentation needs updating
-
-    THE SOLUTION:
-    ─────────────
-
-    Git worktrees + multiple Claude Code instances = parallelism.
-
-
-    HOW IT WORKS:
-    ─────────────
-
-    ┌─────────────────────────────────────────────────────────────────────┐
-    │                                                                     │
-    │  MAIN REPOSITORY                                                   │
-    │  └── .git/ (shared)                                                │
-    │                                                                     │
-    │  WORKTREE 1: feature-a/                                            │
-    │  ├── Claude Code Instance 1                                        │
-    │  ├── Working on: Research for new API                              │
-    │  └── Branch: feature/new-api                                       │
-    │                                                                     │
-    │  WORKTREE 2: feature-b/                                            │
-    │  ├── Claude Code Instance 2                                        │
-    │  ├── Working on: UI implementation                                 │
-    │  └── Branch: feature/ui-redesign                                   │
-    │                                                                     │
-    │  WORKTREE 3: bugfix-c/                                             │
-    │  ├── Claude Code Instance 3                                        │
-    │  ├── Working on: Critical bug investigation                        │
-    │  └── Branch: fix/memory-leak                                       │
-    │                                                                     │
-    │  COORDINATION:                                                     │
-    │  └── .coordination/status.json                                     │
-    │      ├── Agent assignments                                         │
-    │      ├── Progress tracking                                         │
-    │      └── Dependency mapping                                        │
-    │                                                                     │
-    └─────────────────────────────────────────────────────────────────────┘
-
-
-    COMMANDS:
-    ─────────
-
-    claude-squad spawn --branch feature-a --agent researcher
-    claude-squad spawn --branch feature-b --agent implementer
-    claude-squad status
-    claude-squad merge --from feature-a --to main
-
-
-    HARDWARE REALITY CHECK:
-    ───────────────────────
-
-    On a 3080Ti, you can run:
-    • 2-3 parallel Claude API sessions (network-bound, not GPU)
-    • OR 1 local model instance (GPU-bound)
-
-    For true parallelism with local models, you\'d need:
-    • Multiple GPUs
-    • Or: API models for orchestration + local for specific tasks`
+      language: 'bash',
+      code: `# Claude Squad Commands
+claude-squad spawn --branch feature-a --agent researcher
+claude-squad spawn --branch feature-b --agent implementer
+claude-squad status
+claude-squad merge --from feature-a --to main`
+    },
+    {
+      type: 'text',
+      text: '**Hardware Reality Check:** On a 3080Ti, you can run 2-3 parallel Claude API sessions (network-bound, not GPU) OR 1 local model instance (GPU-bound). For true parallelism with local models, you\'d need multiple GPUs or use API models for orchestration + local for specific tasks.'
     },
     {
       type: 'header',

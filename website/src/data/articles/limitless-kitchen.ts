@@ -358,23 +358,62 @@ export const limitlessKitchen: Article = {
       text: 'Cooking is the most contact-rich, deformable-matter, phase-transitioning manipulation task humans routinely perform. Consider what happens when you chop an onion:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `HUMAN CHOPPING ONION: ~47 micro-adjustments per stroke
-═══════════════════════════════════════════════════════════════════════════
-
-Time: 0ms        100ms       200ms       300ms       400ms       500ms
-     │           │           │           │           │           │
-     ▼           ▼           ▼           ▼           ▼           ▼
-┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐
-│ Grip    │ │ Blade   │ │ Initial │ │ Feel    │ │ Adjust  │ │ Complete│
-│ position│►│ angle   │►│ contact │►│resistance│►│ force   │►│ through │
-│ adjust  │ │ set     │ │ sense   │ │ profile │ │ real-   │ │ cut     │
-│         │ │         │ │         │ │         │ │ time    │ │         │
-└─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘
-     │           │           │           │           │           │
-Sensors:   Vision     Proprio-    Tactile    Tactile    Proprio-
-           + proprio   ception    + force    + force    ception`
+      type: 'diagram',
+      diagramType: 'process',
+      data: {
+        title: 'Human Chopping Onion Process',
+        subtitle: '~47 micro-adjustments per stroke in 500ms',
+        steps: [
+          {
+            id: 'grip',
+            name: 'Grip Position Adjust',
+            duration: '0-100ms',
+            icon: 'target',
+            description: 'Initial hand positioning and grip adjustment',
+            sensors: ['Vision', 'Proprioception']
+          },
+          {
+            id: 'blade',
+            name: 'Blade Angle Set',
+            duration: '100-200ms',
+            icon: 'layers',
+            description: 'Angle adjustment for optimal cutting trajectory',
+            sensors: ['Proprioception']
+          },
+          {
+            id: 'contact',
+            name: 'Initial Contact Sense',
+            duration: '200-300ms',
+            icon: 'target',
+            description: 'First contact detection with onion surface',
+            sensors: ['Tactile', 'Force feedback']
+          },
+          {
+            id: 'resistance',
+            name: 'Feel Resistance Profile',
+            duration: '300-400ms',
+            icon: 'layers',
+            description: 'Continuous force sensing during cut progression',
+            sensors: ['Tactile', 'Force feedback']
+          },
+          {
+            id: 'adjust',
+            name: 'Adjust Force Real-time',
+            duration: '400-500ms',
+            icon: 'target',
+            description: 'Dynamic force modulation based on resistance feedback',
+            sensors: ['Proprioception', 'Force feedback']
+          },
+          {
+            id: 'complete',
+            name: 'Complete Through Cut',
+            duration: '500ms',
+            icon: 'target',
+            description: 'Final stroke completion with controlled exit',
+            sensors: ['Proprioception']
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -397,22 +436,77 @@ Sensors:   Vision     Proprio-    Tactile    Tactile    Proprio-
       text: 'Current physics engines fundamentally cannot simulate food:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `MATERIAL SIMULATION CAPABILITY (2025)
-═══════════════════════════════════════════════════════════════════════════
-
-Rigid Bodies    ████████████████████████████████████████ 95%  ✓ PhysX, MuJoCo
-Articulated     ████████████████████████████████████     90%  ✓ Isaac Sim
-Soft bodies     ██████████████████████████               65%  ~ FLEX, FEM
-Liquids (bulk)  ██████████████████                       45%  ~ SPH, FLIP
-Granular        ██████████████                           35%  ~ DEM (slow)
-Cutting         ██████████                               15%  ✗ Fracture mechanics
-Batter/Dough    █████                                     8%  ✗ MPM + viscoelastic
-Eggs cracking   ███                                       5%  ✗ Shell + membrane + fluid
-Phase trans.    █                                         2%  ✗ Raw → Cooked
-
-✓ = Solved    ~ = Research grade    ✗ = Unsolved`
+      type: 'diagram',
+      diagramType: 'metrics',
+      data: {
+        title: 'Material Simulation Capability (2025)',
+        subtitle: 'Physics engine capability for different materials',
+        metrics: [
+          {
+            label: 'Rigid Bodies',
+            value: 95,
+            unit: '%',
+            status: 'success',
+            description: 'PhysX, MuJoCo - Solved'
+          },
+          {
+            label: 'Articulated',
+            value: 90,
+            unit: '%',
+            status: 'success',
+            description: 'Isaac Sim - Solved'
+          },
+          {
+            label: 'Soft Bodies',
+            value: 65,
+            unit: '%',
+            status: 'warning',
+            description: 'FLEX, FEM - Research Grade'
+          },
+          {
+            label: 'Liquids (bulk)',
+            value: 45,
+            unit: '%',
+            status: 'warning',
+            description: 'SPH, FLIP - Research Grade'
+          },
+          {
+            label: 'Granular',
+            value: 35,
+            unit: '%',
+            status: 'warning',
+            description: 'DEM (slow) - Research Grade'
+          },
+          {
+            label: 'Cutting',
+            value: 15,
+            unit: '%',
+            status: 'error',
+            description: 'Fracture mechanics - Unsolved'
+          },
+          {
+            label: 'Batter/Dough',
+            value: 8,
+            unit: '%',
+            status: 'error',
+            description: 'MPM + viscoelastic - Unsolved'
+          },
+          {
+            label: 'Eggs Cracking',
+            value: 5,
+            unit: '%',
+            status: 'error',
+            description: 'Shell + membrane + fluid - Unsolved'
+          },
+          {
+            label: 'Phase Transitions',
+            value: 2,
+            unit: '%',
+            status: 'error',
+            description: 'Raw → Cooked - Unsolved'
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -423,27 +517,34 @@ Phase trans.    █                                         2%  ✗ Raw → Cook
       text: '**The Sim-to-Real Transfer Problem**:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `                  SIMULATION                         REALITY
-              ┌────────────────┐                ┌────────────────┐
-              │                │                │                │
-              │  Onion: rigid  │                │  Onion: layers │
-              │  sphere with   │                │  peel under    │
-              │  friction 0.4  │       ≠        │  pressure, slip│
-              │                │                │  unpredictably │
-              │                │                │                │
-              └────────────────┘                └────────────────┘
-                      │                                 │
-                      ▼                                 ▼
-              Policy: Apply                     Policy: Apply
-              12N downward                      12N downward
-              force at 45°                      force at 45°
-                      │                                 │
-                      ▼                                 ▼
-              Result: Clean                     Result: Onion
-              cut through                       flies across
-                                                kitchen`
+      type: 'diagram',
+      diagramType: 'comparison',
+      data: {
+        title: 'Sim-to-Real Transfer Problem',
+        subtitle: 'Why simulation training fails for cooking tasks',
+        rows: [
+          {
+            aspect: 'Material Model',
+            left: 'Onion: rigid sphere with friction 0.4',
+            right: 'Onion: layers peel under pressure, slip unpredictably',
+            status: 'error'
+          },
+          {
+            aspect: 'Policy Command',
+            left: 'Apply 12N downward force at 45°',
+            right: 'Apply 12N downward force at 45°',
+            status: 'warning'
+          },
+          {
+            aspect: 'Result',
+            left: 'Clean cut through',
+            right: 'Onion flies across kitchen',
+            status: 'error'
+          }
+        ],
+        leftHeader: 'Simulation (PhysX)',
+        rightHeader: 'Reality'
+      }
     },
     {
       type: 'subheader',
@@ -454,54 +555,68 @@ Phase trans.    █                                         2%  ✗ Raw → Cook
       text: 'Rather than simulate food physics analytically (impossible), we **learn** it:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `HYBRID DYNAMICS ARCHITECTURE
-═══════════════════════════════════════════════════════════════════════════
-
-            ┌──────────────────────────────────────────────────────┐
-            │                    INPUT STATE                        │
-            │  Position, Velocity, Material Type, Temperature       │
-            └────────────────────────┬─────────────────────────────┘
-                                     │
-                                     ▼
-        ┌────────────────────────────┴────────────────────────────┐
-        │                                                          │
-        ▼                                                          ▼
-┌───────────────────┐                                  ┌───────────────────┐
-│  ANALYTIC ENGINE  │                                  │   LEARNED MODEL   │
-│                   │                                  │                   │
-│  • MuJoCo/Isaac   │                                  │  Graph Neural     │
-│  • Rigid bodies   │                                  │  Network (GNN)    │
-│  • Known physics  │                                  │                   │
-│                   │                                  │  Scene as graph:  │
-│                   │                                  │  • Nodes = objects│
-│                   │                                  │  • Edges = forces │
-│                   │                                  │                   │
-└─────────┬─────────┘                                  └─────────┬─────────┘
-          │                                                      │
-          │  Δ_analytic                           Δ_learned      │
-          │                                                      │
-          └──────────────────────┬───────────────────────────────┘
-                                 │
-                                 ▼
-                    ┌────────────────────────┐
-                    │    FUSION NETWORK      │
-                    │                        │
-                    │  Δ_final = Δ_analytic  │
-                    │          + α(Δ_learned)│
-                    │                        │
-                    │  α → 0 where analytic  │
-                    │        is accurate     │
-                    │  α → 1 where analytic  │
-                    │        fails (food)    │
-                    │                        │
-                    └────────────┬───────────┘
-                                 │
-                                 ▼
-                    ┌────────────────────────┐
-                    │     NEXT STATE         │
-                    └────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'floorplan',
+      data: {
+        title: 'Hybrid Dynamics Architecture',
+        subtitle: 'Combining analytical physics with learned dynamics',
+        rooms: [
+          {
+            id: 'input',
+            name: 'Input State',
+            subtitle: 'Current System State',
+            icon: 'target',
+            description: 'Position, velocity, material type, temperature',
+            features: ['State vector input', 'Multi-modal sensing']
+          },
+          {
+            id: 'analytic',
+            name: 'Analytic Engine',
+            subtitle: 'Traditional Physics',
+            icon: 'layers',
+            description: 'MuJoCo/Isaac for rigid bodies and known physics',
+            features: [
+              'Rigid body dynamics',
+              'Known physics laws',
+              'Fast computation',
+              'Output: Δ_analytic'
+            ]
+          },
+          {
+            id: 'learned',
+            name: 'Learned Model',
+            subtitle: 'Graph Neural Network',
+            icon: 'brain',
+            description: 'GNN learning residual dynamics for complex materials',
+            features: [
+              'Scene as graph structure',
+              'Nodes = objects',
+              'Edges = forces',
+              'Output: Δ_learned'
+            ]
+          },
+          {
+            id: 'fusion',
+            name: 'Fusion Network',
+            subtitle: 'Intelligent Blending',
+            icon: 'target',
+            description: 'Adaptively combines analytic and learned predictions',
+            features: [
+              'Δ_final = Δ_analytic + α(Δ_learned)',
+              'α → 0 where analytic is accurate',
+              'α → 1 where analytic fails (food)'
+            ]
+          },
+          {
+            id: 'output',
+            name: 'Next State',
+            subtitle: 'Predicted Future',
+            icon: 'target',
+            description: 'Final state prediction for simulation step',
+            features: ['Updated positions', 'Updated velocities', 'Material state changes']
+          }
+        ]
+      }
     },
     {
       type: 'text',
@@ -700,49 +815,50 @@ class CookingFrame:
       text: 'The Hierarchical Policy Architecture'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `                        HIERARCHICAL POLICY STRUCTURE
-═══════════════════════════════════════════════════════════════════════════
-
-                    ┌─────────────────────────────────────────┐
-                    │            HIGH-LEVEL PLANNER           │
-                    │              (LLM / VLM)                 │
-                    │                                          │
-                    │  Input: "Make scrambled eggs"            │
-                    │  Output: [crack_egg, beat_egg,           │
-                    │           heat_pan, pour, stir,          │
-                    │           plate]                         │
-                    │                                          │
-                    │  ⏱️ Decision rate: ~1 Hz                 │
-                    └─────────────────────┬───────────────────┘
-                                          │
-                                          ▼
-                    ┌─────────────────────────────────────────┐
-                    │            MID-LEVEL SKILLS             │
-                    │        (Learned Skill Policies)          │
-                    │                                          │
-                    │  Input: "crack_egg"                      │
-                    │  Output: [reach, grasp_egg,              │
-                    │           transport_to_bowl,             │
-                    │           tap_on_edge,                   │
-                    │           split_shell,                   │
-                    │           pour_contents]                 │
-                    │                                          │
-                    │  ⏱️ Decision rate: ~10 Hz                │
-                    └─────────────────────┬───────────────────┘
-                                          │
-                                          ▼
-                    ┌─────────────────────────────────────────┐
-                    │          LOW-LEVEL CONTROLLER           │
-                    │         (Motor Policy Network)           │
-                    │                                          │
-                    │  Input: "grasp_egg" + current_state      │
-                    │  Output: τ(t) for all joints             │
-                    │          (torque commands)               │
-                    │                                          │
-                    │  ⏱️ Decision rate: ~100 Hz               │
-                    └─────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'hierarchy',
+      data: {
+        title: 'Hierarchical Policy Structure',
+        subtitle: 'Multi-level control architecture for robot cooking',
+        root: {
+          id: 'highlevel',
+          name: 'High-Level Planner',
+          subtitle: 'LLM / VLM',
+          icon: 'brain',
+          description: 'Task decomposition and sequencing',
+          details: [
+            'Input: "Make scrambled eggs"',
+            'Output: [crack_egg, beat_egg, heat_pan, pour, stir, plate]',
+            '⏱️ Decision rate: ~1 Hz'
+          ],
+          children: [
+            {
+              id: 'midlevel',
+              name: 'Mid-Level Skills',
+              subtitle: 'Learned Skill Policies',
+              icon: 'layers',
+              description: 'Skill execution and sub-task breakdown',
+              details: [
+                'Input: "crack_egg"',
+                'Output: [reach, grasp_egg, transport_to_bowl, tap_on_edge, split_shell, pour_contents]',
+                '⏱️ Decision rate: ~10 Hz'
+              ]
+            },
+            {
+              id: 'lowlevel',
+              name: 'Low-Level Controller',
+              subtitle: 'Motor Policy Network',
+              icon: 'target',
+              description: 'Joint-level motor control',
+              details: [
+                'Input: "grasp_egg" + current_state',
+                'Output: τ(t) for all joints (torque commands)',
+                '⏱️ Decision rate: ~100 Hz'
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       type: 'subheader',
@@ -753,25 +869,46 @@ class CookingFrame:
       text: 'The critical challenge: **Human hands ≠ Robot hands**'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `MORPHOLOGY COMPARISON
-═══════════════════════════════════════════════════════════════════════════
-
-    HUMAN HAND                              ROBOT GRIPPER (typical)
-
-         ╱╲                                      │     │
-        ╱  ╲                                     │     │
-       │ 🖐 │  27 DOF                            │  ⬚  │  6-12 DOF
-       │    │  17,000 mechanoreceptors           │     │  6-50 taxels
-       │    │  Individual finger control         └─────┘  Parallel jaw
-       │    │  Compliant joints                            Rigid
-        \\  /
-         \\/
-
-    Cannot directly replay human                Requires retargeting
-    demonstrations on robot!                    under different
-                                                kinematic constraints`
+      type: 'diagram',
+      diagramType: 'comparison',
+      data: {
+        title: 'Morphology Comparison',
+        subtitle: 'Human vs Robot manipulation capabilities',
+        rows: [
+          {
+            aspect: 'Degrees of Freedom',
+            left: '27 DOF',
+            right: '6-12 DOF',
+            status: 'warning'
+          },
+          {
+            aspect: 'Tactile Sensing',
+            left: '17,000 mechanoreceptors',
+            right: '6-50 taxels',
+            status: 'error'
+          },
+          {
+            aspect: 'Control',
+            left: 'Individual finger control',
+            right: 'Parallel jaw',
+            status: 'warning'
+          },
+          {
+            aspect: 'Compliance',
+            left: 'Compliant joints',
+            right: 'Rigid',
+            status: 'error'
+          },
+          {
+            aspect: 'Transfer Feasibility',
+            left: 'Cannot directly replay demonstrations',
+            right: 'Requires retargeting under different kinematic constraints',
+            status: 'error'
+          }
+        ],
+        leftHeader: 'Human Hand 🖐',
+        rightHeader: 'Robot Gripper'
+      }
     },
     {
       type: 'text',
@@ -824,81 +961,39 @@ class CookingFrame:
       text: 'Behavior cloning gets us to ~80% success. RL closes the gap.'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `EUREKA REWARD GENERATION PIPELINE
-═══════════════════════════════════════════════════════════════════════════
-
-┌───────────────────────────────────────────────────────────────────────┐
-│                         TASK DESCRIPTION                              │
-│  "Chop an onion into small, uniform pieces without crushing"          │
-└───────────────────────────────┬───────────────────────────────────────┘
-                                │
-                                ▼
-┌───────────────────────────────────────────────────────────────────────┐
-│                      LLM REWARD GENERATOR                             │
-│                                                                       │
-│  Prompt: Given this task and environment observations                 │
-│  [joint_positions, object_states, forces, time], generate             │
-│  a Python reward function that encourages successful completion.      │
-│                                                                       │
-│  Constraints:                                                         │
-│  - Reward should be dense (feedback at every timestep)                │
-│  - Include progress toward goal + safety penalties                    │
-│  - Avoid reward hacking (be specific about success criteria)          │
-│                                                                       │
-└───────────────────────────────┬───────────────────────────────────────┘
-                                │
-                                ▼
-┌───────────────────────────────────────────────────────────────────────┐
-│                    GENERATED REWARD FUNCTION                          │
-│                                                                       │
-│  def compute_reward(obs):                                             │
-│      # Efficiency: penalize excess motion                             │
-│      motion_cost = -0.01 * np.sum(np.abs(obs['joint_velocities']))   │
-│                                                                       │
-│      # Progress: reward cutting completeness                          │
-│      pieces_created = count_separate_pieces(obs['onion_mesh'])        │
-│      cutting_progress = 0.1 * pieces_created                          │
-│                                                                       │
-│      # Quality: reward uniform piece sizes                            │
-│      piece_sizes = get_piece_volumes(obs['onion_mesh'])               │
-│      uniformity = -0.5 * np.std(piece_sizes) / np.mean(piece_sizes)   │
-│                                                                       │
-│      # Safety: penalize excessive force                               │
-│      force_penalty = -1.0 * max(0, obs['blade_force'] - 50)           │
-│                                                                       │
-│      return motion_cost + cutting_progress + uniformity + force_penalty│
-│                                                                       │
-└───────────────────────────────┬───────────────────────────────────────┘
-                                │
-                                ▼
-┌───────────────────────────────────────────────────────────────────────┐
-│                      PARALLEL EVALUATION                              │
-│                                                                       │
-│     Isaac Gym: 4096 parallel environments                             │
-│     ┌────┬────┬────┬────┬────┬────┬────┬────┐                        │
-│     │env │env │env │env │env │env │env │... │                        │
-│     │ 1  │ 2  │ 3  │ 4  │ 5  │ 6  │ 7  │    │                        │
-│     └────┴────┴────┴────┴────┴────┴────┴────┘                        │
-│                                                                       │
-│     Each env randomizes: friction, mass, knife sharpness,             │
-│     onion size, onion firmness, lighting                              │
-│                                                                       │
-└───────────────────────────────┬───────────────────────────────────────┘
-                                │
-                                ▼
-┌───────────────────────────────────────────────────────────────────────┐
-│                     REWARD REFLECTION                                 │
-│                                                                       │
-│  After N iterations, LLM reviews rollouts with low reward:            │
-│                                                                       │
-│  "Rollout 847: Robot completed cut but crushed onion edges.           │
-│   Current uniformity penalty insufficient.                            │
-│   Proposed modification: Add crushing_penalty based on                │
-│   force distribution across blade contact area."                      │
-│                                                                       │
-└───────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'process',
+      data: {
+        title: 'EUREKA REWARD GENERATION PIPELINE',
+        subtitle: 'Automated reward function design',
+        steps: [
+          {
+            label: 'TASK DESCRIPTION',
+            value: '"Chop an onion into small, uniform pieces without crushing"',
+            icon: '📝'
+          },
+          {
+            label: 'LLM REWARD GENERATOR',
+            value: 'Generate Python reward function with dense feedback, progress rewards, and safety penalties',
+            icon: '🤖'
+          },
+          {
+            label: 'GENERATED REWARD',
+            value: 'motion_cost + cutting_progress + uniformity + force_penalty',
+            icon: '⚡'
+          },
+          {
+            label: 'PARALLEL EVALUATION',
+            value: 'Isaac Gym: 4096 parallel environments with randomized friction, mass, knife sharpness',
+            icon: '🔄'
+          },
+          {
+            label: 'REWARD REFLECTION',
+            value: 'LLM reviews low-reward rollouts and proposes modifications',
+            icon: '🔍'
+          }
+        ]
+      }
     },
     {
       type: 'subheader',
@@ -951,43 +1046,32 @@ class CookingFrame:
       text: 'For closing the final sim-to-real gap:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `RESIDUAL POLICY ARCHITECTURE
-═══════════════════════════════════════════════════════════════════════════
-
-            ┌──────────────────────────────────────────┐
-            │              OBSERVATION                  │
-            │  (visual + proprioception + force)        │
-            └───────────────────┬──────────────────────┘
-                                │
-                ┌───────────────┴───────────────┐
-                │                               │
-                ▼                               ▼
-    ┌─────────────────────┐         ┌─────────────────────┐
-    │   SIM-TRAINED       │         │   RESIDUAL          │
-    │   BASE POLICY       │         │   CORRECTION        │
-    │                     │         │                     │
-    │   π_sim(o) → a_base │         │   π_res(o) → a_res  │
-    │                     │         │                     │
-    │   [FROZEN]          │         │   [TRAINED ON REAL] │
-    └──────────┬──────────┘         └──────────┬──────────┘
-               │                               │
-               │                               │  × 0.1 (start small)
-               │                               │
-               └───────────────┬───────────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │   FINAL ACTION      │
-                    │                     │
-                    │   a = a_base + α·a_res │
-                    │                     │
-                    │   α starts at 0.1,  │
-                    │   increases as      │
-                    │   confidence grows  │
-                    │                     │
-                    └─────────────────────┘`
+      type: 'diagram',
+      diagramType: 'hierarchy',
+      data: {
+        title: 'RESIDUAL POLICY ARCHITECTURE',
+        root: {
+          label: 'OBSERVATION',
+          description: 'visual + proprioception + force',
+          children: [
+            {
+              label: 'SIM-TRAINED BASE POLICY',
+              description: 'π_sim(o) → a_base',
+              note: '[FROZEN]'
+            },
+            {
+              label: 'RESIDUAL CORRECTION',
+              description: 'π_res(o) → a_res',
+              note: '[TRAINED ON REAL]'
+            }
+          ]
+        },
+        output: {
+          label: 'FINAL ACTION',
+          description: 'a = a_base + α·a_res',
+          note: 'α starts at 0.1, increases as confidence grows'
+        }
+      }
     },
     {
       type: 'text',
@@ -1054,25 +1138,19 @@ class CookingFrame:
       text: '3.1 Why Grow Your Own Food?'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `NUTRITIONAL DEGRADATION TIMELINE
-═══════════════════════════════════════════════════════════════════════════
-
-Hours since harvest:     0      12      24      48      72     168
-                         │       │       │       │       │       │
-Vitamin C retention:   100% ───85%────70%────50%────35%────15%──▶
-Antioxidant activity:  100% ───90%────75%────60%────45%────25%──▶
-Enzyme activity:       100% ───70%────40%────15%─────5%─────0%──▶
-                         │       │       │       │       │       │
-                      HARVEST  TRUCK   DISTRIB  STORE  SHELF  YOUR CART
-
-                              ┌─────────────────────────────────┐
-                              │  Home-grown spinach: 100%       │
-                              │  Store-bought spinach: 15-35%   │
-                              │                                  │
-                              │  That\'s a 3-7× nutrition gap    │
-                              └─────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'timeline',
+      data: {
+        title: 'NUTRITIONAL DEGRADATION TIMELINE',
+        steps: [
+          { label: 'HARVEST', value: '100%', description: 'Full nutrients at peak freshness' },
+          { label: 'TRUCK (12h)', value: '85%', description: 'Vitamin C begins dropping, enzyme activity at 70%' },
+          { label: 'DISTRIBUTION (24h)', value: '70%', description: 'Vitamin C at 70%, enzyme activity drops to 40%' },
+          { label: 'STORE (48h)', value: '50%', description: 'Significant nutrient loss, enzyme activity at 15%' },
+          { label: 'SHELF (72h)', value: '35%', description: 'Vitamin C at 35%, antioxidants at 45%' },
+          { label: 'YOUR CART (168h)', value: '15%', description: 'Home-grown: 100% vs Store-bought: 15-35% — a 3-7× nutrition gap' }
+        ]
+      }
     },
     {
       type: 'text',
@@ -1091,60 +1169,24 @@ Enzyme activity:       100% ───70%────40%────15%───�
       text: '3.2 The Autonomous CEA System'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `CONTROLLED ENVIRONMENT AGRICULTURE ARCHITECTURE
-═══════════════════════════════════════════════════════════════════════════
-
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                          │
-│  ┌─────────────────────────────────────────────────────────────────┐    │
-│  │                    VERTICAL GROWING RACK                         │    │
-│  │  ┌─────────────────────────────────────────────────────────────┐│    │
-│  │  │ LEVEL 4: Microgreens (Day 5-7)      LED: 200 µmol/m²/s     ││    │
-│  │  │ ═══════════════════════════════════════════════════════════ ││    │
-│  │  │ Broccoli  │  Radish   │  Sunflower  │  Pea Shoots          ││    │
-│  │  └─────────────────────────────────────────────────────────────┘│    │
-│  │  ┌─────────────────────────────────────────────────────────────┐│    │
-│  │  │ LEVEL 3: Microgreens (Day 3-5)      LED: 150 µmol/m²/s     ││    │
-│  │  │ ═══════════════════════════════════════════════════════════ ││    │
-│  │  │ Same varieties, staggered planting                          ││    │
-│  │  └─────────────────────────────────────────────────────────────┘│    │
-│  │  ┌─────────────────────────────────────────────────────────────┐│    │
-│  │  │ LEVEL 2: Germination (Day 0-3)      LED: Off/50 µmol       ││    │
-│  │  │ ═══════════════════════════════════════════════════════════ ││    │
-│  │  │ Blackout domes, humidity 80%+                               ││    │
-│  │  └─────────────────────────────────────────────────────────────┘│    │
-│  │  ┌─────────────────────────────────────────────────────────────┐│    │
-│  │  │ LEVEL 1: Herbs & Lettuce (30+ day)  LED: 250 µmol/m²/s     ││    │
-│  │  │ ═══════════════════════════════════════════════════════════ ││    │
-│  │  │ NFT hydroponic channels, nutrient solution A+B              ││    │
-│  │  └─────────────────────────────────────────────────────────────┘│    │
-│  └─────────────────────────────────────────────────────────────────┘    │
-│                                                                          │
-│  CONTROL SYSTEMS:                                                        │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐    │
-│  │ LED Spectrum │ │   Nutrient   │ │   Climate    │ │   Harvest    │    │
-│  │   Control    │ │   Dosing     │ │   Control    │ │   Timing     │    │
-│  │              │ │              │ │              │ │              │    │
-│  │ • Wavelength │ │ • EC/TDS     │ │ • Temp       │ │ • Growth     │    │
-│  │ • Intensity  │ │ • pH         │ │ • Humidity   │ │   stage CV   │    │
-│  │ • Photoperiod│ │ • Flow rate  │ │ • CO2        │ │ • Color      │    │
-│  └──────┬───────┘ └──────┬───────┘ └──────┬───────┘ └──────┬───────┘    │
-│         │                │                │                │             │
-│         └────────────────┴────────────────┴────────────────┘             │
-│                                    │                                      │
-│                                    ▼                                      │
-│                    ┌────────────────────────────────┐                    │
-│                    │     PLANT DIGITAL TWIN         │                    │
-│                    │                                │                    │
-│                    │  • Growth rate prediction      │                    │
-│                    │  • Nutrient uptake modeling    │                    │
-│                    │  • Harvest time optimization   │                    │
-│                    │  • Anomaly detection           │                    │
-│                    └────────────────────────────────┘                    │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘`
+      type: 'diagram',
+      diagramType: 'stack',
+      data: {
+        title: 'CONTROLLED ENVIRONMENT AGRICULTURE',
+        layers: [
+          { type: 'LEVEL 4', label: 'Microgreens (Day 5-7)', description: 'LED: 200 µmol/m²/s - Broccoli, Radish, Sunflower, Pea Shoots' },
+          { type: 'LEVEL 3', label: 'Microgreens (Day 3-5)', description: 'LED: 150 µmol/m²/s - Staggered planting' },
+          { type: 'LEVEL 2', label: 'Germination (Day 0-3)', description: 'LED: Off/50 µmol - Blackout domes, 80%+ humidity' },
+          { type: 'LEVEL 1', label: 'Herbs & Lettuce (30+ day)', description: 'LED: 250 µmol/m²/s - NFT hydroponic channels' }
+        ],
+        controls: [
+          { label: 'LED Spectrum', items: ['Wavelength', 'Intensity', 'Photoperiod'] },
+          { label: 'Nutrient Dosing', items: ['EC/TDS', 'pH', 'Flow rate'] },
+          { label: 'Climate Control', items: ['Temp', 'Humidity', 'CO2'] },
+          { label: 'Harvest Timing', items: ['Growth stage CV', 'Color detection'] }
+        ],
+        output: 'PLANT DIGITAL TWIN - Growth prediction, Nutrient modeling, Harvest optimization'
+      }
     },
     {
       type: 'subheader',
@@ -1159,43 +1201,51 @@ Enzyme activity:       100% ───70%────40%────15%───�
       text: 'Traditional L-systems (Lindenmayer systems) model plant growth through recursive rewriting rules. We combine this with ML for prediction:'
     },
     {
-      type: 'code',
-      language: 'diagram',
-      text: `L-SYSTEM GROWTH RULES (Simplified Example)
-═══════════════════════════════════════════════════════════════════════════
-
-Axiom: A                   (Start with a seed/apex)
-
-Rules:
-  A → AB                   (Apex grows and produces branch)
-  B → C[+A][-A]CA          (Branch produces leaves and new apexes)
-  C → CD                   (Stem segment elongates)
-
-Symbols:
-  A = Apex (growing tip)
-  B = Branch node
-  C = Stem segment
-  D = Mature stem
-  + = Turn left 25°
-  - = Turn right 25°
-  [ = Push state (start branch)
-  ] = Pop state (end branch)
-
-Iterations:     Visual Output:
-──────────────────────────────────────────────────────────────────
-    1:   A                          •
-
-    2:   AB                         •─•
-
-    3:   ABC[+A][-A]CA              •─•─┬─•
-                                        │
-                                        •
-
-    4:   (expanded further)             •─•
-                                       ╱│╲
-                                      • • •
-                                        │
-                                       •─•`
+      type: 'diagram',
+      diagramType: 'hierarchy',
+      data: {
+        title: 'L-SYSTEM GROWTH RULES',
+        subtitle: 'Plant growth through recursive rewriting (Simplified Example)',
+        root: {
+          label: 'AXIOM: A',
+          description: 'Start with seed/apex',
+          children: [
+            {
+              label: 'A → AB',
+              description: 'Apex grows and produces branch',
+              children: [
+                {
+                  label: 'B → C[+A][-A]CA',
+                  description: 'Branch produces leaves and new apexes',
+                  children: [
+                    {
+                      label: 'C → CD',
+                      description: 'Stem segment elongates'
+                    },
+                    {
+                      label: '[+A]',
+                      description: 'New apex turns left 25°'
+                    },
+                    {
+                      label: '[-A]',
+                      description: 'New apex turns right 25°'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        symbols: [
+          { symbol: 'A', meaning: 'Apex (growing tip)' },
+          { symbol: 'B', meaning: 'Branch node' },
+          { symbol: 'C', meaning: 'Stem segment' },
+          { symbol: 'D', meaning: 'Mature stem' },
+          { symbol: '+', meaning: 'Turn left 25°' },
+          { symbol: '-', meaning: 'Turn right 25°' },
+          { symbol: '[ ]', meaning: 'Push/pop state (branch)' }
+        ]
+      }
     },
     {
       type: 'text',
