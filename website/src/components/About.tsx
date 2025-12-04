@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
 
 // Animated counter component
-const AnimatedCounter = ({ value, label }: { value: string; label: string }) => {
+const AnimatedCounter: React.FC<{ value: string; label: string }> = ({ value, label }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const count = useMotionValue(0);
@@ -70,7 +70,7 @@ const About = () => {
                     { val: '6', label: 'Pipeline Stages' },
                     { val: '∞', label: 'Automation Loop' }
                 ].map((stat, i) => (
-                    <AnimatedCounter key={i} value={stat.val} label={stat.label} />
+                    <AnimatedCounter key={stat.label} value={stat.val} label={stat.label} />
                 ))}
             </div>
         </div>
