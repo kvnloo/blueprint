@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import { ViewState } from '../App';
 
 // Aura-style button CSS (teal theme)
 const buttonStyles = `
@@ -62,7 +63,12 @@ const buttonStyles = `
   .points_wrapper_teal .point:nth-child(7) { left: 88%; opacity: 0.9; animation-duration: 2.2s; animation-delay: 0.2s; }
 `;
 
-const Navbar = () => {
+interface NavbarProps {
+  currentView: ViewState;
+  onNavigate: (view: ViewState) => void;
+}
+
+const Navbar = ({ currentView, onNavigate }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -74,6 +80,13 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavClick = (view: ViewState) => {
+    onNavigate(view);
+    setIsMobileMenuOpen(false);
+  };
+
+  const isActive = (view: ViewState) => currentView === view;
+
   return (
     <>
     <style>{buttonStyles}</style>
@@ -84,19 +97,42 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <button
+          onClick={() => handleNavClick('home')}
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+        >
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-emerald-600 flex items-center justify-center">
             <span className="font-display font-bold text-black text-sm">z0</span>
           </div>
           <span className="font-display font-bold text-xl tracking-tight">zer0</span>
-        </div>
+        </button>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-          <a href="#" className="hover:text-teal-400 transition-colors">Services</a>
-          <a href="#" className="hover:text-teal-400 transition-colors">Technology</a>
-          <a href="#" className="hover:text-teal-400 transition-colors">Projects</a>
-          <a href="#" className="hover:text-teal-400 transition-colors">Pricing</a>
+          <button
+            onClick={() => handleNavClick('home')}
+            className={`hover:text-teal-400 transition-colors ${isActive('home') ? 'text-teal-400' : ''}`}
+          >
+            Services
+          </button>
+          <button
+            onClick={() => handleNavClick('research')}
+            className={`hover:text-teal-400 transition-colors ${isActive('research') || currentView.startsWith('article:') ? 'text-teal-400' : ''}`}
+          >
+            Research
+          </button>
+          <button
+            onClick={() => handleNavClick('home')}
+            className={`hover:text-teal-400 transition-colors`}
+          >
+            Projects
+          </button>
+          <button
+            onClick={() => handleNavClick('home')}
+            className={`hover:text-teal-400 transition-colors`}
+          >
+            Pricing
+          </button>
         </div>
 
         {/* CTA */}
@@ -119,7 +155,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="md:hidden text-gray-300"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
@@ -130,9 +166,24 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-[#050505] border-b border-white/10 p-6 flex flex-col gap-4 animate-in slide-in-from-top-4 fade-in duration-200">
-          <a href="#" className="text-lg font-medium text-gray-300 hover:text-teal-400">Services</a>
-          <a href="#" className="text-lg font-medium text-gray-300 hover:text-teal-400">Technology</a>
-          <a href="#" className="text-lg font-medium text-gray-300 hover:text-teal-400">Projects</a>
+          <button
+            onClick={() => handleNavClick('home')}
+            className={`text-lg font-medium text-left hover:text-teal-400 ${isActive('home') ? 'text-teal-400' : 'text-gray-300'}`}
+          >
+            Services
+          </button>
+          <button
+            onClick={() => handleNavClick('research')}
+            className={`text-lg font-medium text-left hover:text-teal-400 ${isActive('research') || currentView.startsWith('article:') ? 'text-teal-400' : 'text-gray-300'}`}
+          >
+            Research
+          </button>
+          <button
+            onClick={() => handleNavClick('home')}
+            className="text-lg font-medium text-gray-300 text-left hover:text-teal-400"
+          >
+            Projects
+          </button>
           <hr className="border-white/10" />
           <a href="#" className="text-lg font-medium text-gray-300 hover:text-white">Log In</a>
           <button className="w-full py-3 rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-medium">
