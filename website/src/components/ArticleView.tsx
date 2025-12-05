@@ -268,6 +268,68 @@ const TableOfContents: React.FC<{ items: TOCItem[], activeId: string | null }> =
   );
 };
 
+// --- Markdown Processing Utility ---
+
+/**
+ * Processes inline markdown syntax and returns React nodes
+ * Handles: **bold**, *italic*, [links](url), `code`, and escaped characters
+ */
+const processMarkdown = (text: string): React.ReactNode => {
+  if (!text) return null;
+
+  // Pattern matches: **bold**, *italic*, `code`, [text](url), escaped apostrophes
+  const pattern = /(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|\[[^\]]+\]\([^)]+\)|\\['"])/g;
+
+  const parts = text.split(pattern);
+
+  return parts.map((part, i) => {
+    if (!part) return null;
+
+    // Bold: **text**
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i} className="font-semibold text-white">{part.slice(2, -2)}</strong>;
+    }
+
+    // Italic: *text*
+    if (part.startsWith('*') && part.endsWith('*') && !part.startsWith('**')) {
+      return <em key={i} className="italic text-gray-200">{part.slice(1, -1)}</em>;
+    }
+
+    // Inline code: `code`
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return (
+        <code key={i} className="px-1.5 py-0.5 bg-white/10 text-teal-300 rounded text-sm font-mono">
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+
+    // Links: [text](url)
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      return (
+        <a
+          key={i}
+          href={linkMatch[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-teal-400 hover:text-teal-300 underline underline-offset-2 transition-colors"
+        >
+          {linkMatch[1]}
+        </a>
+      );
+    }
+
+    // Escaped apostrophes: \' or \"
+    if (part === "\\'" || part === '\\"') {
+      return part.slice(1);
+    }
+
+    // Plain text - also handle any remaining escaped characters
+    return part.replace(/\\(['""])/g, '$1');
+  });
+};
+
 // --- Main Reader Component ---
 
 const ArticleView = ({ articleId, onBack }: { articleId: string, onBack: () => void }) => {
@@ -364,7 +426,7 @@ const ArticleView = ({ articleId, onBack }: { articleId: string, onBack: () => v
           viewport={{ once: true, margin: "-50px" }}
           className="mb-8 text-gray-300 leading-relaxed whitespace-pre-line"
         >
-          {blockText}
+          {processMarkdown(blockText)}
         </motion.div>
       );
     }
@@ -376,7 +438,7 @@ const ArticleView = ({ articleId, onBack }: { articleId: string, onBack: () => v
           id={`section-${i}`}
           className="text-3xl font-display font-bold text-white mt-16 mb-8 flex items-center gap-3 scroll-mt-24"
         >
-          <span className="text-teal-500 opacity-50">#</span> {blockText}
+          <span className="text-teal-500 opacity-50">#</span> {processMarkdown(blockText)}
         </h2>
       );
     }
@@ -388,7 +450,7 @@ const ArticleView = ({ articleId, onBack }: { articleId: string, onBack: () => v
           id={`section-${i}`}
           className="text-xl font-bold text-teal-100 mt-12 mb-4 scroll-mt-24"
         >
-          {blockText}
+          {processMarkdown(blockText)}
         </h3>
       );
     }
@@ -463,7 +525,7 @@ const ArticleView = ({ articleId, onBack }: { articleId: string, onBack: () => v
           viewport={{ once: true }}
           className="text-2xl font-display font-medium text-center text-teal-200 my-16 max-w-2xl mx-auto leading-normal"
         >
-          "{blockText}"
+          "{processMarkdown(blockText)}"
           {block.author && (
             <footer className="text-base text-gray-400 mt-4 font-normal">
               — <span className="text-teal-400">{block.author}</span>
