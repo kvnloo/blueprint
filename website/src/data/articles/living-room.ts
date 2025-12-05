@@ -1429,7 +1429,7 @@ HYDROPONIC SUPPLIES:
     },
     {
       type: 'text',
-      text: '*ECE Solutions LLC - Growing the Future, One Living Space at a Time*'
+      text: '*zer0 LLC - Growing the Future, One Living Space at a Time*'
     },
     {
       type: 'text',

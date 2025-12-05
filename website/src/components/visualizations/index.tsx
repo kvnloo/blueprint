@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ChevronRight, ChevronDown, Zap, Brain, Leaf, Home,
@@ -281,8 +281,27 @@ export const HierarchyVis: React.FC<VisProps> = ({ data, className = '' }) => {
 // 3. PROCESS FLOW TIMELINE
 // ============================================================================
 
+// Calculate reading time based on text length (average 200 words per minute)
+const calculateStepDuration = (step: ProcessStep): number => {
+  const baseTime = 2000; // Minimum 2 seconds
+  const wordsPerMs = 200 / 60000; // words per millisecond
+
+  let textLength = (step.label?.length || 0) + (step.description?.length || 0);
+  if (step.substeps) {
+    textLength += step.substeps.join(' ').length;
+  }
+
+  // Estimate word count (average 5 chars per word)
+  const wordCount = textLength / 5;
+  const readingTime = wordCount / wordsPerMs;
+
+  // Return at least base time, max 8 seconds
+  return Math.min(Math.max(baseTime, readingTime), 8000);
+};
+
 export const ProcessFlowVis: React.FC<VisProps> = ({ data, className = '' }) => {
   const [activeStep, setActiveStep] = useState<number>(0);
+  const [isPaused, setIsPaused] = useState(false);
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -290,6 +309,27 @@ export const ProcessFlowVis: React.FC<VisProps> = ({ data, className = '' }) => 
   if (!data) return null;
   const steps: ProcessStep[] = data.steps || [];
   if (steps.length === 0) return null;
+
+  // Auto-advance to next step based on content length
+  useEffect(() => {
+    if (!isInView || isPaused) return;
+
+    const currentStep = steps[activeStep];
+    const duration = calculateStepDuration(currentStep);
+
+    const timer = setTimeout(() => {
+      setActiveStep((prev) => (prev + 1) % steps.length);
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [activeStep, isInView, isPaused, steps]);
+
+  const handleStepClick = useCallback((index: number) => {
+    setActiveStep(index);
+    setIsPaused(true);
+    // Resume auto-play after 5 seconds of inactivity
+    setTimeout(() => setIsPaused(false), 5000);
+  }, []);
 
   return (
     <div ref={ref} className={`my-12 ${className}`}>
@@ -301,11 +341,13 @@ export const ProcessFlowVis: React.FC<VisProps> = ({ data, className = '' }) => 
 
       {/* Progress Bar */}
       <div className="relative mb-8">
-        <div className="absolute top-4 left-0 w-full h-0.5 bg-gray-800" />
+        {/* Background line */}
+        <div className="absolute top-4 left-[4%] right-[4%] h-0.5 bg-gray-800" />
+        {/* Progress line */}
         <motion.div
-          className="absolute top-4 left-0 h-0.5 bg-gradient-to-r from-teal-500 to-emerald-400"
+          className="absolute top-4 left-[4%] h-0.5 bg-gradient-to-r from-teal-500 to-emerald-400"
           initial={{ width: 0 }}
-          animate={isInView ? { width: `${((activeStep + 1) / steps.length) * 100}%` } : {}}
+          animate={isInView ? { width: `${((activeStep) / (steps.length - 1)) * 92}%` } : {}}
           transition={{ duration: 0.5 }}
         />
 
@@ -321,17 +363,17 @@ export const ProcessFlowVis: React.FC<VisProps> = ({ data, className = '' }) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.1 }}
-                onClick={() => setActiveStep(i)}
+                onClick={() => handleStepClick(i)}
                 className="flex flex-col items-center cursor-pointer group"
               >
                 <div className={`
                   w-8 h-8 rounded-full flex items-center justify-center
-                  border-2 transition-all duration-300 z-10 bg-[#050505]
+                  border-2 transition-all duration-300 bg-[#0a0a0a]
                   ${isActive
-                    ? 'border-teal-500 bg-teal-500/20 shadow-lg shadow-teal-500/30'
+                    ? 'border-teal-500 bg-teal-500/20 shadow-lg shadow-teal-500/30 scale-110'
                     : isComplete
                       ? 'border-emerald-500 bg-emerald-500/20'
-                      : 'border-gray-600 group-hover:border-gray-500'
+                      : 'border-gray-600 bg-[#0a0a0a] group-hover:border-gray-500'
                   }
                 `}>
                   {isComplete ? (
