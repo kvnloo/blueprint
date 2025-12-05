@@ -39,7 +39,7 @@ export interface Article {
   content: ArticleSection[];
 }
 
-// Import all 8 complete articles from individual files
+// Import all 9 complete articles from individual files
 import { limitlessProtocol } from './articles/limitless-protocol';
 import { atlasRoadmap } from './articles/atlas-roadmap';
 import { architectureIntelligence } from './articles/architecture-intelligence';
@@ -48,13 +48,15 @@ import { homeGrownRevolution } from './articles/home-grown-revolution';
 import { livingRoom } from './articles/living-room';
 import { secondBrain } from './articles/second-brain';
 import { capabilityTrap } from './articles/capability-trap';
+import { learningInterface } from './articles/learning-interface';
 
 // Export all articles as a combined array
-// Total: ~62,938 words across 8 comprehensive research papers
+// Total: ~71,438 words across 9 comprehensive research papers
 export const researchData: Article[] = [
   limitlessProtocol,      // 11,742 words - Peak Human Performance Framework
   atlasRoadmap,           // 10,667 words - Autonomous Cooking/Garden System
   architectureIntelligence, // 8,765 words - LLM Development Framework
+  learningInterface,      // 8,500 words - Accelerated Learning Systems Architecture
   limitlessKitchen,       // 7,641 words - Autonomous Robot Cooking
   homeGrownRevolution,    // 7,531 words - NASA Space Farming Techniques
   livingRoom,             // 7,489 words - Biophilic Design Guide
