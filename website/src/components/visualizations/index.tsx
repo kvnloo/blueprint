@@ -93,7 +93,10 @@ export const FloorPlanVis: React.FC<VisProps> = ({ data, className = '' }) => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Null check to prevent blank rendering
+  if (!data) return null;
   const rooms = data.rooms || [];
+  if (rooms.length === 0) return null;
   const gridCols = Math.min(rooms.length, 4);
 
   return (
@@ -172,6 +175,10 @@ export const HierarchyVis: React.FC<VisProps> = ({ data, className = '' }) => {
   const [expanded, setExpanded] = useState<Set<string>>(new Set(['root']));
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  // Null check to prevent blank rendering
+  if (!data) return null;
+  if (!data.root && (!data.nodes || data.nodes.length === 0)) return null;
 
   const toggleNode = (id: string) => {
     setExpanded(prev => {
@@ -279,7 +286,10 @@ export const ProcessFlowVis: React.FC<VisProps> = ({ data, className = '' }) => 
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Null check to prevent blank rendering
+  if (!data) return null;
   const steps: ProcessStep[] = data.steps || [];
+  if (steps.length === 0) return null;
 
   return (
     <div ref={ref} className={`my-12 ${className}`}>
@@ -395,7 +405,10 @@ export const MetricsDashboardVis: React.FC<VisProps> = ({ data, className = '' }
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Null check to prevent blank rendering
+  if (!data) return null;
   const metrics: MetricCard[] = data.metrics || [];
+  if (metrics.length === 0) return null;
 
   return (
     <div ref={ref} className={`my-12 ${className}`}>
@@ -449,8 +462,11 @@ export const ComparisonMatrixVis: React.FC<VisProps> = ({ data, className = '' }
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Null check to prevent blank rendering
+  if (!data) return null;
   const headers: string[] = data.headers || [];
   const rows: ComparisonItem[] = data.rows || [];
+  if (rows.length === 0) return null;
 
   return (
     <div ref={ref} className={`my-12 overflow-hidden rounded-xl border border-white/10 ${className}`}>
@@ -513,7 +529,10 @@ export const RadialProgressVis: React.FC<VisProps> = ({ data, className = '' }) 
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Null check to prevent blank rendering
+  if (!data) return null;
   const items: { label: string; value: number; color?: string }[] = data.items || [];
+  if (items.length === 0) return null;
   const size = 200;
   const strokeWidth = 12;
   const center = size / 2;
@@ -603,7 +622,10 @@ export const ChecklistVis: React.FC<VisProps> = ({ data, className = '' }) => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Null check to prevent blank rendering
+  if (!data) return null;
   const items: { id: string; label: string; description?: string }[] = data.items || [];
+  if (items.length === 0) return null;
 
   const toggleItem = (id: string) => {
     setChecked(prev => {
@@ -688,6 +710,9 @@ export const QuoteHighlightVis: React.FC<VisProps> = ({ data, className = '' }) 
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Null check to prevent blank rendering
+  if (!data || !data.quote) return null;
+
   return (
     <motion.blockquote
       ref={ref}
@@ -725,7 +750,10 @@ export const KnowledgeCardsVis: React.FC<VisProps> = ({ data, className = '' }) 
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Null check to prevent blank rendering
+  if (!data) return null;
   const cards: { title: string; content: string; icon?: string; tags?: string[] }[] = data.cards || [];
+  if (cards.length === 0) return null;
 
   return (
     <div ref={ref} className={`my-12 ${className}`}>

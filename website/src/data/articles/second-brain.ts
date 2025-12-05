@@ -405,7 +405,7 @@ export const secondBrain: Article = {
     {
       type: 'code',
       language: 'diagram',
-      text: `THE FIVE COMMUNICATION CHANNELS
+      code: `THE FIVE COMMUNICATION CHANNELS
 ═══════════════════════════════════════════════════════════════════════════
 
     PATHWAY 1: VAGUS NERVE (Direct Neural)
