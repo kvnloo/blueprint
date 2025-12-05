@@ -35,7 +35,7 @@ export default defineConfig({
   // Shared settings for all projects
   use: {
     // Base URL for tests
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:3000',
 
     // Collect trace on first retry of failed test
     trace: 'on-first-retry',
@@ -129,15 +129,15 @@ export default defineConfig({
     },
   ],
 
-  // Web server configuration - Auto-start dev server
+  // Web server configuration - Reuse existing dev server on port 3000
   webServer: {
     command: 'npm run dev',
-    url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
+    url: 'http://localhost:3000',
+    reuseExistingServer: true, // Use existing server on port 3000
     timeout: 120 * 1000,
     stdout: 'ignore',
     stderr: 'pipe',
-    cwd: '../src',
+    cwd: '../src', // Point to the src directory where vite runs
   },
 
   // Output folder for test artifacts

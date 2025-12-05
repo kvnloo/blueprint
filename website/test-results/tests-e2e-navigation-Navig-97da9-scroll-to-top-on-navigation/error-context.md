@@ -1,0 +1,354 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - button "Pause background animations" [ref=e4] [cursor=pointer]:
+    - img [ref=e5]
+  - navigation [ref=e8]:
+    - generic [ref=e9]:
+      - button "z0 zer0" [ref=e10] [cursor=pointer]:
+        - generic [ref=e12]: z0
+        - generic [ref=e13]: zer0
+      - generic [ref=e14]:
+        - button "Services" [active] [ref=e15] [cursor=pointer]
+        - button "Research" [ref=e16] [cursor=pointer]
+        - button "Projects" [ref=e17] [cursor=pointer]
+        - button "Pricing" [ref=e18] [cursor=pointer]
+      - generic [ref=e19]:
+        - link "Log In" [ref=e20] [cursor=pointer]:
+          - /url: "#"
+        - button "Get Access" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Get Access
+  - main [ref=e23]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27]: AUTONOMOUS HEALTH SYSTEM
+        - heading "Farm to Table, Automated." [level=1] [ref=e29]:
+          - generic [ref=e30]: Farm
+          - generic [ref=e31]: to
+          - generic [ref=e32]: Table,
+          - generic [ref=e33]: Automated.
+        - paragraph [ref=e34]: A robot chef trained in simulation, cooking meals personalized to your Blueprint health data. From vertical farm to your plate—fully autonomous.
+        - generic [ref=e35]:
+          - button "See How It Works" [ref=e36] [cursor=pointer]:
+            - generic [ref=e37]:
+              - img [ref=e38]
+              - text: See How It Works
+              - img [ref=e40]
+          - generic [ref=e42]:
+            - generic [ref=e43]: ✓
+            - text: Open source protocol
+        - generic [ref=e44]:
+          - generic [ref=e45] [cursor=pointer]:
+            - generic [ref=e46]: R
+            - generic [ref=e47]:
+              - img [ref=e48]
+              - text: Research
+            - generic [ref=e51]: Autonomous discovery
+          - generic [ref=e52] [cursor=pointer]:
+            - generic [ref=e53]: A
+            - generic [ref=e54]:
+              - img [ref=e55]
+              - text: Analysis
+            - generic [ref=e57]: Pattern recognition
+          - generic [ref=e58] [cursor=pointer]:
+            - generic [ref=e59]: I
+            - generic [ref=e60]:
+              - img [ref=e61]
+              - text: Integration
+            - generic [ref=e65]: Knowledge merging
+          - generic [ref=e66] [cursor=pointer]:
+            - generic [ref=e67]: D
+            - generic [ref=e68]:
+              - img [ref=e69]
+              - text: Deployment
+            - generic [ref=e74]: Ship to production
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e82]: robot_chef_v1.0
+          - generic [ref=e83]:
+            - img "Robot Chef Kitchen" [ref=e84]
+            - generic [ref=e86]:
+              - generic [ref=e87]:
+                - img [ref=e89]
+                - generic [ref=e91]:
+                  - generic [ref=e92]: MEAL PREP STATUS
+                  - generic [ref=e93]: "COOKING: 94.2%"
+              - generic [ref=e94]: LIVE FEED
+          - generic [ref=e97]:
+            - generic [ref=e98]: "Protein: 42g"
+            - generic [ref=e99]: "Carbs: 28g"
+            - generic [ref=e100]: "Fats: 18g"
+        - generic [ref=e104]:
+          - generic [ref=e107]: "\""
+          - paragraph [ref=e108]: "\"My robot chef knows my bloodwork better than I do. Meals are perfectly calibrated to my health goals.\""
+          - generic [ref=e109]: Blueprint User • Early Adopter
+    - generic [ref=e112]:
+      - generic [ref=e113]:
+        - generic [ref=e114]: THE BLUEPRINT SYSTEM
+        - heading "Products that work together" [level=2] [ref=e116]
+        - paragraph [ref=e117]: Each product in the Blueprint ecosystem connects to create a unified platform for autonomous self-care.
+      - generic [ref=e118]:
+        - generic [ref=e122]:
+          - generic [ref=e123]:
+            - img [ref=e125]
+            - generic [ref=e127]: Track 1
+          - heading "Blueprint Protocol" [level=3] [ref=e128]
+          - paragraph [ref=e129]: Open Source Health Optimization
+          - paragraph [ref=e130]: Open sourcing Bryan Johnson's Blueprint protocol as an all-in-one health tracker. Systems-thinking design with integrated modules for complete health optimization.
+          - list [ref=e131]:
+            - listitem [ref=e132]:
+              - img [ref=e133]
+              - generic [ref=e135]: Labs Ingestor - Bloodwork & biomarkers
+            - listitem [ref=e136]:
+              - img [ref=e137]
+              - generic [ref=e140]: Nutrition Tracker - Macro/micronutrients
+            - listitem [ref=e141]:
+              - img [ref=e142]
+              - generic [ref=e148]: Fitness - Exercise & workout logging
+            - listitem [ref=e149]:
+              - img [ref=e150]
+              - generic [ref=e152]: Sleep - Quality, duration, HRV
+          - generic [ref=e153]:
+            - text: Learn more
+            - img [ref=e154]
+        - generic [ref=e159]:
+          - generic [ref=e160]:
+            - img [ref=e162]
+            - generic [ref=e165]: Track 2
+          - heading "World Simulation" [level=3] [ref=e166]
+          - paragraph [ref=e167]: Digital Twin to Robot Chef Pipeline
+          - paragraph [ref=e168]: From Google Maps data to fully autonomous robot chef. Create digital twins for robotics training, vertical farming, and complete farm-to-table automation.
+          - list [ref=e169]:
+            - listitem [ref=e170]:
+              - img [ref=e171]
+              - generic [ref=e173]: House Model - Google Maps + indoor pics
+            - listitem [ref=e174]:
+              - img [ref=e175]
+              - generic [ref=e178]: Robotics Training - RL in virtual space
+            - listitem [ref=e179]:
+              - img [ref=e180]
+              - generic [ref=e183]: Vertical Farm - Autonomous crop management
+            - listitem [ref=e184]:
+              - img [ref=e185]
+              - generic [ref=e187]: Robot Chef - Farm-to-table automation
+          - generic [ref=e188]:
+            - text: Learn more
+            - img [ref=e189]
+        - generic [ref=e194]:
+          - generic [ref=e195]:
+            - img [ref=e197]
+            - generic [ref=e200]: Track 3
+          - heading "Evolve" [level=3] [ref=e201]
+          - paragraph [ref=e202]: C(RAID) Orchestration
+          - paragraph [ref=e203]: End-to-end autonomous development framework. Multi-agent coordination with Claude Flow integration, custom skills, and parallel git worktree workflows.
+          - list [ref=e204]:
+            - listitem [ref=e205]:
+              - img [ref=e206]
+              - generic [ref=e211]: Architecture Diagrams & data flows
+            - listitem [ref=e212]:
+              - img [ref=e213]
+              - generic [ref=e217]: Claude Flow - Multi-agent orchestration
+            - listitem [ref=e218]:
+              - img [ref=e219]
+              - generic [ref=e223]: Git Worktree - Parallel development
+            - listitem [ref=e224]:
+              - img [ref=e225]
+              - generic [ref=e229]: E2B Containerization - Sandboxed execution
+          - link "Explore Evolve" [ref=e230] [cursor=pointer]:
+            - /url: https://github.com/kvnloo/evolve
+            - text: Explore Evolve
+            - img [ref=e231]
+      - paragraph [ref=e236]: All products share the C(RAID) methodology and integrate through the Blueprint platform.
+    - generic [ref=e238]:
+      - generic [ref=e240]:
+        - generic [ref=e242]: CLAUDE FLOW POWERED
+        - generic [ref=e244]: Autonomous research-to-deployment systems
+      - generic [ref=e245]:
+        - generic [ref=e246]:
+          - generic [ref=e248]: THE VISION
+          - heading "Building the Blueprint Protocol—open source health optimization at scale." [level=2] [ref=e249]
+          - paragraph [ref=e251]: "Three integrated tracks: Blueprint Protocol for health tracking, World Simulation for robotics and vertical farming, and Evolve for AI orchestration. All connected through the C(RAID) methodology."
+        - generic [ref=e252]:
+          - generic [ref=e253]:
+            - generic [ref=e254]: "0"
+            - generic [ref=e255]: Active Tracks
+          - generic [ref=e256]:
+            - generic [ref=e257]: "0"
+            - generic [ref=e258]: Health Modules
+          - generic [ref=e259]:
+            - generic [ref=e260]: "0"
+            - generic [ref=e261]: Pipeline Stages
+          - generic [ref=e262]:
+            - generic [ref=e263]: ∞
+            - generic [ref=e264]: Automation Loop
+      - generic [ref=e265]:
+        - paragraph [ref=e266]: Built with leading technology
+        - generic [ref=e267]:
+          - generic [ref=e268]: Claude Flow
+          - generic [ref=e269]: Unity/Unreal
+          - generic [ref=e270]: E2B Sandbox
+          - generic [ref=e271]: Git Worktree
+          - generic [ref=e272]: PyTorch
+    - generic [ref=e275]:
+      - generic [ref=e276]:
+        - generic [ref=e277]: PARADIGM SHIFT
+        - heading "Beyond Traditional CI/CD" [level=2] [ref=e279]
+        - paragraph [ref=e280]: C(RAID) represents a paradigm shift from traditional software development to autonomous research systems—where the pipeline doesn't just deploy code, but continuously researches, analyzes, and evolves the system itself.
+      - generic [ref=e281]:
+        - img
+        - generic [ref=e282]: Continuous
+        - generic [ref=e283]:
+          - img [ref=e286]
+          - generic [ref=e288]:
+            - generic [ref=e289]:
+              - img [ref=e291]
+              - generic [ref=e295]:
+                - img [ref=e297]
+                - generic [ref=e300]: R
+                - generic [ref=e301]: Research
+                - paragraph [ref=e302]: Autonomous information gathering and literature review
+            - generic [ref=e303]:
+              - img [ref=e305]
+              - generic [ref=e309]:
+                - img [ref=e311]
+                - generic [ref=e313]: A
+                - generic [ref=e314]: Analysis
+                - paragraph [ref=e315]: Processing, pattern recognition, insight extraction
+            - generic [ref=e316]:
+              - img [ref=e318]
+              - generic [ref=e322]:
+                - img [ref=e324]
+                - generic [ref=e328]: I
+                - generic [ref=e329]: Integration
+                - paragraph [ref=e330]: Merging new knowledge into existing systems
+            - generic [ref=e334]:
+              - img [ref=e336]
+              - generic [ref=e341]: D
+              - generic [ref=e342]: Deployment
+              - paragraph [ref=e343]: Shipping updates to production
+      - generic [ref=e344]:
+        - generic [ref=e345]:
+          - heading "Integration Points" [level=3] [ref=e346]
+          - paragraph [ref=e347]: All three tracks connect through the C(RAID) methodology
+        - generic [ref=e348]:
+          - generic [ref=e349] [cursor=pointer]:
+            - img [ref=e351]
+            - generic [ref=e353]: Blueprint
+            - generic [ref=e354]: Health Tracker
+            - generic [ref=e355]: Nutrition needs + seed selection
+          - generic [ref=e356] [cursor=pointer]:
+            - img [ref=e358]
+            - generic [ref=e361]: World Sim
+            - generic [ref=e362]: + Robotics
+            - generic [ref=e363]: Autonomous farm + robot training
+          - generic [ref=e364] [cursor=pointer]:
+            - img [ref=e366]
+            - generic [ref=e369]: Evolve
+            - generic [ref=e370]: Orchestration
+            - generic [ref=e371]: Agent coordination + documentation
+        - img [ref=e375]
+        - generic [ref=e377] [cursor=pointer]:
+          - img [ref=e379]
+          - generic [ref=e381]: Robot Chef Output
+          - generic [ref=e382]: Personalized, automated meals based on your health data
+    - generic [ref=e385]:
+      - generic [ref=e389]:
+        - img "App Interface" [ref=e390]
+        - generic [ref=e392]:
+          - generic [ref=e393]:
+            - generic [ref=e395]: zer0.ai
+            - generic [ref=e397]:
+              - generic [ref=e398]: System Efficiency
+              - generic [ref=e399]: 98.2%
+          - generic [ref=e403]: Run Optimization
+      - generic [ref=e405]:
+        - generic [ref=e406]:
+          - heading "Monitor & Control from anywhere." [level=2] [ref=e407]:
+            - generic [ref=e408]: Monitor & Control
+            - generic [ref=e409]: from anywhere.
+          - paragraph [ref=e410]: Access your digital twin simulations and autonomous agent controls directly from your device. Real-time insights at your fingertips.
+        - generic [ref=e411]:
+          - generic [ref=e412]:
+            - img [ref=e413]
+            - generic [ref=e418]: 10+
+            - generic [ref=e419]: Industries Served
+          - generic [ref=e421]:
+            - img [ref=e422]
+            - generic [ref=e424]: 500K+
+            - generic [ref=e425]: Data Points
+          - generic [ref=e427]:
+            - img [ref=e428]
+            - generic [ref=e430]: 1,800%
+            - generic [ref=e431]: Efficiency Gains
+          - generic [ref=e433]:
+            - img [ref=e434]
+            - generic [ref=e437]: 24/7
+            - generic [ref=e438]: Autonomous
+    - generic [ref=e441]:
+      - generic [ref=e442]:
+        - heading "Success Stories" [level=2] [ref=e443]
+        - generic [ref=e444]: CASE STUDIES
+      - generic [ref=e446]:
+        - generic [ref=e447] [cursor=pointer]:
+          - generic [ref=e449]:
+            - generic [ref=e450]: RESEARCH
+            - generic [ref=e451]:
+              - generic [ref=e452]: AgriTech Labs
+              - img [ref=e454]
+          - generic [ref=e455]:
+            - generic [ref=e456]:
+              - generic [ref=e457]:
+                - generic [ref=e458]: Challenge
+                - paragraph [ref=e459]: Data fragmentation slowed down yield prediction models significantly.
+              - generic [ref=e460]:
+                - generic [ref=e461]: Solution
+                - paragraph [ref=e462]: Deployed zer0's distributed agent network to unify data streams.
+              - generic [ref=e463]:
+                - generic [ref=e464]: Result
+                - paragraph [ref=e465]: Achieved a 40% reduction in modeling time and doubled prediction accuracy.
+            - button "Read Full Case Study" [ref=e467]:
+              - text: Read Full Case Study
+              - img [ref=e468]
+        - generic [ref=e473] [cursor=pointer]:
+          - generic [ref=e474]: VERTICAL FARMING
+          - generic [ref=e475]:
+            - generic [ref=e476]: Urban Greens Co
+            - img [ref=e478]
+        - generic [ref=e481] [cursor=pointer]:
+          - generic [ref=e482]: HYDROPONICS
+          - generic [ref=e483]:
+            - generic [ref=e484]: AquaGrow Systems
+            - img [ref=e486]
+        - generic [ref=e489] [cursor=pointer]:
+          - generic [ref=e490]: GREENHOUSE
+          - generic [ref=e491]:
+            - generic [ref=e492]: SolarLeaf Farms
+            - img [ref=e494]
+  - contentinfo [ref=e495]:
+    - generic [ref=e497]:
+      - generic [ref=e498]:
+        - generic [ref=e499]:
+          - generic [ref=e502]: Get In Touch
+          - generic [ref=e503]:
+            - generic [ref=e504] [cursor=pointer]: +1 (312) 555-0199
+            - generic [ref=e505] [cursor=pointer]: hello@zer0.llc
+          - generic [ref=e506]:
+            - link [ref=e507] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e508]
+            - link [ref=e510] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e511]
+            - link [ref=e514] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e515]
+        - generic [ref=e519]:
+          - generic [ref=e520]:
+            - link "Privacy & Policy" [ref=e521] [cursor=pointer]:
+              - /url: "#"
+            - link "Terms of Service" [ref=e522] [cursor=pointer]:
+              - /url: "#"
+          - generic [ref=e524]: ©2025 zer0 LLC.
+      - heading "ZER0" [level=1] [ref=e526]
+```

@@ -14,15 +14,16 @@ import { test, expect } from '@playwright/test';
 // Test configuration - all tests run headless by default
 test.use({
   viewport: { width: 1280, height: 720 },
-  baseURL: 'http://localhost:5173', // Vite default dev server
+  baseURL: 'http://localhost:3000', // Dev server port
 });
 
 test.describe('Navigation Flow Tests', () => {
 
   test.beforeEach(async ({ page }) => {
     // Navigate to home page before each test
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    // Wait for the navbar to be visible instead of networkidle
+    await page.waitForSelector('nav', { timeout: 10000 });
   });
 
   test('should load home page successfully', async ({ page }) => {
@@ -73,16 +74,18 @@ test.describe('Navigation Flow Tests', () => {
     await expect(researchButton).toHaveClass(/text-teal-400/);
 
     // Click logo to go back to home
-    const logoButton = page.locator('button:has-text("zer0")');
-    await logoButton.click();
+    const logoButton = page.locator('button:has-text("zer0")').first();
+    await logoButton.click({ timeout: 10000 });
     await page.waitForTimeout(500);
 
     // Verify we're back on home (Services should be active)
     const servicesButton = page.locator('button:has-text("Services")').first();
     await expect(servicesButton).toHaveClass(/text-teal-400/);
 
-    // Verify Research is no longer active
-    await expect(researchButton).not.toHaveClass(/text-teal-400/);
+    // Verify Research is no longer active (check it doesn't have the active class standalone)
+    const researchClass = await researchButton.getAttribute('class');
+    // Should not have text-teal-400 except in hover: prefix
+    expect(researchClass).not.toMatch(/(?<!hover:)text-teal-400/);
 
     // Verify scroll to top
     const scrollY = await page.evaluate(() => window.scrollY);
@@ -102,9 +105,11 @@ test.describe('Navigation Flow Tests', () => {
     // Verify Services is active
     await expect(servicesButton).toHaveClass(/text-teal-400/);
 
-    // Verify Research is no longer active
+    // Verify Research is no longer active (check it doesn't have the active class standalone)
     const researchButton = page.locator('button:has-text("Research")').first();
-    await expect(researchButton).not.toHaveClass(/text-teal-400/);
+    const researchClass = await researchButton.getAttribute('class');
+    // Should not have text-teal-400 except in hover: prefix
+    expect(researchClass).not.toMatch(/(?<!hover:)text-teal-400/);
 
     // Verify scroll to top
     const scrollY = await page.evaluate(() => window.scrollY);
@@ -115,12 +120,12 @@ test.describe('Navigation Flow Tests', () => {
     // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
 
-    // Verify menu toggle button is visible
-    const menuButton = page.locator('button.md\\:hidden').first();
+    // Verify menu toggle button is visible (the button with Menu/X icon)
+    const menuButton = page.locator('nav button.md\\:hidden');
     await expect(menuButton).toBeVisible();
 
     // Verify mobile menu is not visible initially
-    const mobileMenu = page.locator('.md\\:hidden.absolute');
+    const mobileMenu = page.locator('div.md\\:hidden.absolute');
     await expect(mobileMenu).not.toBeVisible();
 
     // Open mobile menu
@@ -129,11 +134,11 @@ test.describe('Navigation Flow Tests', () => {
 
     // Verify mobile menu is visible with all links
     await expect(mobileMenu).toBeVisible();
-    await expect(mobileMenu.locator('text=Services')).toBeVisible();
-    await expect(mobileMenu.locator('text=Research')).toBeVisible();
-    await expect(mobileMenu.locator('text=Projects')).toBeVisible();
-    await expect(mobileMenu.locator('text=Log In')).toBeVisible();
-    await expect(mobileMenu.locator('text=Get Access')).toBeVisible();
+    await expect(mobileMenu.locator('button:has-text("Services")')).toBeVisible();
+    await expect(mobileMenu.locator('button:has-text("Research")')).toBeVisible();
+    await expect(mobileMenu.locator('button:has-text("Projects")')).toBeVisible();
+    await expect(mobileMenu.locator('a:has-text("Log In")')).toBeVisible();
+    await expect(mobileMenu.locator('button:has-text("Get Access")')).toBeVisible();
 
     // Close mobile menu
     await menuButton.click();
@@ -148,12 +153,12 @@ test.describe('Navigation Flow Tests', () => {
     await page.setViewportSize({ width: 375, height: 667 });
 
     // Open mobile menu
-    const menuButton = page.locator('button.md\\:hidden').first();
+    const menuButton = page.locator('nav button.md\\:hidden');
     await menuButton.click();
     await page.waitForTimeout(300);
 
     // Click Research in mobile menu
-    const mobileMenu = page.locator('.md\\:hidden.absolute');
+    const mobileMenu = page.locator('div.md\\:hidden.absolute');
     const researchLink = mobileMenu.locator('button:has-text("Research")');
     await researchLink.click();
 
@@ -178,7 +183,7 @@ test.describe('Navigation Flow Tests', () => {
 
   test('should scroll to top on navigation', async ({ page }) => {
     // Scroll down on home page
-    await page.evaluate(() => window.scrollTo(0, 500));
+    await page.evaluate(() => window.scrollTo({ top: 500, behavior: 'instant' }));
     await page.waitForTimeout(300);
 
     // Verify we scrolled down
@@ -187,19 +192,25 @@ test.describe('Navigation Flow Tests', () => {
 
     // Navigate to Research
     await page.locator('button:has-text("Research")').first().click();
-    await page.waitForTimeout(600); // Wait for smooth scroll animation
+    await page.waitForTimeout(1000); // Wait longer for smooth scroll animation
 
     // Verify we scrolled back to top
     scrollY = await page.evaluate(() => window.scrollY);
     expect(scrollY).toBeLessThan(100);
 
-    // Scroll down again
-    await page.evaluate(() => window.scrollTo(0, 500));
-    await page.waitForTimeout(300);
+    // Scroll down again with instant behavior to avoid conflicts
+    await page.evaluate(() => window.scrollTo({ top: 500, behavior: 'instant' }));
+    await page.waitForTimeout(500);
+
+    // Verify we scrolled down again
+    scrollY = await page.evaluate(() => window.scrollY);
+    expect(scrollY).toBeGreaterThan(400);
 
     // Navigate back to home
     await page.locator('button:has-text("Services")').first().click();
-    await page.waitForTimeout(600);
+
+    // Wait for scroll to complete by polling
+    await page.waitForFunction(() => window.scrollY < 100, { timeout: 5000 });
 
     // Verify scroll to top again
     scrollY = await page.evaluate(() => window.scrollY);
@@ -212,7 +223,11 @@ test.describe('Navigation Flow Tests', () => {
     const researchButton = page.locator('button:has-text("Research")').first();
 
     await expect(servicesButton).toHaveClass(/text-teal-400/);
-    await expect(researchButton).not.toHaveClass(/text-teal-400/);
+
+    // Check research button doesn't have active class (only hover class)
+    let researchClass = await researchButton.getAttribute('class');
+    // Should not have text-teal-400 except in hover: prefix
+    expect(researchClass).not.toMatch(/(?<!hover:)text-teal-400/);
 
     // Navigate to Research
     await researchButton.click();
@@ -220,15 +235,21 @@ test.describe('Navigation Flow Tests', () => {
 
     // Research should be active, Services should not
     await expect(researchButton).toHaveClass(/text-teal-400/);
-    await expect(servicesButton).not.toHaveClass(/text-teal-400/);
+
+    let servicesClass = await servicesButton.getAttribute('class');
+    // Should not have text-teal-400 except in hover: prefix
+    expect(servicesClass).not.toMatch(/(?<!hover:)text-teal-400/);
 
     // Navigate back to home via logo
-    await page.locator('button:has-text("zer0")').click();
+    await page.locator('button:has-text("zer0")').first().click();
     await page.waitForTimeout(500);
 
     // Services should be active again
     await expect(servicesButton).toHaveClass(/text-teal-400/);
-    await expect(researchButton).not.toHaveClass(/text-teal-400/);
+
+    researchClass = await researchButton.getAttribute('class');
+    // Should not have text-teal-400 except in hover: prefix
+    expect(researchClass).not.toMatch(/(?<!hover:)text-teal-400/);
   });
 
   test('should handle Projects and Pricing navigation (route to home)', async ({ page }) => {
@@ -263,28 +284,25 @@ test.describe('Navigation Flow Tests', () => {
   test('should handle navbar background change on scroll', async ({ page }) => {
     // Check navbar initial state (transparent background)
     const navbar = page.locator('nav');
-    const initialClass = await navbar.getAttribute('class');
 
-    // Initially should have transparent background
-    expect(initialClass).toContain('bg-transparent');
+    // Initially should have transparent background (at top of page)
+    await expect(navbar).toHaveClass(/bg-transparent/);
 
-    // Scroll down
+    // Scroll down past the threshold (50px)
     await page.evaluate(() => window.scrollTo(0, 100));
     await page.waitForTimeout(400); // Wait for scroll event handler
 
     // Check if background changed (scrolled state)
-    const scrolledClass = await navbar.getAttribute('class');
-    expect(scrolledClass).toContain('bg-[#050505]/80');
-    expect(scrolledClass).toContain('backdrop-blur-md');
-    expect(scrolledClass).toContain('border-b');
+    await expect(navbar).toHaveClass(/bg-\[#050505\]\/80/);
+    await expect(navbar).toHaveClass(/backdrop-blur-md/);
+    await expect(navbar).toHaveClass(/border-b/);
 
     // Scroll back to top
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(400);
 
     // Background should be transparent again
-    const backToTopClass = await navbar.getAttribute('class');
-    expect(backToTopClass).toContain('bg-transparent');
+    await expect(navbar).toHaveClass(/bg-transparent/);
   });
 
   test('should maintain active state when navigating between mobile and desktop', async ({ page }) => {
@@ -301,12 +319,12 @@ test.describe('Navigation Flow Tests', () => {
     await page.waitForTimeout(300);
 
     // Open mobile menu
-    const menuButton = page.locator('button.md\\:hidden').first();
+    const menuButton = page.locator('nav button.md\\:hidden');
     await menuButton.click();
     await page.waitForTimeout(300);
 
     // Check Research is still active in mobile menu
-    const mobileMenu = page.locator('.md\\:hidden.absolute');
+    const mobileMenu = page.locator('div.md\\:hidden.absolute');
     researchButton = mobileMenu.locator('button:has-text("Research")');
     await expect(researchButton).toHaveClass(/text-teal-400/);
 
@@ -347,8 +365,8 @@ test.describe('Navigation Flow Tests', () => {
     const logo = page.locator('button:has-text("zer0")');
     await expect(logo).toBeVisible();
 
-    // Check logo icon
-    const logoIcon = page.locator('.w-8.h-8.rounded-full.bg-gradient-to-br');
+    // Check logo icon (be more specific to get the one in the navbar)
+    const logoIcon = page.locator('nav .w-8.h-8.rounded-full.bg-gradient-to-br').first();
     await expect(logoIcon).toBeVisible();
     await expect(logoIcon.locator('text=z0')).toBeVisible();
 
@@ -364,8 +382,8 @@ test.describe('Navigation Flow Tests', () => {
 
 test.describe('Accessibility and UX', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('nav', { timeout: 10000 });
   });
 
   test('should have proper focus states on navigation buttons', async ({ page }) => {
@@ -396,10 +414,11 @@ test.describe('Accessibility and UX', () => {
     // Logo button has visible text "zer0"
     // Mobile menu toggle should be accessible
 
-    const menuButton = page.locator('button.md\\:hidden').first();
-    const buttonText = await menuButton.textContent();
+    // Set to mobile to check menu button
+    await page.setViewportSize({ width: 375, height: 667 });
+    const menuButton = page.locator('nav button.md\\:hidden');
 
-    // Button should have accessible content (icon is from lucide-react which includes aria)
-    expect(menuButton).toBeDefined();
+    // Button should be defined and visible
+    await expect(menuButton).toBeVisible();
   });
 });

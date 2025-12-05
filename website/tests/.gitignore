@@ -2,12 +2,21 @@
 /test-results/
 /playwright-report/
 /playwright/.cache/
+/blob-report/
+/.playwright/
+
+# Node modules
+/node_modules/
 
 # Screenshots and videos
 *.png
 *.jpg
 *.webm
 *.mp4
+*.zip
+
+# Trace files
+*.trace.zip
 
 # But keep example screenshots if needed
 !examples/**/*.png
