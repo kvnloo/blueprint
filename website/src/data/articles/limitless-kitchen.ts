@@ -633,7 +633,7 @@ export const limitlessKitchen: Article = {
     {
       type: 'code',
       language: 'python',
-      text: `class LearnedDynamics:
+      code: `class LearnedDynamics:
     """
     Scene represented as graph where:
     - Nodes: Objects/particles (position, velocity, material_type, temp)
@@ -768,7 +768,7 @@ export const limitlessKitchen: Article = {
     {
       type: 'code',
       language: 'python',
-      text: `@dataclass
+      code: `@dataclass
 class CookingFrame:
     """Every frame at 100Hz, we capture:"""
 
@@ -917,7 +917,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'python',
-      text: `class MorphologyRetargeter:
+      code: `class MorphologyRetargeter:
     """
     Converts human demonstrations to robot-executable actions.
 
@@ -1010,7 +1010,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'python',
-      text: `class CookingDomainRandomization:
+      code: `class CookingDomainRandomization:
     """
     Randomize simulation parameters to cover real-world variation.
 
@@ -1080,7 +1080,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'python',
-      text: `def real_world_residual_learning(sim_policy, real_robot, episodes=100):
+      code: `def real_world_residual_learning(sim_policy, real_robot, episodes=100):
     """
     Learns corrections on top of frozen sim policy.
 
@@ -1254,7 +1254,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'python',
-      text: `class PlantGrowthPredictor:
+      code: `class PlantGrowthPredictor:
     """
     Combines L-system structure with learned parameters.
 
@@ -1314,7 +1314,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'diagram',
-      text: `PERSONALIZED GROWING SCHEDULE
+      code: `PERSONALIZED GROWING SCHEDULE
 ═══════════════════════════════════════════════════════════════════════════
 
          BIOMETRIC INPUT                    GROWING DECISION
@@ -1376,7 +1376,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'diagram',
-      text: `THE LIMITLESS PROTOCOL
+      code: `THE LIMITLESS PROTOCOL
 ═══════════════════════════════════════════════════════════════════════════
 
             BLUEPRINT PRECISION                    BLUE ZONE WISDOM
@@ -1421,7 +1421,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'diagram',
-      text: `CONTINUOUS HEALTH MONITORING ARCHITECTURE
+      code: `CONTINUOUS HEALTH MONITORING ARCHITECTURE
 ═══════════════════════════════════════════════════════════════════════════
 
          LAYER 1: CONTINUOUS (Real-time wearables)
@@ -1493,7 +1493,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'diagram',
-      text: `CLOSED-LOOP HEALTH OPTIMIZATION
+      code: `CLOSED-LOOP HEALTH OPTIMIZATION
 ═══════════════════════════════════════════════════════════════════════════
 
                               ┌─────────────────┐
@@ -1584,7 +1584,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'diagram',
-      text: `PERSONAL HEALTH DIGITAL TWIN
+      code: `PERSONAL HEALTH DIGITAL TWIN
 ═══════════════════════════════════════════════════════════════════════════
 
                     ┌───────────────────────────────────────┐
@@ -1653,7 +1653,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'diagram',
-      text: `YOUR HOME AS TRAINING ENVIRONMENT
+      code: `YOUR HOME AS TRAINING ENVIRONMENT
 ═══════════════════════════════════════════════════════════════════════════
 
                     PHOTO INPUT                    DIGITAL TWIN
@@ -1698,7 +1698,7 @@ class CookingFrame:
     {
       type: 'code',
       language: 'diagram',
-      text: `3D RECONSTRUCTION PIPELINE
+      code: `3D RECONSTRUCTION PIPELINE
 ═══════════════════════════════════════════════════════════════════════════
 
 Step 1: Photo Capture (10-30 photos)
@@ -1757,7 +1757,7 @@ Step 4: Physics Augmentation
     {
       type: 'code',
       language: 'diagram',
-      text: `SKILL LIBRARY ARCHITECTURE
+      code: `SKILL LIBRARY ARCHITECTURE
 ═══════════════════════════════════════════════════════════════════════════
 
                     ┌───────────────────────────────────────┐
@@ -1848,7 +1848,7 @@ Step 4: Physics Augmentation
     {
       type: 'code',
       language: 'diagram',
-      text: `CURRICULUM GENERATION
+      code: `CURRICULUM GENERATION
 ═══════════════════════════════════════════════════════════════════════════
 
     ┌─────────────────────────────────────────────────────────────────────┐
@@ -1919,7 +1919,7 @@ Step 4: Physics Augmentation
     {
       type: 'code',
       language: 'diagram',
-      text: `COMPONENT MATURITY MATRIX
+      code: `COMPONENT MATURITY MATRIX
 ═══════════════════════════════════════════════════════════════════════════
 
                          MATURITY LEVEL
@@ -1987,7 +1987,7 @@ Full integration        │         │         │          │ NOBODY HAS DONE
     {
       type: 'code',
       language: 'diagram',
-      text: `DEVELOPMENT TIMELINE
+      code: `DEVELOPMENT TIMELINE
 ═══════════════════════════════════════════════════════════════════════════
 
 2025 Q1-Q2: FOUNDATION

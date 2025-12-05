@@ -663,17 +663,7 @@ export const capabilityTrap: Article = {
     },
     {
       type: 'text',
-      text: 'How the layers interact:'
-    },
-    {
-      type: 'list',
-      items: [
-        'New task arrives at orchestrator',
-        'Orchestrator checks skill library: if matching skill exists, execute directly; if composable from existing skills, compose and execute; if gap identified, send to evolutionary refinement',
-        'Evolutionary refinement generates candidates: uses search mechanism to explore variations, tests candidates in execution environment, promotes successful patterns to skill library',
-        'Skill library grows over time: new skills added from successful evolutionary runs, underperforming skills pruned, compound skills emerge from composition',
-        'Orchestrator learns which approach works for which task type: direct skill retrieval for routine tasks, evolutionary refinement for novel challenges, full search for breakthrough problems'
-      ]
+      text: 'How the layers interact:\n\n1. New task arrives at orchestrator\n\n2. Orchestrator checks skill library: if matching skill exists, execute directly; if composable from existing skills, compose and execute; if gap identified, send to evolutionary refinement\n\n3. Evolutionary refinement generates candidates: uses search mechanism to explore variations, tests candidates in execution environment, promotes successful patterns to skill library\n\n4. Skill library grows over time: new skills added from successful evolutionary runs, underperforming skills pruned, compound skills emerge from composition\n\n5. Orchestrator learns which approach works for which task type: direct skill retrieval for routine tasks, evolutionary refinement for novel challenges, full search for breakthrough problems'
     },
     {
       type: 'header',

@@ -12,35 +12,35 @@ export const livingRoom: Article = {
   content: [
     {
       type: 'header',
-      content: 'The Living Room'
+      text: 'The Living Room'
     },
     {
       type: 'subheader',
-      content: 'A Solarpunk Guide to Growing Your Home: How to Fill Your Space with Light, Life, and Living Art at Any Budget'
+      text: 'A Solarpunk Guide to Growing Your Home: How to Fill Your Space with Light, Life, and Living Art at Any Budget'
     },
     {
       type: 'quote',
-      content: '"This is an incredible achievement for synthetic biology. Light Bio is bringing us leaps and bounds closer to our solarpunk dream of living in Avatar\'s Pandora." - Jason Kelly, CEO of Ginkgo Bioworks, on the world\'s first commercially available bioluminescent plant'
+      text: '"This is an incredible achievement for synthetic biology. Light Bio is bringing us leaps and bounds closer to our solarpunk dream of living in Avatar\'s Pandora." - Jason Kelly, CEO of Ginkgo Bioworks, on the world\'s first commercially available bioluminescent plant'
     },
     {
       type: 'text',
-      content: 'Close your eyes. Imagine walking into your home after a long day. The walls exhale oxygen. Soft green light pulses gently from plants that glow in the dark. Your feet sink into grass-real, living grass-softer than any carpet you\'ve ever touched. The air smells like a forest after rain.'
+      text: 'Close your eyes. Imagine walking into your home after a long day. The walls exhale oxygen. Soft green light pulses gently from plants that glow in the dark. Your feet sink into grass-real, living grass-softer than any carpet you\'ve ever touched. The air smells like a forest after rain.'
     },
     {
       type: 'text',
-      content: 'This isn\'t science fiction. Every element I just described exists today, and most of it costs less than a nice dinner out.'
+      text: 'This isn\'t science fiction. Every element I just described exists today, and most of it costs less than a nice dinner out.'
     },
     {
       type: 'text',
-      content: 'This is the solarpunk future. And you can start building it this weekend.'
+      text: 'This is the solarpunk future. And you can start building it this weekend.'
     },
     {
       type: 'header',
-      content: '🧭 The Knowledge Architecture'
+      text: '🧭 The Knowledge Architecture'
     },
     {
       type: 'text',
-      content: 'This document is organized as a journey from **understanding** (why living spaces matter) to **building** (exactly how to create them at any budget).'
+      text: 'This document is organized as a journey from **understanding** (why living spaces matter) to **building** (exactly how to create them at any budget).'
     },
     {
       type: 'diagram',
@@ -158,19 +158,19 @@ export const livingRoom: Article = {
     },
     {
       type: 'header',
-      content: 'Part I: The Science of Why Your Brain Craves Green'
+      text: 'Part I: The Science of Why Your Brain Craves Green'
     },
     {
       type: 'subheader',
-      content: '1.1 The Biophilia Hypothesis'
+      text: '1.1 The Biophilia Hypothesis'
     },
     {
       type: 'text',
-      content: 'In 1984, biologist Edward O. Wilson proposed something that feels obvious once you hear it: **humans have an innate need to connect with other living things**. He called this *biophilia*-literally, "love of life."'
+      text: 'In 1984, biologist Edward O. Wilson proposed something that feels obvious once you hear it: **humans have an innate need to connect with other living things**. He called this *biophilia*-literally, "love of life."'
     },
     {
       type: 'text',
-      content: 'This isn\'t poetry. It\'s evolutionary biology. For 99.9% of human history, we lived immersed in nature. Our brains evolved to find calm in green spaces, to feel alert at the sound of running water, to relax when surrounded by living things. The concrete boxes we now call "home" and "office" are-from an evolutionary perspective-a bizarre aberration that our nervous systems never adapted to handle.'
+      text: 'This isn\'t poetry. It\'s evolutionary biology. For 99.9% of human history, we lived immersed in nature. Our brains evolved to find calm in green spaces, to feel alert at the sound of running water, to relax when surrounded by living things. The concrete boxes we now call "home" and "office" are-from an evolutionary perspective-a bizarre aberration that our nervous systems never adapted to handle.'
     },
     {
       type: 'diagram',
@@ -203,27 +203,27 @@ export const livingRoom: Article = {
     },
     {
       type: 'text',
-      content: 'The consequences of this mismatch are measurable. People in offices without plants or windows report higher stress, more sick days, and lower job satisfaction. Hospital patients in rooms facing a brick wall require more pain medication and stay longer than those with views of trees. Students in classrooms with natural light score 20% higher on tests.'
+      text: 'The consequences of this mismatch are measurable. People in offices without plants or windows report higher stress, more sick days, and lower job satisfaction. Hospital patients in rooms facing a brick wall require more pain medication and stay longer than those with views of trees. Students in classrooms with natural light score 20% higher on tests.'
     },
     {
       type: 'text',
-      content: '**Your environment isn\'t just where you live. It\'s shaping how you think, how you feel, and how well you heal.**'
+      text: '**Your environment isn\'t just where you live. It\'s shaping how you think, how you feel, and how well you heal.**'
     },
     {
       type: 'subheader',
-      content: '1.2 The Research: What Plants Actually Do For You'
+      text: '1.2 The Research: What Plants Actually Do For You'
     },
     {
       type: 'text',
-      content: 'Let\'s get specific. What does the science say about bringing nature indoors?'
+      text: 'Let\'s get specific. What does the science say about bringing nature indoors?'
     },
     {
       type: 'subheader',
-      content: 'Mental Health and Productivity'
+      text: 'Mental Health and Productivity'
     },
     {
       type: 'text',
-      content: 'A 2024 systematic review published in the Journal of Intelligent Buildings analyzed 74 peer-reviewed studies on biophilic design in workplaces. The findings were consistent and striking:'
+      text: 'A 2024 systematic review published in the Journal of Intelligent Buildings analyzed 74 peer-reviewed studies on biophilic design in workplaces. The findings were consistent and striking:'
     },
     {
       type: 'diagram',
@@ -284,35 +284,35 @@ export const livingRoom: Article = {
     },
     {
       type: 'subheader',
-      content: 'Healthcare Settings'
+      text: 'Healthcare Settings'
     },
     {
       type: 'text',
-      content: 'In hospitals, the effects are even more dramatic. A 2024 systematic review in Frontiers of the Built Environment analyzed studies from 2010-2023 and found that biophilic hospital design:'
+      text: 'In hospitals, the effects are even more dramatic. A 2024 systematic review in Frontiers of the Built Environment analyzed studies from 2010-2023 and found that biophilic hospital design:'
     },
     {
       type: 'text',
-      content: '- **Reduces hospitalization time** (patients heal faster)\n- **Lowers patient mortality**\n- **Decreases pain levels** (less pain medication needed)\n- **Reduces stress for healthcare providers**\n- **Alleviates anxiety** for patients, families, and staff\n- **Supports faster recovery**'
+      text: '- **Reduces hospitalization time** (patients heal faster)\n- **Lowers patient mortality**\n- **Decreases pain levels** (less pain medication needed)\n- **Reduces stress for healthcare providers**\n- **Alleviates anxiety** for patients, families, and staff\n- **Supports faster recovery**'
     },
     {
       type: 'text',
-      content: 'The landmark study that started this research was conducted in 1984 by Roger Ulrich. He found that post-surgical patients with views of trees from their hospital window recovered faster, required less pain medication, and had fewer complications than patients whose windows faced a brick wall.'
+      text: 'The landmark study that started this research was conducted in 1984 by Roger Ulrich. He found that post-surgical patients with views of trees from their hospital window recovered faster, required less pain medication, and had fewer complications than patients whose windows faced a brick wall.'
     },
     {
       type: 'subheader',
-      content: 'Air Quality: The NASA Study (And Its Nuances)'
+      text: 'Air Quality: The NASA Study (And Its Nuances)'
     },
     {
       type: 'text',
-      content: 'In 1989, NASA conducted a famous study on plants and air quality, looking for ways to purify air in sealed spacecraft. Their findings suggested that certain common houseplants could remove volatile organic compounds (VOCs) like formaldehyde, benzene, and trichloroethylene from the air.'
+      text: 'In 1989, NASA conducted a famous study on plants and air quality, looking for ways to purify air in sealed spacecraft. Their findings suggested that certain common houseplants could remove volatile organic compounds (VOCs) like formaldehyde, benzene, and trichloroethylene from the air.'
     },
     {
       type: 'text',
-      content: '**Important nuance**: Later research has shown that while plants *can* remove VOCs, you\'d need 10-1000 plants per square meter to match what normal ventilation does. Plants alone won\'t purify your air.'
+      text: '**Important nuance**: Later research has shown that while plants *can* remove VOCs, you\'d need 10-1000 plants per square meter to match what normal ventilation does. Plants alone won\'t purify your air.'
     },
     {
       type: 'text',
-      content: '**But here\'s what plants *do* effectively provide**:'
+      text: '**But here\'s what plants *do* effectively provide**:'
     },
     {
       type: 'diagram',
@@ -353,7 +353,7 @@ export const livingRoom: Article = {
     },
     {
       type: 'text',
-      content: 'The NASA study remains valuable because it identified which plants are most effective at VOC absorption in sealed environments-relevant if you\'re designing a space station, submarine, or very tightly sealed modern building. Here are the champions:'
+      text: 'The NASA study remains valuable because it identified which plants are most effective at VOC absorption in sealed environments-relevant if you\'re designing a space station, submarine, or very tightly sealed modern building. Here are the champions:'
     },
     {
       type: 'diagram',
@@ -405,19 +405,19 @@ export const livingRoom: Article = {
     },
     {
       type: 'header',
-      content: 'Part II: The Building Blocks of Living Design'
+      text: 'Part II: The Building Blocks of Living Design'
     },
     {
       type: 'text',
-      content: 'Now we get to the fun part: **what can you actually build?** Let\'s explore each element of living design, from simple houseplants to bioluminescent night lights.'
+      text: 'Now we get to the fun part: **what can you actually build?** Let\'s explore each element of living design, from simple houseplants to bioluminescent night lights.'
     },
     {
       type: 'subheader',
-      content: '2.1 Air-Purifying Plants (The Foundation)'
+      text: '2.1 Air-Purifying Plants (The Foundation)'
     },
     {
       type: 'text',
-      content: 'Every living space should start here. Plants are the most accessible entry point into biophilic design, and even one or two can shift the feeling of a room.'
+      text: 'Every living space should start here. Plants are the most accessible entry point into biophilic design, and even one or two can shift the feeling of a room.'
     },
     {
       type: 'diagram',
@@ -498,11 +498,11 @@ export const livingRoom: Article = {
     },
     {
       type: 'subheader',
-      content: 'The Starter Pack: 5 Plants for Under $50'
+      text: 'The Starter Pack: 5 Plants for Under $50'
     },
     {
       type: 'text',
-      content: 'If you\'re just beginning, here\'s exactly what to buy:'
+      text: 'If you\'re just beginning, here\'s exactly what to buy:'
     },
     {
       type: 'diagram',
@@ -584,15 +584,15 @@ export const livingRoom: Article = {
     },
     {
       type: 'subheader',
-      content: '2.2 Living Walls: Art That Breathes'
+      text: '2.2 Living Walls: Art That Breathes'
     },
     {
       type: 'text',
-      content: 'Once you have a few plants, the next level is **vertical gardens**-living walls that turn blank surfaces into ecosystems.'
+      text: 'Once you have a few plants, the next level is **vertical gardens**-living walls that turn blank surfaces into ecosystems.'
     },
     {
       type: 'subheader',
-      content: 'Understanding Your Options'
+      text: 'Understanding Your Options'
     },
     {
       type: 'diagram',
@@ -657,11 +657,11 @@ export const livingRoom: Article = {
     },
     {
       type: 'subheader',
-      content: 'DIY Preserved Moss Wall Art (Weekend Project, $50-150)'
+      text: 'DIY Preserved Moss Wall Art (Weekend Project, $50-150)'
     },
     {
       type: 'text',
-      content: 'This is the easiest entry into living walls. Preserved moss is real moss that\'s been treated with glycerin-it looks and feels natural but requires zero maintenance.'
+      text: 'This is the easiest entry into living walls. Preserved moss is real moss that\'s been treated with glycerin-it looks and feels natural but requires zero maintenance.'
     },
     {
       type: 'diagram',
@@ -745,11 +745,11 @@ export const livingRoom: Article = {
     },
     {
       type: 'subheader',
-      content: '2.3 Indoor Grass: The Softest Floor You\'ve Ever Touched'
+      text: '2.3 Indoor Grass: The Softest Floor You\'ve Ever Touched'
     },
     {
       type: 'text',
-      content: 'Here\'s where we start getting into truly transformative living design. Imagine a section of your home with real, living grass-softer than any carpet, connected to the earth, a tiny meadow inside your space.'
+      text: 'Here\'s where we start getting into truly transformative living design. Imagine a section of your home with real, living grass-softer than any carpet, connected to the earth, a tiny meadow inside your space.'
     },
     {
       type: 'diagram',
@@ -809,20 +809,20 @@ export const livingRoom: Article = {
     },
     {
       type: 'subheader',
-      content: '2.4 Bioluminescent Plants: Living Night Lights'
+      text: '2.4 Bioluminescent Plants: Living Night Lights'
     },
     {
       type: 'text',
-      content: 'Now we arrive at the most magical element of living design: **plants that glow in the dark**.'
+      text: 'Now we arrive at the most magical element of living design: **plants that glow in the dark**.'
     },
     {
       type: 'text',
-      content: 'In April 2024, Light Bio began shipping the world\'s first commercially available bioluminescent plant-the Firefly Petunia. This isn\'t a gimmick or a blacklight trick. These plants emit actual light through bioluminescence, the same process fireflies and glowing mushrooms use.'
+      text: 'In April 2024, Light Bio began shipping the world\'s first commercially available bioluminescent plant-the Firefly Petunia. This isn\'t a gimmick or a blacklight trick. These plants emit actual light through bioluminescence, the same process fireflies and glowing mushrooms use.'
     },
     {
       type: 'code',
       language: 'diagram',
-      content: `THE FIREFLY PETUNIA
+      code: `THE FIREFLY PETUNIA
 ═══════════════════════════════════════════════════════════════════════════
 
     WHAT IT IS:
@@ -891,24 +891,24 @@ export const livingRoom: Article = {
     },
     {
       type: 'header',
-      content: 'Part III: Complete Builds at Every Budget'
+      text: 'Part III: Complete Builds at Every Budget'
     },
     {
       type: 'text',
-      content: 'Now let\'s put it all together. Here are complete room transformations at three budget levels.'
+      text: 'Now let\'s put it all together. Here are complete room transformations at three budget levels.'
     },
     {
       type: 'subheader',
-      content: '3.1 Tier 1: First Steps ($25-100)'
+      text: '3.1 Tier 1: First Steps ($25-100)'
     },
     {
       type: 'text',
-      content: '**Goal**: Add meaningful biophilic elements to any room without major commitment.'
+      text: '**Goal**: Add meaningful biophilic elements to any room without major commitment.'
     },
     {
       type: 'code',
       language: 'diagram',
-      content: `TIER 1 BUILD: THE GREEN CORNER
+      code: `TIER 1 BUILD: THE GREEN CORNER
 ═══════════════════════════════════════════════════════════════════════════
 
     BUDGET: $50-100
@@ -961,11 +961,11 @@ export const livingRoom: Article = {
     },
     {
       type: 'subheader',
-      content: '3.2 Tier 2: Room Transformation ($100-300)'
+      text: '3.2 Tier 2: Room Transformation ($100-300)'
     },
     {
       type: 'text',
-      content: '**Goal**: Transform a room into a noticeably biophilic space.'
+      text: '**Goal**: Transform a room into a noticeably biophilic space.'
     },
     {
       type: 'diagram',
@@ -1052,11 +1052,11 @@ export const livingRoom: Article = {
     },
     {
       type: 'subheader',
-      content: '3.3 Tier 3: Full Ecosystem ($300-1000)'
+      text: '3.3 Tier 3: Full Ecosystem ($300-1000)'
     },
     {
       type: 'text',
-      content: '**Goal**: Transform a room into an immersive biophilic environment with multiple living systems.'
+      text: '**Goal**: Transform a room into an immersive biophilic environment with multiple living systems.'
     },
     {
       type: 'diagram',
@@ -1150,20 +1150,20 @@ export const livingRoom: Article = {
     },
     {
       type: 'subheader',
-      content: '2.5 The Vision: Bioluminescent Grass That Glows When You Walk'
+      text: '2.5 The Vision: Bioluminescent Grass That Glows When You Walk'
     },
     {
       type: 'text',
-      content: 'Here\'s where we push into the near-future-the intersection of what exists today and what\'s coming tomorrow.'
+      text: 'Here\'s where we push into the near-future-the intersection of what exists today and what\'s coming tomorrow.'
     },
     {
       type: 'text',
-      content: 'Imagine: You walk across your living room floor at night. With each step, the grass beneath your feet pulses with soft blue-green light, then fades. Like walking through shallow bioluminescent waters, but on land. Inside your home.'
+      text: 'Imagine: You walk across your living room floor at night. With each step, the grass beneath your feet pulses with soft blue-green light, then fades. Like walking through shallow bioluminescent waters, but on land. Inside your home.'
     },
     {
       type: 'code',
       language: 'diagram',
-      content: `THE RESPONSIVE BIOLUMINESCENT FLOOR
+      code: `THE RESPONSIVE BIOLUMINESCENT FLOOR
 ═══════════════════════════════════════════════════════════════════════════
 
     THE VISION:
@@ -1218,20 +1218,20 @@ export const livingRoom: Article = {
     },
     {
       type: 'header',
-      content: 'Part IV: The Solarpunk Mindset'
+      text: 'Part IV: The Solarpunk Mindset'
     },
     {
       type: 'text',
-      content: 'Building living spaces isn\'t just about the physical elements. It\'s about shifting how we think about our relationship to nature and to our built environment.'
+      text: 'Building living spaces isn\'t just about the physical elements. It\'s about shifting how we think about our relationship to nature and to our built environment.'
     },
     {
       type: 'subheader',
-      content: '4.1 The Philosophy'
+      text: '4.1 The Philosophy'
     },
     {
       type: 'code',
       language: 'diagram',
-      content: `THE SOLARPUNK VISION
+      code: `THE SOLARPUNK VISION
 ═══════════════════════════════════════════════════════════════════════════
 
     WHAT SOLARPUNK IS:
@@ -1269,12 +1269,12 @@ export const livingRoom: Article = {
     },
     {
       type: 'subheader',
-      content: '4.2 Start Where You Are'
+      text: '4.2 Start Where You Are'
     },
     {
       type: 'code',
       language: 'diagram',
-      content: `YOUR NEXT STEPS
+      code: `YOUR NEXT STEPS
 ═══════════════════════════════════════════════════════════════════════════
 
     THIS WEEK ($5-20):
@@ -1318,28 +1318,28 @@ export const livingRoom: Article = {
     },
     {
       type: 'header',
-      content: 'Conclusion: Growing Home'
+      text: 'Conclusion: Growing Home'
     },
     {
       type: 'text',
-      content: 'We started with a vision: walking into a home filled with light, life, and living things. Walls that exhale oxygen. Plants that glow in the dark. Grass softer than any carpet.'
+      text: 'We started with a vision: walking into a home filled with light, life, and living things. Walls that exhale oxygen. Plants that glow in the dark. Grass softer than any carpet.'
     },
     {
       type: 'text',
-      content: 'And now you know: **this isn\'t science fiction. It\'s DIY.**'
+      text: 'And now you know: **this isn\'t science fiction. It\'s DIY.**'
     },
     {
       type: 'text',
-      content: 'Every element we discussed is available today, at price points from $5 to $500. The bioluminescent petunias are real-you can order them online for $29. The hydroponic grass systems are proven. The moss walls are straightforward weekend projects.'
+      text: 'Every element we discussed is available today, at price points from $5 to $500. The bioluminescent petunias are real-you can order them online for $29. The hydroponic grass systems are proven. The moss walls are straightforward weekend projects.'
     },
     {
       type: 'text',
-      content: 'The solarpunk future doesn\'t require waiting for someone else to build it. It requires you, this weekend, with a trip to the nursery and a willingness to let your space become alive.'
+      text: 'The solarpunk future doesn\'t require waiting for someone else to build it. It requires you, this weekend, with a trip to the nursery and a willingness to let your space become alive.'
     },
     {
       type: 'code',
       language: 'diagram',
-      content: `THE LIVING ROOM
+      code: `THE LIVING ROOM
 Final Thought
 ═══════════════════════════════════════════════════════════════════════════
 
@@ -1361,16 +1361,16 @@ Final Thought
     },
     {
       type: 'header',
-      content: 'Appendix: Quick Reference'
+      text: 'Appendix: Quick Reference'
     },
     {
       type: 'subheader',
-      content: 'Plant Care Cheat Sheet'
+      text: 'Plant Care Cheat Sheet'
     },
     {
       type: 'code',
       language: 'diagram',
-      content: `LIGHT REQUIREMENTS:
+      code: `LIGHT REQUIREMENTS:
 • Low: Snake plant, ZZ plant, pothos, peace lily
 • Medium: Spider plant, dracaena, philodendron, ferns
 • High: Succulents, herbs, aloe, most flowering plants
@@ -1386,12 +1386,12 @@ peperomia, African violet, parlour palm`
     },
     {
       type: 'subheader',
-      content: 'Budget Quick Reference'
+      text: 'Budget Quick Reference'
     },
     {
       type: 'code',
       language: 'diagram',
-      content: `$25-50:   3-5 small plants + basic care supplies
+      code: `$25-50:   3-5 small plants + basic care supplies
 $50-100:  Room accent (plants + moss art)
 $100-200: Room transformation (multiple plants + DIY project)
 $200-500: Full living system (vertical garden OR grass patch)
@@ -1399,12 +1399,12 @@ $500+:    Multi-system ecosystem`
     },
     {
       type: 'subheader',
-      content: 'Where to Buy'
+      text: 'Where to Buy'
     },
     {
       type: 'code',
       language: 'diagram',
-      content: `PLANTS:
+      code: `PLANTS:
 • IKEA (budget)
 • Home Depot / Lowes (selection)
 • Local nurseries (quality + advice)
@@ -1425,15 +1425,15 @@ HYDROPONIC SUPPLIES:
     },
     {
       type: 'text',
-      content: '*This document is a living guide. As you grow, update it with your discoveries.*'
+      text: '*This document is a living guide. As you grow, update it with your discoveries.*'
     },
     {
       type: 'text',
-      content: '*ECE Solutions LLC - Growing the Future, One Living Space at a Time*'
+      text: '*ECE Solutions LLC - Growing the Future, One Living Space at a Time*'
     },
     {
       type: 'text',
-      content: '**Companion pieces**: \n- [The Home-Grown Revolution](/home-grown-revolution-blog) - Building NASA-inspired farming systems at home\n- [The Limitless Protocol](/the-limitless-protocol-blog) - Optimizing your biology for peak performance\n- [The Limitless Kitchen](/limitless-kitchen-blog) - Autonomous systems for preparing what you grow'
+      text: '**Companion pieces**: \n- [The Home-Grown Revolution](/home-grown-revolution-blog) - Building NASA-inspired farming systems at home\n- [The Limitless Protocol](/the-limitless-protocol-blog) - Optimizing your biology for peak performance\n- [The Limitless Kitchen](/limitless-kitchen-blog) - Autonomous systems for preparing what you grow'
     }
   ]
 };
