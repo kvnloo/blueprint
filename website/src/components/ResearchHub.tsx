@@ -48,7 +48,10 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
         {/* Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           {researchData.map((article, i) => {
-            const config = trackConfig[article.track];
+            // Handle both single track and array of tracks
+            const tracks = Array.isArray(article.track) ? article.track : [article.track];
+            const primaryTrack = tracks[0];
+            const config = trackConfig[primaryTrack];
             const Icon = config.icon;
 
             return (
@@ -63,18 +66,28 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
                 {/* Card Container */}
                 <div className="h-full bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/[0.07] hover:border-white/20 transition-all duration-500 cursor-pointer flex flex-col relative overflow-hidden">
 
-                  {/* Track Stripe */}
-                  <div className={`absolute top-0 left-0 w-1 h-full ${config.bg} opacity-50 group-hover:opacity-100 transition-opacity`} />
+                  {/* Track Stripe - gradient for multi-track articles */}
+                  {tracks.length === 1 ? (
+                    <div className={`absolute top-0 left-0 w-1 h-full ${config.bg} opacity-50 group-hover:opacity-100 transition-opacity`} />
+                  ) : (
+                    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 via-orange-500 to-emerald-500 opacity-50 group-hover:opacity-100 transition-opacity" />
+                  )}
 
                   {/* Hover Glow */}
                   <div className={`absolute top-0 right-0 w-64 h-64 ${config.glow} blur-[80px] rounded-full translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                   {/* Header Meta */}
                   <div className="flex flex-wrap items-center justify-between gap-4 mb-6 relative z-10">
-                     <div className="flex items-center gap-2">
-                        <span className={`flex items-center gap-1.5 px-2 py-1 rounded bg-black/40 border ${config.border} ${config.color} text-[10px] font-bold uppercase tracking-wider`}>
-                          <Icon size={10} /> {article.track}
-                        </span>
+                     <div className="flex flex-wrap items-center gap-2">
+                        {tracks.map((track) => {
+                          const trackConf = trackConfig[track];
+                          const TrackIcon = trackConf.icon;
+                          return (
+                            <span key={track} className={`flex items-center gap-1.5 px-2 py-1 rounded bg-black/40 border ${trackConf.border} ${trackConf.color} text-[10px] font-bold uppercase tracking-wider`}>
+                              <TrackIcon size={10} /> {track}
+                            </span>
+                          );
+                        })}
                         <span className="px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-400 text-[10px] font-bold uppercase tracking-wider">
                           {article.type}
                         </span>

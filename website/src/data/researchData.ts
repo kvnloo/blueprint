@@ -31,7 +31,7 @@ export interface Article {
   id: string;
   title: string;
   category: string;
-  track: ArticleTrack;
+  track: ArticleTrack | ArticleTrack[];  // Single track or multiple tracks
   type: ArticleType;
   readTime: string;
   wordCount: number;

@@ -2108,7 +2108,7 @@ Full integration        │         │         │          │ NOBODY HAS DONE
     },
     {
       type: 'text',
-      text: '*ECE Solutions LLC - Making the Limitless Pill a Reality*'
+      text: '*zer0 LLC - Making the Limitless Pill a Reality*'
     }
   ]
 };

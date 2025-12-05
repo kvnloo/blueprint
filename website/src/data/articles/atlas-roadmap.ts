@@ -4,7 +4,7 @@ export const atlasRoadmap: Article = {
   id: 'atlas-roadmap',
   title: 'ATLAS: Autonomous Total Lifestyle and Sustenance System',
   category: 'technology',
-  track: 'Blueprint',
+  track: ['Blueprint', 'World Sim', 'Evolve'],  // ATLAS spans all three tracks
   type: 'Technical Guide',
   readTime: '40 min',
   wordCount: 10667,
@@ -16,7 +16,7 @@ export const atlasRoadmap: Article = {
     },
     {
       type: 'text',
-      text: 'Authors: Kevin Rajan, ECE Solutions LLC\nDate: December 2025\nVersion: 1.0\nStatus: Research Proposal / Engineering Roadmap'
+      text: 'Authors: Kevin Rajan, zer0 LLC\nDate: December 2025\nVersion: 1.0\nStatus: Research Proposal / Engineering Roadmap'
     },
     {
       type: 'subheader',
