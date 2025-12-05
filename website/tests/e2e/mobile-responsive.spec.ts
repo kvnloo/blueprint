@@ -1,7 +1,7 @@
 import { test, expect, devices } from '@playwright/test';
 
-// Test configuration - all tests run in headless mode by default
-const BASE_URL = process.env.BASE_URL || 'http://localhost:5173';
+// Test configuration - all tests run in headless mode by default (configured in playwright.config.ts)
+// baseURL is configured in playwright.config.ts, use relative paths
 
 // Define viewport configurations
 const VIEWPORTS = {
@@ -29,7 +29,7 @@ test.describe('Mobile Responsive Tests - iPhone SE (375x667)', () => {
   });
 
   test('should render correctly on iPhone SE viewport', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
     await expect(page).toHaveTitle(/zer0/);
 
     // Check viewport dimensions
@@ -39,34 +39,37 @@ test.describe('Mobile Responsive Tests - iPhone SE (375x667)', () => {
   });
 
   test('should display mobile menu hamburger icon', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    // Mobile menu toggle should be visible
-    const mobileMenuToggle = page.locator('button.md\\:hidden').first();
+    // Mobile menu toggle should be visible (Menu icon)
+    const mobileMenuToggle = page.locator('nav button.md\\:hidden');
     await expect(mobileMenuToggle).toBeVisible();
 
     // Desktop nav should be hidden
-    const desktopNav = page.locator('.hidden.md\\:flex').first();
+    const desktopNav = page.locator('nav .hidden.md\\:flex').first();
     await expect(desktopNav).not.toBeVisible();
   });
 
   test('should open and close mobile menu', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const menuToggle = page.locator('button.md\\:hidden').first();
+    const menuToggle = page.locator('nav button.md\\:hidden');
+
+    // Initially, mobile menu should not exist (conditional rendering)
+    await expect(page.locator('nav > div.md\\:hidden.absolute')).not.toBeAttached();
 
     // Open menu
     await menuToggle.click();
-    const mobileMenu = page.locator('.md\\:hidden.absolute');
+    const mobileMenu = page.locator('nav > div.md\\:hidden.absolute');
     await expect(mobileMenu).toBeVisible();
 
     // Close menu
     await menuToggle.click();
-    await expect(mobileMenu).not.toBeVisible();
+    await expect(mobileMenu).not.toBeAttached();
   });
 
   test('should not overflow content horizontally', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     // Check body width doesn't exceed viewport
     const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
@@ -75,10 +78,10 @@ test.describe('Mobile Responsive Tests - iPhone SE (375x667)', () => {
   });
 
   test('should have adequate tap targets for buttons', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     // Check mobile menu button
-    const menuButton = page.locator('button.md\\:hidden').first();
+    const menuButton = page.locator('nav button.md\\:hidden');
     const box = await menuButton.boundingBox();
 
     expect(box).not.toBeNull();
@@ -89,7 +92,7 @@ test.describe('Mobile Responsive Tests - iPhone SE (375x667)', () => {
   });
 
   test('should scale images correctly', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     // Check all images are within viewport
     const images = page.locator('img');
@@ -107,7 +110,7 @@ test.describe('Mobile Responsive Tests - iPhone SE (375x667)', () => {
   });
 
   test('should maintain readable text size', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     // Check that text elements have readable font size (min 14px for body text)
     const textElements = page.locator('p, span, a, button').first();
@@ -127,7 +130,7 @@ test.describe('Mobile Responsive Tests - iPhone 12 (390x844)', () => {
   });
 
   test('should render correctly on iPhone 12 viewport', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const viewportSize = page.viewportSize();
     expect(viewportSize?.width).toBe(390);
@@ -135,25 +138,25 @@ test.describe('Mobile Responsive Tests - iPhone 12 (390x844)', () => {
   });
 
   test('should display mobile navigation correctly', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const mobileMenuToggle = page.locator('button.md\\:hidden').first();
+    const mobileMenuToggle = page.locator('nav button.md\\:hidden');
     await expect(mobileMenuToggle).toBeVisible();
   });
 
   test('should handle touch interactions', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const menuToggle = page.locator('button.md\\:hidden').first();
+    const menuToggle = page.locator('nav button.md\\:hidden');
 
     // Simulate touch tap
     await menuToggle.tap();
-    const mobileMenu = page.locator('.md\\:hidden.absolute');
+    const mobileMenu = page.locator('nav > div.md\\:hidden.absolute');
     await expect(mobileMenu).toBeVisible();
   });
 
   test('should not have horizontal scroll', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const hasHorizontalScroll = await page.evaluate(() => {
       return document.documentElement.scrollWidth > document.documentElement.clientWidth;
@@ -163,9 +166,9 @@ test.describe('Mobile Responsive Tests - iPhone 12 (390x844)', () => {
   });
 
   test('logo should be visible and tappable', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const logo = page.locator('button').filter({ hasText: 'zer0' }).first();
+    const logo = page.locator('nav button').filter({ hasText: 'zer0' }).first();
     await expect(logo).toBeVisible();
 
     const box = await logo.boundingBox();
@@ -184,7 +187,7 @@ test.describe('Mobile Responsive Tests - Android Pixel 5 (393x851)', () => {
   });
 
   test('should render correctly on Pixel 5 viewport', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const viewportSize = page.viewportSize();
     expect(viewportSize?.width).toBe(393);
@@ -192,13 +195,13 @@ test.describe('Mobile Responsive Tests - Android Pixel 5 (393x851)', () => {
   });
 
   test('mobile menu items should be tappable', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const menuToggle = page.locator('button.md\\:hidden').first();
+    const menuToggle = page.locator('nav button.md\\:hidden');
     await menuToggle.tap();
 
     // Check menu items have adequate tap targets
-    const menuItems = page.locator('.md\\:hidden.absolute button');
+    const menuItems = page.locator('nav > div.md\\:hidden.absolute button');
     const count = await menuItems.count();
 
     for (let i = 0; i < count; i++) {
@@ -212,23 +215,23 @@ test.describe('Mobile Responsive Tests - Android Pixel 5 (393x851)', () => {
   });
 
   test('should handle menu navigation touch interactions', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     // Open menu
-    const menuToggle = page.locator('button.md\\:hidden').first();
+    const menuToggle = page.locator('nav button.md\\:hidden');
     await menuToggle.tap();
 
     // Tap on a menu item
-    const researchLink = page.locator('.md\\:hidden.absolute button').filter({ hasText: 'Research' });
+    const researchLink = page.locator('nav > div.md\\:hidden.absolute button').filter({ hasText: 'Research' });
     await researchLink.tap();
 
-    // Menu should close after navigation
-    const mobileMenu = page.locator('.md\\:hidden.absolute');
-    await expect(mobileMenu).not.toBeVisible();
+    // Menu should close after navigation (component unmounts it)
+    const mobileMenu = page.locator('nav > div.md\\:hidden.absolute');
+    await expect(mobileMenu).not.toBeAttached();
   });
 
   test('content sections should be stacked vertically', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     // Main content should use flex-col or block layout on mobile
     const main = page.locator('main').first();
@@ -248,7 +251,7 @@ test.describe('Tablet Responsive Tests - iPad (768x1024)', () => {
   });
 
   test('should render correctly on iPad viewport', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const viewportSize = page.viewportSize();
     expect(viewportSize?.width).toBe(768);
@@ -256,19 +259,19 @@ test.describe('Tablet Responsive Tests - iPad (768x1024)', () => {
   });
 
   test('should display desktop navigation on tablet', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     // Desktop nav should be visible at 768px (md breakpoint)
-    const desktopNav = page.locator('.hidden.md\\:flex').first();
+    const desktopNav = page.locator('nav .hidden.md\\:flex').first();
     await expect(desktopNav).toBeVisible();
 
     // Mobile menu toggle should be hidden
-    const mobileMenuToggle = page.locator('button.md\\:hidden').first();
+    const mobileMenuToggle = page.locator('nav button.md\\:hidden');
     await expect(mobileMenuToggle).not.toBeVisible();
   });
 
   test('buttons should be clickable and properly sized', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const ctaButton = page.locator('button').filter({ hasText: 'Get Access' }).first();
     await expect(ctaButton).toBeVisible();
@@ -278,7 +281,7 @@ test.describe('Tablet Responsive Tests - iPad (768x1024)', () => {
   });
 
   test('images should scale appropriately for tablet', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const images = page.locator('img');
     const count = await images.count();
@@ -294,7 +297,7 @@ test.describe('Tablet Responsive Tests - iPad (768x1024)', () => {
   });
 
   test('layout should utilize tablet screen space', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     // Content should not be as narrow as mobile
     const container = page.locator('.max-w-7xl').first();
@@ -310,7 +313,7 @@ test.describe('Desktop Responsive Tests - Laptop (1280x720)', () => {
   });
 
   test('should render correctly on laptop viewport', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const viewportSize = page.viewportSize();
     expect(viewportSize?.width).toBe(1280);
@@ -318,9 +321,9 @@ test.describe('Desktop Responsive Tests - Laptop (1280x720)', () => {
   });
 
   test('should display full desktop navigation', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const desktopNav = page.locator('.hidden.md\\:flex').first();
+    const desktopNav = page.locator('nav .hidden.md\\:flex').first();
     await expect(desktopNav).toBeVisible();
 
     // All nav items should be visible
@@ -330,7 +333,7 @@ test.describe('Desktop Responsive Tests - Laptop (1280x720)', () => {
   });
 
   test('desktop CTA buttons should be visible', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const loginLink = page.locator('a').filter({ hasText: 'Log In' });
     const ctaButton = page.locator('button').filter({ hasText: 'Get Access' }).first();
@@ -340,7 +343,7 @@ test.describe('Desktop Responsive Tests - Laptop (1280x720)', () => {
   });
 
   test('content should be centered with max-width', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const container = page.locator('.max-w-7xl').first();
     const width = await container.evaluate((el) => el.offsetWidth);
@@ -356,7 +359,7 @@ test.describe('Desktop Responsive Tests - Full HD (1920x1080)', () => {
   });
 
   test('should render correctly on Full HD viewport', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const viewportSize = page.viewportSize();
     expect(viewportSize?.width).toBe(1920);
@@ -364,7 +367,7 @@ test.describe('Desktop Responsive Tests - Full HD (1920x1080)', () => {
   });
 
   test('content should be properly centered on large screens', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const container = page.locator('.max-w-7xl').first();
     const box = await container.boundingBox();
@@ -381,7 +384,7 @@ test.describe('Desktop Responsive Tests - Full HD (1920x1080)', () => {
   });
 
   test('layout should utilize large screen real estate', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     const container = page.locator('.max-w-7xl').first();
     const width = await container.evaluate((el) => el.offsetWidth);
@@ -402,9 +405,9 @@ test.describe('Cross-Viewport Consistency Tests', () => {
 
     for (const viewport of viewports) {
       await page.setViewportSize(viewport);
-      await page.goto(BASE_URL);
+      await page.goto('/');
 
-      const logo = page.locator('button').filter({ hasText: 'zer0' }).first();
+      const logo = page.locator('nav button').filter({ hasText: 'zer0' }).first();
       await expect(logo).toBeVisible();
     }
   });
@@ -412,16 +415,16 @@ test.describe('Cross-Viewport Consistency Tests', () => {
   test('navigation should adapt appropriately across viewports', async ({ page }) => {
     // Mobile viewport - hamburger menu
     await page.setViewportSize(VIEWPORTS.mobile.iphone12);
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    let mobileToggle = page.locator('button.md\\:hidden').first();
+    let mobileToggle = page.locator('nav button.md\\:hidden');
     await expect(mobileToggle).toBeVisible();
 
     // Desktop viewport - full nav
     await page.setViewportSize(VIEWPORTS.desktop.laptop);
     await page.reload();
 
-    const desktopNav = page.locator('.hidden.md\\:flex').first();
+    const desktopNav = page.locator('nav .hidden.md\\:flex').first();
     await expect(desktopNav).toBeVisible();
   });
 
@@ -437,7 +440,7 @@ test.describe('Cross-Viewport Consistency Tests', () => {
 
     for (const viewport of viewports) {
       await page.setViewportSize(viewport);
-      await page.goto(BASE_URL);
+      await page.goto('/');
 
       const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
       const viewportWidth = viewport.width;
@@ -454,41 +457,41 @@ test.describe('Touch Interaction Tests', () => {
   });
 
   test('should handle tap events on mobile menu', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const menuToggle = page.locator('button.md\\:hidden').first();
+    const menuToggle = page.locator('nav button.md\\:hidden');
 
     // Tap to open
     await menuToggle.tap();
-    const mobileMenu = page.locator('.md\\:hidden.absolute');
+    const mobileMenu = page.locator('nav > div.md\\:hidden.absolute');
     await expect(mobileMenu).toBeVisible();
 
     // Tap to close
     await menuToggle.tap();
-    await expect(mobileMenu).not.toBeVisible();
+    await expect(mobileMenu).not.toBeAttached();
   });
 
   test('should handle tap on navigation links', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const menuToggle = page.locator('button.md\\:hidden').first();
+    const menuToggle = page.locator('nav button.md\\:hidden');
     await menuToggle.tap();
 
-    const servicesLink = page.locator('.md\\:hidden.absolute button').filter({ hasText: 'Services' }).first();
+    const servicesLink = page.locator('nav > div.md\\:hidden.absolute button').filter({ hasText: 'Services' }).first();
     await servicesLink.tap();
 
-    // Menu should close after tap
-    const mobileMenu = page.locator('.md\\:hidden.absolute');
-    await expect(mobileMenu).not.toBeVisible();
+    // Menu should close after navigation (component unmounts it)
+    const mobileMenu = page.locator('nav > div.md\\:hidden.absolute');
+    await expect(mobileMenu).not.toBeAttached();
   });
 
   test('should handle tap on CTA button in mobile menu', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const menuToggle = page.locator('button.md\\:hidden').first();
+    const menuToggle = page.locator('nav button.md\\:hidden');
     await menuToggle.tap();
 
-    const ctaButton = page.locator('.md\\:hidden.absolute button').filter({ hasText: 'Get Access' });
+    const ctaButton = page.locator('nav > div.md\\:hidden.absolute button').filter({ hasText: 'Get Access' });
     await expect(ctaButton).toBeVisible();
 
     const box = await ctaButton.boundingBox();
@@ -499,13 +502,13 @@ test.describe('Touch Interaction Tests', () => {
   });
 
   test('buttons should have touch-friendly spacing', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const menuToggle = page.locator('button.md\\:hidden').first();
+    const menuToggle = page.locator('nav button.md\\:hidden');
     await menuToggle.tap();
 
     // Check spacing between menu items
-    const menuButtons = page.locator('.md\\:hidden.absolute button');
+    const menuButtons = page.locator('nav > div.md\\:hidden.absolute button');
     const count = await menuButtons.count();
 
     if (count > 1) {
@@ -530,7 +533,7 @@ test.describe('Accessibility and Readability Tests', () => {
 
     for (const viewport of mobileViewports) {
       await page.setViewportSize(viewport);
-      await page.goto(BASE_URL);
+      await page.goto('/');
 
       // Check heading text
       const heading = page.locator('h1').first();
@@ -554,7 +557,7 @@ test.describe('Accessibility and Readability Tests', () => {
 
   test('contrast should be maintained on all screen sizes', async ({ page }) => {
     await page.setViewportSize(VIEWPORTS.mobile.iphone12);
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     // Check that text elements have contrasting backgrounds
     const textElements = page.locator('nav button, nav a').first();
@@ -568,9 +571,9 @@ test.describe('Accessibility and Readability Tests', () => {
 
   test('interactive elements should have visual feedback', async ({ page }) => {
     await page.setViewportSize(VIEWPORTS.mobile.iphone12);
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
-    const menuToggle = page.locator('button.md\\:hidden').first();
+    const menuToggle = page.locator('nav button.md\\:hidden');
 
     // Check for transition or hover styles
     const transition = await menuToggle.evaluate((el) => {
@@ -589,7 +592,7 @@ test.describe('Performance Tests on Mobile', () => {
 
   test('page should load within reasonable time on mobile', async ({ page }) => {
     const startTime = Date.now();
-    await page.goto(BASE_URL);
+    await page.goto('/');
     const loadTime = Date.now() - startTime;
 
     // Should load within 5 seconds
@@ -597,7 +600,7 @@ test.describe('Performance Tests on Mobile', () => {
   });
 
   test('images should lazy load on mobile', async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto('/');
 
     // Check if images have loading attribute
     const images = page.locator('img');

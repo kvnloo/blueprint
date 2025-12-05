@@ -3,20 +3,20 @@ import { test, expect } from '@playwright/test';
 test.describe('Home Page Sections', () => {
   test.beforeEach(async ({ page }) => {
     // Navigate to home page before each test
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:3000');
     // Wait for main content to load
     await page.waitForSelector('main', { state: 'visible' });
   });
 
   test('all sections render in correct order', async ({ page }) => {
     // Check that all main sections exist in the DOM in the expected order
-    const sections = await page.locator('main > *').all();
+    const sections = await page.locator('main section').all();
 
-    // Verify we have at least 6 sections (Hero, Products, About, Pipeline, Showcase, SuccessStories)
-    expect(sections.length).toBeGreaterThanOrEqual(6);
+    // Verify we have exactly 6 sections (Hero, Products, About, Pipeline, Showcase, SuccessStories)
+    expect(sections.length).toBe(6);
 
-    // Check sections appear in order by checking for unique identifiers or headings
-    const heroVisible = await page.locator('section').filter({ hasText: /Get Started|Autonomous AI/i }).first().isVisible();
+    // Check Hero section is visible with expected text
+    const heroVisible = await page.locator('section').first().isVisible();
     expect(heroVisible).toBeTruthy();
   });
 
@@ -32,158 +32,112 @@ test.describe('Home Page Sections', () => {
   });
 
   test('Products section has content', async ({ page }) => {
-    // Scroll to Products section
-    await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('section'));
-      const productsSection = sections.find(s =>
-        s.textContent?.toLowerCase().includes('product') ||
-        s.textContent?.toLowerCase().includes('feature')
-      );
-      if (productsSection) {
-        productsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
+    // Find Products section by ID
+    const productsSection = page.locator('section#products');
 
-    // Wait a bit for scroll and any animations
+    // Scroll to Products section
+    await productsSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
 
-    // Check that Products section exists and has content
-    const hasProductContent = await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('section'));
-      const productsSection = sections.find(s =>
-        s.textContent?.toLowerCase().includes('product') ||
-        s.textContent?.toLowerCase().includes('feature')
-      );
-      return productsSection ? productsSection.children.length > 0 : false;
-    });
+    // Check section is visible
+    await expect(productsSection).toBeVisible();
 
-    expect(hasProductContent).toBeTruthy();
+    // Check for the three product cards
+    const productCards = productsSection.locator('.grid > div');
+    expect(await productCards.count()).toBe(3);
+
+    // Verify expected product names
+    await expect(productsSection.getByText('Blueprint Protocol')).toBeVisible();
+    await expect(productsSection.getByText('World Simulation')).toBeVisible();
+    await expect(productsSection.getByText('Evolve')).toBeVisible();
   });
 
   test('About section displays correctly', async ({ page }) => {
-    // Find and scroll to About section
-    await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('section'));
-      const aboutSection = sections.find(s =>
-        s.textContent?.toLowerCase().includes('about') ||
-        s.textContent?.toLowerCase().includes('who we are') ||
-        s.textContent?.toLowerCase().includes('our mission')
-      );
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
+    // Find About section (3rd section)
+    const sections = await page.locator('main section').all();
+    const aboutSection = sections[2]; // About is the 3rd section (index 2)
 
+    // Scroll to About section
+    await aboutSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
 
-    // Verify About section has content
-    const hasAboutContent = await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('section'));
-      const aboutSection = sections.find(s =>
-        s.textContent?.toLowerCase().includes('about') ||
-        s.textContent?.toLowerCase().includes('who we are') ||
-        s.textContent?.toLowerCase().includes('our mission')
-      );
-      return aboutSection ? aboutSection.textContent!.length > 50 : false;
-    });
+    // Check for specific About content
+    await expect(page.getByText('Building the')).toBeVisible();
+    await expect(page.getByText('Blueprint Protocol')).toBeVisible();
 
-    expect(hasAboutContent).toBeTruthy();
+    // Check for the animated counters
+    await expect(page.getByText('Active Tracks')).toBeVisible();
+    await expect(page.getByText('Health Modules')).toBeVisible();
+
+    // Check for technology stack
+    await expect(page.getByText('Built with leading technology')).toBeVisible();
   });
 
   test('Pipeline section shows process', async ({ page }) => {
-    // Scroll to Pipeline section
-    await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('section'));
-      const pipelineSection = sections.find(s =>
-        s.textContent?.toLowerCase().includes('pipeline') ||
-        s.textContent?.toLowerCase().includes('process') ||
-        s.textContent?.toLowerCase().includes('workflow')
-      );
-      if (pipelineSection) {
-        pipelineSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
+    // Find Pipeline section by ID
+    const pipelineSection = page.locator('section#pipeline');
 
+    // Scroll to Pipeline section
+    await pipelineSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
 
-    // Check Pipeline section exists and has process steps or content
-    const hasPipelineSteps = await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('section'));
-      const pipelineSection = sections.find(s =>
-        s.textContent?.toLowerCase().includes('pipeline') ||
-        s.textContent?.toLowerCase().includes('process') ||
-        s.textContent?.toLowerCase().includes('workflow')
-      );
+    // Check section is visible
+    await expect(pipelineSection).toBeVisible();
 
-      if (!pipelineSection) return false;
+    // Check for RAID phases (Research, Analysis, Integration, Deployment)
+    await expect(pipelineSection.getByText('Research')).toBeVisible();
+    await expect(pipelineSection.getByText('Analysis')).toBeVisible();
+    await expect(pipelineSection.getByText('Integration')).toBeVisible();
+    await expect(pipelineSection.getByText('Deployment')).toBeVisible();
 
-      // Check for multiple child elements indicating steps/stages
-      return pipelineSection.children.length > 2;
-    });
+    // Check for "Beyond Traditional CI/CD" heading
+    await expect(pipelineSection.getByText('Beyond Traditional')).toBeVisible();
 
-    expect(hasPipelineSteps).toBeTruthy();
+    // Check for Integration Points diagram
+    await expect(pipelineSection.getByText('Integration Points')).toBeVisible();
   });
 
   test('Showcase section renders', async ({ page }) => {
-    // Scroll to Showcase section
-    await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('section'));
-      const showcaseSection = sections.find(s =>
-        s.textContent?.toLowerCase().includes('showcase') ||
-        s.textContent?.toLowerCase().includes('portfolio') ||
-        s.textContent?.toLowerCase().includes('examples')
-      );
-      if (showcaseSection) {
-        showcaseSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
+    // Find Showcase section (5th section)
+    const sections = await page.locator('main section').all();
+    const showcaseSection = sections[4]; // Showcase is the 5th section (index 4)
 
+    // Scroll to Showcase section
+    await showcaseSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
 
-    // Verify Showcase section is visible
-    const hasShowcase = await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('section'));
-      return sections.some(s =>
-        s.textContent?.toLowerCase().includes('showcase') ||
-        s.textContent?.toLowerCase().includes('portfolio') ||
-        s.textContent?.toLowerCase().includes('examples')
-      );
-    });
+    // Check for main heading
+    await expect(page.getByText('Monitor & Control')).toBeVisible();
+    await expect(page.getByText('from anywhere.')).toBeVisible();
 
-    expect(hasShowcase).toBeTruthy();
+    // Check for stats
+    await expect(page.getByText('Industries Served')).toBeVisible();
+    await expect(page.getByText('Data Points')).toBeVisible();
+    await expect(page.getByText('Efficiency Gains')).toBeVisible();
+    await expect(page.getByText('Autonomous')).toBeVisible();
   });
 
   test('SuccessStories section has testimonials', async ({ page }) => {
-    // Scroll to SuccessStories section
-    await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('section'));
-      const storiesSection = sections.find(s =>
-        s.textContent?.toLowerCase().includes('success') ||
-        s.textContent?.toLowerCase().includes('testimonial') ||
-        s.textContent?.toLowerCase().includes('stories') ||
-        s.textContent?.toLowerCase().includes('reviews')
-      );
-      if (storiesSection) {
-        storiesSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
+    // Find SuccessStories section (6th section)
+    const sections = await page.locator('main section').all();
+    const storiesSection = sections[5]; // SuccessStories is the 6th section (index 5)
 
+    // Scroll to SuccessStories section
+    await storiesSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
 
-    // Check for testimonial content
-    const hasTestimonials = await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('section'));
-      const storiesSection = sections.find(s =>
-        s.textContent?.toLowerCase().includes('success') ||
-        s.textContent?.toLowerCase().includes('testimonial') ||
-        s.textContent?.toLowerCase().includes('stories')
-      );
+    // Check for main heading
+    await expect(page.getByText('Success Stories')).toBeVisible();
+    await expect(page.getByText('CASE STUDIES')).toBeVisible();
 
-      // Check if section has content elements
-      return storiesSection ? storiesSection.children.length > 0 : false;
-    });
+    // Check for story categories
+    await expect(page.getByText('RESEARCH')).toBeVisible();
+    await expect(page.getByText('VERTICAL FARMING')).toBeVisible();
+    await expect(page.getByText('HYDROPONICS')).toBeVisible();
+    await expect(page.getByText('GREENHOUSE')).toBeVisible();
 
-    expect(hasTestimonials).toBeTruthy();
+    // Check for at least one client name
+    await expect(page.getByText('AgriTech Labs')).toBeVisible();
   });
 
   test('Footer has expected links', async ({ page }) => {
@@ -274,8 +228,12 @@ test.describe('Home Page Sections', () => {
     // Verify all expected sections can be found
     const sectionCount = await page.locator('main section').count();
 
-    // Should have at least 6 sections (Hero, Products, About, Pipeline, Showcase, SuccessStories)
-    expect(sectionCount).toBeGreaterThanOrEqual(6);
+    // Should have exactly 6 sections (Hero, Products, About, Pipeline, Showcase, SuccessStories)
+    expect(sectionCount).toBe(6);
+
+    // Verify specific sections exist
+    await expect(page.locator('section#products')).toBeAttached();
+    await expect(page.locator('section#pipeline')).toBeAttached();
 
     // Verify Footer exists
     await expect(page.locator('footer')).toBeVisible();

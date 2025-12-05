@@ -815,13 +815,16 @@ export const ASCIIArtVis: React.FC<VisProps> = ({ data, className = '' }) => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [revealed, setRevealed] = useState(false);
 
+  // Null check to prevent crashes when data is missing
+  if (!data || !data.content) return null;
+
   useEffect(() => {
     if (isInView && !revealed) {
       setRevealed(true);
     }
   }, [isInView, revealed]);
 
-  const lines = (data.content || '').split('\n');
+  const lines = data.content.split('\n');
 
   return (
     <div ref={ref} className={`my-12 overflow-hidden ${className}`}>
