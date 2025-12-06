@@ -804,7 +804,7 @@ class CookingFrame:
     },
     {
       type: 'text',
-      text: '**Data Volume:**\n\n| Component | Rate | Size/Second | 1 Hour | 670 Hours |\n|-----------|------|-------------|--------|-----------|\\n| RGB (8 cam, 4K) | 30 fps | 2.9 GB/s | 10.4 TB | 7 PB |\n| Depth (4 cam) | 30 fps | 460 MB/s | 1.7 TB | 1.1 PB |\n| Force/Torque | 1 kHz | 480 KB/s | 1.7 GB | 1.1 TB |\n| Audio | 48 kHz | 192 KB/s | 691 MB | 450 GB |\n| Motion capture | 100 Hz | 240 KB/s | 864 MB | 562 GB |\n| **Total (raw)** | - | ~3.4 GB/s | **12 TB** | **~8 PB** |\n| **Compressed** | - | - | ~1.2 TB | **~800 TB** |'
+      text: '**Data Volume:**\n\n| Component | Rate | Size/Second | 1 Hour | 670 Hours |\n|-----------|------|-------------|--------|-----------|\n| RGB (8 cam, 4K) | 30 fps | 2.9 GB/s | 10.4 TB | 7 PB |\n| Depth (4 cam) | 30 fps | 460 MB/s | 1.7 TB | 1.1 PB |\n| Force/Torque | 1 kHz | 480 KB/s | 1.7 GB | 1.1 TB |\n| Audio | 48 kHz | 192 KB/s | 691 MB | 450 GB |\n| Motion capture | 100 Hz | 240 KB/s | 864 MB | 562 GB |\n| **Total (raw)** | - | ~3.4 GB/s | **12 TB** | **~8 PB** |\n| **Compressed** | - | - | ~1.2 TB | **~800 TB** |'
     },
     {
       type: 'subheader',
@@ -1158,7 +1158,7 @@ class CookingFrame:
     },
     {
       type: 'text',
-      text: '| Crop | Growth Time | Yield/sqft/month | Nutrient Density | Difficulty | ROI Score |\n|------|-------------|------------------|------------------|------------|-----------|\\n| Microgreens | 7-14 days | 4-8 oz | ★★★★★ | Easy | **97** |\n| Lettuce | 30-45 days | 1-2 heads | ★★★☆☆ | Easy | 82 |\n| Herbs (basil) | 28+ days | Continuous | ★★★★☆ | Easy | 85 |\n| Spinach | 35-45 days | 0.5-1 lb | ★★★★★ | Medium | 78 |\n| Tomatoes | 60-80 days | 2-4 lbs | ★★★☆☆ | Medium | 65 |\n| Broccoli | 70-100 days | 0.5-1 lb | ★★★★★ | Hard | 45 |'
+      text: '| Crop | Growth Time | Yield/sqft/month | Nutrient Density | Difficulty | ROI Score |\n|------|-------------|------------------|------------------|------------|-----------|\n| Microgreens | 7-14 days | 4-8 oz | ★★★★★ | Easy | **97** |\n| Lettuce | 30-45 days | 1-2 heads | ★★★☆☆ | Easy | 82 |\n| Herbs (basil) | 28+ days | Continuous | ★★★★☆ | Easy | 85 |\n| Spinach | 35-45 days | 0.5-1 lb | ★★★★★ | Medium | 78 |\n| Tomatoes | 60-80 days | 2-4 lbs | ★★★☆☆ | Medium | 65 |\n| Broccoli | 70-100 days | 0.5-1 lb | ★★★★★ | Hard | 45 |'
     },
     {
       type: 'text',
@@ -2064,7 +2064,7 @@ Full integration        │         │         │          │ NOBODY HAS DONE
     },
     {
       type: 'text',
-      text: '| Component | Specification | Cost Estimate |\n|-----------|---------------|---------------|\\n| Base | Mobile manipulator (dual-arm) | $100-200K |\n| Arms | 7-DOF per arm, 3kg payload | (included) |\n| Grippers | Parallel jaw + compliant fingers | $10-20K |\n| Force/torque sensors | 6-axis per wrist | $10K |\n| Cameras | 4× RGB-D, 1× wide-angle | $5K |\n| Compute | Orin AGX + edge inference | $5K |\n| **Total** | | **~$130-240K** |'
+      text: '| Component | Specification | Cost Estimate |\n|-----------|---------------|---------------|\n| Base | Mobile manipulator (dual-arm) | $100-200K |\n| Arms | 7-DOF per arm, 3kg payload | (included) |\n| Grippers | Parallel jaw + compliant fingers | $10-20K |\n| Force/torque sensors | 6-axis per wrist | $10K |\n| Cameras | 4× RGB-D, 1× wide-angle | $5K |\n| Compute | Orin AGX + edge inference | $5K |\n| **Total** | | **~$130-240K** |'
     },
     {
       type: 'subheader',
@@ -2072,7 +2072,7 @@ Full integration        │         │         │          │ NOBODY HAS DONE
     },
     {
       type: 'text',
-      text: '| Component | Specification | Cost Estimate |\n|-----------|---------------|---------------|\\n| Camera array | 8× 4K @ 60fps, synced | $8K |\n| Depth cameras | 4× RealSense D455 | $2K |\n| Thermal camera | FLIR A700 | $6K |\n| Motion capture | Vicon or markerless | $5-50K |\n| IMU gloves | Manus/StretchSense | $10K |\n| Instrumented tools | 10 tools with F/T | $15K |\n| Force plates | AMTI/Bertec | $8K |\n| Eye tracking | Pupil Labs | $10K |\n| Compute/storage | Workstation + NAS | $10K |\n| Kitchen buildout | Counters, appliances | $20K |\n| **Total** | | **~$100-150K** |'
+      text: '| Component | Specification | Cost Estimate |\n|-----------|---------------|---------------|\n| Camera array | 8× 4K @ 60fps, synced | $8K |\n| Depth cameras | 4× RealSense D455 | $2K |\n| Thermal camera | FLIR A700 | $6K |\n| Motion capture | Vicon or markerless | $5-50K |\n| IMU gloves | Manus/StretchSense | $10K |\n| Instrumented tools | 10 tools with F/T | $15K |\n| Force plates | AMTI/Bertec | $8K |\n| Eye tracking | Pupil Labs | $10K |\n| Compute/storage | Workstation + NAS | $10K |\n| Kitchen buildout | Counters, appliances | $20K |\n| **Total** | | **~$100-150K** |'
     },
     {
       type: 'subheader',
@@ -2080,7 +2080,7 @@ Full integration        │         │         │          │ NOBODY HAS DONE
     },
     {
       type: 'text',
-      text: '| Component | Specification | Cost Estimate |\n|-----------|---------------|---------------|\\n| Grow rack | 4-tier, 16 sqft growing | $500 |\n| LED lighting | 800W full spectrum | $800 |\n| Hydroponic system | NFT + reservoir | $400 |\n| Climate control | Exhaust, humidity | $600 |\n| Sensors | Temp, humidity, EC, pH | $300 |\n| Controller | Raspberry Pi + relays | $200 |\n| **Total** | | **~$2,800** |'
+      text: '| Component | Specification | Cost Estimate |\n|-----------|---------------|---------------|\n| Grow rack | 4-tier, 16 sqft growing | $500 |\n| LED lighting | 800W full spectrum | $800 |\n| Hydroponic system | NFT + reservoir | $400 |\n| Climate control | Exhaust, humidity | $600 |\n| Sensors | Temp, humidity, EC, pH | $300 |\n| Controller | Raspberry Pi + relays | $200 |\n| **Total** | | **~$2,800** |'
     },
     {
       type: 'subheader',

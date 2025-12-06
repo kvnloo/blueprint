@@ -1638,7 +1638,7 @@ HYDROPONIC SUPPLIES:
 
 *This document is a living guide. As you grow, update it with your discoveries.*
 
-*ECE Solutions LLC — Growing the Future, One Living Space at a Time*
+*zer0 LLC — Growing the Future, One Living Space at a Time*
 
 ---
 
