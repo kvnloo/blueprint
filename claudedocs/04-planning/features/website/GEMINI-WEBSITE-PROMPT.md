@@ -1,8 +1,8 @@
 # Gemini 3 Pro Prompt Guide for Website Showcase
 
-> **UPDATE**: For cloning the Lumina template design, see [GEMINI-CLONE-PROMPT.md](GEMINI-CLONE-PROMPT.md) which contains detailed instructions for replicating the exact design with ECE Solutions branding.
+> **UPDATE**: For cloning the Lumina template design, see [GEMINI-CLONE-PROMPT.md](GEMINI-CLONE-PROMPT.md) which contains detailed instructions for replicating the exact design with zer0 branding.
 
-This document contains optimized system instructions and prompts for using Gemini 3 Pro to build the ECE Solutions LLC showcase website from scratch (original design approach).
+This document contains optimized system instructions and prompts for using Gemini 3 Pro to build the zer0 LLC showcase website from scratch (original design approach).
 
 ## Table of Contents
 
@@ -99,7 +99,7 @@ Use this prompt to generate the initial showcase website:
 
 ```xml
 <context>
-Design a high-impact portfolio/showcase website for ECE Solutions LLC - an AI consulting company specializing in autonomous AI agent systems, digital twin technologies for controlled environment agriculture (CEA), and multi-agent orchestration frameworks.
+Design a high-impact portfolio/showcase website for zer0 LLC - an AI consulting company specializing in autonomous AI agent systems, digital twin technologies for controlled environment agriculture (CEA), and multi-agent orchestration frameworks.
 
 The founder has deep expertise in:
 - Claude Flow, SuperClaude, CCPM multi-agent orchestration
