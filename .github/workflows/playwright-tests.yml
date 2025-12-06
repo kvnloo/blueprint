@@ -36,12 +36,14 @@ jobs:
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium firefox webkit
+        working-directory: website
 
       - name: Build application
         run: npm run build
 
       - name: Run Playwright tests
-        run: npx playwright test --config=../tests/playwright.config.ts
+        run: npx playwright test --config=tests/playwright.config.ts
+        working-directory: website
         env:
           CI: true
           PLAYWRIGHT_BASE_URL: http://localhost:3000
@@ -93,12 +95,14 @@ jobs:
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
+        working-directory: website
 
       - name: Build application
         run: npm run build
 
       - name: Run smoke tests (Chromium only)
-        run: npx playwright test --config=../tests/playwright.config.ts --project=chromium navigation.spec.ts home-sections.spec.ts
+        run: npx playwright test --config=tests/playwright.config.ts --project=chromium navigation.spec.ts home-sections.spec.ts
+        working-directory: website
         env:
           CI: true
           PLAYWRIGHT_BASE_URL: http://localhost:3000
