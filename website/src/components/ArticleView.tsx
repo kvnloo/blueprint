@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { researchData, ArticleSection } from '../data/researchData';
+import { useSEO, generateArticleSchema } from '../hooks';
 import {
   FloorPlanVis,
   HierarchyVis,
@@ -47,6 +48,41 @@ const ArticleView = ({ articleId, onBack }: { articleId: string, onBack: () => v
   const [verificationStatus, setVerificationStatus] = useState<'verifying' | 'valid' | 'truncated'>('verifying');
   const [tocItems, setTocItems] = useState<TOCItem[]>([]);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  // Dynamic SEO for article pages
+  useSEO(article ? {
+    title: article.title,
+    description: article.description,
+    type: 'article',
+    article: {
+      section: Array.isArray(article.track) ? article.track.join(', ') : article.track,
+      tags: Array.isArray(article.track) ? article.track : [article.track],
+    }
+  } : {});
+
+  // Inject article structured data
+  useEffect(() => {
+    if (!article) return;
+
+    const schema = generateArticleSchema(article);
+    const scriptId = 'article-schema';
+
+    // Remove existing script if present
+    const existing = document.getElementById(scriptId);
+    if (existing) existing.remove();
+
+    // Create new script element
+    const script = document.createElement('script');
+    script.id = scriptId;
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+
+    return () => {
+      const el = document.getElementById(scriptId);
+      if (el) el.remove();
+    };
+  }, [article]);
 
   // Helper to get text content from any property name variant
   const getBlockText = (block: ArticleSection): string => {

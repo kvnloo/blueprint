@@ -83,9 +83,11 @@ test.describe('Navigation Flow Tests', () => {
     await expect(servicesButton).toHaveClass(/text-teal-400/);
 
     // Verify Research is no longer active (check it doesn't have the active class standalone)
-    const researchClass = await researchButton.getAttribute('class');
-    // Should not have text-teal-400 except in hover: prefix
-    expect(researchClass).not.toMatch(/(?<!hover:)text-teal-400/);
+    const researchClass = await researchButton.getAttribute('class') || '';
+    // Should not have text-teal-400 as a standalone class (only hover:text-teal-400 is allowed)
+    // Split by space and check if text-teal-400 exists as standalone
+    const hasActiveClass = researchClass.split(' ').some(cls => cls === 'text-teal-400');
+    expect(hasActiveClass).toBe(false);
 
     // Verify scroll to top
     const scrollY = await page.evaluate(() => window.scrollY);
@@ -107,9 +109,10 @@ test.describe('Navigation Flow Tests', () => {
 
     // Verify Research is no longer active (check it doesn't have the active class standalone)
     const researchButton = page.locator('button:has-text("Research")').first();
-    const researchClass = await researchButton.getAttribute('class');
-    // Should not have text-teal-400 except in hover: prefix
-    expect(researchClass).not.toMatch(/(?<!hover:)text-teal-400/);
+    const researchClass = await researchButton.getAttribute('class') || '';
+    // Should not have text-teal-400 as a standalone class (only hover:text-teal-400 is allowed)
+    const hasResearchActive = researchClass.split(' ').some(cls => cls === 'text-teal-400');
+    expect(hasResearchActive).toBe(false);
 
     // Verify scroll to top
     const scrollY = await page.evaluate(() => window.scrollY);
@@ -224,9 +227,10 @@ test.describe('Navigation Flow Tests', () => {
     await expect(servicesButton).toHaveClass(/text-teal-400/);
 
     // Check research button doesn't have active class (only hover class)
-    let researchClass = await researchButton.getAttribute('class');
-    // Should not have text-teal-400 except in hover: prefix
-    expect(researchClass).not.toMatch(/(?<!hover:)text-teal-400/);
+    let researchClass = await researchButton.getAttribute('class') || '';
+    // Should not have text-teal-400 as a standalone class (only hover:text-teal-400 is allowed)
+    let researchHasActive = researchClass.split(' ').some(cls => cls === 'text-teal-400');
+    expect(researchHasActive).toBe(false);
 
     // Navigate to Research
     await researchButton.click();
@@ -235,9 +239,10 @@ test.describe('Navigation Flow Tests', () => {
     // Research should be active, Services should not
     await expect(researchButton).toHaveClass(/text-teal-400/);
 
-    let servicesClass = await servicesButton.getAttribute('class');
-    // Should not have text-teal-400 except in hover: prefix
-    expect(servicesClass).not.toMatch(/(?<!hover:)text-teal-400/);
+    let servicesClass = await servicesButton.getAttribute('class') || '';
+    // Should not have text-teal-400 as a standalone class (only hover:text-teal-400 is allowed)
+    let servicesHasActive = servicesClass.split(' ').some(cls => cls === 'text-teal-400');
+    expect(servicesHasActive).toBe(false);
 
     // Navigate back to home via logo
     await page.locator('button:has-text("zer0")').first().click();
@@ -246,9 +251,10 @@ test.describe('Navigation Flow Tests', () => {
     // Services should be active again
     await expect(servicesButton).toHaveClass(/text-teal-400/);
 
-    researchClass = await researchButton.getAttribute('class');
-    // Should not have text-teal-400 except in hover: prefix
-    expect(researchClass).not.toMatch(/(?<!hover:)text-teal-400/);
+    researchClass = await researchButton.getAttribute('class') || '';
+    // Should not have text-teal-400 as a standalone class (only hover:text-teal-400 is allowed)
+    researchHasActive = researchClass.split(' ').some(cls => cls === 'text-teal-400');
+    expect(researchHasActive).toBe(false);
   });
 
   test('should handle Projects and Pricing navigation (route to home)', async ({ page }) => {
