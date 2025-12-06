@@ -2,7 +2,7 @@
 
 ## A Technical Roadmap for Simulation-Trained Robotic Cooking, Autonomous Gardening, and Closed-Loop Human Performance Optimization
 
-**Authors:** Kevin Rajan, ECE Solutions LLC  
+**Authors:** Kevin Rajan, zer0 LLC  
 **Date:** December 2025  
 **Version:** 1.0  
 **Status:** Research Proposal / Engineering Roadmap

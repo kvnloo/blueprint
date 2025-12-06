@@ -1738,7 +1738,7 @@ Peppers:        70-90 days (from transplant)
 
 *This document is a living guide. As you grow, update it with your discoveries.*
 
-*ECE Solutions LLC — Growing the Future, One System at a Time*
+*zer0 LLC — Growing the Future, One System at a Time*
 
 ---
 

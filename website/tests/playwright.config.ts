@@ -34,8 +34,8 @@ export default defineConfig({
 
   // Shared settings for all projects
   use: {
-    // Base URL for tests
-    baseURL: 'http://localhost:3000',
+    // Base URL for tests - use environment variable if set, fallback to 3000
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000',
 
     // Collect trace on first retry of failed test
     trace: 'on-first-retry',
