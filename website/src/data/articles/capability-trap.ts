@@ -29,7 +29,7 @@ export const capabilityTrap: Article = {
         title: 'THE UNCOMFORTABLE QUESTION',
         cards: [
           {
-            title: 'Deep Blue beat Garry Kasparov in 1997',
+            title: '[Deep Blue](https://ibm.com/ibm/history/ibm100/us/en/icons/deepblue) beat Garry Kasparov in 1997',
             description: 'Could Deep Blue play checkers? No.\n\nCould it have a conversation about chess? No.\n\nDid it understand what a "game" was? No.',
             icon: 'brain'
           },
@@ -175,7 +175,7 @@ export const capabilityTrap: Article = {
     },
     {
       type: 'text',
-      text: 'In 2024, NVIDIA Research published Eureka-a system that generates reward functions for robotic reinforcement learning. Here\'s what makes it fascinating: Eureka achieved an 83% win rate against human experts at designing reward functions. It enabled the first-ever simulated robot to perform rapid pen spinning-a task that had defeated previous systems.'
+      text: 'In 2024, NVIDIA Research published [Eureka](https://arxiv.org/abs/2310.12931)-a system that generates reward functions for robotic reinforcement learning. Here\'s what makes it fascinating: Eureka achieved an 83% win rate against human experts at designing reward functions. It enabled the first-ever simulated robot to perform rapid pen spinning-a task that had defeated previous systems.'
     },
     {
       type: 'text',
@@ -197,7 +197,7 @@ export const capabilityTrap: Article = {
           {
             title: 'Evaluation Phase',
             icon: 'zap',
-            description: 'GPU-accelerated simulation tests all candidates in parallel. Isaac Gym runs thousands of trials per candidate. Pure empirical measurement—does it work or not?',
+            description: 'GPU-accelerated simulation tests all candidates in parallel. [Isaac Gym](https://developer.nvidia.com/isaac-gym) runs thousands of trials per candidate. Pure empirical measurement—does it work or not?',
             metrics: ['Thousands of trials per candidate', 'Parallel GPU execution']
           },
           {
@@ -247,7 +247,7 @@ export const capabilityTrap: Article = {
     },
     {
       type: 'text',
-      text: 'In 2023, researchers from NVIDIA, Caltech, UT Austin, and Stanford released Voyager-an agent that plays Minecraft and learns new skills over time. Voyager became the first LLM-powered agent to reach diamond-tier tools in Minecraft, achieving 15.3x improvement over baselines.'
+      text: 'In 2023, researchers from NVIDIA, Caltech, UT Austin, and Stanford released [Voyager](https://voyager.minedojo.org)-an agent that plays Minecraft and learns new skills over time. Voyager became the first LLM-powered agent to reach diamond-tier tools in Minecraft, achieving 15.3x improvement over baselines.'
     },
     {
       type: 'text',
@@ -300,11 +300,11 @@ export const capabilityTrap: Article = {
     },
     {
       type: 'subheader',
-      text: '2.3 AlphaEvolve: Evolutionary Intelligence'
+      text: '2.3 [AlphaEvolve](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/): Evolutionary Intelligence'
     },
     {
       type: 'text',
-      text: 'In May 2025, Google DeepMind released AlphaEvolve-a system that uses evolutionary algorithms to discover novel solutions to hard mathematical and computational problems. AlphaEvolve discovered a new algorithm for 4×4 complex matrix multiplication using only 48 multiplications-the first improvement to Strassen\'s 1969 algorithm in 56 years.'
+      text: 'In May 2025, Google DeepMind released [AlphaEvolve](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/)-a system that uses evolutionary algorithms to discover novel solutions to hard mathematical and computational problems. AlphaEvolve discovered a new algorithm for 4×4 complex matrix multiplication using only 48 multiplications-the first improvement to [Strassen\'s 1969 algorithm](https://doi.org/10.1007/BF02165411) in 56 years.'
     },
     {
       type: 'text',

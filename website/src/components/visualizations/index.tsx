@@ -8,6 +8,28 @@ import {
 } from 'lucide-react';
 
 // ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+
+/**
+ * Processes text to handle escaped newlines and format properly.
+ * Handles both string and array content formats.
+ */
+const processTextContent = (text: string | string[] | undefined): string => {
+  if (!text) return '';
+  // Handle array content by joining with newlines
+  if (Array.isArray(text)) {
+    return text.join('\n');
+  }
+  // Handle string content with escaped newlines
+  if (typeof text === 'string') {
+    return text.replace(/\\n/g, '\n');
+  }
+  // Fallback for other types - convert to string
+  return String(text);
+};
+
+// ============================================================================
 // TYPES & INTERFACES
 // ============================================================================
 
@@ -45,11 +67,17 @@ export interface HierarchyNode {
 
 export interface ProcessStep {
   id: string;
-  label: string;
+  label?: string;
+  name?: string; // Alternative to label
   description?: string;
+  subtitle?: string; // Alternative to description
   duration?: string;
+  timeframe?: string; // Alternative to duration
   icon?: string;
   substeps?: string[];
+  details?: string[]; // Alternative to substeps
+  importance?: string;
+  color?: string;
 }
 
 export interface MetricCard {
@@ -147,9 +175,9 @@ export const FloorPlanVis: React.FC<VisProps> = ({ data, className = '' }) => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="text-sm text-gray-400 mt-3 leading-relaxed"
+                    className="text-sm text-gray-400 mt-3 leading-relaxed whitespace-pre-line"
                   >
-                    {room.description}
+                    {processTextContent(room.description)}
                   </motion.p>
                 )}
               </AnimatePresence>
@@ -178,7 +206,31 @@ export const HierarchyVis: React.FC<VisProps> = ({ data, className = '' }) => {
 
   // Null check to prevent blank rendering
   if (!data) return null;
-  if (!data.root && (!data.nodes || data.nodes.length === 0)) return null;
+
+  // Support multiple data formats:
+  // 1. data.root (single root node with children)
+  // 2. data.nodes (array of nodes)
+  // 3. data.levels (pyramid-style levels array)
+  const hasRootOrNodes = data.root || (data.nodes && data.nodes.length > 0);
+  const hasLevels = data.levels && data.levels.length > 0;
+
+  if (!hasRootOrNodes && !hasLevels) return null;
+
+  // Convert levels format to nodes format if needed
+  const convertLevelsToNodes = (levels: any[]): HierarchyNode[] => {
+    return levels.map((level: any) => ({
+      id: level.id || `level-${level.level || levels.indexOf(level)}`,
+      label: level.name || level.label || '',
+      description: level.description || level.subtitle || '',
+      icon: level.icon,
+      color: level.color,
+      metrics: level.importance ? [{ label: 'Priority', value: level.importance }] : undefined,
+      children: undefined
+    }));
+  };
+
+  // Use levels if available and no root/nodes
+  const effectiveNodes = hasRootOrNodes ? null : convertLevelsToNodes(data.levels);
 
   const toggleNode = (id: string) => {
     setExpanded(prev => {
@@ -232,7 +284,7 @@ export const HierarchyVis: React.FC<VisProps> = ({ data, className = '' }) => {
           <div className="flex-1">
             <div className="font-medium text-white text-sm">{node.label}</div>
             {node.description && (
-              <div className="text-xs text-gray-500 mt-0.5">{node.description}</div>
+              <div className="text-xs text-gray-500 mt-0.5 whitespace-pre-line">{processTextContent(node.description)}</div>
             )}
           </div>
 
@@ -271,8 +323,15 @@ export const HierarchyVis: React.FC<VisProps> = ({ data, className = '' }) => {
           {data.title}
         </h4>
       )}
+      {data.subtitle && (
+        <p className="text-sm text-gray-400 mb-4">{data.subtitle}</p>
+      )}
+      {data.description && (
+        <p className="text-xs text-gray-500 mb-6 italic">{data.description}</p>
+      )}
       {data.root && renderNode(data.root)}
       {data.nodes && data.nodes.map((node: HierarchyNode) => renderNode(node))}
+      {effectiveNodes && effectiveNodes.map((node: HierarchyNode) => renderNode(node))}
     </div>
   );
 };
@@ -281,14 +340,24 @@ export const HierarchyVis: React.FC<VisProps> = ({ data, className = '' }) => {
 // 3. PROCESS FLOW TIMELINE
 // ============================================================================
 
+// Helper to get step label (supports both label and name)
+const getStepLabel = (step: ProcessStep): string => step.label || step.name || '';
+// Helper to get step substeps (supports both substeps and details)
+const getStepSubsteps = (step: ProcessStep): string[] => step.substeps || step.details || [];
+// Helper to get step duration (supports both duration and timeframe)
+const getStepDuration = (step: ProcessStep): string | undefined => step.duration || step.timeframe;
+// Helper to get step description (supports both description and subtitle)
+const getStepDescription = (step: ProcessStep): string | undefined => step.description || step.subtitle;
+
 // Calculate reading time based on text length (average 200 words per minute)
 const calculateStepDuration = (step: ProcessStep): number => {
   const baseTime = 2000; // Minimum 2 seconds
   const wordsPerMs = 200 / 60000; // words per millisecond
 
-  let textLength = (step.label?.length || 0) + (step.description?.length || 0);
-  if (step.substeps) {
-    textLength += step.substeps.join(' ').length;
+  let textLength = (getStepLabel(step).length || 0) + (getStepDescription(step)?.length || 0);
+  const substeps = getStepSubsteps(step);
+  if (substeps.length > 0) {
+    textLength += substeps.join(' ').length;
   }
 
   // Estimate word count (average 5 chars per word)
@@ -388,10 +457,10 @@ export const ProcessFlowVis: React.FC<VisProps> = ({ data, className = '' }) => 
                     text-xs font-medium transition-colors duration-200
                     ${isActive ? 'text-teal-400' : 'text-gray-500'}
                   `}>
-                    {step.label}
+                    {getStepLabel(step)}
                   </div>
-                  {step.duration && (
-                    <div className="text-[10px] text-gray-600 mt-0.5">{step.duration}</div>
+                  {getStepDuration(step) && (
+                    <div className="text-[10px] text-gray-600 mt-0.5">{getStepDuration(step)}</div>
                   )}
                 </div>
               </motion.div>
@@ -410,15 +479,15 @@ export const ProcessFlowVis: React.FC<VisProps> = ({ data, className = '' }) => 
             exit={{ opacity: 0, y: -10 }}
             className="p-6 bg-white/5 border border-white/10 rounded-xl"
           >
-            <h5 className="font-bold text-white mb-2">{steps[activeStep].label}</h5>
-            {steps[activeStep].description && (
+            <h5 className="font-bold text-white mb-2">{getStepLabel(steps[activeStep])}</h5>
+            {getStepDescription(steps[activeStep]) && (
               <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                {steps[activeStep].description}
+                {getStepDescription(steps[activeStep])}
               </p>
             )}
-            {steps[activeStep].substeps && (
+            {getStepSubsteps(steps[activeStep]).length > 0 && (
               <ul className="space-y-2">
-                {steps[activeStep].substeps.map((sub, i) => (
+                {getStepSubsteps(steps[activeStep]).map((sub, i) => (
                   <motion.li
                     key={i}
                     initial={{ opacity: 0, x: -10 }}
@@ -656,18 +725,47 @@ export const RadialProgressVis: React.FC<VisProps> = ({ data, className = '' }) 
 };
 
 // ============================================================================
-// 7. INTERACTIVE CHECKLIST
+// 7. INTERACTIVE CHECKLIST (Supports both flat items and tiered structure)
 // ============================================================================
+
+interface ChecklistTier {
+  id: string;
+  name: string;
+  subtitle?: string;
+  importance?: 'critical' | 'high' | 'medium' | 'low';
+  items: { id: string; name?: string; label?: string; description?: string; icon?: string }[];
+}
+
+interface ChecklistAction {
+  title: string;
+  steps: string[];
+  summary?: string;
+}
 
 export const ChecklistVis: React.FC<VisProps> = ({ data, className = '' }) => {
   const [checked, setChecked] = useState<Set<string>>(new Set());
+  const [expandedTiers, setExpandedTiers] = useState<Set<string>>(new Set(['tier1']));
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Null check to prevent blank rendering
   if (!data) return null;
-  const items: { id: string; label: string; description?: string }[] = data.items || [];
-  if (items.length === 0) return null;
+
+  // Support both flat items array and tiered structure
+  const tiers: ChecklistTier[] = data.tiers || [];
+  const flatItems: { id: string; name?: string; label?: string; description?: string }[] = data.items || [];
+  const action: ChecklistAction | undefined = data.action;
+
+  // If using flat items, wrap them in a single tier
+  const allTiers: ChecklistTier[] = tiers.length > 0 ? tiers : flatItems.length > 0 ? [{
+    id: 'default',
+    name: data.title || 'Checklist',
+    items: flatItems
+  }] : [];
+
+  if (allTiers.length === 0 && !action) return null;
+
+  // Calculate total items across all tiers
+  const totalItems = allTiers.reduce((sum: number, tier) => sum + (tier.items?.length || 0), 0);
 
   const toggleItem = (id: string) => {
     setChecked(prev => {
@@ -678,68 +776,180 @@ export const ChecklistVis: React.FC<VisProps> = ({ data, className = '' }) => {
     });
   };
 
-  const progress = (checked.size / items.length) * 100;
+  const toggleTier = (tierId: string) => {
+    setExpandedTiers(prev => {
+      const next = new Set(prev);
+      if (next.has(tierId)) next.delete(tierId);
+      else next.add(tierId);
+      return next;
+    });
+  };
+
+  const progress = totalItems > 0 ? (checked.size / totalItems) * 100 : 0;
+
+  const getImportanceColor = (importance?: string) => {
+    switch (importance) {
+      case 'critical': return 'border-red-500/30 bg-red-500/5';
+      case 'high': return 'border-orange-500/30 bg-orange-500/5';
+      case 'medium': return 'border-yellow-500/30 bg-yellow-500/5';
+      case 'low': return 'border-gray-500/30 bg-gray-500/5';
+      default: return 'border-white/10 bg-white/5';
+    }
+  };
+
+  const getImportanceBadge = (importance?: string) => {
+    switch (importance) {
+      case 'critical': return <span className="px-2 py-0.5 text-xs bg-red-500/20 text-red-400 rounded">CRITICAL</span>;
+      case 'high': return <span className="px-2 py-0.5 text-xs bg-orange-500/20 text-orange-400 rounded">HIGH</span>;
+      case 'medium': return <span className="px-2 py-0.5 text-xs bg-yellow-500/20 text-yellow-400 rounded">MEDIUM</span>;
+      default: return null;
+    }
+  };
 
   return (
     <div ref={ref} className={`my-12 p-6 bg-white/5 border border-white/10 rounded-xl ${className}`}>
+      {/* Header */}
       {data.title && (
-        <div className="flex items-center justify-between mb-6">
-          <h4 className="text-sm font-mono text-gray-500 uppercase tracking-wider">
-            {data.title}
-          </h4>
-          <span className="text-sm font-mono text-teal-400">
-            {checked.size}/{items.length}
-          </span>
+        <div className="mb-6">
+          <div className="flex items-center justify-between">
+            <h4 className="text-lg font-semibold text-white">
+              {data.title}
+            </h4>
+            <span className="text-sm font-mono text-teal-400">
+              {checked.size}/{totalItems}
+            </span>
+          </div>
+          {data.subtitle && (
+            <p className="text-sm text-gray-400 mt-1">{data.subtitle}</p>
+          )}
         </div>
       )}
 
       {/* Progress bar */}
-      <div className="h-2 bg-gray-800 rounded-full mb-6 overflow-hidden">
-        <motion.div
-          className="h-full bg-gradient-to-r from-teal-500 to-emerald-400 rounded-full"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.3 }}
-        />
-      </div>
+      {totalItems > 0 && (
+        <div className="h-2 bg-gray-800 rounded-full mb-6 overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-teal-500 to-emerald-400 rounded-full"
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 0.3 }}
+          />
+        </div>
+      )}
 
-      <div className="space-y-3">
-        {items.map((item, i) => {
-          const isChecked = checked.has(item.id);
+      {/* Tiered checklist */}
+      <div className="space-y-4">
+        {allTiers.map((tier, tierIndex) => {
+          const isExpanded = expandedTiers.has(tier.id);
+          const tierItems = tier.items || [];
+          const tierChecked = tierItems.filter(item => checked.has(item.id)).length;
 
           return (
             <motion.div
-              key={item.id}
+              key={tier.id}
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.05 }}
-              onClick={() => toggleItem(item.id)}
-              className={`
-                flex items-start gap-3 p-3 rounded-lg cursor-pointer
-                ${isChecked ? 'bg-teal-500/10' : 'bg-white/5 hover:bg-white/10'}
-                transition-colors duration-200
-              `}
+              transition={{ delay: tierIndex * 0.1 }}
+              className={`border rounded-lg overflow-hidden ${getImportanceColor(tier.importance)}`}
             >
-              <div className={`
-                w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5
-                ${isChecked ? 'border-teal-500 bg-teal-500' : 'border-gray-600'}
-                transition-colors duration-200
-              `}>
-                {isChecked && <Check className="w-3 h-3 text-white" />}
-              </div>
-
-              <div>
-                <div className={`text-sm font-medium ${isChecked ? 'text-gray-400 line-through' : 'text-white'}`}>
-                  {item.label}
+              {/* Tier header */}
+              <button
+                onClick={() => toggleTier(tier.id)}
+                className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  {isExpanded ? (
+                    <ChevronDown className="w-5 h-5 text-gray-400" />
+                  ) : (
+                    <ChevronRight className="w-5 h-5 text-gray-400" />
+                  )}
+                  <div className="text-left">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-white">{tier.name}</span>
+                      {getImportanceBadge(tier.importance)}
+                    </div>
+                    {tier.subtitle && (
+                      <span className="text-xs text-gray-500">{tier.subtitle}</span>
+                    )}
+                  </div>
                 </div>
-                {item.description && (
-                  <div className="text-xs text-gray-500 mt-0.5">{item.description}</div>
-                )}
-              </div>
+                <span className="text-sm font-mono text-gray-400">
+                  {tierChecked}/{tierItems.length}
+                </span>
+              </button>
+
+              {/* Tier items */}
+              {isExpanded && tierItems.length > 0 && (
+                <div className="border-t border-white/10 p-4 space-y-3">
+                  {tierItems.map((item, itemIndex) => {
+                    const isChecked = checked.has(item.id);
+                    const IconComponent = item.icon ? getIcon(item.icon) : null;
+
+                    return (
+                      <motion.div
+                        key={item.id}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: itemIndex * 0.05 }}
+                        onClick={() => toggleItem(item.id)}
+                        className={`
+                          flex items-start gap-3 p-3 rounded-lg cursor-pointer
+                          ${isChecked ? 'bg-teal-500/10' : 'bg-white/5 hover:bg-white/10'}
+                          transition-colors duration-200
+                        `}
+                      >
+                        <div className={`
+                          w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5
+                          ${isChecked ? 'border-teal-500 bg-teal-500' : 'border-gray-600'}
+                          transition-colors duration-200
+                        `}>
+                          {isChecked && <Check className="w-3 h-3 text-white" />}
+                        </div>
+
+                        {IconComponent && (
+                          <IconComponent className={`w-5 h-5 flex-shrink-0 mt-0.5 ${isChecked ? 'text-gray-500' : 'text-teal-400'}`} />
+                        )}
+
+                        <div className="flex-1">
+                          <div className={`text-sm font-medium ${isChecked ? 'text-gray-400 line-through' : 'text-white'}`}>
+                            {item.name || item.label}
+                          </div>
+                          {item.description && (
+                            <div className="text-xs text-gray-500 mt-0.5 whitespace-pre-line">{processTextContent(item.description)}</div>
+                          )}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              )}
             </motion.div>
           );
         })}
       </div>
+
+      {/* Action section */}
+      {action && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: allTiers.length * 0.1 }}
+          className="mt-6 p-4 bg-gradient-to-r from-teal-500/10 to-emerald-500/10 border border-teal-500/30 rounded-lg"
+        >
+          <h5 className="font-semibold text-teal-400 mb-3">{action.title}</h5>
+          <ol className="space-y-2">
+            {action.steps?.map((step, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                <span className="font-mono text-teal-500">{i + 1}.</span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+          {action.summary && (
+            <p className="mt-3 text-sm text-gray-400 italic">{action.summary}</p>
+          )}
+        </motion.div>
+      )}
     </div>
   );
 };
@@ -824,8 +1034,8 @@ export const KnowledgeCardsVis: React.FC<VisProps> = ({ data, className = '' }) 
                 <h5 className="font-bold text-white pt-2">{card.title}</h5>
               </div>
 
-              <p className="text-sm text-gray-400 leading-relaxed mb-3">
-                {card.content}
+              <p className="text-sm text-gray-400 leading-relaxed mb-3 whitespace-pre-line">
+                {processTextContent(card.content)}
               </p>
 
               {card.tags && card.tags.length > 0 && (

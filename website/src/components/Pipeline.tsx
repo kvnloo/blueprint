@@ -223,7 +223,7 @@ const Pipeline = () => {
               >
                 <Globe className="w-8 h-8 text-amber-400" />
               </motion.div>
-              <div className="font-bold text-white mb-1">World Sim</div>
+              <div className="font-bold text-white mb-1">World Simulation</div>
               <div className="text-sm text-amber-400 mb-3">+ Robotics</div>
               <div className="text-xs text-gray-500">Autonomous farm + robot training</div>
             </motion.div>
