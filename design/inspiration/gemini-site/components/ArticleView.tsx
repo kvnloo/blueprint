@@ -226,7 +226,7 @@ const ArticleView = ({ articleId, onBack }: { articleId: string, onBack: () => v
            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs md:text-sm text-gray-500 font-mono border-t border-b border-white/10 py-6">
               <span className="flex items-center gap-2">
                  <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center text-[10px] text-white font-bold">Z0</div>
-                 ECE Solutions
+                 zer0 LLC
               </span>
               <span className="hidden md:inline">•</span>
               <span className="flex items-center gap-2">

@@ -286,7 +286,7 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## 🤝 Contributing
 
-This is a solo scientist-founder project by ECE Solutions LLC, but contributions are welcome! Please read the documentation thoroughly before submitting PRs.
+This is a solo scientist-founder project by zer0 LLC, but contributions are welcome! Please read the documentation thoroughly before submitting PRs.
 
 ---
 
