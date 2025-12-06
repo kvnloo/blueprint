@@ -1797,4 +1797,4 @@ That's the Limitless Kitchen.
 
 *This document is a living technical specification. Last updated: December 2025.*
 
-*ECE Solutions LLC — Making the Limitless Pill a Reality*
+*zer0 LLC — Making the Limitless Pill a Reality*
