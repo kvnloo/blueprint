@@ -1,15 +1,30 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Clock, BookOpen, Layers, Zap, Search, X, Filter } from 'lucide-react';
-import { researchData, ArticleTrack, ArticleType } from '../data/researchData';
+import { ArrowRight, Clock, BookOpen, Layers, Zap, Search, X, Filter, FileText, Type, AlignLeft } from 'lucide-react';
+import { researchData, ArticleTrack, ArticleType, Article } from '../data/researchData';
 import { ViewState } from '../App';
+import { useSearch, isSearchResults } from '../hooks';
+import { SearchResult } from '../services/searchService';
 
 const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTracks, setSelectedTracks] = useState<ArticleTrack[]>([]);
-  const [selectedTypes, setSelectedTypes] = useState<ArticleType[]>([]);
   const [showFilters, setShowFilters] = useState(false);
+
+  // Use SOTA FlexSearch-powered search hook
+  const {
+    query: searchQuery,
+    setQuery: setSearchQuery,
+    results,
+    isSearching,
+    hasSearchQuery,
+    stats,
+    selectedTracks,
+    selectedTypes,
+    toggleTrack,
+    toggleType,
+    clearFilters,
+    hasActiveFilters,
+  } = useSearch({ debounceMs: 150, minQueryLength: 2 });
 
   const trackConfig = {
     'Blueprint': { color: 'text-cyan-400', bg: 'bg-cyan-500', border: 'border-cyan-500/30', glow: 'bg-cyan-500/10', icon: Zap },
@@ -20,51 +35,29 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
   const allTracks: ArticleTrack[] = ['Blueprint', 'World Sim', 'Evolve'];
   const allTypes: ArticleType[] = ['Deep Dive', 'Casual', 'Technical Guide'];
 
-  // Filter articles based on search and filter criteria
-  const filteredArticles = useMemo(() => {
-    return researchData.filter(article => {
-      // Search filter (title and description)
-      const searchLower = searchQuery.toLowerCase();
-      const matchesSearch = searchQuery === '' ||
-        article.title.toLowerCase().includes(searchLower) ||
-        article.description.toLowerCase().includes(searchLower);
-
-      // Track filter
-      const articleTracks = Array.isArray(article.track) ? article.track : [article.track];
-      const matchesTrack = selectedTracks.length === 0 ||
-        selectedTracks.some(track => articleTracks.includes(track));
-
-      // Type filter
-      const matchesType = selectedTypes.length === 0 ||
-        selectedTypes.includes(article.type);
-
-      return matchesSearch && matchesTrack && matchesType;
-    });
-  }, [searchQuery, selectedTracks, selectedTypes]);
-
-  const toggleTrack = (track: ArticleTrack) => {
-    setSelectedTracks(prev =>
-      prev.includes(track)
-        ? prev.filter(t => t !== track)
-        : [...prev, track]
-    );
+  // Helper to get article from result (handles both SearchResult and Article)
+  const getArticle = (result: SearchResult | Article): Article => {
+    return 'article' in result ? result.article : result;
   };
 
-  const toggleType = (type: ArticleType) => {
-    setSelectedTypes(prev =>
-      prev.includes(type)
-        ? prev.filter(t => t !== type)
-        : [...prev, type]
-    );
+  // Helper to get search metadata if available
+  const getSearchMeta = (result: SearchResult | Article): { score: number; matchedFields: string[]; highlights: SearchResult['highlights'] } | null => {
+    if ('score' in result) {
+      return {
+        score: result.score,
+        matchedFields: result.matchedFields,
+        highlights: result.highlights,
+      };
+    }
+    return null;
   };
 
-  const clearFilters = () => {
-    setSearchQuery('');
-    setSelectedTracks([]);
-    setSelectedTypes([]);
+  // Matched field icon mapping
+  const fieldIcons: Record<string, React.ReactNode> = {
+    title: <Type size={10} />,
+    description: <AlignLeft size={10} />,
+    content: <FileText size={10} />,
   };
-
-  const hasActiveFilters = searchQuery !== '' || selectedTracks.length > 0 || selectedTypes.length > 0;
 
   return (
     <section className="pt-32 pb-24 px-6 relative z-10 min-h-screen">
@@ -222,19 +215,37 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
             )}
           </AnimatePresence>
 
-          {/* Results Count */}
-          <div className="mt-4 text-sm text-gray-500">
-            {hasActiveFilters ? (
-              <span>Showing {filteredArticles.length} of {researchData.length} articles</span>
-            ) : (
-              <span>{researchData.length} articles</span>
+          {/* Results Count & Search Stats */}
+          <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
+            <div className="flex items-center gap-3">
+              {hasActiveFilters ? (
+                <span>
+                  Showing {results.length} of {researchData.length} articles
+                  {isSearching && <span className="ml-2 text-teal-400 animate-pulse">searching...</span>}
+                </span>
+              ) : (
+                <span>{researchData.length} articles</span>
+              )}
+            </div>
+            {hasSearchQuery && isSearchResults(results) && results.length > 0 && (
+              <div className="flex items-center gap-2 text-xs">
+                <span className="text-gray-600">Matched in:</span>
+                {['title', 'description', 'content'].map(field => {
+                  const hasField = results.some(r => r.matchedFields.includes(field));
+                  return hasField ? (
+                    <span key={field} className="flex items-center gap-1 px-2 py-0.5 bg-white/5 rounded text-gray-400">
+                      {fieldIcons[field]} {field}
+                    </span>
+                  ) : null;
+                })}
+              </div>
             )}
           </div>
         </motion.div>
 
         {/* Grid */}
         <AnimatePresence mode="wait">
-          {filteredArticles.length === 0 ? (
+          {results.length === 0 ? (
             <motion.div
               key="no-results"
               initial={{ opacity: 0, y: 20 }}
@@ -262,7 +273,9 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
           exit={{ opacity: 0 }}
           className="grid md:grid-cols-2 gap-8"
         >
-          {filteredArticles.map((article, i) => {
+          {results.map((result, i) => {
+            const article = getArticle(result);
+            const searchMeta = getSearchMeta(result);
             // Handle both single track and array of tracks
             const tracks = Array.isArray(article.track) ? article.track : [article.track];
             const primaryTrack = tracks[0];
@@ -306,6 +319,12 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
                         <span className="px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-400 text-[10px] font-bold uppercase tracking-wider">
                           {article.type}
                         </span>
+                        {/* Search relevance score badge */}
+                        {searchMeta && (
+                          <span className="px-2 py-1 rounded bg-teal-500/20 border border-teal-500/30 text-teal-400 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+                            <Search size={8} /> {searchMeta.score}pts
+                          </span>
+                        )}
                      </div>
                      <span className="flex items-center gap-1 text-xs font-mono text-gray-500">
                         <Clock size={12} /> {article.readTime}
@@ -316,9 +335,40 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
                   <h3 className="text-2xl font-display font-bold mb-3 group-hover:text-white transition-colors relative z-10">
                     {article.title}
                   </h3>
-                  <p className="text-gray-400 mb-8 line-clamp-3 relative z-10 text-sm leading-relaxed">
+                  <p className="text-gray-400 mb-4 line-clamp-3 relative z-10 text-sm leading-relaxed">
                     {article.description}
                   </p>
+
+                  {/* Search Match Highlights */}
+                  {searchMeta && searchMeta.matchedFields.includes('content') && searchMeta.highlights.content && searchMeta.highlights.content.length > 0 && (
+                    <div className="mb-6 relative z-10">
+                      <div className="text-[10px] text-teal-400 uppercase tracking-wider font-bold mb-2 flex items-center gap-1">
+                        <FileText size={10} /> Content matches
+                      </div>
+                      <div className="space-y-1">
+                        {searchMeta.highlights.content.slice(0, 2).map((excerpt, idx) => (
+                          <p key={idx} className="text-xs text-gray-500 bg-white/5 rounded px-2 py-1 line-clamp-2 italic">
+                            {excerpt}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Matched Fields Indicators */}
+                  {searchMeta && (
+                    <div className="flex items-center gap-1 mb-4 relative z-10">
+                      {searchMeta.matchedFields.map(field => (
+                        <span
+                          key={field}
+                          className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] bg-white/5 text-gray-500"
+                          title={`Matched in ${field}`}
+                        >
+                          {fieldIcons[field]} {field}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Footer */}
                   <div className="mt-auto flex items-center justify-between relative z-10 border-t border-white/5 pt-6">
