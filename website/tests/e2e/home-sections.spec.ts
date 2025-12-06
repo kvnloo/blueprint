@@ -46,10 +46,10 @@ test.describe('Home Page Sections', () => {
     const productCards = productsSection.locator('.grid > div');
     expect(await productCards.count()).toBe(3);
 
-    // Verify expected product names
-    await expect(productsSection.getByText('Blueprint Protocol')).toBeVisible();
-    await expect(productsSection.getByText('World Simulation')).toBeVisible();
-    await expect(productsSection.getByText('Evolve')).toBeVisible();
+    // Verify expected product names (use heading role to avoid matching other text)
+    await expect(productsSection.getByRole('heading', { name: 'Blueprint Protocol' })).toBeVisible();
+    await expect(productsSection.getByRole('heading', { name: 'World Simulation' })).toBeVisible();
+    await expect(productsSection.getByRole('heading', { name: 'Evolve' })).toBeVisible();
   });
 
   test('About section displays correctly', async ({ page }) => {
@@ -61,16 +61,16 @@ test.describe('Home Page Sections', () => {
     await aboutSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
 
-    // Check for specific About content
-    await expect(page.getByText('Building the')).toBeVisible();
-    await expect(page.getByText('Blueprint Protocol')).toBeVisible();
+    // Check for specific About content (scoped to section to avoid ambiguous matches)
+    await expect(aboutSection.getByText('Building the')).toBeVisible();
+    await expect(aboutSection.getByText('Blueprint Protocol')).toBeVisible();
 
     // Check for the animated counters
-    await expect(page.getByText('Active Tracks')).toBeVisible();
-    await expect(page.getByText('Health Modules')).toBeVisible();
+    await expect(aboutSection.getByText('Active Tracks')).toBeVisible();
+    await expect(aboutSection.getByText('Health Modules')).toBeVisible();
 
     // Check for technology stack
-    await expect(page.getByText('Built with leading technology')).toBeVisible();
+    await expect(aboutSection.getByText('Built with leading technology')).toBeVisible();
   });
 
   test('Pipeline section shows process', async ({ page }) => {
@@ -85,10 +85,10 @@ test.describe('Home Page Sections', () => {
     await expect(pipelineSection).toBeVisible();
 
     // Check for RAID phases (Research, Analysis, Integration, Deployment)
-    await expect(pipelineSection.getByText('Research')).toBeVisible();
-    await expect(pipelineSection.getByText('Analysis')).toBeVisible();
-    await expect(pipelineSection.getByText('Integration')).toBeVisible();
-    await expect(pipelineSection.getByText('Deployment')).toBeVisible();
+    await expect(pipelineSection.getByText('Research', { exact: true })).toBeVisible();
+    await expect(pipelineSection.getByText('Analysis', { exact: true })).toBeVisible();
+    await expect(pipelineSection.getByText('Integration', { exact: true })).toBeVisible();
+    await expect(pipelineSection.getByText('Deployment', { exact: true })).toBeVisible();
 
     // Check for "Beyond Traditional CI/CD" heading
     await expect(pipelineSection.getByText('Beyond Traditional')).toBeVisible();
@@ -106,15 +106,15 @@ test.describe('Home Page Sections', () => {
     await showcaseSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
 
-    // Check for main heading
-    await expect(page.getByText('Monitor & Control')).toBeVisible();
-    await expect(page.getByText('from anywhere.')).toBeVisible();
+    // Check for main heading (scoped to section to avoid ambiguous matches)
+    await expect(showcaseSection.getByText('Monitor & Control')).toBeVisible();
+    await expect(showcaseSection.getByText('from anywhere.')).toBeVisible();
 
-    // Check for stats
-    await expect(page.getByText('Industries Served')).toBeVisible();
-    await expect(page.getByText('Data Points')).toBeVisible();
-    await expect(page.getByText('Efficiency Gains')).toBeVisible();
-    await expect(page.getByText('Autonomous')).toBeVisible();
+    // Check for stats (scoped with exact match for short/ambiguous text)
+    await expect(showcaseSection.getByText('Industries Served', { exact: true })).toBeVisible();
+    await expect(showcaseSection.getByText('Data Points', { exact: true })).toBeVisible();
+    await expect(showcaseSection.getByText('Efficiency Gains', { exact: true })).toBeVisible();
+    await expect(showcaseSection.getByText('Autonomous', { exact: true })).toBeVisible();
   });
 
   test('SuccessStories section has testimonials', async ({ page }) => {
@@ -126,18 +126,18 @@ test.describe('Home Page Sections', () => {
     await storiesSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
 
-    // Check for main heading
-    await expect(page.getByText('Success Stories')).toBeVisible();
-    await expect(page.getByText('CASE STUDIES')).toBeVisible();
+    // Check for main heading (scoped to section to avoid ambiguous matches)
+    await expect(storiesSection.getByText('Success Stories')).toBeVisible();
+    await expect(storiesSection.getByText('CASE STUDIES', { exact: true })).toBeVisible();
 
-    // Check for story categories
-    await expect(page.getByText('RESEARCH')).toBeVisible();
-    await expect(page.getByText('VERTICAL FARMING')).toBeVisible();
-    await expect(page.getByText('HYDROPONICS')).toBeVisible();
-    await expect(page.getByText('GREENHOUSE')).toBeVisible();
+    // Check for story categories (exact match for short/ambiguous text)
+    await expect(storiesSection.getByText('RESEARCH', { exact: true })).toBeVisible();
+    await expect(storiesSection.getByText('VERTICAL FARMING', { exact: true })).toBeVisible();
+    await expect(storiesSection.getByText('HYDROPONICS', { exact: true })).toBeVisible();
+    await expect(storiesSection.getByText('GREENHOUSE', { exact: true })).toBeVisible();
 
     // Check for at least one client name
-    await expect(page.getByText('AgriTech Labs')).toBeVisible();
+    await expect(storiesSection.getByText('AgriTech Labs', { exact: true })).toBeVisible();
   });
 
   test('Footer has expected links', async ({ page }) => {
