@@ -1,6 +1,6 @@
-# Gemini 3 Pro - Lumina Clone Prompt for ECE Solutions LLC
+# Gemini 3 Pro - Lumina Clone Prompt for zer0 LLC
 
-Complete prompts to clone the full Lumina landing page and adapt it for ECE Solutions.
+Complete prompts to clone the full Lumina landing page and adapt it for zer0.
 
 ---
 
@@ -221,7 +221,7 @@ SECTION 8 - FOOTER:
 </reference_design>
 
 <new_brand>
-Company: ECE Solutions LLC
+Company: zer0 LLC
 Tagline: "Building Autonomous Futures"
 Industry: AI Consulting & Agricultural Technology
 
@@ -234,7 +234,7 @@ COLOR REBRAND:
 
 <content_replacement>
 SECTION 1 - NAVBAR:
-- Logo: Teal gradient circle + "ECE Solutions"
+- Logo: Teal gradient circle + "zer0"
 - Nav: "Services", "Technology", "Projects"  
 - CTA: "Get Started"
 
@@ -248,7 +248,7 @@ SECTION 2 - HERO:
 - Card images: vertical farming / hydroponics visuals
 
 SECTION 3 - TESTIMONIAL + VERSION:
-- Quote: "ECE's digital twin reduced our optimization time from weeks to hours."
+- Quote: "zer0's digital twin reduced our optimization time from weeks to hours."
 - Attribution: "VERIFIED CLIENT • 5.0 RATING"
 - Version: "⚡ CLAUDE FLOW POWERED"
 - Tagline: "Next generation autonomous systems."
@@ -312,9 +312,9 @@ SECTION 8 - FOOTER:
 
 ## Content Mapping Table
 
-| Section | Original (Lumina) | New (ECE Solutions) |
+| Section | Original (Lumina) | New (zer0) |
 |---------|-------------------|---------------------|
-| **Brand** | Lumina | ECE Solutions |
+| **Brand** | Lumina | zer0 |
 | **Badge** | Creative Suite 2.0 | Autonomous Systems 2.0 |
 | **Headline** | Craft Visual Stories. | Build Smarter Farms. |
 | **Subtitle** | Transforms raw footage into cinematic masterpieces... | Transform agricultural operations with AI-powered digital twins... |
@@ -322,7 +322,7 @@ SECTION 8 - FOOTER:
 | **Subtext** | No credit card required | Free consultation available |
 | **Nav Links** | Workflow / Resources / Pricing | Services / Technology / Projects |
 | **Steps** | Import Footage → AI Scene Detect → Export 4K | Design System → AI Simulation → Deploy & Scale |
-| **Quote** | "Lumina changed my entire workflow." | "ECE's digital twin reduced our optimization time from weeks to hours." |
+| **Quote** | "Lumina changed my entire workflow." | "zer0's digital twin reduced our optimization time from weeks to hours." |
 | **Version** | VERSION 2.0 AVAILABLE | CLAUDE FLOW POWERED |
 | **About** | Creative intelligence engine... | Autonomous systems lab... |
 | **Stats** | $500M / 99% / 2M+ / 4.9 | $2M+ / 95% / 50+ / 4.9 |
