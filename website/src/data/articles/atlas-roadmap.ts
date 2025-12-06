@@ -1144,7 +1144,7 @@ export const atlasRoadmap: Article = {
     },
     {
       type: 'text',
-      text: 'Last updated: December 2025\nContact: kevin@ecesolutions.io\nLicense: CC BY-NC-SA 4.0'
+      text: 'Last updated: December 2025\nContact: kevinsrajan@gmail.com\nLicense: CC BY-NC-SA 4.0'
     }
   ]
 };
