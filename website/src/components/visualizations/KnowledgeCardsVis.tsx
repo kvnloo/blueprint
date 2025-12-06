@@ -38,8 +38,10 @@ export const KnowledgeCardsVis: React.FC<VisProps> = ({ data, className = '' }) 
                 <h5 className="font-bold text-white pt-2">{card.title}</h5>
               </div>
 
-              <p className="text-sm text-gray-400 leading-relaxed mb-3">
-                {card.content}
+              <p className="text-sm text-gray-400 leading-relaxed mb-3 whitespace-pre-line">
+                {typeof card.content === 'string'
+                  ? card.content.replace(/\\n/g, '\n')
+                  : card.content}
               </p>
 
               {card.tags && card.tags.length > 0 && (

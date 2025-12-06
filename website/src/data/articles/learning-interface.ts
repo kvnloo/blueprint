@@ -1314,7 +1314,7 @@ export const learningInterface: Article = {
     },
     {
       type: 'text',
-      text: '| Framework | Source | Core Insight |\n|-----------|--------|---------------|\n| Elaborative Encoding | Justin Sung | Quality of initial encoding determines retention |\n| Ultralearning | Scott Young | Directness, drill, feedback, retrieval |\n| Learning How to Learn | Barbara Oakley | Focused/diffuse modes, chunking, spaced repetition |\n| Flow State | Csikszentmihalyi | Challenge-skill balance, clear goals, immediate feedback |\n| Deliberate Practice | Anders Ericsson | Purposeful practice with expert feedback |\n| PARA Method | Tiago Forte | Projects, Areas, Resources, Archives |'
+      text: '| Framework | Source | Core Insight |\n|-----------|--------|---------------|\n| Elaborative Encoding | [Justin Sung](https://icanstudy.com) | Quality of initial encoding determines retention |\n| Ultralearning | [Scott Young](https://scottyoung.com) | Directness, drill, feedback, retrieval |\n| Learning How to Learn | [Barbara Oakley](https://barbaraoakley.com) | Focused/diffuse modes, chunking, spaced repetition |\n| Flow State | [Mihaly Csikszentmihalyi](https://amazon.com/dp/0061339202) | Challenge-skill balance, clear goals, immediate feedback |\n| Deliberate Practice | [Anders Ericsson](https://amazon.com/dp/0544456238) | Purposeful practice with expert feedback |\n| PARA Method | [Tiago Forte](https://fortelabs.com) - [PARA Method](https://fortelabs.com/blog/para) | Projects, Areas, Resources, Archives |'
     },
     {
       type: 'subheader',
@@ -1330,7 +1330,7 @@ export const learningInterface: Article = {
     },
     {
       type: 'text',
-      text: '| Technology | Application |\n|------------|-------------|\n| LLMs | Content understanding, generation, dialogue |\n| Spaced Repetition Algorithms | Optimal review scheduling (SM-2, FSRS) |\n| Knowledge Graphs | Concept relationship mapping |\n| Adaptive Testing | Difficulty calibration |\n| NLP | Text extraction, summarization, Q&A |'
+      text: '| Technology | Application |\n|------------|-------------|\n| LLMs | Content understanding, generation, dialogue |\n| Spaced Repetition Algorithms | Optimal review scheduling ([SM-2](https://supermemo.com/en/archives1990-2015/english/ol/sm2), FSRS) |\n| Knowledge Graphs | Concept relationship mapping |\n| Adaptive Testing | Difficulty calibration |\n| NLP | Text extraction, summarization, Q&A |'
     },
     {
       type: 'text',

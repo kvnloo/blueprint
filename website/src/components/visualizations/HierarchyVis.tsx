@@ -4,6 +4,14 @@ import { ChevronRight } from 'lucide-react';
 import { VisProps, HierarchyNode } from './types';
 import { getIcon } from './iconMap';
 
+/**
+ * Processes text to handle escaped newlines
+ */
+const processTextContent = (text: string | undefined): string => {
+  if (!text) return '';
+  return text.replace(/\\n/g, '\n');
+};
+
 export const HierarchyVis: React.FC<VisProps> = ({ data, className = '' }) => {
   const [expanded, setExpanded] = useState<Set<string>>(new Set(['root']));
   const ref = React.useRef(null);
@@ -64,7 +72,7 @@ export const HierarchyVis: React.FC<VisProps> = ({ data, className = '' }) => {
           <div className="flex-1">
             <div className="font-medium text-white text-sm">{node.label}</div>
             {node.description && (
-              <div className="text-xs text-gray-500 mt-0.5">{node.description}</div>
+              <div className="text-xs text-gray-500 mt-0.5 whitespace-pre-line">{processTextContent(node.description)}</div>
             )}
           </div>
 

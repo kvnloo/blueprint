@@ -59,8 +59,10 @@ export interface ComparisonItem {
 
 export interface ChecklistItem {
   id: string;
-  label: string;
+  label?: string;
+  name?: string;
   description?: string;
+  icon?: string;
 }
 
 export interface KnowledgeCard {

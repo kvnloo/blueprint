@@ -3,6 +3,14 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { VisProps, FloorPlanRoom } from './types';
 import { getIcon } from './iconMap';
 
+/**
+ * Processes text to handle escaped newlines
+ */
+const processTextContent = (text: string | undefined): string => {
+  if (!text) return '';
+  return text.replace(/\\n/g, '\n');
+};
+
 export const FloorPlanVis: React.FC<VisProps> = ({ data, className = '' }) => {
   const [activeRoom, setActiveRoom] = useState<string | null>(null);
   const ref = React.useRef(null);
@@ -61,9 +69,9 @@ export const FloorPlanVis: React.FC<VisProps> = ({ data, className = '' }) => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="text-sm text-gray-400 mt-3 leading-relaxed"
+                    className="text-sm text-gray-400 mt-3 leading-relaxed whitespace-pre-line"
                   >
-                    {room.description}
+                    {processTextContent(room.description)}
                   </motion.p>
                 )}
               </AnimatePresence>

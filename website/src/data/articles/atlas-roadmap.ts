@@ -128,11 +128,11 @@ export const atlasRoadmap: Article = {
     },
     {
       type: 'text',
-      text: 'Simulation-Based Robot Learning: NVIDIA\'s Isaac Sim, MuJoCo, and emerging platforms like SimWorld enable training manipulation policies in simulation before real-world deployment. The Eureka paper demonstrated that LLM-generated reward functions can achieve 52% improvement over human-designed rewards.'
+      text: 'Simulation-Based Robot Learning: [NVIDIA Isaac Sim](https://developer.nvidia.com/isaac-sim), [MuJoCo](https://mujoco.org), and emerging platforms like [SimWorld](https://simworld.org/) enable training manipulation policies in simulation before real-world deployment. The [Eureka](https://arxiv.org/abs/2310.12931) paper demonstrated that LLM-generated reward functions can achieve 52% improvement over human-designed rewards.'
     },
     {
       type: 'text',
-      text: 'Affordable Robotic Hardware: Unitree\'s humanoid robots, Figure\'s Figure 02, and Tesla\'s Optimus are driving down the cost of capable manipulation hardware. Mobile ALOHA demonstrated that teleoperation can collect high-quality manipulation data at scale.'
+      text: 'Affordable Robotic Hardware: [Unitree](https://unitree.com)\'s humanoid robots, [Figure](https://figure.ai)\'s Figure 02, and [Tesla Optimus](https://tesla.com/optimus) are driving down the cost of capable manipulation hardware. [Mobile ALOHA](https://mobile-aloha.github.io) demonstrated that teleoperation can collect high-quality manipulation data at scale.'
     },
     {
       type: 'text',
@@ -140,7 +140,7 @@ export const atlasRoadmap: Article = {
     },
     {
       type: 'text',
-      text: 'Wearable Biometrics: Continuous glucose monitors (Dexcom, Abbott Libre), HRV trackers (WHOOP, Oura), and advanced blood panels (Levels, InsideTracker) provide unprecedented insight into metabolic response.'
+      text: 'Wearable Biometrics: Continuous glucose monitors ([Dexcom](https://dexcom.com), [Abbott Libre](https://freestyle.abbott)), HRV trackers ([WHOOP](https://whoop.com), [Oura](https://ouraring.com)), and advanced blood panels (Levels, [InsideTracker](https://insidetracker.com)) provide unprecedented insight into metabolic response.'
     },
     {
       type: 'text',
@@ -193,7 +193,7 @@ export const atlasRoadmap: Article = {
             description: 'Real-world systems: humanoid robot, garden automation, and smart appliances',
             icon: 'zap',
             components: [
-              { name: 'Humanoid Robot (Unitree)', description: 'Sim-trained manipulation' },
+              { name: 'Humanoid Robot ([Unitree](https://unitree.com))', description: 'Sim-trained manipulation' },
               { name: 'Garden Automation', description: 'Autonomous CEA system' },
               { name: 'Kitchen Appliances (IoT)', description: 'Smart connected devices' }
             ]
@@ -223,7 +223,7 @@ export const atlasRoadmap: Article = {
     },
     {
       type: 'text',
-      text: '| Module | Function | Key Technologies | Readiness |\n|--------|----------|------------------|-----------|  \n| I. Video Understanding | Extract recipes from video | VLMs, action segmentation | 80% |\n| II. Data Collection | Capture multimodal cooking data | Instrumented kitchen | 30% |\n| III. Food Simulation | Model food physics | Learned dynamics, MPM | 20% |\n| IV. Policy Learning | Train manipulation skills | BC, RL, sim-to-real | 40% |\n| V. Garden Automation | Grow optimal crops | CEA, hydroponics | 60% |\n| VI. Health Optimization | Personalize nutrition | Biometrics, Bayesian opt | 50% |\n| VII. Home Digital Twin | Personalized training env | NeRF, 3DGS, SimWorld | 25% |'
+      text: '| Module | Function | Key Technologies | Readiness |\n|--------|----------|------------------|-----------|  \n| I. Video Understanding | Extract recipes from video | VLMs, action segmentation | 80% |\n| II. Data Collection | Capture multimodal cooking data | Instrumented kitchen | 30% |\n| III. Food Simulation | Model food physics | Learned dynamics, MPM | 20% |\n| IV. Policy Learning | Train manipulation skills | BC, RL, sim-to-real | 40% |\n| V. Garden Automation | Grow optimal crops | CEA, hydroponics | 60% |\n| VI. Health Optimization | Personalize nutrition | Biometrics, Bayesian opt | 50% |\n| VII. Home Digital Twin | Personalized training env | NeRF, 3DGS, [SimWorld](https://simworld.org/) | 25% |'
     },
     {
       type: 'text',
@@ -689,9 +689,9 @@ export const atlasRoadmap: Article = {
             description: 'Real-time tracking of glucose, stress, and recovery metrics',
             icon: 'heart',
             substeps: [
-              'CGM (Dexcom G7) - Glucose trends',
-              'HRV (WHOOP 4.0) - Stress/recovery',
-              'Sleep (Oura Ring) - Rest quality',
+              'CGM ([Dexcom](https://dexcom.com) G7) - Glucose trends',
+              'HRV ([WHOOP](https://whoop.com) 4.0) - Stress/recovery',
+              'Sleep ([Oura](https://ouraring.com) Ring) - Rest quality',
               'Data fusion & normalization'
             ]
           },
@@ -701,7 +701,7 @@ export const atlasRoadmap: Article = {
             description: 'Regular deep health assessments and trend analysis',
             icon: 'clock',
             substeps: [
-              'Blood panels (InsideTracker, Levels)',
+              'Blood panels ([InsideTracker](https://insidetracker.com), Levels)',
               'Body composition (InBody, DEXA)',
               'Fitness tests (VO2 Max, grip strength)',
               'Longitudinal trend analysis'
@@ -1132,15 +1132,15 @@ export const atlasRoadmap: Article = {
     },
     {
       type: 'text',
-      text: 'Key academic papers include Voyager (Wang et al., 2023), Eureka (Ma et al., ICLR 2024), AlphaEvolve (DeepMind, 2025), SimWorld (NeurIPS 2025), Diffusion Policy (Chi et al., RSS 2023), Mobile ALOHA (Fu et al., 2024), Learning to Simulate (Sanchez-Gonzalez et al., ICML 2020), and RT-2 (Brohan et al., 2023).'
+      text: 'Key academic papers include [Voyager](https://voyager.minedojo.org) (Wang et al., 2023), [Eureka](https://arxiv.org/abs/2310.12931) (Ma et al., ICLR 2024), [AlphaEvolve](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/) (DeepMind, 2025), [SimWorld](https://simworld.org/) (NeurIPS 2025), [Diffusion Policy](https://diffusion-policy.cs.columbia.edu) (Chi et al., RSS 2023), [Mobile ALOHA](https://mobile-aloha.github.io) (Fu et al., 2024), [Learning to Simulate](https://arxiv.org/abs/2002.09405) (Sanchez-Gonzalez et al., ICML 2020), and [RT-2](https://robotics-transformer2.github.io) (Brohan et al., 2023).'
     },
     {
       type: 'text',
-      text: 'Health and longevity research includes Blueprint Protocol (Johnson, 2024), Blue Zones (Buettner, 2008), CALERIE Study (Kraus et al., The Lancet 2019), and DunedinPACE (Belsky et al., Nature Aging 2022).'
+      text: 'Health and longevity research includes [Blueprint Protocol](https://blueprint.bryanjohnson.com) (Johnson, 2024), [Blue Zones](https://bluezones.com) ([book](https://amazon.com/dp/1426209487)) (Buettner, 2008), [CALERIE Study](https://doi.org/10.1016/S2213-8587(19)30151-2) (Kraus et al., The Lancet 2019), and [DunedinPACE](https://doi.org/10.1038/s43587-022-00174-x) (Belsky et al., Nature Aging 2022).'
     },
     {
       type: 'text',
-      text: 'Software platforms include MuJoCo (Todorov et al., IEEE IROS 2012), NVIDIA Isaac Sim, PhysX 5, and SAM 2 (Ravi et al., Meta AI 2024).'
+      text: 'Software platforms include [MuJoCo](https://mujoco.org) (Todorov et al., IEEE IROS 2012), [NVIDIA Isaac Sim](https://developer.nvidia.com/isaac-sim), [PhysX 5](https://developer.nvidia.com/physx-sdk), and [SAM 2](https://segment-anything.com) (Ravi et al., Meta AI 2024).'
     },
     {
       type: 'text',
