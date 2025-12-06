@@ -2651,5 +2651,5 @@ The future of nutrition is not a pill. It's a system that grows what your body n
 ---
 
 *Last updated: December 2025*  
-*Contact: kevin@ecesolutions.io*  
+*Contact: kevinsrajan@gmail.com*  
 *License: CC BY-NC-SA 4.0*
