@@ -43,3 +43,7 @@ yarn-error.log*
 
 # Claude Flow metrics
 .claude-flow/
+**/.claude-flow/
+
+# Git worktrees
+worktrees/
