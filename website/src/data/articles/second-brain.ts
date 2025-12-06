@@ -355,7 +355,7 @@ export const secondBrain: Article = {
               'Reduces inflammatory cytokines',
               'Alters tryptophan metabolism (serotonin precursor)'
             ],
-            quality: 'Human RCT published in Translational Psychiatry'
+            quality: 'Human RCT published in [Translational Psychiatry](https://nature.com/tp)'
           },
           {
             title: 'LACTOBACILLUS RHAMNOSUS GG',
@@ -869,7 +869,7 @@ export const secondBrain: Article = {
                 items: [
                   'L. plantarum PS128: 10 billion CFU daily',
                   'Timeline: 8-12 weeks for measurable effects',
-                  'Brand example: Bened Biomedical (the research source)'
+                  'Brand example: [Bened Biomedical](https://benedbiomedical.com) (the research source)'
                 ]
               },
               {
@@ -915,7 +915,7 @@ export const secondBrain: Article = {
               {
                 subtitle: 'OPTIONAL: MICROBIOME TESTING',
                 items: [
-                  'Services like Viome, Ombre (formerly Thryve), or clinical tests can baseline and track microbiome composition.',
+                  'Services like [Viome](https://viome.com), [Ombre](https://ombre.com) (formerly Thryve), or clinical tests can baseline and track microbiome composition.',
                   'Cost: $100-400 per test',
                   'Frequency: Baseline, 3 months, 6 months',
                   'Value: Moderate. Useful for identifying dysbiosis or confirming interventions are shifting composition.',
@@ -1166,7 +1166,7 @@ export const secondBrain: Article = {
     },
     {
       type: 'text',
-      text: '| Strain | Primary Effect | Dosage | Timeline |\n|--------|---------------|--------|----------|\n| L. plantarum PS128 | Memory enhancement | 10B CFU | 8-12 weeks |\n| B. longum 1714 | Stress reduction | 1B CFU | 4-8 weeks |\n| L. rhamnosus GG | Anxiety reduction | 10B CFU | 4-6 weeks |\n| B. infantis 35624 | Inflammation reduction | 1B CFU | 6-8 weeks |'
+      text: '| Strain | Primary Effect | Dosage | Timeline | Source |\n|--------|---------------|--------|----------|--------|\n| L. plantarum PS128 | Memory enhancement | 10B CFU | 8-12 weeks | [Bened Biomedical](https://benedbiomedical.com) |\n| B. longum 1714 | Stress reduction | 1B CFU | 4-8 weeks | [Precision Biotics](https://precisionbiotics.com) |\n| L. rhamnosus GG | Anxiety reduction | 10B CFU | 4-6 weeks | [Culturelle](https://culturelle.com) |\n| B. infantis 35624 | Inflammation reduction | 1B CFU | 6-8 weeks | - |'
     },
     {
       type: 'subheader',
@@ -1187,6 +1187,14 @@ export const secondBrain: Article = {
     {
       type: 'text',
       text: 'If multiple signs persist for >4 weeks, consider microbiome testing and consultation.'
+    },
+    {
+      type: 'subheader',
+      text: 'Testing Services & Resources'
+    },
+    {
+      type: 'text',
+      text: '**Microbiome Testing:**\n- [Viome](https://viome.com) - Comprehensive gut health analysis\n- [Ombre](https://ombre.com) (formerly Thryve) - Microbiome testing and personalized probiotics\n\n**Research:**\n- [Translational Psychiatry](https://nature.com/tp) - Leading journal for gut-brain research\n\n**Probiotic Companies:**\n- [Bened Biomedical](https://benedbiomedical.com) - L. plantarum PS128\n- [Precision Biotics](https://precisionbiotics.com) - B. longum 1714\n- [Culturelle](https://culturelle.com) - L. rhamnosus GG'
     },
     {
       type: 'text',

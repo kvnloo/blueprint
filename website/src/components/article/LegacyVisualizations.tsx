@@ -78,24 +78,121 @@ export const SystemStackVis: React.FC<VisProps> = ({ data }) => {
   );
 };
 
-// 4. Comparison Table
+// 4. Comparison Table - Supports multiple data formats
 export const ComparisonVis: React.FC<VisProps> = ({ data }) => {
+  // Handle categories format (side-by-side comparison cards)
+  if (data?.categories?.length) {
+    return (
+      <div className="my-12">
+        {data.title && (
+          <h4 className="text-sm font-mono text-gray-500 mb-2 uppercase tracking-wider">{data.title}</h4>
+        )}
+        {data.subtitle && (
+          <p className="text-sm text-gray-400 mb-6">{data.subtitle}</p>
+        )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {data.categories.map((cat: any, i: number) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="p-6 bg-white/5 border border-white/10 rounded-xl"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                  cat.color === 'yellow' ? 'bg-yellow-500/20' :
+                  cat.color === 'purple' ? 'bg-purple-500/20' :
+                  cat.color === 'blue' ? 'bg-blue-500/20' :
+                  cat.color === 'green' ? 'bg-green-500/20' :
+                  'bg-teal-500/20'
+                }`}>
+                  <span className="text-lg">{cat.icon === 'zap' ? '⚡' : cat.icon === 'brain' ? '🧠' : '📊'}</span>
+                </div>
+                <div>
+                  <h5 className="font-bold text-white">{cat.name}</h5>
+                  {cat.subtitle && <p className="text-xs text-gray-500">{cat.subtitle}</p>}
+                </div>
+              </div>
+              <ul className="space-y-3">
+                {cat.items?.map((item: any, j: number) => (
+                  <li key={j} className="flex items-start gap-2">
+                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${
+                      item.impact === 'critical' ? 'bg-red-400' :
+                      item.impact === 'high' ? 'bg-yellow-400' :
+                      item.impact === 'medium' ? 'bg-blue-400' :
+                      'bg-gray-400'
+                    }`} />
+                    <div>
+                      <span className="text-sm font-medium text-teal-400">{item.name}</span>
+                      {item.description && (
+                        <span className="text-sm text-gray-400"> — {item.description}</span>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              {cat.netEffect && (
+                <div className="mt-4 pt-4 border-t border-white/10">
+                  <p className="text-sm text-emerald-400 font-medium">{cat.netEffect}</p>
+                </div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (!data?.rows?.length) return null;
+
+  // Support both old format (metric/human/robot) and new format (aspect/left/right)
+  const firstRow = data.rows[0];
+  const hasOldFormat = 'metric' in firstRow;
+  const hasNewFormat = 'aspect' in firstRow || 'left' in firstRow;
+
+  // Determine headers
+  const headers = hasOldFormat
+    ? ['Metric', 'Human', 'Current Robot']
+    : [data.metricHeader || 'Aspect', data.leftHeader || 'Option A', data.rightHeader || 'Option B'];
+
+  // Get status color
+  const getStatusColor = (status?: string) => {
+    switch (status) {
+      case 'error': return 'border-l-4 border-red-500/50 bg-red-500/5';
+      case 'warning': return 'border-l-4 border-yellow-500/50 bg-yellow-500/5';
+      case 'success': return 'border-l-4 border-emerald-500/50 bg-emerald-500/5';
+      default: return '';
+    }
+  };
+
   return (
     <div className="my-12 overflow-hidden rounded-xl border border-white/10">
+      {data.title && (
+        <div className="px-4 py-3 bg-white/5 border-b border-white/10">
+          <h4 className="text-sm font-mono text-gray-500 uppercase tracking-wider">{data.title}</h4>
+          {data.subtitle && <p className="text-xs text-gray-600 mt-1">{data.subtitle}</p>}
+        </div>
+      )}
       <div className="grid grid-cols-3 bg-white/5 p-4 text-xs font-bold uppercase tracking-wider text-gray-400">
-        <div>Metric</div>
-        <div>Human</div>
-        <div>Current Robot</div>
+        {headers.map((header, i) => (
+          <div key={i}>{header}</div>
+        ))}
       </div>
       <div className="divide-y divide-white/5 bg-black/20">
-        {data.rows.map((row: any, i: number) => (
-          <div key={i} className="grid grid-cols-3 p-4 text-sm hover:bg-white/5 transition-colors">
-            <div className="text-teal-400 font-medium">{row.metric}</div>
-            <div className="text-gray-300">{row.human}</div>
-            <div className="text-gray-500">{row.robot}</div>
-          </div>
-        ))}
+        {data.rows.map((row: any, i: number) => {
+          const col1 = row.metric || row.aspect || row.category || '';
+          const col2 = row.human || row.left || row.value1 || '';
+          const col3 = row.robot || row.right || row.value2 || '';
+
+          return (
+            <div key={i} className={`grid grid-cols-3 p-4 text-sm hover:bg-white/5 transition-colors ${getStatusColor(row.status)}`}>
+              <div className="text-teal-400 font-medium">{col1}</div>
+              <div className="text-gray-300">{col2}</div>
+              <div className="text-gray-500">{col3}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

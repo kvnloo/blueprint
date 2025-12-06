@@ -20,7 +20,7 @@ export const livingRoom: Article = {
     },
     {
       type: 'quote',
-      text: '"This is an incredible achievement for synthetic biology. Light Bio is bringing us leaps and bounds closer to our solarpunk dream of living in Avatar\'s Pandora." - Jason Kelly, CEO of Ginkgo Bioworks, on the world\'s first commercially available bioluminescent plant'
+      text: '"This is an incredible achievement for synthetic biology. [Light Bio](https://light.bio) is bringing us leaps and bounds closer to our solarpunk dream of living in Avatar\'s Pandora." - Jason Kelly, CEO of [Ginkgo Bioworks](https://ginkgobioworks.com), on the world\'s first commercially available bioluminescent plant'
     },
     {
       type: 'text',
@@ -166,7 +166,7 @@ export const livingRoom: Article = {
     },
     {
       type: 'text',
-      text: 'In 1984, biologist Edward O. Wilson proposed something that feels obvious once you hear it: **humans have an innate need to connect with other living things**. He called this *biophilia*-literally, "love of life."'
+      text: 'In 1984, biologist [Edward O. Wilson](https://eowilsonfoundation.org) proposed something that feels obvious once you hear it: **humans have an innate need to connect with other living things**. He called this *biophilia*-literally, "love of life."'
     },
     {
       type: 'text',
@@ -296,7 +296,7 @@ export const livingRoom: Article = {
     },
     {
       type: 'text',
-      text: 'The landmark study that started this research was conducted in 1984 by Roger Ulrich. He found that post-surgical patients with views of trees from their hospital window recovered faster, required less pain medication, and had fewer complications than patients whose windows faced a brick wall.'
+      text: 'The landmark study that started this research was conducted in 1984 by [Roger Ulrich](https://doi.org/10.1126/science.6143402). He found that post-surgical patients with views of trees from their hospital window recovered faster, required less pain medication, and had fewer complications than patients whose windows faced a brick wall.'
     },
     {
       type: 'subheader',
@@ -304,7 +304,7 @@ export const livingRoom: Article = {
     },
     {
       type: 'text',
-      text: 'In 1989, NASA conducted a famous study on plants and air quality, looking for ways to purify air in sealed spacecraft. Their findings suggested that certain common houseplants could remove volatile organic compounds (VOCs) like formaldehyde, benzene, and trichloroethylene from the air.'
+      text: 'In 1989, [NASA conducted a famous study](https://ntrs.nasa.gov/citations/19930073077) on plants and air quality, looking for ways to purify air in sealed spacecraft. Their findings suggested that certain common houseplants could remove volatile organic compounds (VOCs) like formaldehyde, benzene, and trichloroethylene from the air.'
     },
     {
       type: 'text',
@@ -817,7 +817,7 @@ export const livingRoom: Article = {
     },
     {
       type: 'text',
-      text: 'In April 2024, Light Bio began shipping the world\'s first commercially available bioluminescent plant-the Firefly Petunia. This isn\'t a gimmick or a blacklight trick. These plants emit actual light through bioluminescence, the same process fireflies and glowing mushrooms use.'
+      text: 'In April 2024, [Light Bio](https://light.bio) began shipping the world\'s first commercially available bioluminescent plant-the Firefly Petunia. This isn\'t a gimmick or a blacklight trick. These plants emit actual light through bioluminescence, the same process fireflies and glowing mushrooms use.'
     },
     {
       type: 'code',
@@ -1411,7 +1411,7 @@ $500+:    Multi-system ecosystem`
 • Facebook Marketplace (deals)
 
 BIOLUMINESCENT PLANTS:
-• light.bio (Firefly Petunias)
+• Light Bio (https://light.bio) - Firefly Petunias
 
 MOSS + SUPPLIES:
 • Amazon (preserved moss, supplies)

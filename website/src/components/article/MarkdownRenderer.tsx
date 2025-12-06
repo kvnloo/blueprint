@@ -159,84 +159,206 @@ const processInlineMarkdown = (text: string): React.ReactNode => {
 };
 
 /**
- * Processes markdown text, handling both tables and inline syntax
- * Handles: **bold**, *italic*, [links](url), `code`, escaped characters, and tables
+ * Renders a markdown header
+ */
+const renderHeader = (level: number, content: string, key: string): React.ReactNode => {
+  const processedContent = processInlineMarkdown(content);
+
+  switch (level) {
+    case 1:
+      return <h1 key={key} className="text-2xl font-bold text-white mt-8 mb-4">{processedContent}</h1>;
+    case 2:
+      return <h2 key={key} className="text-xl font-semibold text-white mt-6 mb-3">{processedContent}</h2>;
+    case 3:
+      return <h3 key={key} className="text-lg font-semibold text-teal-400 mt-5 mb-2">{processedContent}</h3>;
+    case 4:
+      return <h4 key={key} className="text-base font-semibold text-teal-300 mt-4 mb-2">{processedContent}</h4>;
+    case 5:
+      return <h5 key={key} className="text-sm font-semibold text-gray-300 mt-3 mb-1">{processedContent}</h5>;
+    case 6:
+      return <h6 key={key} className="text-sm font-medium text-gray-400 mt-3 mb-1">{processedContent}</h6>;
+    default:
+      return <p key={key} className="text-gray-300">{processedContent}</p>;
+  }
+};
+
+/**
+ * Renders a list item
+ */
+const renderListItem = (content: string, key: string): React.ReactNode => {
+  return (
+    <li key={key} className="text-gray-300 ml-4 pl-2">
+      {processInlineMarkdown(content)}
+    </li>
+  );
+};
+
+/**
+ * Block types for parsing
+ */
+type BlockType = 'paragraph' | 'header' | 'list' | 'table';
+
+interface ParsedBlock {
+  type: BlockType;
+  content: string;
+  level?: number; // For headers
+  items?: string[]; // For lists
+}
+
+/**
+ * Parses text into blocks (headers, lists, paragraphs, tables)
+ */
+const parseBlocks = (text: string): ParsedBlock[] => {
+  const lines = text.split('\n');
+  const blocks: ParsedBlock[] = [];
+  let currentList: string[] = [];
+  let currentParagraph: string[] = [];
+  let inTable = false;
+  let tableLines: string[] = [];
+
+  const flushParagraph = () => {
+    if (currentParagraph.length > 0) {
+      const content = currentParagraph.join('\n').trim();
+      if (content) {
+        blocks.push({ type: 'paragraph', content });
+      }
+      currentParagraph = [];
+    }
+  };
+
+  const flushList = () => {
+    if (currentList.length > 0) {
+      blocks.push({ type: 'list', content: '', items: [...currentList] });
+      currentList = [];
+    }
+  };
+
+  const flushTable = () => {
+    if (tableLines.length > 0) {
+      blocks.push({ type: 'table', content: tableLines.join('\n') });
+      tableLines = [];
+    }
+    inTable = false;
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    // Check for table lines
+    if (trimmed.includes('|') && !inTable) {
+      flushParagraph();
+      flushList();
+      inTable = true;
+      tableLines = [line];
+      continue;
+    }
+
+    if (inTable) {
+      if (trimmed.includes('|')) {
+        tableLines.push(line);
+        continue;
+      } else {
+        flushTable();
+        // Fall through to process this line
+      }
+    }
+
+    // Check for headers: # Header, ## Header, ### Header, etc.
+    const headerMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
+    if (headerMatch) {
+      flushParagraph();
+      flushList();
+      blocks.push({
+        type: 'header',
+        level: headerMatch[1].length,
+        content: headerMatch[2]
+      });
+      continue;
+    }
+
+    // Check for list items: - item or * item
+    const listMatch = trimmed.match(/^[-*]\s+(.+)$/);
+    if (listMatch) {
+      flushParagraph();
+      currentList.push(listMatch[1]);
+      continue;
+    }
+
+    // If we were in a list and hit a non-list line, flush the list
+    if (currentList.length > 0 && !listMatch) {
+      flushList();
+    }
+
+    // Empty line - flush paragraph
+    if (!trimmed) {
+      flushParagraph();
+      continue;
+    }
+
+    // Regular text - add to paragraph
+    currentParagraph.push(line);
+  }
+
+  // Flush remaining content
+  flushTable();
+  flushParagraph();
+  flushList();
+
+  return blocks;
+};
+
+/**
+ * Processes markdown text, handling headers, lists, tables and inline syntax
+ * Handles: # headers, - lists, **bold**, *italic*, [links](url), `code`, tables
  */
 export const processMarkdown = (text: string): React.ReactNode => {
   if (!text) return null;
 
-  // Check if text contains a markdown table
-  if (containsMarkdownTable(text)) {
-    // Split text into parts: before table, table, after table
-    const lines = text.split('\n');
-    const result: React.ReactNode[] = [];
-    let currentBlock: string[] = [];
-    let inTable = false;
-    let tableLines: string[] = [];
-    let tableCount = 0;
+  // Check for block-level markdown elements
+  const hasBlockElements = /^#{1,6}\s|^[-*]\s/m.test(text) || containsMarkdownTable(text);
 
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      const trimmed = line.trim();
-      const isPipeLine = trimmed.includes('|');
+  if (hasBlockElements) {
+    const blocks = parseBlocks(text);
 
-      if (isPipeLine && !inTable) {
-        // Starting a table - flush current block
-        if (currentBlock.length > 0) {
-          const blockText = currentBlock.join('\n');
-          result.push(
-            <span key={`text-${result.length}`} className="whitespace-pre-line">
-              {processInlineMarkdown(blockText)}
-            </span>
-          );
-          currentBlock = [];
-        }
-        inTable = true;
-        tableLines = [line];
-      } else if (isPipeLine && inTable) {
-        // Continue table
-        tableLines.push(line);
-      } else if (!isPipeLine && inTable) {
-        // End table - render it
-        const tableNode = parseMarkdownTable(tableLines.join('\n'), `table-${tableCount++}`);
-        if (tableNode) {
-          result.push(tableNode);
-        }
-        tableLines = [];
-        inTable = false;
-        // Start new text block
-        if (trimmed) {
-          currentBlock.push(line);
-        }
-      } else {
-        // Regular text line
-        currentBlock.push(line);
-      }
-    }
+    return (
+      <>
+        {blocks.map((block, index) => {
+          const key = `block-${index}`;
 
-    // Flush remaining table
-    if (inTable && tableLines.length > 0) {
-      const tableNode = parseMarkdownTable(tableLines.join('\n'), `table-${tableCount++}`);
-      if (tableNode) {
-        result.push(tableNode);
-      }
-    }
+          switch (block.type) {
+            case 'header':
+              return renderHeader(block.level || 1, block.content, key);
 
-    // Flush remaining text block
-    if (currentBlock.length > 0) {
-      const blockText = currentBlock.join('\n');
-      result.push(
-        <span key={`text-${result.length}`} className="whitespace-pre-line">
-          {processInlineMarkdown(blockText)}
-        </span>
-      );
-    }
+            case 'list':
+              return (
+                <ul key={key} className="list-disc list-outside my-3 space-y-1">
+                  {block.items?.map((item, i) => renderListItem(item, `${key}-item-${i}`))}
+                </ul>
+              );
 
-    return <>{result}</>;
+            case 'table':
+              return parseMarkdownTable(block.content, key);
+
+            case 'paragraph':
+            default:
+              return (
+                <p key={key} className="text-gray-300 my-2 whitespace-pre-line">
+                  {processInlineMarkdown(block.content)}
+                </p>
+              );
+          }
+        })}
+      </>
+    );
   }
 
-  // No table - process as inline markdown
-  return processInlineMarkdown(text);
+  // No block elements - process as inline markdown with preserved whitespace
+  return (
+    <span className="whitespace-pre-line">
+      {processInlineMarkdown(text)}
+    </span>
+  );
 };
 
 interface MarkdownTextProps {
@@ -248,7 +370,7 @@ interface MarkdownTextProps {
  * Component wrapper for processMarkdown
  */
 const MarkdownText: React.FC<MarkdownTextProps> = ({ children, className }) => {
-  return <span className={className}>{processMarkdown(children)}</span>;
+  return <div className={className}>{processMarkdown(children)}</div>;
 };
 
 export default MarkdownText;

@@ -406,7 +406,7 @@ export const homeGrownRevolution: Article = {
     },
     {
       type: 'text',
-      text: 'The result? Some of the most sophisticated and efficient plant-growing technology ever developed.'
+      text: 'The result? Some of the most sophisticated and efficient plant-growing technology ever developed. The [NASA VEGGIE System](https://nasa.gov/mission_pages/station/research/experiments/383.html) and Advanced Plant Habitat demonstrate this innovation.'
     },
     {
       type: 'diagram',
@@ -544,7 +544,7 @@ export const homeGrownRevolution: Article = {
     },
     {
       type: 'text',
-      text: 'NASA tested multiple hydroponic approaches. The Kratky method is essentially what NASA would design if they had no power budget at all. It\'s dead simple: a passive deep water culture system with no pumps, no timers, and no moving parts.'
+      text: 'NASA tested multiple hydroponic approaches. The [Kratky method](https://ctahr.hawaii.edu/oc/freepubs/pdf/SA-5.pdf) is essentially what NASA would design if they had no power budget at all. It\'s dead simple: a passive deep water culture system with no pumps, no timers, and no moving parts.'
     },
     {
       type: 'diagram',
@@ -661,7 +661,7 @@ export const homeGrownRevolution: Article = {
           },
           {
             text: 'Masterblend 4-18-38',
-            details: '1 lb bag, Amazon $10',
+            details: '1 lb bag, [Masterblend](https://masterblend.com) $10',
             icon: 'droplets'
           },
           {
@@ -686,7 +686,7 @@ export const homeGrownRevolution: Article = {
           },
           {
             text: 'Light source',
-            details: 'Option A: Sunny window + LED bulb ($5-15) | Option B: Spider Farmer SF300 ($30-40)',
+            details: 'Option A: Sunny window + LED bulb ($5-15) | Option B: [Spider Farmer SF300](https://spider-farmer.com) ($30-40)',
             icon: 'lightbulb'
           }
         ]
@@ -698,7 +698,7 @@ export const homeGrownRevolution: Article = {
     },
     {
       type: 'text',
-      text: 'This is where things get interesting. Commercial tower gardens (like the Tower Garden brand) cost $500-1,000+. We\'re going to build essentially the same thing for a fraction of the price.'
+      text: 'This is where things get interesting. Commercial tower gardens (like the [Tower Garden](https://towergarden.com) brand) cost $500-1,000+. We\'re going to build essentially the same thing for a fraction of the price.'
     },
     {
       type: 'text',

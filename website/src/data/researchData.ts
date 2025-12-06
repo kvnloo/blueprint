@@ -14,12 +14,16 @@ export interface ArticleSection {
     | 'floorplan'   // Interactive room/facility layouts
     | 'hierarchy'   // Expandable tree structures
     | 'process'     // Step-by-step process flows
+    | 'process-flow' // Alias for process flows
     | 'metrics'     // Dashboard-style metric cards
     | 'matrix'      // Comparison matrices/tables
+    | 'comparison-matrix' // Alias for comparison matrices
     | 'radial'      // Circular progress charts
     | 'checklist'   // Interactive checklists
     | 'cards'       // Knowledge card grids
-    | 'ascii';      // Animated ASCII art preservation
+    | 'ascii'       // Animated ASCII art preservation
+    | 'spectrum'    // Spectrum/range visualizations
+    | 'quote';      // Quote blocks with attribution
   data?: any;
   language?: string;
 }

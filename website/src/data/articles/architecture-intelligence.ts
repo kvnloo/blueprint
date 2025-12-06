@@ -47,7 +47,7 @@ export const architectureIntelligence: Article = {
             title: 'Orchestrate Tools',
             icon: 'zap',
             content: 'Coordinate diverse tooling',
-            details: 'Blender, Unity, code, documents, research',
+            details: '[Blender](https://blender.org), [Unity](https://unity.com), code, documents, research',
             tags: ['execution']
           },
           {
@@ -150,7 +150,7 @@ export const architectureIntelligence: Article = {
             label: 'TEACHER MODEL',
             description: '405B parameters',
             details: [
-              'Claude, GPT-4, DeepSeek R1',
+              '[Claude](https://anthropic.com), [GPT-4](https://openai.com), [DeepSeek R1](https://deepseek.com)',
               '"The Expert"',
               'Learns from billions of tokens',
               'Massive computational requirements'
@@ -177,7 +177,7 @@ export const architectureIntelligence: Article = {
             label: 'STUDENT MODEL',
             description: '8B parameters',
             details: [
-              'Llama Nemotron Nano',
+              '[Llama Nemotron Nano](https://nvidia.com/en-us/ai)',
               '"The Apprentice"',
               'Learns from teacher behavior',
               'Runs on single GPU'
@@ -208,7 +208,7 @@ export const architectureIntelligence: Article = {
     },
     {
       type: 'text',
-      text: 'This breakthrough has led to models that dramatically outperform their size class. The most striking example in 2025 is NVIDIA\'s Llama Nemotron family.'
+      text: 'This breakthrough has led to models that dramatically outperform their size class. The most striking example in 2025 is NVIDIA\'s [Llama Nemotron](https://nvidia.com/en-us/ai) family.'
     },
     {
       type: 'subheader',
@@ -253,7 +253,7 @@ export const architectureIntelligence: Article = {
             details: 'Distilled from: Llama 3.1 405B',
             tags: ['253B', 'distributed', 'sota'],
             stats: [
-              { label: 'Achievement', value: 'Beats DeepSeek-R1' },
+              { label: 'Achievement', value: 'Beats [DeepSeek-R1](https://deepseek.com)' },
               { label: 'Hardware', value: 'Single 8xH100 node' },
               { label: 'Throughput', value: 'Higher than 405B' }
             ]
@@ -308,7 +308,7 @@ export const architectureIntelligence: Article = {
     },
     {
       type: 'text',
-      text: 'The Llama Nemotron Nano 8B is particularly relevant because it fits on your 3080Ti and excels at exactly what autonomous systems need: **tool calling, reasoning, and RAG**.'
+      text: 'The [Llama Nemotron Nano 8B](https://nvidia.com/en-us/ai) is particularly relevant because it fits on your 3080Ti and excels at exactly what autonomous systems need: **tool calling, reasoning, and RAG**.'
     },
     {
       type: 'subheader',
@@ -1071,36 +1071,36 @@ claude-squad merge --from feature-a --to main`
                       children: [
                         {
                           id: 'blender',
-                          label: 'Blender MCP',
+                          label: '[Blender](https://blender.org) MCP',
                           icon: 'sparkles',
                           children: [
                             {
                               id: 'blender-app',
-                              label: 'Blender (3D app)',
+                              label: '[Blender](https://blender.org) (3D app)',
                               icon: 'target'
                             }
                           ]
                         },
                         {
                           id: 'unity',
-                          label: 'Unity MCP',
+                          label: '[Unity](https://unity.com) MCP',
                           icon: 'sparkles',
                           children: [
                             {
                               id: 'unity-app',
-                              label: 'Unity Editor',
+                              label: '[Unity](https://unity.com) Editor',
                               icon: 'target'
                             }
                           ]
                         },
                         {
                           id: 'linear',
-                          label: 'Linear MCP',
+                          label: '[Linear](https://linear.app) MCP',
                           icon: 'sparkles',
                           children: [
                             {
                               id: 'linear-api',
-                              label: 'Linear API',
+                              label: '[Linear](https://linear.app) API',
                               icon: 'target'
                             }
                           ]
@@ -2668,22 +2668,22 @@ claude-squad merge --from feature-a --to main`
 ═══════════════════════════════════════════════════════════════════════════
 
     TASK: Complex reasoning, novel problems, architecture
-    MODEL: Claude Opus 4.5 (API)
+    MODEL: [Claude](https://anthropic.com) Opus 4.5 (API)
 
     TASK: Research synthesis, code review, planning
-    MODEL: Claude Sonnet 4.5 (API)
+    MODEL: [Claude](https://anthropic.com) Sonnet 4.5 (API)
 
     TASK: Tool calling, MCP orchestration, routine code
-    MODEL: Llama Nemotron Nano 8B (local, 3080Ti)
+    MODEL: [Llama Nemotron Nano](https://nvidia.com/en-us/ai) 8B (local, 3080Ti)
 
     TASK: Code generation from spec, refactoring
-    MODEL: Qwen2.5-Coder 14B Q4 (local, 3080Ti)
+    MODEL: [Qwen2.5-Coder](https://qwenlm.github.io) 14B Q4 (local, 3080Ti)
 
     TASK: Embeddings, routing, classification
     MODEL: Sentence transformers (local, CPU or 2080)
 
     TASK: Document understanding with images
-    MODEL: Nemotron Nano VL 8B (local, 3080Ti)`
+    MODEL: [Nemotron Nano VL](https://nvidia.com/en-us/ai) 8B (local, 3080Ti)`
     },
     {
       type: 'subheader',
@@ -2695,27 +2695,27 @@ claude-squad merge --from feature-a --to main`
       code: `MCP SERVER SETUP CHECKLIST
 ═══════════════════════════════════════════════════════════════════════════
 
-    BLENDER MCP:
+    BLENDER MCP (https://blender.org):
     □ Download blender-mcp addon
-    □ Install in Blender (Edit > Preferences > Add-ons)
+    □ Install in [Blender](https://blender.org) (Edit > Preferences > Add-ons)
     □ Enable addon
     □ Add to claude_desktop_config.json
     □ Restart Claude Desktop
     □ Test: "Create a red cube at origin"
 
-    UNITY MCP:
-    □ Install Unity MCP Package
+    UNITY MCP (https://unity.com):
+    □ Install [Unity](https://unity.com) MCP Package
     □ Configure Python MCP server
     □ Add to claude_desktop_config.json
-    □ Open Unity project
+    □ Open [Unity](https://unity.com) project
     □ Restart Claude Desktop
     □ Test: "Create empty GameObject named Test"
 
-    LINEAR MCP:
-    □ Get Linear API key
+    LINEAR MCP (https://linear.app):
+    □ Get [Linear](https://linear.app) API key
     □ Install linear-mcp package
     □ Add to claude_desktop_config.json
-    □ Test: "List my Linear issues"
+    □ Test: "List my [Linear](https://linear.app) issues"
 
     GIT MCP:
     □ Already built into Claude Code

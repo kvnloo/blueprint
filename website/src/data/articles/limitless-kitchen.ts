@@ -160,11 +160,11 @@ export const limitlessKitchen: Article = {
     },
     {
       type: 'text',
-      text: '**Bryan Johnson\'s Blueprint** demonstrates what\'s possible with extreme dedication: 100+ biomarkers tracked, meals optimized to the calorie, and measurable biological age reversal. But it costs $2M/year and requires a full-time team.'
+      text: '**[Bryan Johnson\'s Blueprint](https://blueprint.bryanjohnson.com)** demonstrates what\'s possible with extreme dedication: 100+ biomarkers tracked, meals optimized to the calorie, and measurable biological age reversal. But it costs $2M/year and requires a full-time team.'
     },
     {
       type: 'text',
-      text: '**Blue Zones** show that certain populations (Okinawa, Sardinia, Loma Linda, Ikaria, Nicoya) achieve exceptional longevity through lifestyle patterns-but these emerged from culture, not engineering.'
+      text: '**[Blue Zones](https://bluezones.com)** ([book](https://amazon.com/dp/1426209487)) show that certain populations (Okinawa, Sardinia, Loma Linda, Ikaria, Nicoya) achieve exceptional longevity through lifestyle patterns-but these emerged from culture, not engineering.'
     },
     {
       type: 'text',
@@ -628,7 +628,7 @@ export const limitlessKitchen: Article = {
     },
     {
       type: 'text',
-      text: 'Inspired by DeepMind\'s "Learning to Simulate Complex Physics with Graph Networks":'
+      text: 'Inspired by DeepMind\'s ["Learning to Simulate Complex Physics with Graph Networks"](https://arxiv.org/abs/2002.09405):'
     },
     {
       type: 'code',
@@ -2088,19 +2088,19 @@ Full integration        │         │         │          │ NOBODY HAS DONE
     },
     {
       type: 'text',
-      text: '**Robot Cooking & Manipulation:**\n- DeepMind. "Learning to Simulate Complex Physics with Graph Networks" (ICML 2020)\n- NVIDIA. "Eureka: Human-Level Reward Design via Coding LLMs" (ICLR 2024)\n- Stanford. "Mobile ALOHA: Learning Bimanual Mobile Manipulation" (2024)\n- Google. "RT-2: Vision-Language-Action Models" (2023)'
+      text: '**Robot Cooking & Manipulation:**\n- DeepMind. ["Learning to Simulate Complex Physics with Graph Networks"](https://arxiv.org/abs/2002.09405) (ICML 2020)\n- NVIDIA. ["Eureka: Human-Level Reward Design via Coding LLMs"](https://arxiv.org/abs/2310.12931) (ICLR 2024)\n- Stanford. ["Mobile ALOHA: Learning Bimanual Mobile Manipulation"](https://mobile-aloha.github.io) (2024)\n- Google. ["RT-2: Vision-Language-Action Models"](https://robotics-transformer2.github.io) (2023)'
     },
     {
       type: 'text',
-      text: '**Skill Learning & Curriculum:**\n- NVIDIA et al. "Voyager: An Open-Ended Embodied Agent with LLMs" (2023)\n- OpenAI. "Asymmetric Actor Critic for Image-Based Robot Learning" (2018)'
+      text: '**Skill Learning & Curriculum:**\n- NVIDIA et al. ["Voyager: An Open-Ended Embodied Agent with LLMs"](https://voyager.minedojo.org) (2023)\n- OpenAI. ["Asymmetric Actor Critic for Image-Based Robot Learning"](https://arxiv.org/abs/1710.06542) (2018)'
     },
     {
       type: 'text',
-      text: '**Health Optimization:**\n- Bryan Johnson. Blueprint Protocol Documentation\n- Buettner, D. "The Blue Zones" (2008)\n- Attia, P. "Outlive: The Science and Art of Longevity" (2023)'
+      text: '**Health Optimization:**\n- Bryan Johnson. [Blueprint Protocol Documentation](https://blueprint.bryanjohnson.com)\n- Buettner, D. ["The Blue Zones"](https://amazon.com/dp/1426209487) (2008)\n- Attia, P. ["Outlive: The Science and Art of Longevity"](https://amazon.com/dp/0593236599) (2023)'
     },
     {
       type: 'text',
-      text: '**Simulation & Digital Twins:**\n- NVIDIA. Isaac Sim Documentation\n- DeepMind. MuJoCo Documentation\n- SimWorld. "Procedural World Generation for Embodied AI" (CVPR 2025)'
+      text: '**Simulation & Digital Twins:**\n- NVIDIA. [Isaac Sim Documentation](https://developer.nvidia.com/isaac-sim)\n- DeepMind. [MuJoCo Documentation](https://mujoco.org)\n- [SimWorld](https://simworld.org/). "Procedural World Generation for Embodied AI" (CVPR 2025)'
     },
     {
       type: 'text',

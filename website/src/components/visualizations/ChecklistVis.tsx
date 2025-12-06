@@ -4,6 +4,14 @@ import { Check, ChevronDown, ChevronRight } from 'lucide-react';
 import { VisProps, ChecklistItem } from './types';
 import { getIcon } from './iconMap';
 
+/**
+ * Processes text to handle escaped newlines
+ */
+const processTextContent = (text: string | undefined): string => {
+  if (!text) return '';
+  return text.replace(/\\n/g, '\n');
+};
+
 interface ChecklistTier {
   id: string;
   name: string;
@@ -32,7 +40,7 @@ export const ChecklistVis: React.FC<VisProps> = ({ data, className = '' }) => {
   const action: ChecklistAction | undefined = data.action;
 
   // If using flat items, wrap them in a single tier
-  const allTiers = tiers.length > 0 ? tiers : flatItems.length > 0 ? [{
+  const allTiers: ChecklistTier[] = tiers.length > 0 ? tiers : flatItems.length > 0 ? [{
     id: 'default',
     name: data.title || 'Checklist',
     items: flatItems
@@ -41,7 +49,7 @@ export const ChecklistVis: React.FC<VisProps> = ({ data, className = '' }) => {
   if (allTiers.length === 0 && !action) return null;
 
   // Calculate total items across all tiers
-  const totalItems = allTiers.reduce((sum, tier) => sum + (tier.items?.length || 0), 0);
+  const totalItems = allTiers.reduce((sum: number, tier) => sum + (tier.items?.length || 0), 0);
 
   const toggleItem = (id: string) => {
     setChecked(prev => {
@@ -191,7 +199,7 @@ export const ChecklistVis: React.FC<VisProps> = ({ data, className = '' }) => {
                             {item.name || item.label}
                           </div>
                           {item.description && (
-                            <div className="text-xs text-gray-500 mt-0.5">{item.description}</div>
+                            <div className="text-xs text-gray-500 mt-0.5 whitespace-pre-line">{processTextContent(item.description)}</div>
                           )}
                         </div>
                       </motion.div>
