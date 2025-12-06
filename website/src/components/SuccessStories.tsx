@@ -9,7 +9,9 @@ const stories = [
     client: 'AgriTech Labs',
     challenge: 'Data fragmentation slowed down yield prediction models significantly.',
     solution: 'Deployed zer0\'s distributed agent network to unify data streams.',
-    result: 'Achieved a 40% reduction in modeling time and doubled prediction accuracy.'
+    result: 'Achieved a 40% reduction in modeling time and doubled prediction accuracy.',
+    caseStudyUrl: 'https://www.datanext.ai/case-study/aerofarms-aeroponics-vertical-farming/',
+    caseStudySource: 'AeroFarms + Nokia Bell Labs: AI & 5G Drones in Vertical Farming'
   },
   {
     id: 'vertical',
@@ -17,7 +19,9 @@ const stories = [
     client: 'Urban Greens Co',
     challenge: 'High energy costs in climate control systems eating into margins.',
     solution: 'Implemented AI-driven HVAC modulation using digital twins.',
-    result: 'Reduced energy consumption by 22% while increasing crop yield by 15%.'
+    result: 'Reduced energy consumption by 22% while increasing crop yield by 15%.',
+    caseStudyUrl: 'https://www.mdpi.com/2071-1050/16/24/10958',
+    caseStudySource: 'AI-GECS: Digital Twin Climate Control System Research'
   },
   {
     id: 'hydro',
@@ -25,7 +29,9 @@ const stories = [
     client: 'AquaGrow Systems',
     challenge: 'Manual nutrient monitoring was leading to inconsistent PH levels.',
     solution: 'Autonomous sensor array with real-time chemical balancing agents.',
-    result: 'Eliminated manual testing completely. 100% consistent nutrient delivery.'
+    result: 'Eliminated manual testing completely. 100% consistent nutrient delivery.',
+    caseStudyUrl: 'https://www.sciencedirect.com/science/article/pii/S2090447923002307',
+    caseStudySource: 'IoT-Based Smart Hydroponic Greenhouse Automation'
   },
   {
     id: 'greenhouse',
@@ -33,7 +39,9 @@ const stories = [
     client: 'SolarLeaf Farms',
     challenge: 'Unpredictable weather patterns disrupting harvest schedules.',
     solution: 'Predictive weather modeling integrated with automated shielding.',
-    result: 'Prevented 3 major crop loss events in the first year alone.'
+    result: 'Prevented 3 major crop loss events in the first year alone.',
+    caseStudyUrl: 'https://www.mdpi.com/2311-7524/9/8/853',
+    caseStudySource: 'Taiwan TARI: AI-Powered Greenhouse Climate Prediction'
   }
 ];
 
@@ -103,9 +111,16 @@ const SuccessStories = () => {
                       </div>
                       
                       <div className="pb-8 pl-4">
-                         <button className="text-xs font-bold uppercase tracking-wider text-teal-500 flex items-center gap-1 hover:text-teal-400">
-                            Read Full Case Study <ArrowUpRight size={14} />
-                         </button>
+                         <a
+                           href={story.caseStudyUrl}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           onClick={(e) => e.stopPropagation()}
+                           className="text-xs font-bold uppercase tracking-wider text-teal-500 flex items-center gap-1 hover:text-teal-400 transition-colors"
+                         >
+                            Read Related Research <ArrowUpRight size={14} />
+                         </a>
+                         <p className="text-xs text-gray-600 mt-1">{story.caseStudySource}</p>
                       </div>
                     </motion.div>
                   )}
