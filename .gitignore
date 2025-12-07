@@ -43,3 +43,6 @@ yarn-error.log*
 
 # Claude Flow metrics
 .claude-flow/
+
+# Claude Flow metrics (auto-generated)
+.claude-flow/
