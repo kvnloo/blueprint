@@ -1,28 +1,57 @@
-name: Playwright E2E Tests
+name: Playwright E2E Tests (Optimized)
+
+# This is the RECOMMENDED workflow combining all optimizations:
+# - Smart path filtering (Phase 3)
+# - Browser caching (Phase 1)
+# - Parallel workers (Phase 1)
+# - Sharding for main/dev (Phase 2)
+# - Quick PR checks
 
 on:
   push:
-    branches: [main, dev, feature/*, fix/*, enhancement/*]
+    branches: [main, dev]
   pull_request:
     branches: [main, dev]
   workflow_dispatch:
+    inputs:
+      force_full:
+        description: 'Run full sharded tests'
+        required: false
+        default: 'false'
+        type: boolean
 
 jobs:
-  test:
-    name: Playwright Tests
+  # Step 1: Detect what changed
+  changes:
+    name: Detect Changes
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    outputs:
+      should_test: ${{ steps.filter.outputs.code == 'true' || steps.filter.outputs.tests == 'true' || github.event.inputs.force_full == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            code:
+              - 'website/src/**/*.{ts,tsx,js,jsx,css,scss}'
+              - 'website/src/package*.json'
+            tests:
+              - 'website/tests/**'
+              - 'website/package*.json'
 
-    defaults:
-      run:
-        working-directory: website/src
+  # Step 2a: Quick PR check (Chromium only, no sharding)
+  pr-check:
+    name: PR Quick Check
+    needs: changes
+    if: github.event_name == 'pull_request' && needs.changes.outputs.should_test == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
@@ -30,135 +59,154 @@ jobs:
             website/package-lock.json
             website/src/package-lock.json
 
-      - name: Install test dependencies
-        run: npm ci
+      - name: Install dependencies
+        run: npm ci && cd src && npm ci
         working-directory: website
 
-      - name: Install app dependencies
-        run: npm ci
-
-      # Phase 1: Browser caching for faster CI runs
       - name: Get Playwright version
-        id: playwright-version
-        run: echo "version=$(npm ls @playwright/test --json | jq -r '.dependencies["@playwright/test"].version // .devDependencies["@playwright/test"].version')" >> $GITHUB_OUTPUT
+        id: pw-version
+        run: echo "version=$(npm ls @playwright/test --json | jq -r '.dependencies["@playwright/test"].version')" >> $GITHUB_OUTPUT
         working-directory: website
 
-      - name: Cache Playwright browsers
-        id: playwright-cache
+      - name: Cache Playwright
+        id: cache
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
-          restore-keys: |
-            playwright-${{ runner.os }}-
+          key: pw-chromium-${{ runner.os }}-${{ steps.pw-version.outputs.version }}
 
-      - name: Install Playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium firefox webkit
-        working-directory: website
-
-      - name: Install Playwright dependencies (cached)
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium firefox webkit
-        working-directory: website
-
-      - name: Build application
-        run: npm run build
-
-      - name: Run Playwright tests
-        run: npx playwright test --config=tests/playwright.config.ts
-        working-directory: website
-        env:
-          CI: true
-          PLAYWRIGHT_BASE_URL: http://localhost:3000
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: website/tests/playwright-report/
-          retention-days: 30
-
-      - name: Upload test artifacts
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: test-results
-          path: website/tests/test-results/
-          retention-days: 7
-
-  # Quick smoke test for PRs (subset of tests)
-  smoke-test:
-    name: Smoke Tests (Quick)
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    if: github.event_name == 'pull_request'
-
-    defaults:
-      run:
-        working-directory: website/src
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: |
-            website/package-lock.json
-            website/src/package-lock.json
-
-      - name: Install test dependencies
-        run: npm ci
-        working-directory: website
-
-      - name: Install app dependencies
-        run: npm ci
-
-      # Phase 1: Browser caching for smoke tests
-      - name: Get Playwright version
-        id: playwright-version
-        run: echo "version=$(npm ls @playwright/test --json | jq -r '.dependencies["@playwright/test"].version // .devDependencies["@playwright/test"].version')" >> $GITHUB_OUTPUT
-        working-directory: website
-
-      - name: Cache Playwright Chromium
-        id: playwright-cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
-          restore-keys: |
-            playwright-chromium-${{ runner.os }}-
-            playwright-${{ runner.os }}-
-
-      - name: Install Playwright Chromium
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
+      - name: Install Chromium
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
         working-directory: website
 
-      - name: Install Playwright dependencies (cached)
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
+      - name: Install deps only
+        if: steps.cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
         working-directory: website
 
-      - name: Build application
+      - name: Build
         run: npm run build
+        working-directory: website/src
 
-      - name: Run smoke tests (Chromium only)
-        run: npx playwright test --config=tests/playwright.config.ts --project=chromium navigation.spec.ts home-sections.spec.ts
+      - name: Test (Chromium only)
+        run: npx playwright test --config=tests/playwright.config.ts --project=chromium
         working-directory: website
         env:
           CI: true
           PLAYWRIGHT_BASE_URL: http://localhost:3000
 
-      - name: Upload smoke test results
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: smoke-test-results
+          name: pr-test-results
           path: website/tests/test-results/
           retention-days: 7
+
+  # Step 2b: Full sharded test for main/dev pushes
+  full-test:
+    name: Full Test (${{ matrix.browser }}, ${{ matrix.shard }}/4)
+    needs: changes
+    if: github.event_name == 'push' && needs.changes.outputs.should_test == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+        shard: [1, 2, 3, 4]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: |
+            website/package-lock.json
+            website/src/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci && cd src && npm ci
+        working-directory: website
+
+      - name: Get Playwright version
+        id: pw-version
+        run: echo "version=$(npm ls @playwright/test --json | jq -r '.dependencies["@playwright/test"].version')" >> $GITHUB_OUTPUT
+        working-directory: website
+
+      - name: Cache Playwright
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ matrix.browser }}-${{ runner.os }}-${{ steps.pw-version.outputs.version }}
+
+      - name: Install browser
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+        working-directory: website
+
+      - name: Install deps only
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps ${{ matrix.browser }}
+        working-directory: website
+
+      - name: Build
+        run: npm run build
+        working-directory: website/src
+
+      - name: Test (sharded)
+        run: npx playwright test --config=tests/playwright.config.ts --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/4 --reporter=blob
+        working-directory: website
+        env:
+          CI: true
+          PLAYWRIGHT_BASE_URL: http://localhost:3000
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: blob-${{ matrix.browser }}-${{ matrix.shard }}
+          path: website/blob-report/
+          retention-days: 1
+
+  # Step 3: Merge sharded reports
+  merge:
+    name: Merge Reports
+    needs: full-test
+    if: always() && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm ci
+        working-directory: website
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: blobs
+          pattern: blob-*
+          merge-multiple: true
+
+      - run: npx playwright merge-reports --reporter html ./blobs
+        working-directory: website
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: website/playwright-report/
+          retention-days: 30
+
+  # Step 4: Skip notification
+  skipped:
+    name: Tests Skipped
+    needs: changes
+    if: needs.changes.outputs.should_test != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "No code changes - tests skipped" >> $GITHUB_STEP_SUMMARY
