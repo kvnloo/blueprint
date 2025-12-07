@@ -1,0 +1,9 @@
+# E2E Test Directory
+
+Place your Playwright test files here.
+
+Example test file structure:
+- homepage.spec.ts
+- navigation.spec.ts
+- forms.spec.ts
+- responsive.spec.ts
