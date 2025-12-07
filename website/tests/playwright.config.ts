@@ -23,7 +23,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : undefined, // Increased from 1 to 2 for faster CI
 
   // Reporter configuration - multiple formats for different use cases
   reporter: [
@@ -57,74 +57,89 @@ export default defineConfig({
   },
 
   // Configure projects for major browsers
-  projects: [
-    // Desktop Browsers - HEADLESS MODE ENABLED
+  // In CI, run only core desktop browsers to stay within timeout
+  // Locally, run full matrix including mobile and tablet
+  projects: process.env.CI ? [
+    // CI: Core desktop browsers only (3 projects)
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        headless: true, // MANDATORY: Headless mode
+        headless: true,
       },
     },
-
     {
       name: 'firefox',
       use: {
         ...devices['Desktop Firefox'],
-        headless: true, // MANDATORY: Headless mode
+        headless: true,
       },
     },
-
     {
       name: 'webkit',
       use: {
         ...devices['Desktop Safari'],
-        headless: true, // MANDATORY: Headless mode
+        headless: true,
       },
     },
-
-    // Mobile Viewports - HEADLESS MODE ENABLED
+  ] : [
+    // Local: Full matrix with all devices
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        headless: true,
+      },
+    },
+    {
+      name: 'firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        headless: true,
+      },
+    },
+    {
+      name: 'webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        headless: true,
+      },
+    },
     {
       name: 'Mobile Chrome',
       use: {
         ...devices['Pixel 5'],
-        headless: true, // MANDATORY: Headless mode
+        headless: true,
       },
     },
-
     {
       name: 'Mobile Safari',
       use: {
         ...devices['iPhone 12'],
-        headless: true, // MANDATORY: Headless mode
+        headless: true,
       },
     },
-
-    // Tablet Viewports - HEADLESS MODE ENABLED
     {
       name: 'iPad',
       use: {
         ...devices['iPad Pro'],
-        headless: true, // MANDATORY: Headless mode
+        headless: true,
       },
     },
-
-    // Additional Desktop Resolutions - HEADLESS MODE ENABLED
     {
       name: 'Desktop 1920x1080',
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1920, height: 1080 },
-        headless: true, // MANDATORY: Headless mode
+        headless: true,
       },
     },
-
     {
       name: 'Desktop 1366x768',
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1366, height: 768 },
-        headless: true, // MANDATORY: Headless mode
+        headless: true,
       },
     },
   ],
