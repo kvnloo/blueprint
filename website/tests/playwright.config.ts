@@ -10,6 +10,9 @@ import { defineConfig, devices } from '@playwright/test';
  * - Visual regression: Screenshots and videos on failure
  * - Multiple reporters: HTML, JSON, list
  * - Dev server integration: Auto-start Vite on port 5173
+ *
+ * Phase 1 Optimization:
+ * - Workers increased from 1 to 2 for CI (GitHub runners have 2 cores)
  */
 
 export default defineConfig({
@@ -23,7 +26,8 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  // Phase 1: Use 2 workers in CI (GitHub runners have 2 cores)
+  workers: process.env.CI ? 2 : undefined,
 
   // Reporter configuration - multiple formats for different use cases
   reporter: [
