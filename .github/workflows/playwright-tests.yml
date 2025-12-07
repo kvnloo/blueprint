@@ -2,9 +2,10 @@ name: Playwright E2E Tests
 
 on:
   push:
-    branches: [main, dev, feature/*]
+    branches: [main, dev, feature/*, fix/*, enhancement/*]
   pull_request:
     branches: [main, dev]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -25,7 +26,9 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: website/src/package-lock.json
+          cache-dependency-path: |
+            website/package-lock.json
+            website/src/package-lock.json
 
       - name: Install test dependencies
         run: npm ci
@@ -34,14 +37,37 @@ jobs:
       - name: Install app dependencies
         run: npm ci
 
+      # Phase 1: Browser caching for faster CI runs
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(npm ls @playwright/test --json | jq -r '.dependencies["@playwright/test"].version // .devDependencies["@playwright/test"].version')" >> $GITHUB_OUTPUT
+        working-directory: website
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
       - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium firefox webkit
+        working-directory: website
+
+      - name: Install Playwright dependencies (cached)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium firefox webkit
+        working-directory: website
 
       - name: Build application
         run: npm run build
 
       - name: Run Playwright tests
-        run: npx playwright test --config=../tests/playwright.config.ts
+        run: npx playwright test --config=tests/playwright.config.ts
+        working-directory: website
         env:
           CI: true
           PLAYWRIGHT_BASE_URL: http://localhost:3000
@@ -82,7 +108,9 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: website/src/package-lock.json
+          cache-dependency-path: |
+            website/package-lock.json
+            website/src/package-lock.json
 
       - name: Install test dependencies
         run: npm ci
@@ -91,14 +119,38 @@ jobs:
       - name: Install app dependencies
         run: npm ci
 
+      # Phase 1: Browser caching for smoke tests
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(npm ls @playwright/test --json | jq -r '.dependencies["@playwright/test"].version // .devDependencies["@playwright/test"].version')" >> $GITHUB_OUTPUT
+        working-directory: website
+
+      - name: Cache Playwright Chromium
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+          restore-keys: |
+            playwright-chromium-${{ runner.os }}-
+            playwright-${{ runner.os }}-
+
       - name: Install Playwright Chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
+        working-directory: website
+
+      - name: Install Playwright dependencies (cached)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+        working-directory: website
 
       - name: Build application
         run: npm run build
 
       - name: Run smoke tests (Chromium only)
-        run: npx playwright test --config=../tests/playwright.config.ts --project=chromium navigation.spec.ts home-sections.spec.ts
+        run: npx playwright test --config=tests/playwright.config.ts --project=chromium navigation.spec.ts home-sections.spec.ts
+        working-directory: website
         env:
           CI: true
           PLAYWRIGHT_BASE_URL: http://localhost:3000
