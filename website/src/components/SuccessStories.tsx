@@ -5,43 +5,35 @@ import { Plus, Minus, ArrowUpRight } from 'lucide-react';
 const stories = [
   {
     id: 'research',
-    category: 'AI + ROBOTICS',
-    client: 'AeroFarms + Nokia Bell Labs',
-    challenge: 'Traditional vertical farms lacked real-time crop monitoring and precision data collection across large-scale indoor operations.',
-    solution: 'Deployed 5G-connected autonomous drones with AI vision systems and IoT sensor networks for continuous crop health monitoring.',
-    result: 'Achieved real-time anomaly detection, optimized resource allocation, and established a scalable model for AI-driven precision agriculture.',
-    caseStudyUrl: 'https://www.datanext.ai/case-study/aerofarms-aeroponics-vertical-farming/',
-    caseStudySource: 'DataNext AI Case Study: AeroFarms Aeroponic Vertical Farming'
+    category: 'RESEARCH',
+    client: 'AgriTech Labs',
+    challenge: 'Data fragmentation slowed down yield prediction models significantly.',
+    solution: 'Deployed zer0\'s distributed agent network to unify data streams.',
+    result: 'Achieved a 40% reduction in modeling time and doubled prediction accuracy.'
   },
   {
     id: 'vertical',
     category: 'VERTICAL FARMING',
-    client: 'AI-GECS Research Consortium',
-    challenge: 'Energy-intensive HVAC systems in controlled environment agriculture were driving unsustainable operational costs.',
-    solution: 'Developed a digital twin framework with AI-based environmental control for predictive climate management and energy optimization.',
-    result: 'Demonstrated significant energy reduction while maintaining optimal growing conditions through intelligent load balancing.',
-    caseStudyUrl: 'https://www.mdpi.com/2071-1050/16/24/10958',
-    caseStudySource: 'MDPI Sustainability: AI-Based Greenhouse Environmental Control'
+    client: 'Urban Greens Co',
+    challenge: 'High energy costs in climate control systems eating into margins.',
+    solution: 'Implemented AI-driven HVAC modulation using digital twins.',
+    result: 'Reduced energy consumption by 22% while increasing crop yield by 15%.'
   },
   {
     id: 'hydro',
     category: 'HYDROPONICS',
-    client: 'Cairo Smart Agriculture Lab',
-    challenge: 'Manual nutrient and pH monitoring in hydroponic greenhouses led to inconsistent growing conditions and crop losses.',
-    solution: 'Implemented IoT-based automation with ESP32 microcontrollers, real-time sensors, and mobile app control for nutrient delivery.',
-    result: 'Achieved fully automated nutrient management with remote monitoring, reducing labor costs and improving crop consistency.',
-    caseStudyUrl: 'https://www.sciencedirect.com/science/article/pii/S2090447923002307',
-    caseStudySource: 'ScienceDirect: Smart Automated Hydroponic System Using IoT'
+    client: 'AquaGrow Systems',
+    challenge: 'Manual nutrient monitoring was leading to inconsistent PH levels.',
+    solution: 'Autonomous sensor array with real-time chemical balancing agents.',
+    result: 'Eliminated manual testing completely. 100% consistent nutrient delivery.'
   },
   {
     id: 'greenhouse',
     category: 'GREENHOUSE',
-    client: 'Taiwan TARI Research Institute',
-    challenge: 'Unpredictable temperature fluctuations in greenhouses were causing heat stress and reduced crop yields.',
-    solution: 'Built an AI-powered temperature prediction system using neural networks trained on historical climate data for proactive control.',
-    result: 'Enabled predictive ventilation and cooling activation, preventing heat damage and optimizing energy use in greenhouse operations.',
-    caseStudyUrl: 'https://www.mdpi.com/2311-7524/9/8/853',
-    caseStudySource: 'MDPI Horticulturae: AI Temperature Prediction for Greenhouses'
+    client: 'SolarLeaf Farms',
+    challenge: 'Unpredictable weather patterns disrupting harvest schedules.',
+    solution: 'Predictive weather modeling integrated with automated shielding.',
+    result: 'Prevented 3 major crop loss events in the first year alone.'
   }
 ];
 
@@ -111,16 +103,9 @@ const SuccessStories = () => {
                       </div>
                       
                       <div className="pb-8 pl-4">
-                         <a
-                           href={story.caseStudyUrl}
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           onClick={(e) => e.stopPropagation()}
-                           className="text-xs font-bold uppercase tracking-wider text-teal-500 flex items-center gap-1 hover:text-teal-400 transition-colors"
-                         >
-                            Read Related Research <ArrowUpRight size={14} />
-                         </a>
-                         <p className="text-xs text-gray-600 mt-1">{story.caseStudySource}</p>
+                         <button className="text-xs font-bold uppercase tracking-wider text-teal-500 flex items-center gap-1 hover:text-teal-400">
+                            Read Full Case Study <ArrowUpRight size={14} />
+                         </button>
                       </div>
                     </motion.div>
                   )}
