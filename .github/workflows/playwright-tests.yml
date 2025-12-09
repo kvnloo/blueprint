@@ -27,7 +27,11 @@ jobs:
           cache: 'npm'
           cache-dependency-path: website/src/package-lock.json
 
-      - name: Install dependencies
+      - name: Install test dependencies
+        run: npm ci
+        working-directory: website
+
+      - name: Install app dependencies
         run: npm ci
 
       - name: Install Playwright browsers
@@ -80,7 +84,11 @@ jobs:
           cache: 'npm'
           cache-dependency-path: website/src/package-lock.json
 
-      - name: Install dependencies
+      - name: Install test dependencies
+        run: npm ci
+        working-directory: website
+
+      - name: Install app dependencies
         run: npm ci
 
       - name: Install Playwright Chromium
