@@ -137,7 +137,7 @@ export default defineConfig({
     timeout: 120 * 1000,
     stdout: 'ignore',
     stderr: 'pipe',
-    cwd: '../src', // Point to the src directory where vite runs
+    cwd: './src', // Point to the src directory where vite runs (relative to website/)
   },
 
   // Output folder for test artifacts
