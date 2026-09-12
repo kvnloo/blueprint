@@ -174,7 +174,7 @@ const Pipeline = () => {
         >
           <div className="text-center mb-12">
             <h3 className="text-2xl font-display font-bold text-white mb-3">Integration Points</h3>
-            <p className="text-gray-400">All three tracks connect through the C(RAID) methodology</p>
+            <p className="text-gray-400">Three tracks. C(RAID) is the named hybrid, not a wellness loop.</p>
           </div>
 
           {/* Integration Flow Diagram */}
@@ -215,8 +215,8 @@ const Pipeline = () => {
           {/* Final Output */}
           <div className="bg-gradient-to-r from-teal-500/10 via-amber-500/10 to-emerald-500/10 rounded-xl border border-white/10 p-6 text-center max-w-md mx-auto">
             <ChefHat className="w-10 h-10 text-white mx-auto mb-3" />
-            <div className="font-bold text-white text-lg mb-2">Robot Chef Output</div>
-            <div className="text-sm text-gray-400">Personalized, automated meals based on your health data</div>
+            <div className="font-bold text-white text-lg mb-2">Soil to cell</div>
+            <div className="text-sm text-gray-400">Robot chef is downstream of GrowTwin. This site does not cook from a medical protocol.</div>
           </div>
         </motion.div>
       </div>
