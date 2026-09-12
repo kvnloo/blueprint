@@ -7,7 +7,7 @@ const Pipeline = () => {
     {
       abbr: 'R',
       name: 'Research',
-      description: 'Autonomous information gathering and literature review',
+      description: 'What the crop needs — literature and sensors, not a deploy button',
       icon: Search,
       color: 'from-blue-500 to-blue-600',
       glowColor: 'rgba(59, 130, 246, 0.3)'
@@ -15,7 +15,7 @@ const Pipeline = () => {
     {
       abbr: 'A',
       name: 'Analysis',
-      description: 'Processing, pattern recognition, insight extraction',
+      description: 'Yield, watts, cost — predicted until a physical build exists',
       icon: BarChart3,
       color: 'from-purple-500 to-purple-600',
       glowColor: 'rgba(168, 85, 247, 0.3)'
@@ -23,7 +23,7 @@ const Pipeline = () => {
     {
       abbr: 'I',
       name: 'Integration',
-      description: 'Merging new knowledge into existing systems',
+      description: 'Spec into the twin — AODL IR, not a second language',
       icon: GitMerge,
       color: 'from-teal-500 to-teal-600',
       glowColor: 'rgba(20, 184, 166, 0.3)'

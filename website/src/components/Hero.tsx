@@ -107,8 +107,8 @@ const Hero = () => {
             {/* Control Bar */}
             <div className="p-4 bg-[#0F0F0F] border-t border-white/5 space-y-3">
                 <div className="flex items-center justify-between text-xs text-gray-500 font-mono">
-                    <span>Input: Sensor_Array_A</span>
-                    <span>Output: Actuator_B</span>
+                    <span>Input: CEA spec</span>
+                    <span>Output: yield · watts</span>
                 </div>
                 <div className="h-1 bg-gray-800 rounded-full overflow-hidden">
                     <div className="h-full w-2/3 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full animate-pulse" />

@@ -33,10 +33,10 @@ const About = () => {
 
             <div className="grid grid-cols-2 gap-8 lg:gap-12 content-center">
                 {[
-                    { val: '3', label: 'Active Tracks' },
-                    { val: '4', label: 'Health Modules' },
-                    { val: '6', label: 'Pipeline Stages' },
-                    { val: '∞', label: 'Automation Loop' }
+                    { val: '3', label: 'Tracks' },
+                    { val: 'CEA', label: 'GrowTwin offer' },
+                    { val: 'C(RAID)', label: 'Named hybrid' },
+                    { val: '<1h', label: 'Human week' }
                 ].map((stat, i) => (
                     <motion.div
                         whileHover={{ y: -5 }}

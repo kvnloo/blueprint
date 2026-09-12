@@ -42,7 +42,7 @@ Build cost-effective, highly automated vertical farming systems optimized for nu
                                 │
                                 ▼
 ┌─────────────────────────────────────────────────────────────────────┐
-│                   CLAUDE FLOW ORCHESTRATION                          │
+│   AODL / C(RAID) — Claude Flow is inspiration, not runtime          │
 │  Product → Project → Feature → Task                                  │
 │  ┌─────────────────────────────────────────────────────────────────┐│
 │  │ Research Agent → Cost Optimizer → Design Agent → Simulation Agent││
@@ -89,7 +89,7 @@ Build cost-effective, highly automated vertical farming systems optimized for nu
 
 ### AI Orchestration
 
-- **Claude Flow**: Multi-agent task orchestration
+- **AODL**: typed IR for agent graphs (this product does not run Claude Flow)
 - **Hyper3D Rodin Gen 1.5**: Text/image to production-ready 3D mesh with PBR materials
 
 ## 📁 Repository Structure

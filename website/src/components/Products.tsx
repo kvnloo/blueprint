@@ -51,10 +51,10 @@ const products = [
     statusColor: 'bg-emerald-500',
     link: 'https://github.com/kvnloo/evolve',
     features: [
-      { icon: FileCode, text: 'Architecture Diagrams & data flows' },
-      { icon: Workflow, text: 'Claude Flow - Multi-agent orchestration' },
-      { icon: GitBranch, text: 'Git Worktree - Parallel development' },
-      { icon: Container, text: 'E2B Containerization - Sandboxed execution' }
+      { icon: FileCode, text: 'Architecture diagrams & data flows' },
+      { icon: Workflow, text: 'AODL IR — typed graphs, not Claude Flow as runtime' },
+      { icon: GitBranch, text: 'Git worktree — parallel development' },
+      { icon: Container, text: 'Sandboxed execution (E2B is a claim, not this site)' }
     ]
   }
 ];
@@ -70,16 +70,16 @@ const Products = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-teal-400 uppercase mb-6">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            THE BLUEPRINT SYSTEM
+            THREE TRACKS · CEA FIRST
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            <span className="text-white">Products that </span>
+            <span className="text-white">Measure, GrowTwin, </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-400">
-              work together
+              Evolve
             </span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Each product in the Blueprint ecosystem connects to create a unified platform for autonomous self-care.
+            Soil to cell is the product. Health tracking is a separate ethic, not a wellness SaaS, and not Bryan Johnson’s protocol.
           </p>
         </div>
 
@@ -171,7 +171,7 @@ const Products = () => {
           className="mt-16 text-center"
         >
           <p className="text-sm text-gray-600">
-            All products share the <span className="text-teal-500">C(RAID)</span> methodology and integrate through the Blueprint platform.
+            Tracks share <span className="text-teal-500">C(RAID)</span> as a named hybrid. This site is a pretotype, not the UE5 twin.
           </p>
         </motion.div>
       </div>
