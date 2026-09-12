@@ -17,8 +17,8 @@ const products = [
     features: [
       { icon: FlaskConical, text: 'Measure the loop — not a medical protocol' },
       { icon: Apple, text: 'Nutrition as logistics, not Don’t Die copy' },
-      { icon: Dumbbell, text: 'Fitness - Exercise & workout logging' },
-      { icon: Moon, text: 'Sleep - Quality, duration, HRV' }
+      { icon: Dumbbell, text: 'Effort is not the metric — close the loop' },
+      { icon: Moon, text: 'Recovery is observed, not a sleep-tracker SaaS' }
     ]
   },
   {
@@ -33,10 +33,10 @@ const products = [
     statusColor: 'bg-amber-500',
     link: null,
     features: [
-      { icon: Map, text: 'House Model - Google Maps + indoor pics' },
-      { icon: Bot, text: 'Robotics Training - RL in virtual space' },
-      { icon: Leaf, text: 'Vertical Farm - Autonomous crop management' },
-      { icon: ChefHat, text: 'Robot Chef - Farm-to-table automation' }
+      { icon: Map, text: 'Specify the CEA stack — PCPartPicker for farms' },
+      { icon: Bot, text: 'Simulate yield and watts before a physical build' },
+      { icon: Leaf, text: 'Bind a live twin — UE5/Cesium is the twin claim' },
+      { icon: ChefHat, text: 'Robot chef is downstream of the farm' }
     ]
   },
   {

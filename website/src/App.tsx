@@ -11,7 +11,7 @@ import BackgroundGrid from './components/BackgroundGrid';
 
 export default function App() {
   return (
-    <div className="relative min-h-screen overflow-hidden text-white selection:bg-teal-500/30 selection:text-teal-200">
+    <div id="top" className="relative min-h-screen overflow-hidden text-white selection:bg-teal-500/30 selection:text-teal-200">
       <BackgroundGrid />
       <Navbar />
       <main>
