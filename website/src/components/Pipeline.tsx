@@ -31,7 +31,7 @@ const Pipeline = () => {
     {
       abbr: 'D',
       name: 'Deployment',
-      description: 'Shipping updates to production',
+      description: 'Bind the physical farm; observed state feeds research (observation, not a dependency cycle)',
       icon: Rocket,
       color: 'from-emerald-500 to-emerald-600',
       glowColor: 'rgba(16, 185, 129, 0.3)'
@@ -48,16 +48,16 @@ const Pipeline = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-purple-400 uppercase mb-6">
             <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-            PARADIGM SHIFT
+            PARADIGM
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            <span className="text-white">Beyond Traditional </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400">
-              CI/CD
+            <span className="text-white">C(RAID) is a named hybrid, </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-amber-300">
+              not CI/CD
             </span>
           </h2>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-            C(RAID) represents a paradigm shift from traditional software development to autonomous research systems—where the pipeline doesn't just deploy code, but continuously researches, analyzes, and evolves the system itself.
+            Continuous Research, Analysis, Integration, Deployment. The C-loop is an observation from deploy back to research — not a dependency, not unlabeled “hybrid,” not a second scheduler. AODL is the IR; this site is a projection.
           </p>
         </div>
 

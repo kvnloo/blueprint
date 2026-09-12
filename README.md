@@ -1,11 +1,15 @@
 # Autonomous Vertical Farming Digital Twin
 
-[![Platform](https://img.shields.io/badge/Platform-UE5%20%2B%20Cesium-blue)](https://www.unrealengine.com/)
-[![Modeling](https://img.shields.io/badge/Modeling-Blender%20%2B%20MCP-orange)](https://www.blender.org/)
-[![AI](https://img.shields.io/badge/AI-Claude%20Flow-purple)](https://www.anthropic.com/)
+[![Site](https://img.shields.io/badge/This_repo-React_pretotype-green)](https://kvnloo.github.io/blueprint/)
+[![Twin claim](https://img.shields.io/badge/Photoreal_twin-UE5%20%2B%20Cesium-blue)](https://www.unrealengine.com/)
+[![IR](https://img.shields.io/badge/Orchestration_IR-AODL-purple)](https://github.com/kvnloo/aodl)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-A self-optimizing digital twin system for controlled environment agriculture (CEA), combining real-time 3D simulation with autonomous AI agents for continuous design iteration and cost optimization.
+A self-optimizing **marketing pretotype** for controlled-environment agriculture (CEA). The software offer is GrowTwin: **PCPartPicker for farms** — specify a stack, simulate yield and watts, then bind a live twin. Photoreal UE5 + Cesium + Blender live on the **twin claim**, not in `website/` (this tree is React + Vite).
+
+This product is **not** Bryan Johnson’s Blueprint Protocol. Copy the measurement ethic; do not ship a medical stack. C(RAID) is a named hybrid (Research → Analysis → Integration → Deployment); deploy feeds research as **observation**. AODL is the IR. Claude Flow is inspiration.
+
+Human intervention target: **less than 1 hour/week**.
 
 ## 🌱 Vision
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Search, BarChart3, GitMerge, Rocket, Activity, Terminal } from 'lucide-react';
+import { ArrowRight, Search, BarChart3, GitMerge, Rocket, Leaf } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -15,43 +15,39 @@ const Hero = () => {
           className="space-y-8"
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-teal-400 uppercase">
-            <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            C(RAID) PIPELINE
+          <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+            <span className="w-2 h-2 rounded-full bg-amber-400" />
+            C(RAID) · named hybrid
           </div>
 
-          {/* Headline */}
           <h1 className="text-5xl lg:text-7xl font-display font-bold leading-tight">
-            Research to <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-teal-200">
-              Production.
+            Soil to cell.<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-emerald-400 to-teal-300">
+              Under an hour a week.
             </span>
           </h1>
 
-          {/* Subtitle */}
           <p className="text-lg text-gray-400 max-w-xl leading-relaxed">
-            Extending CI/CD to a full autonomous research-to-deployment loop. Systems that continuously research, analyze, integrate, and deploy—evolving themselves.
+            GrowTwin is PCPartPicker for farms: specify a CEA stack, simulate it, then bind a live twin. This site is the marketing pretotype — not Unreal in the browser, and not Bryan Johnson’s Blueprint Protocol.
           </p>
 
-          {/* Actions */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <button className="group px-8 py-4 rounded-full bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-medium hover:shadow-[0_0_30px_rgba(20,184,166,0.4)] transition-all flex items-center gap-2">
-              <Terminal className="w-4 h-4" />
-              Explore Blueprint
+            <a href="#pipeline" className="group px-8 py-4 rounded-full bg-gradient-to-r from-emerald-700 to-teal-700 text-white font-medium hover:shadow-[0_0_30px_rgba(16,185,129,0.35)] transition-all flex items-center gap-2">
+              <Leaf className="w-4 h-4" />
+              Read C(RAID)
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
             <span className="text-sm text-gray-500 flex items-center gap-2">
-              <span className="text-teal-500">✓</span> Open source protocol
+              <span className="text-amber-400">●</span> Pretotype · photoreal twin is UE5 elsewhere
             </span>
           </div>
 
-          {/* C(RAID) Steps */}
           <div className="pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { title: 'Continuous Research', icon: Search, step: 'R', desc: 'Autonomous discovery' },
-              { title: 'Continuous Analysis', icon: BarChart3, step: 'A', desc: 'Pattern recognition' },
-              { title: 'Continuous Integration', icon: GitMerge, step: 'I', desc: 'Knowledge merging' },
-              { title: 'Continuous Deployment', icon: Rocket, step: 'D', desc: 'Ship to production' }
+              { title: 'Continuous Research', icon: Search, step: 'R', desc: 'What the crop needs' },
+              { title: 'Continuous Analysis', icon: BarChart3, step: 'A', desc: 'Yield, watts, cost' },
+              { title: 'Continuous Integration', icon: GitMerge, step: 'I', desc: 'Spec into the twin' },
+              { title: 'Continuous Deployment', icon: Rocket, step: 'D', desc: 'Bind the physical' }
             ].map((item, idx) => (
               <div key={idx} className="group cursor-pointer">
                 <div className="text-xs font-mono text-teal-500 mb-2 group-hover:text-teal-300 transition-colors font-bold">{item.step}</div>
@@ -82,31 +78,25 @@ const Hero = () => {
                   <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
                   <div className="w-3 h-3 rounded-full bg-green-500/50" />
                </div>
-               <div className="text-xs font-mono text-gray-500">system_monitor_v2.0</div>
+               <div className="text-xs font-mono text-gray-500">grow_twin · pretotype</div>
             </div>
 
             {/* Content Image/Dashboard */}
             <div className="relative aspect-video bg-gray-900 overflow-hidden">
                 <img 
                     src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80" 
-                    alt="Autonomous System Dashboard" 
-                    className="w-full h-full object-cover opacity-60 mix-blend-overlay"
+                    alt="Vertical farm foliage — marketing still, not the UE5 twin"
+                    className="w-full h-full object-cover opacity-80"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
                 
-                {/* Overlay UI Elements */}
                 <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center backdrop-blur-md border border-teal-500/30">
-                            <Activity className="w-5 h-5 text-teal-400" />
-                        </div>
-                        <div>
-                            <div className="text-xs text-teal-400 font-mono">SYSTEM STATUS</div>
-                            <div className="text-sm font-bold text-white">OPTIMIZING: 98.4%</div>
-                        </div>
+                    <div>
+                        <div className="text-xs text-amber-400 font-mono">GARDEN FIRST</div>
+                        <div className="text-sm font-bold text-white">CEA stack · specify then simulate</div>
                     </div>
-                     <div className="px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-xs text-teal-300 font-mono">
-                        LIVE FEED
+                     <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 font-mono">
+                        PRETOTYPE
                     </div>
                 </div>
 
@@ -139,10 +129,10 @@ const Hero = () => {
                      <div className="text-teal-500 text-xl font-serif">"</div>
                 </div>
                 <p className="text-sm text-gray-300 mb-4 font-medium">
-                "zer0's autonomous agents reduced our optimization cycles from weeks to hours."
+                "Specify the cheapest-viable CEA stack. Measure yield and watts. Do not romanticize the greenhouse."
                 </p>
-                <div className="text-[10px] font-bold tracking-wider text-teal-600 uppercase">
-                    Verified Client • 5.0 Rating
+                <div className="text-[10px] font-bold tracking-wider text-amber-600 uppercase">
+                    GrowTwin · measure, don’t guess
                 </div>
              </div>
           </motion.div>
