@@ -182,17 +182,17 @@ const Pipeline = () => {
             {/* Blueprint Track */}
             <div className="bg-teal-500/10 rounded-xl border border-teal-500/20 p-6 text-center">
               <Heart className="w-8 h-8 text-teal-400 mx-auto mb-3" />
-              <div className="font-bold text-white mb-1">Blueprint</div>
-              <div className="text-sm text-teal-400 mb-3">Health Tracker</div>
-              <div className="text-xs text-gray-500">Nutrition needs + seed selection</div>
+              <div className="font-bold text-white mb-1">Measure</div>
+              <div className="text-sm text-teal-400 mb-3">Not Johnson Protocol</div>
+              <div className="text-xs text-gray-500">Nutrition as logistics, not Don’t Die</div>
             </div>
 
             {/* World Sim Track */}
             <div className="bg-amber-500/10 rounded-xl border border-amber-500/20 p-6 text-center">
               <Globe className="w-8 h-8 text-amber-400 mx-auto mb-3" />
-              <div className="font-bold text-white mb-1">World Sim</div>
-              <div className="text-sm text-amber-400 mb-3">+ Robotics</div>
-              <div className="text-xs text-gray-500">Autonomous farm + robot training</div>
+              <div className="font-bold text-white mb-1">GrowTwin</div>
+              <div className="text-sm text-amber-400 mb-3">CEA + live twin</div>
+              <div className="text-xs text-gray-500">Specify the stack, then bind the farm</div>
             </div>
 
             {/* Evolve Track */}
