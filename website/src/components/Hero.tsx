@@ -17,7 +17,7 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
             <span className="w-2 h-2 rounded-full bg-amber-400" />
-            C(RAID) · named hybrid
+            ATLAS · C(RAID) · named hybrid
           </div>
 
           <h1 className="text-5xl lg:text-7xl font-display font-bold leading-tight">
@@ -28,7 +28,7 @@ const Hero = () => {
           </h1>
 
           <p className="text-lg text-gray-400 max-w-xl leading-relaxed">
-            GrowTwin is PCPartPicker for farms: specify a CEA stack, simulate it, then bind a live twin. This site is the marketing pretotype — not Unreal in the browser, and not Bryan Johnson’s Blueprint Protocol.
+            ATLAS is soil to cell. GrowTwin is PCPartPicker for farms: specify a CEA stack, simulate it, then bind a live twin. This site is the marketing pretotype — not Unreal in the browser, and not Bryan Johnson’s Blueprint Protocol.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
@@ -78,7 +78,7 @@ const Hero = () => {
                   <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
                   <div className="w-3 h-3 rounded-full bg-green-500/50" />
                </div>
-               <div className="text-xs font-mono text-gray-500">grow_twin · pretotype</div>
+               <div className="text-xs font-mono text-gray-500">atlas · pretotype</div>
             </div>
 
             {/* Content Image/Dashboard */}
@@ -132,7 +132,7 @@ const Hero = () => {
                 "Specify the cheapest-viable CEA stack. Measure yield and watts. Do not romanticize the greenhouse."
                 </p>
                 <div className="text-[10px] font-bold tracking-wider text-amber-600 uppercase">
-                    GrowTwin · measure, don’t guess
+                    ATLAS · measure, don’t guess
                 </div>
              </div>
           </motion.div>

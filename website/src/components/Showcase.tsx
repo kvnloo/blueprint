@@ -11,7 +11,7 @@ const Showcase = () => {
         <div className="relative mx-auto lg:mx-0 order-2 lg:order-1 w-full max-w-md">
             <div className="relative z-10 rounded-3xl border border-white/10 bg-[#0A0A0A] overflow-hidden shadow-2xl">
                 <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                    <span className="text-xs font-mono text-amber-400">grow_twin · CEA spec</span>
+                    <span className="text-xs font-mono text-amber-400">atlas · CEA spec</span>
                     <span className="text-[10px] font-mono text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full">PRETOTYPE</span>
                 </div>
                 <div className="relative aspect-[4/5] bg-gradient-to-br from-[#1a3d24] via-[#243d28] to-[#0c0d0b]">
@@ -44,7 +44,7 @@ const Showcase = () => {
                     <span className="block">then bind the twin.</span>
                 </h2>
                 <p className="text-lg text-gray-400 max-w-md">
-                    GrowTwin is PCPartPicker for farms. This site is the marketing pretotype — not a live twin, not Unreal in the browser, and not a wellness app.
+                    ATLAS is soil to cell. GrowTwin is PCPartPicker for farms. This site is the marketing pretotype — not a live twin, not Unreal in the browser, and not a wellness app.
                 </p>
             </div>
 

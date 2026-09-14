@@ -70,16 +70,16 @@ const Products = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-teal-400 uppercase mb-6">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            THREE TRACKS · CEA FIRST
+            ATLAS · THREE TRACKS
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            <span className="text-white">Measure, GrowTwin, </span>
+            <span className="text-white">ATLAS: Measure, GrowTwin, </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-400">
               Evolve
             </span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Soil to cell is the product. Health tracking is a separate ethic, not a wellness SaaS, and not Bryan Johnson’s protocol.
+            ATLAS is soil to cell. GrowTwin is the CEA offer. Health tracking is a separate ethic, not a wellness SaaS, and not Bryan Johnson’s protocol.
           </p>
         </div>
 

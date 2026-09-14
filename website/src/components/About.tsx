@@ -22,7 +22,7 @@ const About = () => {
                     <span className="text-xs font-bold text-gray-600 px-2 py-1 rounded bg-white/5 border border-white/5">THE VISION</span>
                 </div>
                 <h2 className="text-4xl md:text-5xl font-display font-medium leading-tight text-gray-100 mb-8">
-                    GrowTwin completes the loop from <span className="text-white font-bold">soil to cell</span> — not Bryan Johnson’s medical protocol.
+                    ATLAS completes the loop from <span className="text-white font-bold">soil to cell</span> — GrowTwin is the CEA offer, not Bryan Johnson’s medical protocol.
                 </h2>
                 <div className="space-y-6 text-lg text-gray-400">
                     <p>
@@ -33,7 +33,7 @@ const About = () => {
 
             <div className="grid grid-cols-2 gap-8 lg:gap-12 content-center">
                 {[
-                    { val: '3', label: 'Tracks' },
+                    { val: '3', label: 'ATLAS tracks' },
                     { val: 'CEA', label: 'GrowTwin offer' },
                     { val: 'C(RAID)', label: 'Named hybrid' },
                     { val: '<1h', label: 'Human week' }

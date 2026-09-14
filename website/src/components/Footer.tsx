@@ -54,7 +54,7 @@ const Footer = () => {
         {/* Giant Text */}
         <div className="relative">
            <h1 className="text-[20vw] leading-none font-bold font-display text-transparent bg-clip-text bg-gradient-to-b from-white/10 to-transparent select-none text-center tracking-tighter">
-              ZER0
+              ATLAS
            </h1>
            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent" />
         </div>

@@ -1,11 +1,11 @@
-# Autonomous Vertical Farming Digital Twin
+# ATLAS — soil to cell
 
 [![Site](https://img.shields.io/badge/This_repo-React_pretotype-green)](https://kvnloo.github.io/blueprint/)
 [![Twin claim](https://img.shields.io/badge/Photoreal_twin-UE5%20%2B%20Cesium-blue)](https://www.unrealengine.com/)
 [![IR](https://img.shields.io/badge/Orchestration_IR-AODL-purple)](https://github.com/kvnloo/aodl)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-A self-optimizing **marketing pretotype** for controlled-environment agriculture (CEA). The software offer is GrowTwin: **PCPartPicker for farms** — specify a stack, simulate yield and watts, then bind a live twin. Photoreal UE5 + Cesium + Blender live on the **twin claim**, not in `website/` (this tree is React + Vite).
+**ATLAS is soil to cell.** This repo is the public marketing pretotype. GrowTwin is the CEA software offer: **PCPartPicker for farms** — specify a stack, simulate yield and watts, then bind a live twin. Photoreal UE5 + Cesium + Blender live on the **twin claim**, not in `website/` (this tree is React + Vite).
 
 This product is **not** Bryan Johnson’s Blueprint Protocol. Copy the measurement ethic; do not ship a medical stack. C(RAID) is a named hybrid (Research → Analysis → Integration → Deployment); deploy feeds research as **observation**. AODL is the IR. Claude Flow is inspiration.
 

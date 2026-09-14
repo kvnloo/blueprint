@@ -174,7 +174,7 @@ const Pipeline = () => {
         >
           <div className="text-center mb-12">
             <h3 className="text-2xl font-display font-bold text-white mb-3">Integration Points</h3>
-            <p className="text-gray-400">Three tracks. C(RAID) is the named hybrid, not a wellness loop.</p>
+            <p className="text-gray-400">ATLAS tracks. C(RAID) is the named hybrid, not a wellness loop.</p>
           </div>
 
           {/* Integration Flow Diagram */}

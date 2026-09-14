@@ -44,7 +44,7 @@ const SuccessStories = () => {
     <section className="py-24 px-6 relative z-10 bg-[#050505]">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <h2 className="text-4xl md:text-5xl font-display font-bold">What GrowTwin is for</h2>
+          <h2 className="text-4xl md:text-5xl font-display font-bold">What ATLAS is for</h2>
           <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400">
              <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
              PRETOTYPE · NO CASE-STUDY RECEIPTS
