@@ -1,11 +1,15 @@
-# Autonomous Vertical Farming Digital Twin
+# ATLAS — soil to cell
 
-[![Platform](https://img.shields.io/badge/Platform-UE5%20%2B%20Cesium-blue)](https://www.unrealengine.com/)
-[![Modeling](https://img.shields.io/badge/Modeling-Blender%20%2B%20MCP-orange)](https://www.blender.org/)
-[![AI](https://img.shields.io/badge/AI-Claude%20Flow-purple)](https://www.anthropic.com/)
+[![Site](https://img.shields.io/badge/This_repo-React_pretotype-green)](https://kvnloo.github.io/blueprint/)
+[![Twin claim](https://img.shields.io/badge/Photoreal_twin-UE5%20%2B%20Cesium-blue)](https://www.unrealengine.com/)
+[![IR](https://img.shields.io/badge/Orchestration_IR-AODL-purple)](https://github.com/kvnloo/aodl)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-A self-optimizing digital twin system for controlled environment agriculture (CEA), combining real-time 3D simulation with autonomous AI agents for continuous design iteration and cost optimization.
+**ATLAS is soil to cell.** This repo is the public marketing pretotype. GrowTwin is the CEA software offer: **PCPartPicker for farms** — specify a stack, simulate yield and watts, then bind a live twin. Photoreal UE5 + Cesium + Blender live on the **twin claim**, not in `website/` (this tree is React + Vite).
+
+This product is **not** Bryan Johnson’s Blueprint Protocol. Copy the measurement ethic; do not ship a medical stack. C(RAID) is a named hybrid (Research → Analysis → Integration → Deployment); deploy feeds research as **observation**. AODL is the IR. Claude Flow is inspiration.
+
+Human intervention target: **less than 1 hour/week**.
 
 ## 🌱 Vision
 
@@ -38,7 +42,7 @@ Build cost-effective, highly automated vertical farming systems optimized for nu
                                 │
                                 ▼
 ┌─────────────────────────────────────────────────────────────────────┐
-│                   CLAUDE FLOW ORCHESTRATION                          │
+│   AODL / C(RAID) — Claude Flow is inspiration, not runtime          │
 │  Product → Project → Feature → Task                                  │
 │  ┌─────────────────────────────────────────────────────────────────┐│
 │  │ Research Agent → Cost Optimizer → Design Agent → Simulation Agent││
@@ -85,7 +89,7 @@ Build cost-effective, highly automated vertical farming systems optimized for nu
 
 ### AI Orchestration
 
-- **Claude Flow**: Multi-agent task orchestration
+- **AODL**: typed IR for agent graphs (this product does not run Claude Flow)
 - **Hyper3D Rodin Gen 1.5**: Text/image to production-ready 3D mesh with PBR materials
 
 ## 📁 Repository Structure

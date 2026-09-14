@@ -7,7 +7,7 @@ const Pipeline = () => {
     {
       abbr: 'R',
       name: 'Research',
-      description: 'Autonomous information gathering and literature review',
+      description: 'What the crop needs — literature and sensors, not a deploy button',
       icon: Search,
       color: 'from-blue-500 to-blue-600',
       glowColor: 'rgba(59, 130, 246, 0.3)'
@@ -15,7 +15,7 @@ const Pipeline = () => {
     {
       abbr: 'A',
       name: 'Analysis',
-      description: 'Processing, pattern recognition, insight extraction',
+      description: 'Yield, watts, cost — predicted until a physical build exists',
       icon: BarChart3,
       color: 'from-purple-500 to-purple-600',
       glowColor: 'rgba(168, 85, 247, 0.3)'
@@ -23,7 +23,7 @@ const Pipeline = () => {
     {
       abbr: 'I',
       name: 'Integration',
-      description: 'Merging new knowledge into existing systems',
+      description: 'Spec into the twin — AODL IR, not a second language',
       icon: GitMerge,
       color: 'from-teal-500 to-teal-600',
       glowColor: 'rgba(20, 184, 166, 0.3)'
@@ -31,7 +31,7 @@ const Pipeline = () => {
     {
       abbr: 'D',
       name: 'Deployment',
-      description: 'Shipping updates to production',
+      description: 'Bind the physical farm; observed state feeds research (observation, not a dependency cycle)',
       icon: Rocket,
       color: 'from-emerald-500 to-emerald-600',
       glowColor: 'rgba(16, 185, 129, 0.3)'
@@ -48,16 +48,16 @@ const Pipeline = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-purple-400 uppercase mb-6">
             <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-            PARADIGM SHIFT
+            PARADIGM
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            <span className="text-white">Beyond Traditional </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400">
-              CI/CD
+            <span className="text-white">C(RAID) is a named hybrid, </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-amber-300">
+              not CI/CD
             </span>
           </h2>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-            C(RAID) represents a paradigm shift from traditional software development to autonomous research systems—where the pipeline doesn't just deploy code, but continuously researches, analyzes, and evolves the system itself.
+            Continuous Research, Analysis, Integration, Deployment. The C-loop is an observation from deploy back to research — not a dependency, not unlabeled “hybrid,” not a second scheduler. AODL is the IR; this site is a projection.
           </p>
         </div>
 
@@ -174,7 +174,7 @@ const Pipeline = () => {
         >
           <div className="text-center mb-12">
             <h3 className="text-2xl font-display font-bold text-white mb-3">Integration Points</h3>
-            <p className="text-gray-400">All three tracks connect through the C(RAID) methodology</p>
+            <p className="text-gray-400">ATLAS tracks. C(RAID) is the named hybrid, not a wellness loop.</p>
           </div>
 
           {/* Integration Flow Diagram */}
@@ -182,17 +182,17 @@ const Pipeline = () => {
             {/* Blueprint Track */}
             <div className="bg-teal-500/10 rounded-xl border border-teal-500/20 p-6 text-center">
               <Heart className="w-8 h-8 text-teal-400 mx-auto mb-3" />
-              <div className="font-bold text-white mb-1">Blueprint</div>
-              <div className="text-sm text-teal-400 mb-3">Health Tracker</div>
-              <div className="text-xs text-gray-500">Nutrition needs + seed selection</div>
+              <div className="font-bold text-white mb-1">Measure</div>
+              <div className="text-sm text-teal-400 mb-3">Not Johnson Protocol</div>
+              <div className="text-xs text-gray-500">Nutrition as logistics, not Don’t Die</div>
             </div>
 
             {/* World Sim Track */}
             <div className="bg-amber-500/10 rounded-xl border border-amber-500/20 p-6 text-center">
               <Globe className="w-8 h-8 text-amber-400 mx-auto mb-3" />
-              <div className="font-bold text-white mb-1">World Sim</div>
-              <div className="text-sm text-amber-400 mb-3">+ Robotics</div>
-              <div className="text-xs text-gray-500">Autonomous farm + robot training</div>
+              <div className="font-bold text-white mb-1">GrowTwin</div>
+              <div className="text-sm text-amber-400 mb-3">CEA + live twin</div>
+              <div className="text-xs text-gray-500">Specify the stack, then bind the farm</div>
             </div>
 
             {/* Evolve Track */}
@@ -215,8 +215,8 @@ const Pipeline = () => {
           {/* Final Output */}
           <div className="bg-gradient-to-r from-teal-500/10 via-amber-500/10 to-emerald-500/10 rounded-xl border border-white/10 p-6 text-center max-w-md mx-auto">
             <ChefHat className="w-10 h-10 text-white mx-auto mb-3" />
-            <div className="font-bold text-white text-lg mb-2">Robot Chef Output</div>
-            <div className="text-sm text-gray-400">Personalized, automated meals based on your health data</div>
+            <div className="font-bold text-white text-lg mb-2">Soil to cell</div>
+            <div className="text-sm text-gray-400">Robot chef is downstream of GrowTwin. This site does not cook from a medical protocol.</div>
           </div>
         </motion.div>
       </div>

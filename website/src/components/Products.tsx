@@ -4,9 +4,9 @@ import { Cpu, Heart, Globe, ArrowRight, ExternalLink, FlaskConical, Apple, Dumbb
 
 const products = [
   {
-    name: 'Blueprint Protocol',
-    tagline: 'Open Source Health Optimization',
-    description: "Open sourcing Bryan Johnson's Blueprint protocol as an all-in-one health tracker. Systems-thinking design with integrated modules for complete health optimization.",
+    name: 'Measure (health track)',
+    tagline: 'Ethics, not Don’t Die',
+    description: "Copy the measurement ethic (biomarkers over ‘I tried hard’). This repo does not ship Bryan Johnson’s Blueprint Protocol or a medical stack. Name collision: Johnson ≠ this CEA product ≠ factory law.",
     icon: Heart,
     color: 'teal',
     gradient: 'from-teal-500 to-teal-600',
@@ -15,16 +15,16 @@ const products = [
     statusColor: 'bg-teal-500',
     link: null,
     features: [
-      { icon: FlaskConical, text: 'Labs Ingestor - Bloodwork & biomarkers' },
-      { icon: Apple, text: 'Nutrition Tracker - Macro/micronutrients' },
-      { icon: Dumbbell, text: 'Fitness - Exercise & workout logging' },
-      { icon: Moon, text: 'Sleep - Quality, duration, HRV' }
+      { icon: FlaskConical, text: 'Measure the loop — not a medical protocol' },
+      { icon: Apple, text: 'Nutrition as logistics, not Don’t Die copy' },
+      { icon: Dumbbell, text: 'Effort is not the metric — close the loop' },
+      { icon: Moon, text: 'Recovery is observed, not a sleep-tracker SaaS' }
     ]
   },
   {
-    name: 'World Simulation',
-    tagline: 'Digital Twin to Robot Chef Pipeline',
-    description: 'From Google Maps data to fully autonomous robot chef. Create digital twins for robotics training, vertical farming, and complete farm-to-table automation.',
+    name: 'GrowTwin / World Simulation',
+    tagline: 'PCPartPicker for farms',
+    description: 'Specify a CEA stack, simulate yield and watts, then bind a live twin. Robot chef is downstream. Photoreal UE5/Cesium is the twin claim — not this React pretotype.',
     icon: Globe,
     color: 'amber',
     gradient: 'from-amber-500 to-orange-500',
@@ -33,16 +33,16 @@ const products = [
     statusColor: 'bg-amber-500',
     link: null,
     features: [
-      { icon: Map, text: 'House Model - Google Maps + indoor pics' },
-      { icon: Bot, text: 'Robotics Training - RL in virtual space' },
-      { icon: Leaf, text: 'Vertical Farm - Autonomous crop management' },
-      { icon: ChefHat, text: 'Robot Chef - Farm-to-table automation' }
+      { icon: Map, text: 'Specify the CEA stack — PCPartPicker for farms' },
+      { icon: Bot, text: 'Simulate yield and watts before a physical build' },
+      { icon: Leaf, text: 'Bind a live twin — UE5/Cesium is the twin claim' },
+      { icon: ChefHat, text: 'Robot chef is downstream of the farm' }
     ]
   },
   {
     name: 'Evolve',
     tagline: 'C(RAID) Orchestration',
-    description: 'End-to-end autonomous development framework. Multi-agent coordination with Claude Flow integration, custom skills, and parallel git worktree workflows.',
+    description: 'C(RAID) over a backlog. Evolve is inspiration. AODL is the IR — not a second language, not Claude Flow as the runtime on this site.',
     icon: Cpu,
     color: 'emerald',
     gradient: 'from-emerald-500 to-emerald-600',
@@ -51,10 +51,10 @@ const products = [
     statusColor: 'bg-emerald-500',
     link: 'https://github.com/kvnloo/evolve',
     features: [
-      { icon: FileCode, text: 'Architecture Diagrams & data flows' },
-      { icon: Workflow, text: 'Claude Flow - Multi-agent orchestration' },
-      { icon: GitBranch, text: 'Git Worktree - Parallel development' },
-      { icon: Container, text: 'E2B Containerization - Sandboxed execution' }
+      { icon: FileCode, text: 'Architecture diagrams & data flows' },
+      { icon: Workflow, text: 'AODL IR — typed graphs, not Claude Flow as runtime' },
+      { icon: GitBranch, text: 'Git worktree — parallel development' },
+      { icon: Container, text: 'Sandboxed execution (E2B is a claim, not this site)' }
     ]
   }
 ];
@@ -70,16 +70,16 @@ const Products = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-teal-400 uppercase mb-6">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            THE BLUEPRINT SYSTEM
+            ATLAS · THREE TRACKS
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            <span className="text-white">Products that </span>
+            <span className="text-white">ATLAS: Measure, GrowTwin, </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-400">
-              work together
+              Evolve
             </span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Each product in the Blueprint ecosystem connects to create a unified platform for autonomous self-care.
+            ATLAS is soil to cell. GrowTwin is the CEA offer. Health tracking is a separate ethic, not a wellness SaaS, and not Bryan Johnson’s protocol.
           </p>
         </div>
 
@@ -171,7 +171,7 @@ const Products = () => {
           className="mt-16 text-center"
         >
           <p className="text-sm text-gray-600">
-            All products share the <span className="text-teal-500">C(RAID)</span> methodology and integrate through the Blueprint platform.
+            Tracks share <span className="text-teal-500">C(RAID)</span> as a named hybrid. This site is a pretotype, not the UE5 twin.
           </p>
         </motion.div>
       </div>

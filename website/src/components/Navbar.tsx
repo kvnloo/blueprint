@@ -13,42 +13,42 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const close = () => setIsMobileMenuOpen(false);
+
   return (
-    <nav 
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-[#050505]/80 backdrop-blur-md border-b border-white/5 py-4' : 'bg-transparent py-6'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-2">
+        <a href="#top" className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-emerald-600 flex items-center justify-center">
-            <span className="font-display font-bold text-black text-sm">z0</span>
+            <span className="font-display font-bold text-black text-sm">A</span>
           </div>
-          <span className="font-display font-bold text-xl tracking-tight">zer0</span>
-        </div>
+          <span className="font-display font-bold text-xl tracking-tight">ATLAS</span>
+          <span className="ml-2 text-[10px] tracking-widest font-mono font-normal text-amber-400/90 border border-amber-400/40 px-2 py-0.5 rounded-full">PRETOTYPE</span>
+        </a>
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-          <a href="#" className="hover:text-teal-400 transition-colors">Services</a>
-          <a href="#" className="hover:text-teal-400 transition-colors">Technology</a>
-          <a href="#" className="hover:text-teal-400 transition-colors">Projects</a>
-          <a href="#" className="hover:text-teal-400 transition-colors">Pricing</a>
+          <a href="#products" className="hover:text-teal-400 transition-colors">Tracks</a>
+          <a href="#pipeline" className="hover:text-teal-400 transition-colors">C(RAID)</a>
+          <a href="https://github.com/kvnloo/blueprint" className="hover:text-teal-400 transition-colors">Repo</a>
         </div>
 
-        {/* CTA */}
         <div className="hidden md:flex items-center gap-6">
-          <a href="#" className="text-sm font-medium hover:text-white text-gray-400 transition-colors">Log In</a>
-          <button className="group relative px-6 py-2 rounded-full bg-gradient-to-r from-teal-600 to-emerald-600 text-white text-sm font-medium overflow-hidden transition-all hover:shadow-[0_0_20px_rgba(20,184,166,0.3)]">
-            <div className="absolute inset-0 bg-white/20 group-hover:translate-x-full transition-transform duration-500 ease-out -skew-x-12 -translate-x-full" />
+          <a
+            href="#pipeline"
+            className="group relative px-6 py-2 rounded-full bg-gradient-to-r from-teal-600 to-emerald-600 text-white text-sm font-medium overflow-hidden transition-all hover:shadow-[0_0_20px_rgba(20,184,166,0.3)]"
+          >
             <span className="relative flex items-center gap-2">
-              Get Started
+              Read C(RAID)
+              <ArrowRight className="w-4 h-4" />
             </span>
-          </button>
+          </a>
         </div>
 
-        {/* Mobile Toggle */}
-        <button 
+        <button
           className="md:hidden text-gray-300"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
@@ -56,17 +56,11 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-[#050505] border-b border-white/10 p-6 flex flex-col gap-4 animate-in slide-in-from-top-4 fade-in duration-200">
-          <a href="#" className="text-lg font-medium text-gray-300 hover:text-teal-400">Services</a>
-          <a href="#" className="text-lg font-medium text-gray-300 hover:text-teal-400">Technology</a>
-          <a href="#" className="text-lg font-medium text-gray-300 hover:text-teal-400">Projects</a>
-          <hr className="border-white/10" />
-          <a href="#" className="text-lg font-medium text-gray-300 hover:text-white">Log In</a>
-          <button className="w-full py-3 rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-medium">
-            Get Started
-          </button>
+          <a href="#products" onClick={close} className="text-lg font-medium text-gray-300 hover:text-teal-400">Tracks</a>
+          <a href="#pipeline" onClick={close} className="text-lg font-medium text-gray-300 hover:text-teal-400">C(RAID)</a>
+          <a href="https://github.com/kvnloo/blueprint" className="text-lg font-medium text-gray-300 hover:text-teal-400">Repo</a>
         </div>
       )}
     </nav>

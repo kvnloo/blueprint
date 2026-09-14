@@ -1,5 +1,5 @@
 import React from 'react';
-import { Twitter, Github, Linkedin } from 'lucide-react';
+import { Twitter, Github } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -18,20 +18,24 @@ const Footer = () => {
               </div>
               
               <div className="space-y-1">
-                 <div className="text-3xl md:text-4xl font-display font-medium text-white hover:text-teal-400 transition-colors cursor-pointer">
-                    +1 (312) 555-0199
-                 </div>
-                 <div className="text-3xl md:text-4xl font-display font-medium text-white hover:text-teal-400 transition-colors cursor-pointer uppercase">
+                 <a
+                    href="https://github.com/kvnloo/blueprint"
+                    className="block text-3xl md:text-4xl font-display font-medium text-white hover:text-teal-400 transition-colors"
+                 >
+                    github.com/kvnloo/blueprint
+                 </a>
+                 <div className="text-3xl md:text-4xl font-display font-medium text-white/80 uppercase">
                     hello@zer0.llc
                  </div>
               </div>
 
               <div className="flex gap-4">
-                 {[Twitter, Github, Linkedin].map((Icon, i) => (
-                    <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white transition-all">
-                       <Icon size={18} />
-                    </a>
-                 ))}
+                 <a href="https://x.com/_kvnloo" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white transition-all">
+                    <Twitter size={18} />
+                 </a>
+                 <a href="https://github.com/kvnloo/blueprint" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white transition-all">
+                    <Github size={18} />
+                 </a>
               </div>
            </div>
 
@@ -42,7 +46,7 @@ const Footer = () => {
                  <a href="#" className="block hover:text-white transition-colors">Terms of Service</a>
               </div>
               <div className="space-y-4">
-                 <div className="block text-gray-700">©2025 zer0 LLC.</div>
+                 <div className="block text-gray-700">©2026 zer0 LLC.</div>
               </div>
            </div>
         </div>
@@ -50,7 +54,7 @@ const Footer = () => {
         {/* Giant Text */}
         <div className="relative">
            <h1 className="text-[20vw] leading-none font-bold font-display text-transparent bg-clip-text bg-gradient-to-b from-white/10 to-transparent select-none text-center tracking-tighter">
-              ZER0
+              ATLAS
            </h1>
            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent" />
         </div>
