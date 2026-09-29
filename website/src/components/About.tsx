@@ -1,69 +1,55 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+const principles = [
+  ['Goals stay human', 'ACE can help clarify tradeoffs and surface options, but the person defines what they are trying to become.'],
+  ['The twin is a model', 'Observed facts, estimates, expert judgments and simulations remain separate so uncertainty is visible.'],
+  ['Experts get more leverage', 'Coaches, physicians, PTs, nutritionists, scientists and peers collaborate with agents instead of being replaced by them.'],
+  ['Learning compounds', 'Every intervention becomes evidence about what worked, for whom, in what context, and with what confidence.'],
+];
+
 const About = () => {
   return (
-    <section className="py-24 relative z-10">
+    <section id="thesis" className="py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-6">
-
-        {/* Version / Badge */}
-        <div className="flex justify-start mb-16">
-          <div className="flex items-center gap-3 px-4 py-2 rounded-full border border-teal-500/30 bg-teal-900/10">
-            <span className="flex h-2 w-2 rounded-full bg-teal-400 animate-pulse"></span>
-            <span className="text-xs font-mono text-teal-300 tracking-wider">CLAUDE FLOW POWERED</span>
-            <span className="w-px h-3 bg-teal-500/30"></span>
-            <span className="text-xs text-gray-400">Autonomous research-to-deployment systems</span>
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div>
+            <div className="inline-flex items-center gap-2 mb-6 text-xs font-bold text-teal-400 tracking-widest uppercase">
+              The thesis
+            </div>
+            <h2 className="text-4xl md:text-5xl font-display font-medium leading-tight text-gray-100 mb-8">
+              The facility is the interface.
+              <span className="block text-white font-bold">The human feedback loop is the product.</span>
+            </h2>
+            <div className="space-y-5 text-lg text-gray-400 leading-relaxed">
+              <p>
+                ACE brings training, recovery, nutrition, medicine, learning, research, community and simulation into one environment designed to help people break plateaus.
+              </p>
+              <p>
+                It takes inspiration from continuous-measurement systems such as Bryan Johnson&apos;s Blueprint, then broadens the idea beyond biomarkers into capability, learning, expertise, relationships and environment.
+              </p>
+              <p className="text-sm text-gray-500">
+                ACE is an independent research project and is not affiliated with Blueprint.
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
-            <div>
-                <div className="flex items-center gap-2 mb-6">
-                    <span className="text-xs font-bold text-gray-600 px-2 py-1 rounded bg-white/5 border border-white/5">THE VISION</span>
-                </div>
-                <h2 className="text-4xl md:text-5xl font-display font-medium leading-tight text-gray-100 mb-8">
-                    Building the <span className="text-white font-bold">Blueprint Protocol</span>—open source health optimization at scale.
-                </h2>
-                <div className="space-y-6 text-lg text-gray-400">
-                    <p>
-                    Three integrated tracks: Blueprint Protocol for health tracking, World Simulation for robotics and vertical farming, and Evolve for AI orchestration. All connected through the C(RAID) methodology.
-                    </p>
-                </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-8 lg:gap-12 content-center">
-                {[
-                    { val: '3', label: 'Active Tracks' },
-                    { val: '4', label: 'Health Modules' },
-                    { val: '6', label: 'Pipeline Stages' },
-                    { val: '∞', label: 'Automation Loop' }
-                ].map((stat, i) => (
-                    <motion.div
-                        whileHover={{ y: -5 }}
-                        className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-teal-500/30 transition-colors"
-                        key={i}
-                    >
-                        <div className="text-4xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-2">
-                            {stat.val}
-                        </div>
-                        <div className="text-sm font-medium text-teal-500/80 uppercase tracking-wide">
-                            {stat.label}
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        </div>
-
-        {/* Technology Stack */}
-        <div className="mt-32 border-t border-white/5 pt-12">
-            <p className="text-center text-xs font-semibold tracking-widest text-gray-600 uppercase mb-12">Built with leading technology</p>
-            <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-                {['Claude Flow', 'Unity/Unreal', 'E2B Sandbox', 'Git Worktree', 'PyTorch'].map((logo) => (
-                    <div key={logo} className="text-lg font-bold font-display text-white flex items-center gap-2 hover:text-teal-400 transition-colors cursor-default">
-                        {logo}
-                    </div>
-                ))}
-            </div>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {principles.map(([title, text], index) => (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
+                className="p-6 rounded-2xl bg-white/[0.03] border border-white/10"
+              >
+                <div className="text-xs font-mono text-teal-500 mb-4">0{index + 1}</div>
+                <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{text}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
