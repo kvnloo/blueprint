@@ -1,179 +1,83 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Heart, Globe, ArrowRight, ExternalLink, FlaskConical, Apple, Dumbbell, Moon, Map, Bot, Leaf, ChefHat, FileCode, Workflow, GitBranch, Container } from 'lucide-react';
+import { Bot, Sprout, Trophy, User, Users } from 'lucide-react';
 
-const products = [
+const systems = [
   {
-    name: 'Blueprint Protocol',
-    tagline: 'Open Source Health Optimization',
-    description: "Open sourcing Bryan Johnson's Blueprint protocol as an all-in-one health tracker. Systems-thinking design with integrated modules for complete health optimization.",
-    icon: Heart,
-    color: 'teal',
-    gradient: 'from-teal-500 to-teal-600',
-    glowColor: 'rgba(20, 184, 166, 0.3)',
-    status: 'Track 1',
-    statusColor: 'bg-teal-500',
-    link: null,
-    features: [
-      { icon: FlaskConical, text: 'Labs Ingestor - Bloodwork & biomarkers' },
-      { icon: Apple, text: 'Nutrition Tracker - Macro/micronutrients' },
-      { icon: Dumbbell, text: 'Fitness - Exercise & workout logging' },
-      { icon: Moon, text: 'Sleep - Quality, duration, HRV' }
-    ]
+    title: 'Personal digital twin',
+    subtitle: 'A living model, not a score',
+    icon: User,
+    body: 'Goals, training history, physiology, movement, skill, recovery, interventions and uncertainty in one longitudinal model.',
+    status: 'RESEARCH + PROTOTYPE',
   },
   {
-    name: 'World Simulation',
-    tagline: 'Digital Twin to Robot Chef Pipeline',
-    description: 'From Google Maps data to fully autonomous robot chef. Create digital twins for robotics training, vertical farming, and complete farm-to-table automation.',
-    icon: Globe,
-    color: 'amber',
-    gradient: 'from-amber-500 to-orange-500',
-    glowColor: 'rgba(251, 191, 36, 0.3)',
-    status: 'Track 2',
-    statusColor: 'bg-amber-500',
-    link: null,
-    features: [
-      { icon: Map, text: 'House Model - Google Maps + indoor pics' },
-      { icon: Bot, text: 'Robotics Training - RL in virtual space' },
-      { icon: Leaf, text: 'Vertical Farm - Autonomous crop management' },
-      { icon: ChefHat, text: 'Robot Chef - Farm-to-table automation' }
-    ]
+    title: 'Sport labs',
+    subtitle: 'Rules + simulation per sport',
+    icon: Trophy,
+    body: 'Each sport brings its own machine-readable rules, state and semantics on top of a minimal reusable simulation substrate.',
+    status: 'PROTOTYPE',
   },
   {
-    name: 'Evolve',
-    tagline: 'C(RAID) Orchestration',
-    description: 'End-to-end autonomous development framework. Multi-agent coordination with Claude Flow integration, custom skills, and parallel git worktree workflows.',
-    icon: Cpu,
-    color: 'emerald',
-    gradient: 'from-emerald-500 to-emerald-600',
-    glowColor: 'rgba(16, 185, 129, 0.3)',
-    status: 'Track 3',
-    statusColor: 'bg-emerald-500',
-    link: 'https://github.com/kvnloo/evolve',
-    features: [
-      { icon: FileCode, text: 'Architecture Diagrams & data flows' },
-      { icon: Workflow, text: 'Claude Flow - Multi-agent orchestration' },
-      { icon: GitBranch, text: 'Git Worktree - Parallel development' },
-      { icon: Container, text: 'E2B Containerization - Sandboxed execution' }
-    ]
-  }
+    title: 'Expert network',
+    subtitle: 'Bring the right people into the loop',
+    icon: Users,
+    body: 'Connect athletes with coaches, PTs, physicians, nutritionists, scientists and peers around the specific plateau being investigated.',
+    status: 'RESEARCH',
+  },
+  {
+    title: 'Agent layer',
+    subtitle: 'Extend human attention',
+    icon: Bot,
+    body: 'Agents research, compare evidence, run simulations and coordinate follow-up while authority stays with the person and relevant experts.',
+    status: 'ACTIVE R&D',
+  },
+  {
+    title: 'Facility + food',
+    subtitle: 'Environment becomes part of the twin',
+    icon: Sprout,
+    body: 'Training spaces, recovery, labs, community, agriculture and nutrition can eventually share one evidence model without becoming one monolithic system.',
+    status: 'VISION + PROTOTYPE',
+  },
 ];
 
 const Products = () => {
   return (
-    <section id="products" className="py-32 relative">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-teal-900/10 blur-[150px] rounded-full -z-10" />
-
+    <section id="system" className="py-32 relative">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-teal-400 uppercase mb-6">
-            <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            THE BLUEPRINT SYSTEM
-          </div>
+        <div className="text-center mb-16">
+          <div className="text-xs font-semibold tracking-wider text-emerald-400 uppercase mb-5">The ACE system</div>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            <span className="text-white">Products that </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-400">
-              work together
-            </span>
+            One loop. Many specialized systems.
           </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Each product in the Blueprint ecosystem connects to create a unified platform for autonomous self-care.
+          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+            ACE should stay modular: shared evidence and simulation infrastructure underneath, domain-specific expertise and rules above it.
           </p>
         </div>
 
-        {/* Products Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {products.map((product, idx) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {systems.map((item, index) => (
             <motion.div
-              key={product.name}
-              initial={{ opacity: 0, y: 30 }}
+              key={item.title}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.15, duration: 0.6 }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="group relative"
+              transition={{ delay: index * 0.08 }}
+              className="rounded-2xl border border-white/10 bg-[#0A0A0A] p-7"
             >
-              {/* Card */}
-              <div className="relative h-full bg-[#0A0A0A] rounded-2xl border border-white/10 p-8 overflow-hidden hover:border-white/20 transition-all duration-300">
-                {/* Glow effect on hover */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background: `radial-gradient(circle at 50% 0%, ${product.glowColor}, transparent 70%)`
-                  }}
-                />
-
-                {/* Content */}
-                <div className="relative z-10">
-                  {/* Icon & Status */}
-                  <div className="flex items-start justify-between mb-6">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${product.gradient} p-3 shadow-lg`}>
-                      <product.icon className="w-full h-full text-white" />
-                    </div>
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${product.statusColor}/20 text-white border border-white/10`}>
-                      {product.status}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-2xl font-display font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all">
-                    {product.name}
-                  </h3>
-                  <p className={`text-sm font-medium text-${product.color}-400 mb-4`}>
-                    {product.tagline}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                    {product.description}
-                  </p>
-
-                  {/* Features */}
-                  <ul className="space-y-3 mb-8">
-                    {product.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-3 text-sm text-gray-400">
-                        <feature.icon className={`w-4 h-4 text-${product.color}-500 flex-shrink-0`} />
-                        <span>{feature.text}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA */}
-                  {product.link ? (
-                    <a
-                      href={product.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 text-sm font-medium text-${product.color}-400 hover:text-${product.color}-300 transition-colors`}
-                    >
-                      Explore {product.name}
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  ) : (
-                    <span className="inline-flex items-center gap-2 text-sm font-medium text-gray-600">
-                      {product.status === 'Coming Soon' ? 'Join waitlist' : 'Learn more'}
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  )}
+              <div className="flex items-start justify-between gap-4 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                  <item.icon className="w-6 h-6 text-emerald-400" />
                 </div>
+                <span className="px-2.5 py-1 rounded-full border border-white/10 text-[9px] font-mono tracking-wider text-gray-500">
+                  {item.status}
+                </span>
               </div>
+              <h3 className="text-xl font-bold text-white mb-1">{item.title}</h3>
+              <div className="text-sm text-emerald-400 mb-4">{item.subtitle}</div>
+              <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
             </motion.div>
           ))}
         </div>
-
-        {/* Integration Note */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
-          <p className="text-sm text-gray-600">
-            All products share the <span className="text-teal-500">C(RAID)</span> methodology and integrate through the Blueprint platform.
-          </p>
-        </motion.div>
       </div>
     </section>
   );
