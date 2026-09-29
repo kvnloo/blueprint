@@ -14,10 +14,8 @@ import { BackgroundControls } from './components/ui';
 import { useReducedMotion, useLocalStorage } from './hooks';
 import backgroundImage from './assets/background.png';
 
-// Lazy load WebGL background for performance
 const WebGLBackground = lazy(() => import('./components/WebGLBackground'));
 
-// ViewState type for routing between views
 export type ViewState = 'home' | 'research' | string;
 
 export default function App() {
@@ -26,32 +24,24 @@ export default function App() {
   const [animationsEnabled] = useLocalStorage('bg-animations-enabled', true);
   const [currentView, setCurrentView] = useState<ViewState>('home');
 
-  // Navigation function for view changes
   const navigate = (view: ViewState) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setCurrentView(view);
   };
 
   useEffect(() => {
-    // Hide loading overlay once React has mounted
     const overlay = document.getElementById('loading-overlay');
-
     if (overlay) {
-      // Small delay to ensure smooth transition
       setTimeout(() => {
         overlay.classList.add('hidden');
-        // Remove from DOM after transition completes
         setTimeout(() => overlay.remove(), 500);
       }, 100);
     }
-
   }, []);
 
   useEffect(() => {
-    // Don't load WebGL if user prefers reduced motion or has disabled animations
     if (prefersReducedMotion || !animationsEnabled) return;
 
-    // Lazy load WebGL after initial render
     if ('requestIdleCallback' in window) {
       (window as any).requestIdleCallback(() => setLoadWebGL(true), { timeout: 2000 });
     } else {
@@ -61,14 +51,12 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen overflow-hidden text-white selection:bg-teal-500/30 selection:text-teal-200">
-      {/* Background image layer */}
       <div
         className="fixed inset-0 -z-20 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${backgroundImage})` }}
         aria-hidden="true"
       />
 
-      {/* Dark vignette overlay for text readability - loads with background */}
       <div
         className="fixed inset-0 pointer-events-none"
         style={{
@@ -78,7 +66,6 @@ export default function App() {
         aria-hidden="true"
       />
 
-      {/* WebGL wisps overlay */}
       {loadWebGL && animationsEnabled ? (
         <Suspense fallback={<BackgroundGrid />}>
           <WebGLBackground />
@@ -87,29 +74,25 @@ export default function App() {
         <BackgroundGrid />
       )}
 
-      {/* Accessibility: Animation pause control */}
       <BackgroundControls />
       <Navbar currentView={currentView} onNavigate={navigate} />
 
       <main>
-        {/* Home View */}
         {currentView === 'home' && (
           <>
             <Hero />
-            <Products />
             <About />
             <Pipeline />
+            <Products />
             <Showcase />
             <SuccessStories />
           </>
         )}
 
-        {/* Research Hub View */}
         {currentView === 'research' && (
           <ResearchHub onNavigate={navigate} />
         )}
 
-        {/* Article View */}
         {currentView.startsWith('article:') && (
           <ArticleView
             articleId={currentView.split(':')[1]}
