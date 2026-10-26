@@ -54,7 +54,15 @@ void main() {
 }
 `;
 
-/** L0 + L5: plate with depth parallax and tip-weighted foliage sway. */
+/**
+ * L0 + L5: plate with depth parallax and foliage sway.
+ *
+ * The G mask is a smooth "may sway" weight (0 on stone and architecture). The
+ * amplitude is NOT the mask value alone: it follows the root-to-tip gradient,
+ * i.e. how far up a foliage clump this pixel sits. Leaves with open space
+ * above them (tips) swing fully, pixels buried deep in a clump (near the
+ * root) barely move, and nearer foliage (larger plate y) swings more.
+ */
 export const FRAG_SCENE = `${PRECISION}
 varying vec2 v_uv;
 uniform sampler2D u_base;
@@ -65,12 +73,22 @@ ${PLATE}
 void main() {
   vec2 p = toPlate(v_uv);
   float fol = texture2D(u_masks, p).g;
+  if (fol < 0.004) {
+    gl_FragColor = vec4(texture2D(u_base, p).rgb, 1.0);
+    return;
+  }
   float t = u_time;
+  // root-to-tip gradient: foliage cover above this pixel means it is nearer the root
+  float above = texture2D(u_masks, p - vec2(0.0, 0.012)).g * 0.5
+              + texture2D(u_masks, p - vec2(0.0, 0.028)).g * 0.5;
+  float tip = clamp(1.0 - above * 0.8, 0.2, 1.0);
+  float near = mix(0.55, 1.0, smoothstep(0.25, 0.95, p.y));
+  float amp = u_sway * fol * tip * near;
   // two periods (~4 s and ~7 s) plus a slow gust envelope every 8-15 s
   float gust = 0.55 + 0.45 * smoothstep(0.35, 1.0, 0.5 + 0.5 * sin(t * 0.13) + 0.25 * sin(t * 0.37 + 1.3));
   float s = sin(t * 1.57 + p.y * 9.0 + p.x * 4.0) * 0.65 + sin(t * 0.9 + p.x * 13.0) * 0.35;
-  p.x += s * u_sway * gust * fol;
-  p.y += cos(t * 1.21 + p.x * 7.0) * u_sway * 0.25 * gust * fol;
+  p.x += s * amp * gust;
+  p.y += cos(t * 1.21 + p.x * 7.0) * amp * 0.25 * gust;
   gl_FragColor = vec4(texture2D(u_base, p).rgb, 1.0);
 }
 `;
@@ -203,9 +221,12 @@ void main() {
   float breath = 0.8 + 0.2 * sin(t * 0.24);
   col = mix(col, vec3(0.82, 0.9, 0.95), smoothstep(0.35, 0.95, f) * fogMask * u_fog * breath);
 
-  // grade: lean shadows toward the site's teal/violet
+  // grade: lean shadows toward the site's teal/violet, then a little vibrance so the
+  // water and the amber accents stay luminous under the page's readability veil
   float lum = dot(col, vec3(0.299, 0.587, 0.114));
-  col = mix(col, col * vec3(0.9, 0.97, 1.08), (1.0 - lum) * 0.35);
+  col = mix(col, col * vec3(0.9, 0.97, 1.08), (1.0 - lum) * 0.3);
+  lum = dot(col, vec3(0.299, 0.587, 0.114));
+  col = max(mix(vec3(lum), col, 1.12), 0.0);
 
   vec2 vv = (v_uv - 0.5) * vec2(1.0, 1.15);
   col *= mix(1.0, smoothstep(0.98, 0.22, length(vv)), u_vig);

@@ -6,7 +6,8 @@ Usage (from repo root):
 
 Reads  website/art/living-ruins/masks/{water,foliage,light,depth,flow}.png
 Writes website/src/public/wallpaper/living-ruins/
-  masks.webp  RGB lossless  R = water, G = foliage (tip weighted), B = light
+  masks.webp  RGB lossless  R = water, G = foliage (sway weight; the shader adds the root-to-tip
+              gradient), B = light. Built at the water/foliage size (2x grid); light is upscaled.
   flow.webp   RGB lossless  R,G = flow direction (0.5 = zero, +y down), B = strength
   depth.webp  RGB lossy     depth in all channels (0 = far, 1 = near), blurred for smooth parallax
 and refreshes the "depth" field of website/src/data/wallpaper-hotspots.json.
@@ -32,7 +33,9 @@ def gray(name: str) -> Image.Image:
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    masks = Image.merge("RGB", (gray("water.png"), gray("foliage.png"), gray("light.png")))
+    water, foliage = gray("water.png"), gray("foliage.png")
+    light = gray("light.png").resize(water.size, Image.BICUBIC)
+    masks = Image.merge("RGB", (water, foliage, light))
     masks.save(OUT / "masks.webp", lossless=True, quality=100, method=6)
 
     Image.open(SRC / "flow.png").convert("RGB").save(OUT / "flow.webp", lossless=True, quality=100, method=6)

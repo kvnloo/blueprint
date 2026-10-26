@@ -1,11 +1,27 @@
 {
-  "_comment": "Flow polylines for base.png (chosen plate-01). Normalised 0..1, top-left origin, points follow the direction water flows. width = lane half-width (square space), speed 1 = calm, 2+ = fall/rapids.",
-  "corridor": 0.035,
+  "_comment": "Flow polylines and rigid boxes for base.png (chosen plate-01). Normalised 0..1, top-left origin, points follow the direction water flows. width = lane half-width (square space), speed 1 = calm, 2+ = fall/rapids. fill = close holes in the water mask inside the lane. pad = per-lane corridor override. rigid = architecture boxes that never sway.",
+  "corridor": 0.03,
   "polylines": [
-    {"name": "river-upper", "width": 0.035, "speed": 1.4, "points": [[0.80,0.55],[0.74,0.58],[0.68,0.61],[0.62,0.66]]},
-    {"name": "pool-main",   "width": 0.075, "speed": 0.5, "points": [[0.62,0.67],[0.52,0.72],[0.40,0.75],[0.26,0.76],[0.14,0.78]]},
-    {"name": "pool-outlet", "width": 0.04,  "speed": 0.9, "points": [[0.46,0.78],[0.48,0.86],[0.50,0.94]]},
-    {"name": "main-fall",   "width": 0.028, "speed": 3.0, "points": [[0.795,0.35],[0.795,0.45],[0.790,0.54]]},
-    {"name": "wheel-fall",  "width": 0.012, "speed": 3.0, "points": [[0.578,0.44],[0.578,0.53],[0.580,0.60]]}
+    {"name": "river-upper", "width": 0.045, "speed": 1.4, "points": [[0.80,0.55],[0.74,0.585],[0.68,0.62],[0.63,0.665]]},
+    {"name": "rapids",      "width": 0.032, "speed": 1.8, "points": [[0.72,0.66],[0.66,0.685],[0.60,0.70],[0.55,0.69]]},
+    {"name": "pool-main",   "width": 0.11, "speed": 0.5, "points": [[0.62,0.67],[0.52,0.72],[0.40,0.755],[0.26,0.765],[0.14,0.78]]},
+    {"name": "pool-outlet", "width": 0.03,  "speed": 0.7, "pad": 0, "points": [[0.44,0.79],[0.45,0.83]]},
+    {"name": "main-fall",   "width": 0.030, "speed": 3.0, "fill": true, "points": [[0.795,0.36],[0.795,0.45],[0.790,0.54]]},
+    {"name": "side-fall",   "width": 0.014, "speed": 2.6, "fill": true, "points": [[0.672,0.39],[0.670,0.44],[0.668,0.47]]},
+    {"name": "wheel-fall",  "width": 0.012, "speed": 3.0, "fill": true, "points": [[0.578,0.44],[0.578,0.53],[0.580,0.60]]}
+  ],
+  "rigid": [
+    {"name": "greenhouse",   "box": [0.11, 0.21, 0.42, 0.475]},
+    {"name": "west-arches",  "box": [0.05, 0.12, 0.20, 0.42]},
+    {"name": "wheel",        "box": [0.47, 0.40, 0.645, 0.60]},
+    {"name": "pool-pillar",  "box": [0.345, 0.465, 0.395, 0.585]},
+    {"name": "observatory",  "box": [0.70, 0.03, 0.83, 0.25]},
+    {"name": "aqueduct",     "box": [0.81, 0.13, 0.98, 0.28]},
+    {"name": "east-wall",    "box": [0.68, 0.61, 0.78, 0.80]},
+    {"name": "east-wall-lo", "box": [0.78, 0.67, 0.93, 0.79]},
+    {"name": "workshop",     "box": [0.82, 0.40, 1.00, 0.665]},
+    {"name": "pool-island",  "box": [0.40, 0.595, 0.54, 0.67]},
+    {"name": "pool-rock",    "box": [0.46, 0.745, 0.545, 0.835]},
+    {"name": "rapids-rocks", "box": [0.545, 0.765, 0.72, 0.86]}
   ]
 }

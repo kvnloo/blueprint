@@ -1,27 +1,28 @@
 {
   "water": {
-    "mean": 0.0957,
-    "coverage_gt_0.5_pct": 9.57
+    "mean": 0.116,
+    "coverage_gt_0.5_pct": 11.59
   },
   "foliage": {
-    "mean": 0.1993,
-    "coverage_gt_0.5_pct": 20.94
+    "mean": 0.1172,
+    "coverage_gt_0.5_pct": 11.57
   },
   "light": {
-    "mean": 0.1341,
-    "coverage_gt_0.5_pct": 12.85
+    "mean": 0.1456,
+    "coverage_gt_0.5_pct": 13.77
   },
   "depth": {
-    "mean": 0.5329,
-    "coverage_gt_0.5_pct": 54.88
+    "mean": 0.5316,
+    "coverage_gt_0.5_pct": 54.96
   },
   "flow_strength": {
-    "mean": 0.0372,
-    "coverage_gt_0.5_pct": 1.37
+    "mean": 0.0387,
+    "coverage_gt_0.5_pct": 1.38
   },
   "_meta": {
-    "plate": "website/art/living-ruins/base.png",
-    "size": "1024x576",
-    "river": "website/art/living-ruins/river.json"
+    "plate": "base.png",
+    "size": "2048x1152",
+    "smooth_size": "1024x576",
+    "river": "river.json"
   }
 }

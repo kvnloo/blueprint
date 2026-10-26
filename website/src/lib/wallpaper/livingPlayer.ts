@@ -19,7 +19,18 @@ import {
   VERT_PARTICLE,
   VERT_QUAD,
 } from './shaders';
-import { coverView, MAX_PARALLAX, publishCamera, screenToPlate, type Camera, type View } from './view';
+import {
+  coverView,
+  focusPanX,
+  getPanFocus,
+  isPortrait,
+  MAX_PARALLAX,
+  portraitPan,
+  publishCamera,
+  screenToPlate,
+  type Camera,
+  type View,
+} from './view';
 
 export type WallpaperQuality = 'high' | 'low';
 
@@ -257,6 +268,7 @@ export class LivingPlayer {
   private scroll = { y: 0, max: 1, vh: 1 };
   private exploring = false;
   private dim = 0;
+  private panX = 0;
   private view: View = { sx: 1, sy: 1, ox: 0, oy: 0 };
   private wavesUniform = new Float32Array(12);
   private embersUniform = new Float32Array(16);
@@ -495,7 +507,7 @@ export class LivingPlayer {
     }
   }
 
-  private updateCamera(dt: number) {
+  private updateCamera(dt: number, t: number) {
     const target = this.tilt.on ? this.tilt : this.pointer;
     const k = 1 - Math.exp(-dt * 3.5);
     this.par.x += (target.x * MAX_PARALLAX - this.par.x) * k;
@@ -506,17 +518,24 @@ export class LivingPlayer {
     const dimTarget = this.exploring ? 0 : heroOut * 0.5;
     this.dim += (dimTarget - this.dim) * (1 - Math.exp(-dt * 4));
     const canvas = this.opts.canvas;
-    this.view = coverView(canvas.clientWidth, canvas.clientHeight, {
+    const cw = canvas.clientWidth;
+    const ch = canvas.clientHeight;
+    // portrait: slow auto-pan between greenhouse and waterfall, or ease to a chip's landmark
+    let panTarget = 0;
+    if (isPortrait(cw, ch)) panTarget = getPanFocus() != null ? focusPanX(cw, ch) : portraitPan(t);
+    this.panX += (panTarget - this.panX) * (1 - Math.exp(-dt * (getPanFocus() != null ? 2.2 : 1.2)));
+    this.view = coverView(cw, ch, {
       zoom: 1 + progress * 0.05,
       driftY: progress * 0.035,
+      panX: this.panX,
     });
     const cam: Camera = {
       ...this.view,
       px: this.par.x,
       py: this.par.y,
       dim: this.dim,
-      width: canvas.clientWidth,
-      height: canvas.clientHeight,
+      width: cw,
+      height: ch,
     };
     publishCamera(cam);
   }
@@ -524,7 +543,7 @@ export class LivingPlayer {
   private frame(t: number, dt: number) {
     const gl = this.gl;
     if (!this.fboA || !this.fboB) return;
-    this.updateCamera(dt);
+    this.updateCamera(dt, t);
     gl.viewport(0, 0, this.drawW, this.drawH);
     gl.disable(gl.BLEND);
 
@@ -536,7 +555,7 @@ export class LivingPlayer {
     this.bind(s, 'u_base', 1, this.texBase);
     this.bind(s, 'u_masks', 2, this.texMasks);
     gl.uniform1f(s.u.u_time, t);
-    gl.uniform1f(s.u.u_sway, 0.0019);
+    gl.uniform1f(s.u.u_sway, 0.0026);
     this.drawQuad(s);
 
     // water: A -> B
@@ -565,7 +584,7 @@ export class LivingPlayer {
     gl.uniform2f(c.u.u_sun, SUN[0], SUN[1]);
     gl.uniform1f(c.u.u_shafts, 1);
     gl.uniform1f(c.u.u_fog, this.extras ? 0.2 : 0);
-    gl.uniform1f(c.u.u_vig, 0.38);
+    gl.uniform1f(c.u.u_vig, 0.22);
     gl.uniform1f(c.u.u_dim, this.dim);
     this.drawQuad(c);
 

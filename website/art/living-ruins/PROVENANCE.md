@@ -39,5 +39,5 @@ Mood references attached are our own concept art; take only mood and palette. Us
 `plate-01.png` becomes `base.*`. Reproduce masks:
 
 ```sh
-uv run --with numpy --with pillow website/scripts/wallpaper/derive_masks.py --plate website/art/living-ruins/base.png
+uv run --with numpy --with pillow --with scipy website/scripts/wallpaper/derive_masks.py --plate website/art/living-ruins/base.png
 ```

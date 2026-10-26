@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import hotspotData from '../../data/wallpaper-hotspots.json';
-import { plateToScreen, publishCamera, staticCamera, subscribeCamera } from '../../lib/wallpaper/view';
+import { plateToScreen, publishCamera, setPanFocus, staticCamera, subscribeCamera } from '../../lib/wallpaper/view';
 import { setWallpaperState, useWallpaperState } from '../../lib/wallpaper/store';
 import './wallpaper.css';
 
@@ -12,10 +12,22 @@ const HOTSPOTS = (hotspotData as { hotspots: Hotspot[] }).hotspots;
  * player publishes every frame (or a static camera in the poster tier) and
  * move with transform only, so they stay glued to the art under parallax.
  * Shown in Explore mode, where the page content steps aside.
+ *
+ * Portrait screens only see about a quarter of the plate, so Explore mode also
+ * shows a bottom row of landmark chips: a chip pans the camera to its landmark
+ * (the live player eases there, the poster tier re-crops), where the marker
+ * link to the section is then on screen.
  */
 const WallpaperHotspots: React.FC = () => {
   const { exploring, live } = useWallpaperState();
   const refs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [focused, setFocused] = useState<string | null>(null);
+
+  const focus = (h: Hotspot | null) => {
+    setFocused(h ? h.id : null);
+    setPanFocus(h ? h.x : null);
+    if (!live) publishCamera(staticCamera(window.innerWidth, window.innerHeight));
+  };
 
   // Poster tier: publish a static camera so markers still line up with the poster.
   useEffect(() => {
@@ -47,7 +59,11 @@ const WallpaperHotspots: React.FC = () => {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.toggle('wallpaper-exploring', exploring);
-    if (!exploring) return;
+    if (!exploring) {
+      setFocused(null);
+      setPanFocus(null);
+      return;
+    }
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setWallpaperState({ exploring: false });
     };
@@ -87,6 +103,22 @@ const WallpaperHotspots: React.FC = () => {
           </span>
         </a>
       ))}
+      <nav className="wallpaper-chips" aria-label="Landmarks">
+        {HOTSPOTS.map((h) => (
+          <button
+            key={h.id}
+            type="button"
+            className="wallpaper-chip"
+            data-chip={h.id}
+            aria-pressed={focused === h.id}
+            tabIndex={exploring ? 0 : -1}
+            onClick={() => focus(focused === h.id ? null : h)}
+          >
+            <span className="wallpaper-chip__name">{h.label}</span>
+            <span className="wallpaper-chip__sub">{h.sub}</span>
+          </button>
+        ))}
+      </nav>
     </div>
   );
 };

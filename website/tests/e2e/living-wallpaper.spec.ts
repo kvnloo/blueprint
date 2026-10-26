@@ -86,15 +86,25 @@ test.describe('Living wallpaper', () => {
 
     const hotspots = page.locator('.wallpaper-hotspot');
     await expect(hotspots).toHaveCount(4);
-    // every marker is anchored inside the viewport
     const vp = page.viewportSize()!;
-    for (const box of await hotspots.evaluateAll((els) =>
-      els.map((el) => {
+    const portrait = vp.width <= vp.height;
+    const anchor = (id: string) =>
+      page.locator(`[data-hotspot="${id}"]`).evaluate((el) => {
         const m = /translate3d\(([-\d.]+)px, ([-\d.]+)px/.exec((el as HTMLElement).style.transform);
-        return m ? { x: Number(m[1]), y: Number(m[2]) } : null;
-      }),
-    )) {
+        return m ? { x: Number(m[1]), y: Number(m[2]), visible: getComputedStyle(el).visibility !== 'hidden' } : null;
+      });
+    const ids = await hotspots.evaluateAll((els) => els.map((el) => (el as HTMLElement).dataset.hotspot!));
+    for (const id of ids) {
+      // portrait crops show about a quarter of the plate: the landmark chip pans to it
+      if (portrait) {
+        const chip = page.locator(`[data-chip="${id}"]`);
+        await expect(chip).toBeVisible();
+        await chip.click();
+        await expect(chip).toHaveAttribute('aria-pressed', 'true');
+      }
+      const box = await anchor(id);
       expect(box).not.toBeNull();
+      expect(box!.visible).toBe(true);
       expect(box!.x).toBeGreaterThanOrEqual(0);
       expect(box!.x).toBeLessThanOrEqual(vp.width);
       expect(box!.y).toBeGreaterThanOrEqual(0);
@@ -107,6 +117,7 @@ test.describe('Living wallpaper', () => {
 
     // a hotspot leaves Explore mode and scrolls to its section
     await explore.click();
+    if (portrait) await page.locator('[data-chip="greenhouse"]').click();
     await page.locator('[data-hotspot="greenhouse"] .wallpaper-hotspot__label').click();
     await expect(page.locator('html')).not.toHaveClass(/wallpaper-exploring/);
     await expect(page.locator('#products')).toBeInViewport({ timeout: 15_000 });

@@ -4,6 +4,30 @@ import { motion } from 'framer-motion';
 
 // Aura-style button CSS
 const buttonStyles = `
+  /* Phones and tablets: the copy sits over bright water, so it gets its own soft
+     backing (a light band plus a dark halo around the small copy) instead of a
+     scrim over the whole wallpaper. */
+  @media (max-width: 1023px) {
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      inset: -44px -24px -36px;
+      z-index: -1;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(6, 8, 10, 0) 0px, rgba(6, 8, 10, 0.5) 64px,
+        rgba(6, 8, 10, 0.5) calc(100% - 48px), rgba(6, 8, 10, 0) 100%);
+    }
+    .hero-legible {
+      text-shadow: 0 0 2px rgba(6, 8, 10, 0.95), 0 0 6px rgba(6, 8, 10, 0.95), 0 0 12px rgba(6, 8, 10, 0.9),
+        0 0 22px rgba(6, 8, 10, 0.8), 0 0 36px rgba(6, 8, 10, 0.6);
+    }
+    .hero-badge {
+      margin-left: -10px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(6, 8, 10, 0.62);
+    }
+  }
   .button-custom {
     cursor: pointer;
     position: relative;
@@ -76,10 +100,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="space-y-8"
+          className="hero-copy relative isolate space-y-8"
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+          <div className="hero-legible hero-badge inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
             AUTONOMOUS HEALTH SYSTEM
           </div>
@@ -109,7 +133,7 @@ const Hero = () => {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-gray-400 max-w-xl leading-relaxed">
+          <p className="hero-legible text-lg text-gray-300 max-w-xl leading-relaxed">
             A robot chef trained in simulation, cooking meals personalized to your Blueprint health data. From vertical farm to your plate—fully autonomous.
           </p>
 
@@ -131,7 +155,7 @@ const Hero = () => {
                 <ArrowRight />
               </span>
             </button>
-            <span className="text-sm text-gray-500 flex items-center gap-2">
+            <span className="hero-legible text-sm text-gray-300 flex items-center gap-2">
               <span className="text-amber-500">✓</span> Open source protocol
             </span>
           </div>
@@ -146,11 +170,11 @@ const Hero = () => {
             ].map((item, idx) => (
               <div key={idx} className="group cursor-pointer">
                 <div className="text-xs font-mono text-amber-500 mb-2 group-hover:text-amber-300 transition-colors font-bold">{item.step}</div>
-                <div className="flex items-center gap-2 text-sm font-medium text-gray-300 group-hover:text-white transition-colors mb-1">
+                <div className="hero-legible flex items-center gap-2 text-sm font-medium text-gray-300 group-hover:text-white transition-colors mb-1">
                   <item.icon className="w-4 h-4 text-gray-500 group-hover:text-amber-400" />
                   {item.title.split(' ')[1]}
                 </div>
-                <div className="text-xs text-gray-600">{item.desc}</div>
+                <div className="hero-legible text-xs text-gray-300">{item.desc}</div>
               </div>
             ))}
           </div>
