@@ -50,6 +50,39 @@ test('resume excludes hidden time and clears consecutive slow samples before ada
   player.dispose();
 });
 
+test('20 mount/unmount cycles release every context after deleting resources', async () => {
+  let activeContexts = 0;
+  for (let i = 0; i < 20; i++) {
+    const h = webglHarness();
+    activeContexts++;
+    const player = new LivingPlayer({ canvas: h.canvas, assetBase: '/plate/' });
+    await player.init(); player.start(); h.frame(16);
+    player.dispose(); player.dispose();
+    assert.equal(h.resources.size, 0);
+    assert.equal(h.calls.loseContext?.length, 1, `cycle ${i + 1} must release its context exactly once`);
+    activeContexts -= h.calls.loseContext?.length ?? 0;
+    assert.equal(activeContexts, 0);
+    const programs = h.calls.createProgram.length;
+    h.restore(); await settle();
+    assert.equal(h.calls.createProgram.length, programs, 'disposed player cannot restore');
+    assert.equal(h.frames.size, 0);
+    mock.restoreAll();
+  }
+});
+
+test('dispose during image decoding deletes pending programs and cannot restart later', async () => {
+  const h = webglHarness();
+  let resolve!: () => void;
+  const decoded = new Promise<void>((r) => { resolve = r; });
+  Object.assign(globalThis, { Image: class { decode() { return decoded; } } });
+  const player = new LivingPlayer({ canvas: h.canvas, assetBase: '/plate/' });
+  const init = player.init();
+  player.dispose(); resolve(); await init; player.start();
+  assert.equal(h.resources.size, 0);
+  assert.equal(h.calls.loseContext?.length, 1);
+  assert.equal(h.frames.size, 0);
+});
+
 test('restore failure stays on the poster without an unhandled rejection', async () => {
   const h = webglHarness();
   let gaveUp = 0;

@@ -501,6 +501,8 @@ export class LivingPlayer {
     this.opts.canvas.removeEventListener('webglcontextlost', this.onContextLost);
     this.opts.canvas.removeEventListener('webglcontextrestored', this.onContextRestored);
     this.releaseResources();
+    this.ready = false;
+    this.gl.getExtension('WEBGL_lose_context')?.loseContext();
   }
 
   private releaseResources() {
