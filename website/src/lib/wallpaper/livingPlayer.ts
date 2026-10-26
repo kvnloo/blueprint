@@ -414,8 +414,13 @@ export class LivingPlayer {
   }
 
   setVisible(v: boolean) {
+    if (v) {
+      this.lastNow = this.fpsWindowStart = performance.now();
+      this.fpsFrames = this.slowSamples = 0;
+      this.fps = 0;
+    }
     this.visible = v;
-    if (v && this.running && !this.raf && !this.disposed) this.raf = requestAnimationFrame(this.loop);
+    if (v && this.ready && this.running && !this.raf && !this.disposed) this.raf = requestAnimationFrame(this.loop);
   }
 
   /* ----------------------------- lifecycle ---------------------------- */

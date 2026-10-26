@@ -32,6 +32,24 @@ test('context loss shows poster, pauses frames and rebuilds all GPU resources be
   player.dispose();
 });
 
+test('resume excludes hidden time and clears consecutive slow samples before adapting quality', async () => {
+  const h = webglHarness();
+  const samples: number[] = [];
+  const player = new LivingPlayer({ canvas: h.canvas, assetBase: '/plate/', adaptive: true,
+    onFps: (fps) => samples.push(fps),
+  });
+  await player.init(); player.start();
+  h.frame(3500); h.frame(4000); h.frame(4500);
+  const width = h.canvas.width;
+  const count = samples.length;
+  player.setVisible(false); h.frame(4600);
+  h.setNow(60_000); player.setVisible(true); h.frame(60_016);
+  assert.equal(samples.length, count, 'first resumed frame must not report the hidden interval');
+  h.frame(60_516); h.frame(61_016); h.frame(61_516);
+  assert.equal(h.canvas.width, width, 'old slow samples must not downgrade the resumed player');
+  player.dispose();
+});
+
 test('restore failure stays on the poster without an unhandled rejection', async () => {
   const h = webglHarness();
   let gaveUp = 0;
