@@ -21,7 +21,7 @@ export function tierFromUrl(search = typeof location !== 'undefined' ? location.
   return v === 'poster' || v === 'webgl' ? v : null;
 }
 
-export function detectWallpaperTier(opts: CapabilityOptions = {}): WallpaperTier {
+export async function detectWallpaperTier(opts: CapabilityOptions = {}): Promise<WallpaperTier> {
   if (typeof window === 'undefined') return 'poster';
   if (opts.forceTier) return opts.forceTier;
 
@@ -36,27 +36,46 @@ export function detectWallpaperTier(opts: CapabilityOptions = {}): WallpaperTier
   if (typeof nav.deviceMemory === 'number' && nav.deviceMemory > 0 && nav.deviceMemory <= 2) return 'poster';
 
   // No WebGL, or a CPU rasteriser (SwiftShader, llvmpipe, WARP) that would starve the page.
-  if (probeWebGL() !== 'hardware') return 'poster';
+  if (await probeWebGL() !== 'hardware') return 'poster';
   return 'webgl';
 }
 
 const SOFTWARE_GL = /swiftshader|llvmpipe|softpipe|software|basic render|microsoft basic/i;
 
-export function probeWebGL(): 'none' | 'software' | 'hardware' {
+type WebGLCapability = 'none' | 'software' | 'hardware';
+let probeResult: Promise<WebGLCapability> | undefined;
+
+/** Share both pending and resolved results for this page session. Never probe during mount. */
+export function probeWebGL(): Promise<WebGLCapability> {
+  if (typeof window === 'undefined') return Promise.resolve('none');
+  return probeResult ??= new Promise((resolve) => {
+    const run = () => resolve(probeNow());
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(run, { timeout: 2000 });
+    } else {
+      setTimeout(run, 1000);
+    }
+  });
+}
+
+function probeNow(): WebGLCapability {
+  let gl: WebGLRenderingContext | null = null;
   try {
     const c = document.createElement('canvas');
-    const gl = (c.getContext('webgl') || c.getContext('experimental-webgl')) as WebGLRenderingContext | null;
+    gl = (c.getContext('webgl') || c.getContext('experimental-webgl')) as WebGLRenderingContext | null;
     if (!gl) return 'none';
     const info = gl.getExtension('WEBGL_debug_renderer_info');
     const renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
-    // Release the probe context right away so it does not count against the page's context limit.
-    gl.getExtension('WEBGL_lose_context')?.loseContext();
+
     return SOFTWARE_GL.test(renderer) ? 'software' : 'hardware';
   } catch {
     return 'none';
+  } finally {
+    // Release even when renderer inspection fails.
+    try { gl?.getExtension('WEBGL_lose_context')?.loseContext(); } catch { /* driver unavailable */ }
   }
 }
 
-export function hasWebGL(): boolean {
-  return probeWebGL() !== 'none';
+export async function hasWebGL(): Promise<boolean> {
+  return await probeWebGL() !== 'none';
 }

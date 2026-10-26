@@ -13,7 +13,7 @@ import { BackgroundControls } from './components/ui';
 import { ANIMATIONS_KEY, QUALITY_KEY } from './components/ui/BackgroundControls';
 import WallpaperHotspots from './components/wallpaper/WallpaperHotspots';
 import { useReducedMotion, useLocalStorage } from './hooks';
-import { detectWallpaperTier, tierFromUrl } from './lib/wallpaper/capability';
+import { detectWallpaperTier, tierFromUrl, type WallpaperTier } from './lib/wallpaper/capability';
 
 // Lazy load the WebGL wallpaper player; the static poster (index.html) is the LCP.
 const LivingWallpaper = lazy(() => import('./components/wallpaper/LivingWallpaper'));
@@ -29,7 +29,7 @@ export default function App() {
   // Capability gate, decided once: reduced motion / Save-Data / slow network /
   // low memory / no WebGL keep the static poster. `?wallpaper=` forces a tier.
   const [forcedTier] = useState(() => tierFromUrl());
-  const [tier] = useState(() => detectWallpaperTier({ forceTier: forcedTier }));
+  const [tier, setTier] = useState<WallpaperTier>('poster');
   const [webglFailed, setWebglFailed] = useState(false);
   const [currentView, setCurrentView] = useState<ViewState>('home');
 
@@ -55,14 +55,24 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    let cancelled = false;
+    void detectWallpaperTier({ forceTier: forcedTier }).then((result) => {
+      if (!cancelled) setTier(result);
+    });
+    return () => { cancelled = true; };
+  }, [forcedTier]);
+
+  useEffect(() => {
     // Don't load WebGL if user prefers reduced motion or has disabled animations
     if (tier !== 'webgl' || prefersReducedMotion || !animationsEnabled) return;
 
     // Lazy load WebGL after initial render
-    if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(() => setLoadWebGL(true), { timeout: 2000 });
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(() => setLoadWebGL(true), { timeout: 2000 });
+      return () => window.cancelIdleCallback(id);
     } else {
-      setTimeout(() => setLoadWebGL(true), 1000);
+      const id = setTimeout(() => setLoadWebGL(true), 1000);
+      return () => clearTimeout(id);
     }
   }, [tier, prefersReducedMotion, animationsEnabled]);
 
