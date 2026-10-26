@@ -83,6 +83,34 @@ test('dispose during image decoding deletes pending programs and cannot restart 
   assert.equal(h.frames.size, 0);
 });
 
+test('loss during initial decode resumes after restoration even before the first start', async () => {
+  const h = webglHarness();
+  let resolve!: () => void;
+  const decoded = new Promise<void>((r) => { resolve = r; });
+  Object.assign(globalThis, { Image: class { decode() { return decoded; } } });
+  let ready = 0;
+  const player = new LivingPlayer({ canvas: h.canvas, assetBase: '/plate/', onReady: () => ready++ });
+  const init = player.init(); h.lose(); resolve(); await init;
+  player.start(); h.restore(); await settle(); h.frame(32);
+  assert.equal(ready, 1);
+  player.dispose();
+});
+
+test('decode failure from a lost generation cannot reject a newer restored player', async () => {
+  const h = webglHarness();
+  let reject!: (error: Error) => void;
+  const decoded = new Promise<void>((_resolve, r) => { reject = r; });
+  Object.assign(globalThis, { Image: class { decode() { return decoded; } } });
+  const player = new LivingPlayer({ canvas: h.canvas, assetBase: '/plate/' });
+  const init = player.init(); h.lose();
+  Object.assign(globalThis, { Image: class { decode() { return Promise.resolve(); } } });
+  h.restore(); await settle();
+  reject(new Error('obsolete decode'));
+  await assert.doesNotReject(init);
+  assert.equal(player.ready, true);
+  player.dispose();
+});
+
 test('restore failure stays on the poster without an unhandled rejection', async () => {
   const h = webglHarness();
   let gaveUp = 0;

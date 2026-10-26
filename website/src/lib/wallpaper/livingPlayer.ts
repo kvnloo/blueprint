@@ -343,7 +343,14 @@ export class LivingPlayer {
     gl.generateMipmap(gl.TEXTURE_2D);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
 
-    const [imgBase, imgMasks, imgFlow, imgDepth] = await images;
+    let decoded: HTMLImageElement[];
+    try {
+      decoded = await images;
+    } catch (error) {
+      if (this.disposed || generation !== this.generation || gl.isContextLost()) return;
+      throw error;
+    }
+    const [imgBase, imgMasks, imgFlow, imgDepth] = decoded;
     if (this.disposed || generation !== this.generation || gl.isContextLost()) return;
     [this.progScene, this.progWater, this.progComposite, this.progParticle] = pending.map((pp) => finishProgram(gl, pp));
     this.pendingPrograms = [];
@@ -449,12 +456,12 @@ export class LivingPlayer {
   };
 
   start() {
-    if (this.disposed || this.running || !this.ready) return;
+    if (this.disposed || this.running) return;
     this.running = true;
     this.startedAt = performance.now();
     this.lastNow = this.startedAt;
     this.fpsWindowStart = this.startedAt;
-    this.raf = requestAnimationFrame(this.loop);
+    if (this.ready && this.visible && !document.hidden) this.raf = requestAnimationFrame(this.loop);
   }
 
   stop() {
@@ -477,15 +484,17 @@ export class LivingPlayer {
 
   private onContextRestored = () => {
     if (this.disposed) return;
-    void this.init().then(() => {
-      if (!this.ready || this.disposed) return;
+    const restored = this.init();
+    const generation = this.generation;
+    void restored.then(() => {
+      if (!this.ready || this.disposed || generation !== this.generation) return;
       this.lastNow = this.fpsWindowStart = performance.now();
       this.fpsFrames = this.slowSamples = 0;
       if (this.running && this.visible && !document.hidden && !this.raf) {
         this.raf = requestAnimationFrame(this.loop);
       }
     }).catch(() => {
-      if (this.disposed || this.gl.isContextLost()) return;
+      if (this.disposed || generation !== this.generation || this.gl.isContextLost()) return;
       this.ready = false;
       this.stop();
       this.releaseResources();
@@ -514,15 +523,15 @@ export class LivingPlayer {
         gl.deleteShader(pp.f);
         gl.deleteProgram(pp.p);
       }
-    for (const f of [this.fboA, this.fboB]) {
-      if (!f) continue;
-      gl.deleteFramebuffer(f.fb);
-      gl.deleteTexture(f.tex);
-    }
-    for (const t of [this.texBase, this.texMasks, this.texFlow, this.texDepth, this.texNormal]) if (t) gl.deleteTexture(t);
-    if (this.quad) gl.deleteBuffer(this.quad);
-    if (this.particleBuf) gl.deleteBuffer(this.particleBuf);
-    for (const p of [this.progScene, this.progWater, this.progComposite, this.progParticle]) if (p) gl.deleteProgram(p.p);
+      for (const f of [this.fboA, this.fboB]) {
+        if (!f) continue;
+        gl.deleteFramebuffer(f.fb);
+        gl.deleteTexture(f.tex);
+      }
+      for (const t of [this.texBase, this.texMasks, this.texFlow, this.texDepth, this.texNormal]) if (t) gl.deleteTexture(t);
+      if (this.quad) gl.deleteBuffer(this.quad);
+      if (this.particleBuf) gl.deleteBuffer(this.particleBuf);
+      for (const p of [this.progScene, this.progWater, this.progComposite, this.progParticle]) if (p) gl.deleteProgram(p.p);
     }
     this.pendingPrograms = [];
     this.fboA = this.fboB = null;
