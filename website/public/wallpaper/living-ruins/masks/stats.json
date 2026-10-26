@@ -1,0 +1,27 @@
+{
+  "water": {
+    "mean": 0.0957,
+    "coverage_gt_0.5_pct": 9.57
+  },
+  "foliage": {
+    "mean": 0.1993,
+    "coverage_gt_0.5_pct": 20.94
+  },
+  "light": {
+    "mean": 0.1341,
+    "coverage_gt_0.5_pct": 12.85
+  },
+  "depth": {
+    "mean": 0.5329,
+    "coverage_gt_0.5_pct": 54.88
+  },
+  "flow_strength": {
+    "mean": 0.0372,
+    "coverage_gt_0.5_pct": 1.37
+  },
+  "_meta": {
+    "plate": "website/public/wallpaper/living-ruins/base.png",
+    "size": "1024x576",
+    "river": "website/public/wallpaper/living-ruins/river.json"
+  }
+}
