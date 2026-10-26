@@ -19,15 +19,23 @@ export const WALLPAPER_ASSET_BASE = `${import.meta.env.BASE_URL}wallpaper/living
  * and a few data attributes for tests.
  */
 const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const hostRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<LivingPlayer | null>(null);
   const { exploring } = useWallpaperState();
   const failRef = useRef(onFail);
   failRef.current = onFail;
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const host = hostRef.current;
+    if (!host) return;
+    // StrictMode replays effects on the same host. A disposed WebGL context
+    // cannot be reused: each effect owns a fresh canvas and its GPU context.
+    const canvas = document.createElement('canvas');
+    canvas.className = 'living-wallpaper fixed inset-0 w-full h-full pointer-events-none';
+    canvas.style.cssText = 'z-index: -12; opacity: 0; transition: opacity 1.2s ease-out';
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.dataset.testid = 'living-wallpaper';
+    host.appendChild(canvas);
     let cancelled = false;
     let player: LivingPlayer | null = null;
     const cleanups: (() => void)[] = [];
@@ -162,6 +170,7 @@ const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) 
       cancelled = true;
       cleanups.forEach((c) => c());
       player?.dispose();
+      canvas.remove();
       playerRef.current = null;
       setWallpaperState({ live: false, tiltActive: false, tiltNeedsPermission: false });
     };
@@ -177,15 +186,7 @@ const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) 
     playerRef.current?.setExplore(exploring);
   }, [exploring]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="living-wallpaper fixed inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: -12, opacity: 0, transition: 'opacity 1.2s ease-out' }}
-      aria-hidden="true"
-      data-testid="living-wallpaper"
-    />
-  );
+  return <div ref={hostRef} aria-hidden="true" />;
 };
 
 export default LivingWallpaper;
