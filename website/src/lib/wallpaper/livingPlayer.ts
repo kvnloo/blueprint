@@ -42,6 +42,8 @@ export type LivingPlayerOptions = {
   /** Degrade (lower resolution, then drop extras, then give up) when fps stays under 24. */
   adaptive?: boolean;
   onReady?: () => void;
+  /** Temporarily reveal the poster while the context is unavailable. */
+  onContextLost?: () => void;
   onFps?: (fps: number) => void;
   /** Called when adaptive degradation runs out of steps; the host should fall back to the poster. */
   onGiveUp?: () => void;
@@ -235,6 +237,8 @@ export class LivingPlayer {
   private fpsFrames = 0;
   private slowSamples = 0;
   private firstFrame = false;
+  private generation = 0;
+  private pendingPrograms: PendingProg[] = [];
 
   private quad!: WebGLBuffer;
   private progScene!: Prog;
@@ -290,6 +294,8 @@ export class LivingPlayer {
     this.gl = gl;
     this.opts = opts;
     this.quality = opts.quality ?? 'high';
+    opts.canvas.addEventListener('webglcontextlost', this.onContextLost);
+    opts.canvas.addEventListener('webglcontextrestored', this.onContextRestored);
 
     WAVES.forEach(([dir, scale, speed], i) => {
       // WE rotateVec2(vec2(0,-1), dir), as in the .files player
@@ -299,6 +305,8 @@ export class LivingPlayer {
   }
 
   async init(): Promise<void> {
+    if (this.disposed || this.gl.isContextLost()) return;
+    const generation = ++this.generation;
     const gl = this.gl;
     // 1. start the network fetches first, 2. queue shader compiles (parallel where the
     //    driver supports KHR_parallel_shader_compile), 3. only then block on results.
@@ -306,7 +314,7 @@ export class LivingPlayer {
     const images = Promise.all(['base.webp', 'masks.webp', 'flow.webp', 'depth.webp'].map((f) => loadImage(base + f)));
     gl.getExtension('KHR_parallel_shader_compile');
     const plateU = ['u_view', 'u_par', 'u_depth'];
-    const pending = [
+    const pending = this.pendingPrograms = [
       startProgram(gl, VERT_QUAD, FRAG_SCENE, [...plateU, 'u_base', 'u_masks', 'u_time', 'u_sway'], ['a_pos']),
       startProgram(
         gl,
@@ -336,9 +344,9 @@ export class LivingPlayer {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
 
     const [imgBase, imgMasks, imgFlow, imgDepth] = await images;
-    if (this.disposed) return;
+    if (this.disposed || generation !== this.generation || gl.isContextLost()) return;
     [this.progScene, this.progWater, this.progComposite, this.progParticle] = pending.map((pp) => finishProgram(gl, pp));
-    if (this.disposed) return;
+    this.pendingPrograms = [];
     // Images stay top-left origin (no FLIP_Y): texture (0,0) is the plate's top-left.
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
     gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
@@ -356,8 +364,13 @@ export class LivingPlayer {
 
     this.particleBuf = gl.createBuffer();
     this.seedParticles();
-    this.resize();
     this.ready = true;
+    try {
+      this.resize(true);
+    } catch (error) {
+      this.ready = false;
+      throw error;
+    }
   }
 
   /* ------------------------------ inputs ------------------------------ */
@@ -445,12 +458,55 @@ export class LivingPlayer {
     this.raf = 0;
   }
 
+  private onContextLost = (event: Event) => {
+    event.preventDefault();
+    if (this.disposed) return;
+    ++this.generation;
+    if (this.raf) cancelAnimationFrame(this.raf);
+    this.raf = 0;
+    this.ready = false;
+    this.firstFrame = false;
+    this.releaseResources();
+    this.opts.onContextLost?.();
+  };
+
+  private onContextRestored = () => {
+    if (this.disposed) return;
+    void this.init().then(() => {
+      if (!this.ready || this.disposed) return;
+      this.lastNow = this.fpsWindowStart = performance.now();
+      this.fpsFrames = this.slowSamples = 0;
+      if (this.running && this.visible && !document.hidden && !this.raf) {
+        this.raf = requestAnimationFrame(this.loop);
+      }
+    }).catch(() => {
+      if (this.disposed || this.gl.isContextLost()) return;
+      this.ready = false;
+      this.stop();
+      this.releaseResources();
+      this.opts.onGiveUp?.();
+    });
+  };
+
   dispose() {
     this.stop();
     if (this.disposed) return;
     this.disposed = true;
+    ++this.generation;
+    this.opts.canvas.removeEventListener('webglcontextlost', this.onContextLost);
+    this.opts.canvas.removeEventListener('webglcontextrestored', this.onContextRestored);
+    this.releaseResources();
+  }
+
+  private releaseResources() {
     const gl = this.gl;
-    if (gl.isContextLost()) return;
+    // Lost-context handles are already invalid; forget them before rebuilding.
+    if (!gl.isContextLost()) {
+      for (const pp of this.pendingPrograms) {
+        gl.deleteShader(pp.v);
+        gl.deleteShader(pp.f);
+        gl.deleteProgram(pp.p);
+      }
     for (const f of [this.fboA, this.fboB]) {
       if (!f) continue;
       gl.deleteFramebuffer(f.fb);
@@ -460,6 +516,13 @@ export class LivingPlayer {
     if (this.quad) gl.deleteBuffer(this.quad);
     if (this.particleBuf) gl.deleteBuffer(this.particleBuf);
     for (const p of [this.progScene, this.progWater, this.progComposite, this.progParticle]) if (p) gl.deleteProgram(p.p);
+    }
+    this.pendingPrograms = [];
+    this.fboA = this.fboB = null;
+    this.quad = this.particleBuf = undefined;
+    this.texBase = this.texMasks = this.texFlow = this.texDepth = this.texNormal = undefined;
+    this.progScene = this.progWater = this.progComposite = this.progParticle = undefined;
+    this.drawW = this.drawH = 0;
   }
 
   /* ------------------------------ frame ------------------------------- */
@@ -470,7 +533,7 @@ export class LivingPlayer {
 
   private loop = (now: number) => {
     this.raf = 0;
-    if (!this.running || this.disposed) return;
+    if (!this.running || this.disposed || !this.ready) return;
     if (!this.visible || document.hidden) return; // setVisible(true) restarts the loop
     this.raf = requestAnimationFrame(this.loop);
     if (this.gl.isContextLost()) return;

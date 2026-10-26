@@ -48,12 +48,6 @@ const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) 
       failRef.current();
     };
 
-    on(canvas, 'webglcontextlost', (e: Event) => {
-      e.preventDefault();
-      player?.stop();
-      fail();
-    }, { passive: false });
-
     (async () => {
       try {
         player = new LivingPlayer({
@@ -61,7 +55,16 @@ const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) 
           assetBase: WALLPAPER_ASSET_BASE,
           quality,
           adaptive,
+          onContextLost: () => {
+            // Keep this canvas mounted so it can receive contextrestored.
+            canvas.style.transition = 'none';
+            canvas.style.opacity = '0';
+            canvas.dataset.ready = '0';
+            setWallpaperState({ live: false });
+          },
           onReady: () => {
+            if (cancelled) return;
+            canvas.style.transition = 'opacity 1.2s ease-out';
             canvas.style.opacity = '1';
             canvas.dataset.ready = '1';
             setWallpaperState({ live: true });
