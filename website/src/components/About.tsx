@@ -35,7 +35,7 @@ const AnimatedCounter: React.FC<{ value: string; label: string }> = ({ value, la
 
 const About = () => {
   return (
-    <section className="py-24 relative z-10">
+    <section id="about" className="py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Version / Badge */}

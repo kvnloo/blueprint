@@ -7,15 +7,16 @@ import Products from './components/Products';
 import Showcase from './components/Showcase';
 import SuccessStories from './components/SuccessStories';
 import Footer from './components/Footer';
-import BackgroundGrid from './components/BackgroundGrid';
 import ResearchHub from './components/ResearchHub';
 import ArticleView from './components/ArticleView';
 import { BackgroundControls } from './components/ui';
+import { ANIMATIONS_KEY, QUALITY_KEY } from './components/ui/BackgroundControls';
+import WallpaperHotspots from './components/wallpaper/WallpaperHotspots';
 import { useReducedMotion, useLocalStorage } from './hooks';
-import backgroundImage from './assets/background.png';
+import { detectWallpaperTier, tierFromUrl } from './lib/wallpaper/capability';
 
-// Lazy load WebGL background for performance
-const WebGLBackground = lazy(() => import('./components/WebGLBackground'));
+// Lazy load the WebGL wallpaper player; the static poster (index.html) is the LCP.
+const LivingWallpaper = lazy(() => import('./components/wallpaper/LivingWallpaper'));
 
 // ViewState type for routing between views
 export type ViewState = 'home' | 'research' | string;
@@ -23,7 +24,13 @@ export type ViewState = 'home' | 'research' | string;
 export default function App() {
   const [loadWebGL, setLoadWebGL] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const [animationsEnabled] = useLocalStorage('bg-animations-enabled', true);
+  const [animationsEnabled] = useLocalStorage(ANIMATIONS_KEY, true);
+  const [quality] = useLocalStorage<'high' | 'low'>(QUALITY_KEY, 'high');
+  // Capability gate, decided once: reduced motion / Save-Data / slow network /
+  // low memory / no WebGL keep the static poster. `?wallpaper=` forces a tier.
+  const [forcedTier] = useState(() => tierFromUrl());
+  const [tier] = useState(() => detectWallpaperTier({ forceTier: forcedTier }));
+  const [webglFailed, setWebglFailed] = useState(false);
   const [currentView, setCurrentView] = useState<ViewState>('home');
 
   // Navigation function for view changes
@@ -49,7 +56,7 @@ export default function App() {
 
   useEffect(() => {
     // Don't load WebGL if user prefers reduced motion or has disabled animations
-    if (prefersReducedMotion || !animationsEnabled) return;
+    if (tier !== 'webgl' || prefersReducedMotion || !animationsEnabled) return;
 
     // Lazy load WebGL after initial render
     if ('requestIdleCallback' in window) {
@@ -57,35 +64,22 @@ export default function App() {
     } else {
       setTimeout(() => setLoadWebGL(true), 1000);
     }
-  }, [prefersReducedMotion, animationsEnabled]);
+  }, [tier, prefersReducedMotion, animationsEnabled]);
+
+  const showWebGL =
+    tier === 'webgl' && loadWebGL && animationsEnabled && !webglFailed && !prefersReducedMotion;
 
   return (
     <div className="relative min-h-screen overflow-hidden text-white selection:bg-teal-500/30 selection:text-teal-200">
-      {/* Background image layer */}
-      <div
-        className="fixed inset-0 -z-20 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-        aria-hidden="true"
-      />
-
-      {/* Dark vignette overlay for text readability - loads with background */}
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          zIndex: -15,
-          background: 'radial-gradient(ellipse 70% 40% at 50% 20%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.92) 100%)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* WebGL wisps overlay */}
-      {loadWebGL && animationsEnabled ? (
-        <Suspense fallback={<BackgroundGrid />}>
-          <WebGLBackground />
+      {/* Living Ruins wallpaper. The static poster and the readability veil
+          live in index.html (LCP, works without JS); the WebGL layer sits
+          between them and crossfades in after its first frame. */}
+      {showWebGL && (
+        <Suspense fallback={null}>
+          <LivingWallpaper quality={quality} adaptive={forcedTier !== 'webgl'} onFail={() => setWebglFailed(true)} />
         </Suspense>
-      ) : (
-        <BackgroundGrid />
       )}
+      <WallpaperHotspots />
 
       {/* Accessibility: Animation pause control */}
       <BackgroundControls />

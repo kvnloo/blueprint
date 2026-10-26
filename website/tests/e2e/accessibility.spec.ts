@@ -512,7 +512,9 @@ test.describe('Accessibility Tests', () => {
     test('should load WebGL when reduced motion is not preferred', async ({ page }) => {
       // Set no reduced motion preference
       await page.emulateMedia({ reducedMotion: 'no-preference' });
-      await page.goto('/');
+      // Headless CI renders WebGL with SwiftShader, which the capability gate
+      // treats as a weak GPU (poster tier); force the WebGL tier for this check.
+      await page.goto('/?wallpaper=webgl');
       await page.waitForLoadState('networkidle');
 
       // Wait for lazy loading

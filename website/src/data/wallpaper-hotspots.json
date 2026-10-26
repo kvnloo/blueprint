@@ -1,0 +1,41 @@
+{
+  "_comment": "Landmark anchors on the Living Ruins plate. x,y are normalised plate coords (0..1, origin top-left). depth is sampled from the depth mask by website/scripts/wallpaper/pack_runtime.py so the marker follows parallax.",
+  "hotspots": [
+    {
+      "id": "greenhouse",
+      "label": "Greenhouse",
+      "sub": "Products",
+      "href": "#products",
+      "x": 0.234,
+      "y": 0.3,
+      "depth": 0.369
+    },
+    {
+      "id": "observatory",
+      "label": "Observatory",
+      "sub": "About",
+      "href": "#about",
+      "x": 0.762,
+      "y": 0.105,
+      "depth": 0.243
+    },
+    {
+      "id": "waterwheel",
+      "label": "Water wheel",
+      "sub": "Pipeline",
+      "href": "#pipeline",
+      "x": 0.52,
+      "y": 0.5,
+      "depth": 0.58
+    },
+    {
+      "id": "workshop",
+      "label": "Workshop",
+      "sub": "Showcase",
+      "href": "#showcase",
+      "x": 0.914,
+      "y": 0.555,
+      "depth": 0.627
+    }
+  ]
+}

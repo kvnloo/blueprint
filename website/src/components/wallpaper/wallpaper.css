@@ -1,0 +1,129 @@
+/* Living Ruins wallpaper HUD + Explore mode. The poster and the readability
+   veil are styled inline in index.html so they work without JS. */
+
+.wallpaper-hud {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.wallpaper-hud[data-active='1'] {
+  opacity: 1;
+}
+.wallpaper-hud[data-active='1'] .wallpaper-hotspot {
+  pointer-events: auto;
+}
+
+.wallpaper-hotspot {
+  --gold: #e8c77a;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  color: var(--gold);
+  text-decoration: none;
+  will-change: transform;
+}
+.wallpaper-hotspot__dot {
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--gold);
+  border-radius: 9999px;
+  background: rgba(232, 199, 122, 0.18);
+  box-shadow: 0 0 12px rgba(232, 199, 122, 0.55);
+}
+.wallpaper-hotspot__dot::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--gold);
+  border-radius: 9999px;
+  animation: wallpaper-ping 2.4s ease-out infinite;
+}
+.wallpaper-hotspot__line {
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to top, var(--gold), rgba(232, 199, 122, 0));
+}
+.wallpaper-hotspot__label {
+  position: absolute;
+  left: -1px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 8px;
+  white-space: nowrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-left: 1px solid var(--gold);
+  background: rgba(5, 5, 5, 0.55);
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease;
+}
+.wallpaper-hotspot__sub {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 10px;
+}
+.wallpaper-hotspot:hover .wallpaper-hotspot__label,
+.wallpaper-hotspot:focus-visible .wallpaper-hotspot__label {
+  background: rgba(5, 5, 5, 0.8);
+}
+.wallpaper-hotspot:focus-visible {
+  outline: none;
+}
+.wallpaper-hotspot:focus-visible .wallpaper-hotspot__dot {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.wallpaper-hotspot[data-side='left'] .wallpaper-hotspot__label {
+  left: auto;
+  right: -1px;
+  align-items: flex-end;
+  border-left: none;
+  border-right: 1px solid var(--gold);
+}
+.wallpaper-hotspot[data-v='down'] .wallpaper-hotspot__line {
+  bottom: auto;
+  top: 6px;
+  background: linear-gradient(to bottom, var(--gold), rgba(232, 199, 122, 0));
+}
+.wallpaper-hotspot[data-v='down'] .wallpaper-hotspot__label {
+  bottom: auto;
+  top: 40px;
+}
+
+@keyframes wallpaper-ping {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wallpaper-hotspot__dot::after { animation: none; }
+}
+
+/* Explore mode: content steps aside, the veil lifts. */
+main,
+footer {
+  transition: opacity 0.45s ease;
+}
+html.wallpaper-exploring main,
+html.wallpaper-exploring footer {
+  opacity: 0;
+  pointer-events: none;
+}
+html.wallpaper-exploring #wallpaper-veil {
+  opacity: 0.12;
+}

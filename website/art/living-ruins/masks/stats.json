@@ -20,8 +20,8 @@
     "coverage_gt_0.5_pct": 1.37
   },
   "_meta": {
-    "plate": "website/public/wallpaper/living-ruins/base.png",
+    "plate": "website/art/living-ruins/base.png",
     "size": "1024x576",
-    "river": "website/public/wallpaper/living-ruins/river.json"
+    "river": "website/art/living-ruins/river.json"
   }
 }

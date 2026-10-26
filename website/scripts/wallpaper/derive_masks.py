@@ -3,9 +3,9 @@
 
 Usage (from repo root):
   uv run --with numpy --with pillow website/scripts/wallpaper/derive_masks.py \
-      --plate website/public/wallpaper/living-ruins/base.png \
-      --river website/public/wallpaper/living-ruins/river.json \
-      --out   website/public/wallpaper/living-ruins/masks
+      --plate website/art/living-ruins/base.png \
+      --river website/art/living-ruins/river.json \
+      --out   website/art/living-ruins/masks
 
 Outputs (1024x576 by default, 8-bit PNG, no randomness):
   water.png    L   water body (turquoise HSV range, cleaned, intersected with the river corridor)

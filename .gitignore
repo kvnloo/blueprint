@@ -47,3 +47,6 @@ yarn-error.log*
 
 # Git worktrees
 worktrees/
+
+# Living wallpaper capture output (frames, traces)
+.wallpaper-shots/

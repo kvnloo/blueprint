@@ -139,6 +139,47 @@
       .text-glow {
         text-shadow: 0 0 20px rgba(45, 212, 191, 0.5);
       }
+      /* Living Ruins wallpaper: static poster (LCP, works without JS) and the
+         readability veil. The WebGL layer (z -12) slots between them. The crop
+         matches src/lib/wallpaper/view.ts coverView(): object-position P plus
+         scale(1.07) about P. */
+      #wallpaper-poster img {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -20;
+        object-fit: cover;
+        object-position: 50% 50%;
+        transform: scale(1.07);
+        transform-origin: 50% 50%;
+        pointer-events: none;
+        user-select: none;
+      }
+      @media (max-width: 768px) {
+        /* higher specificity: this block sits above the base veil rule */
+        html #wallpaper-veil {
+          background:
+            linear-gradient(180deg, rgba(5, 5, 5, 0.7) 0%, rgba(5, 5, 5, 0.55) 55%, rgba(5, 5, 5, 0.35) 100%);
+        }
+      }
+      @media (max-aspect-ratio: 1/1) {
+        #wallpaper-poster img {
+          object-position: 66% 92%;
+          transform-origin: 66% 92%;
+        }
+      }
+      #wallpaper-veil {
+        position: fixed;
+        inset: 0;
+        z-index: -9;
+        pointer-events: none;
+        background:
+          linear-gradient(180deg, rgba(5, 5, 5, 0.65) 0px, rgba(5, 5, 5, 0) 160px),
+          linear-gradient(90deg, rgba(5, 5, 5, 0.8) 0%, rgba(5, 5, 5, 0.55) 38%, rgba(5, 5, 5, 0.12) 72%, rgba(5, 5, 5, 0.05) 100%),
+          radial-gradient(ellipse 95% 85% at 65% 35%, rgba(5, 5, 5, 0) 0%, rgba(5, 5, 5, 0.45) 75%, rgba(5, 5, 5, 0.85) 100%);
+        transition: opacity 0.6s ease;
+      }
     </style>
   <script type="importmap">
 {
@@ -154,6 +195,11 @@
 <link rel="stylesheet" href="/index.css">
 </head>
   <body>
+    <picture id="wallpaper-poster" aria-hidden="true">
+      <source type="image/webp" srcset="/wallpaper/living-ruins/base.webp" />
+      <img src="/wallpaper/living-ruins/base.jpg" alt="" width="1920" height="1080" fetchpriority="high" decoding="async" />
+    </picture>
+    <div id="wallpaper-veil" aria-hidden="true"></div>
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
