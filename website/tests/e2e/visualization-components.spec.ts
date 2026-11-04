@@ -129,18 +129,9 @@ test.describe('Visualization Components', () => {
    * Navigate to Research Hub and open an article
    */
   async function navigateToArticle(page: Page, articleTitle: string): Promise<void> {
-    await page.goto('http://localhost:3000/', { waitUntil: 'domcontentloaded' });
-
-    // Wait for navbar
-    await expect(page.locator('nav')).toBeVisible({ timeout: 10000 });
-
-    // Click Research button
-    const researchButton = page.locator('button').filter({ hasText: /^Research$/ });
-    await expect(researchButton).toBeVisible({ timeout: 5000 });
-    await researchButton.click();
-
-    // Wait for Research Hub
-    await expect(page.locator('text=SCIENTIFIC DEEP DIVES & GUIDES')).toBeVisible({ timeout: 10000 });
+    // Writing lives on the Research route (#/research), below the z0evals section.
+    await page.goto('http://localhost:3000/?wallpaper=poster#/research', { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('#writing')).toBeVisible({ timeout: 10000 });
 
     // Find and click the specific article
     const articleCard = page.locator('div.group.relative').filter({ hasText: new RegExp(articleTitle, 'i') }).first();

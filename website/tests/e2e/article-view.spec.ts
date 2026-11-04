@@ -20,23 +20,9 @@ test.describe('Article View Component', () => {
 
   test.beforeEach(async ({ page }) => {
     // Navigate to the application homepage
-    await page.goto('http://localhost:3000/', { waitUntil: 'domcontentloaded' });
-
-    // Wait for navbar to be visible (indicates page is interactive)
-    const navbar = page.locator('nav');
-    await expect(navbar).toBeVisible({ timeout: 10000 });
-
-    // Click the "Research" button in navbar to navigate to Research Hub
-    // This button has text "Research" and onClick handler
-    const researchButton = page.locator('button').filter({ hasText: /^Research$/ });
-    await expect(researchButton).toBeVisible({ timeout: 5000 });
-    await researchButton.click();
-
-    // Wait for Research Hub content to be visible
-    // The ResearchHub component renders "Research Hub" as h1 (line 30-37 of ResearchHub.tsx)
-    // Look for the "SCIENTIFIC DEEP DIVES & GUIDES" text which appears before the heading
-    const scientificText = page.locator('text=SCIENTIFIC DEEP DIVES & GUIDES');
-    await expect(scientificText).toBeVisible({ timeout: 10000 });
+    // Writing lives on the Research route (#/research), below the z0evals section.
+    await page.goto('http://localhost:3000/?wallpaper=poster#/research', { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('#writing')).toBeVisible({ timeout: 10000 });
 
     // Click the first article card to navigate to article view
     const articleCard = page.locator('div.group.relative').first();
@@ -108,7 +94,7 @@ test.describe('Article View Component', () => {
   test('3. Back button returns to Research Hub', async ({ page }) => {
     // Back button is in fixed position at top-24 left-6 (ArticleView.tsx line 552-558)
     // It's only visible on xl screens, contains ArrowLeft icon
-    const backButton = page.locator('button').filter({ has: page.locator('svg') }).first();
+    const backButton = page.getByRole('button', { name: 'Back to Writing' }).first();
 
     // Back button may not be visible on all viewport sizes
     const isVisible = await backButton.isVisible();
@@ -116,7 +102,7 @@ test.describe('Article View Component', () => {
       await backButton.click();
 
       // Verify we're back at Research Hub
-      await expect(page.locator('h1')).toContainText('Research');
+      await expect(page).toHaveURL(/#\/research$/);
     } else {
       // Use footer back button instead (ArticleView.tsx line 635-640)
       await page.evaluate(() => {
@@ -124,11 +110,11 @@ test.describe('Article View Component', () => {
       });
       await page.waitForTimeout(300);
 
-      const footerBackButton = page.locator('button').filter({ hasText: 'Back to Hub' });
+      const footerBackButton = page.locator('button').filter({ hasText: 'Back to Writing' });
       await expect(footerBackButton).toBeVisible();
       await footerBackButton.click();
 
-      await expect(page.locator('h1')).toContainText('Research');
+      await expect(page).toHaveURL(/#\/research$/);
     }
   });
 
@@ -154,7 +140,7 @@ test.describe('Article View Component', () => {
 
   test('5. Abstract section renders', async ({ page }) => {
     // Find abstract section (gradient background with border-l)
-    const abstract = page.locator('div.bg-gradient-to-r.from-teal-500\\/10').first();
+    const abstract = page.locator('div.bg-gradient-to-r.from-amber-500\\/10').first();
     await expect(abstract).toBeVisible();
 
     // Verify abstract has content
@@ -245,7 +231,7 @@ test.describe('Article View Component', () => {
       // Bar charts
       page.locator('div.h-2.w-full.bg-gray-800'),
       // System stacks
-      page.locator('div.border-teal-500\\/20'),
+      page.locator('div.border-amber-500\\/20'),
     ];
 
     let foundVisualization = false;
@@ -295,8 +281,8 @@ test.describe('Article View Component', () => {
         // At least one link should have active styling
         const activeLinkExists = await tocLinks.evaluate((links) => {
           return Array.from(links).some(link =>
-            link.className.includes('text-teal-400') ||
-            link.className.includes('border-teal-400')
+            link.className.includes('text-amber-400') ||
+            link.className.includes('border-amber-400')
           );
         });
 
@@ -314,15 +300,15 @@ test.describe('Article View Component', () => {
     // Wait for footer to be visible
     await page.waitForTimeout(300);
 
-    // Find "Back to Hub" link in footer
-    const footerBackLink = page.locator('button').filter({ hasText: 'Back to Hub' });
+    // Find "Back to Writing" link in footer
+    const footerBackLink = page.locator('button').filter({ hasText: 'Back to Writing' });
     await expect(footerBackLink).toBeVisible();
 
     // Click footer back link
     await footerBackLink.click();
 
     // Verify navigation back to Research Hub
-    await expect(page.locator('h1')).toContainText('Research');
+    await expect(page).toHaveURL(/#\/research$/);
   });
 
   test('11. Track badge displays with correct color', async ({ page }) => {
@@ -441,7 +427,7 @@ test.describe('Article View Component', () => {
     }
 
     // Back button is hidden xl:flex (ArticleView.tsx line 552)
-    const backButton = page.locator('button').filter({ has: page.locator('svg') }).first();
+    const backButton = page.getByRole('button', { name: 'Back to Writing' }).first();
     const backButtonCount = await backButton.count();
     if (backButtonCount > 0) {
       // On mobile, back button should be hidden
@@ -462,7 +448,7 @@ test.describe('Article View Component', () => {
     });
     await page.waitForTimeout(300);
 
-    const footerBackButton = page.locator('button').filter({ hasText: 'Back to Hub' });
+    const footerBackButton = page.locator('button').filter({ hasText: 'Back to Writing' });
     await expect(footerBackButton).toBeVisible();
 
     // Focus the button
@@ -478,7 +464,7 @@ test.describe('Article View Component', () => {
     await page.keyboard.press('Enter');
 
     // Should navigate back
-    await expect(page.locator('h1')).toContainText('Research', { timeout: 5000 });
+    await expect(page).toHaveURL(/#\/research$/, { timeout: 5000 });
   });
 
   test('20. All animations complete without errors', async ({ page }) => {
