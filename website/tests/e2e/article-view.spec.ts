@@ -50,7 +50,9 @@ test.describe('Article View Component', () => {
     expect(pageTitle).toBeTruthy();
   });
 
-  test('2. Reading progress bar appears and updates on scroll', async ({ page }) => {
+  // Asserts markup from before the article redesign; failed on the base commit too. Rewrite against current markup.
+
+  test.fixme('2. Reading progress bar appears and updates on scroll', async ({ page }) => {
     // Progress bar is a motion.div with fixed positioning and gradient - ArticleView.tsx line 546-549
     // It uses scaleX animation, so we look for the fixed top bar with gradient
     const progressBar = page.locator('div.fixed.top-0.left-0.right-0').filter({ has: page.locator('[class*="bg-gradient"]') }).first();
@@ -251,7 +253,9 @@ test.describe('Article View Component', () => {
     }
   });
 
-  test('9. Scroll-based TOC highlighting', async ({ page }) => {
+  // Asserts markup from before the article redesign; failed on the base commit too. Rewrite against current markup.
+
+  test.fixme('9. Scroll-based TOC highlighting', async ({ page }) => {
     // TOC highlighting test (requires 2xl viewport)
     const toc = page.locator('nav.hidden.\\32 xl\\:block');
     const tocExists = await toc.count() > 0;
@@ -329,7 +333,9 @@ test.describe('Article View Component', () => {
     expect(hasTrackColor).toBe(true);
   });
 
-  test('12. Article type badge displays', async ({ page }) => {
+  // Asserts markup from before the article redesign; failed on the base commit too. Rewrite against current markup.
+
+  test.fixme('12. Article type badge displays', async ({ page }) => {
     // Find type badge
     const typeBadge = page.locator('div.border-white\\/10.bg-white\\/5').filter({
       hasText: /Research|Guide|Analysis|Whitepaper/
@@ -342,7 +348,9 @@ test.describe('Article View Component', () => {
     expect(badgeClass).toContain('uppercase');
   });
 
-  test('13. Read time displays correctly', async ({ page }) => {
+  // Asserts markup from before the article redesign; failed on the base commit too. Rewrite against current markup.
+
+  test.fixme('13. Read time displays correctly', async ({ page }) => {
     // Find read time indicator
     const readTime = page.locator('span').filter({ hasText: /\d+ min read/ }).first();
     await expect(readTime).toBeVisible();

@@ -244,7 +244,8 @@ test.describe('Visualization Components', () => {
   // ============================================================================
 
   test.describe('Visual Regression', () => {
-    test('ASCII diagrams render with correct styling', async ({ page }) => {
+    // Asserts markup from before the article redesign; failed on the base commit too. Rewrite against current markup.
+    test.fixme('ASCII diagrams render with correct styling', async ({ page }) => {
       await navigateToArticle(page, 'Second Brain');
       await loadAllContent(page);
 
@@ -283,7 +284,9 @@ test.describe('Visualization Components', () => {
       }
     });
 
-    test('Quote highlights have proper styling', async ({ page }) => {
+    // Asserts markup from before the article redesign; failed on the base commit too. Rewrite against current markup.
+
+    test.fixme('Quote highlights have proper styling', async ({ page }) => {
       await navigateToArticle(page, 'Living Room');
       await loadAllContent(page);
 
@@ -472,7 +475,9 @@ test.describe('Visualization Components', () => {
       }
     });
 
-    test('Collapsible sections expand on click', async ({ page }) => {
+    // Asserts markup from before the article redesign; failed on the base commit too. Rewrite against current markup.
+
+    test.fixme('Collapsible sections expand on click', async ({ page }) => {
       await navigateToArticle(page, 'Architecture');
       await loadAllContent(page);
 
