@@ -112,6 +112,17 @@ test.describe('writing', () => {
     await expect(page).toHaveURL(/#\/research$/);
   });
 
+  test('Writing lists every essay on first paint, and search narrows it', async ({ page }) => {
+    await go(page, '#/research');
+    const writing = page.locator('#writing');
+    await expect(writing.getByText('No articles found')).toHaveCount(0);
+    await expect(writing.getByText('Read Article')).toHaveCount(9);
+    await writing.locator('input').first().fill('brain');
+    await expect(writing.getByText(/Showing [1-8] of 9 articles/)).toBeVisible();
+    await expect.poll(() => writing.getByText('Read Article').count()).toBeLessThan(9);
+    expect(await writing.getByText('Read Article').count()).toBeGreaterThan(0);
+  });
+
   test('article deep links load directly', async ({ page }) => {
     await go(page, '#/article/limitless-protocol');
     await expect(page.getByRole('heading', { name: /Limitless Protocol/i }).first()).toBeVisible();
