@@ -50,3 +50,9 @@ worktrees/
 
 # Living wallpaper capture output (frames, traces)
 .wallpaper-shots/
+
+# build output and dependencies
+website/src/node_modules/
+website/src/dist/
+.swarm/
+website/tests/skyvern/.env
