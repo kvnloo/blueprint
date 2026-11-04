@@ -42,8 +42,6 @@ export function useSearch(options: UseSearchOptions = {}): UseSearchReturn {
 
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
-  const [isSearching, setIsSearching] = useState(false);
-  const [results, setResults] = useState<SearchResult[] | Article[]>([]);
   const [selectedTracks, setSelectedTracks] = useState<ArticleTrack[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<ArticleType[]>([]);
 
@@ -67,22 +65,14 @@ export function useSearch(options: UseSearchOptions = {}): UseSearchReturn {
   }, [query, debounceMs]);
 
   // Perform search when debounced query or filters change
-  useEffect(() => {
-    setIsSearching(true);
-
-    // Use requestAnimationFrame for smoother UI
-    const rafId = requestAnimationFrame(() => {
-      const searchResults = searchAndFilter(
-        debouncedQuery,
-        selectedTracks,
-        selectedTypes
-      );
-      setResults(searchResults);
-      setIsSearching(false);
-    });
-
-    return () => cancelAnimationFrame(rafId);
-  }, [debouncedQuery, selectedTracks, selectedTypes]);
+  // Nine articles: searching is cheap, so derive results during render. Computing
+  // them in requestAnimationFrame left the first paint (and any hidden tab, where
+  // rAF never fires) showing "No articles found".
+  const results = useMemo<SearchResult[] | Article[]>(
+    () => searchAndFilter(debouncedQuery, selectedTracks, selectedTypes),
+    [debouncedQuery, selectedTracks, selectedTypes],
+  );
+  const isSearching = query !== debouncedQuery;
 
   // Toggle track filter
   const toggleTrack = useCallback((track: ArticleTrack) => {
