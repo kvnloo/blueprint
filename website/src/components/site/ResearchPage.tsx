@@ -23,7 +23,7 @@ const ResearchPage: React.FC = () => (
           </div>
           <h3 className="mt-4 text-2xl font-semibold z-text-ink">slm-router-v0</h3>
           <p className="mt-2 text-sm z-text-dim leading-relaxed">
-            The first study: can a small local model route agent work as well as a large one? Reserved and in progress; no results are claimed until the report is frozen.
+            The first study: routing agent work with small local models. Reserved and in progress; no results are claimed until the report is frozen.
           </p>
           <a className="mt-5 z-link text-sm inline-flex items-center gap-1" href={LINKS.z0evals} target="_blank" rel="noopener noreferrer">
             Open z0evals <ArrowUpRight size={14} aria-hidden />
