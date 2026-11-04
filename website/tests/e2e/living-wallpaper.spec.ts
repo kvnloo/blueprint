@@ -115,12 +115,23 @@ test.describe('Living wallpaper', () => {
     await page.keyboard.press('Escape');
     await expect(page.locator('html')).not.toHaveClass(/wallpaper-exploring/);
 
-    // a hotspot leaves Explore mode and scrolls to its section
+    // a hotspot leaves Explore mode and opens its page
     await explore.click();
     if (portrait) await page.locator('[data-chip="greenhouse"]').click();
     await page.locator('[data-hotspot="greenhouse"] .wallpaper-hotspot__label').click();
     await expect(page.locator('html')).not.toHaveClass(/wallpaper-exploring/);
-    await expect(page.locator('#products')).toBeInViewport({ timeout: 15_000 });
+    await expect(page).toHaveURL(/#\/work$/, { timeout: 15_000 });
+
+    // on a phone, tapping the focused chip again opens its page too
+    if (portrait) {
+      await explore.click();
+      const chip = page.locator('[data-chip="workshop"]');
+      await chip.click();
+      await expect(chip).toHaveAttribute('aria-label', 'Go to Open source');
+      await chip.click();
+      await expect(page.locator('html')).not.toHaveClass(/wallpaper-exploring/);
+      await expect(page).toHaveURL(/#\/oss$/, { timeout: 15_000 });
+    }
   });
 
   test('pause state persists across reloads', async ({ page }) => {
