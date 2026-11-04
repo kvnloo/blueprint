@@ -58,7 +58,7 @@ const parseMarkdownTable = (tableText: string, keyPrefix: string): React.ReactNo
   const dataRows = lines.slice(separatorIndex + 1);
 
   return (
-    <div key={keyPrefix} className="overflow-x-auto my-4">
+    <div key={keyPrefix} tabIndex={0} className="overflow-x-auto my-4">
       <table className="min-w-full border-collapse">
         {headers.length > 0 && (
           <thead>
@@ -66,7 +66,7 @@ const parseMarkdownTable = (tableText: string, keyPrefix: string): React.ReactNo
               {headers.map((header, i) => (
                 <th
                   key={`${keyPrefix}-h-${i}`}
-                  className="px-4 py-2 text-left text-sm font-semibold text-teal-300 bg-white/5"
+                  className="px-4 py-2 text-left text-sm font-semibold text-amber-300 bg-white/5"
                 >
                   {processInlineMarkdown(header)}
                 </th>
@@ -126,7 +126,7 @@ const processInlineMarkdown = (text: string): React.ReactNode => {
     // Inline code: `code`
     if (part.startsWith('`') && part.endsWith('`')) {
       return (
-        <code key={i} className="px-1.5 py-0.5 bg-white/10 text-teal-300 rounded text-sm font-mono">
+        <code key={i} className="px-1.5 py-0.5 bg-white/10 text-amber-300 rounded text-sm font-mono">
           {part.slice(1, -1)}
         </code>
       );
@@ -141,7 +141,7 @@ const processInlineMarkdown = (text: string): React.ReactNode => {
           href={linkMatch[2]}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-teal-400 hover:text-teal-300 underline underline-offset-2 transition-colors"
+          className="text-amber-400 hover:text-amber-300 underline underline-offset-2 transition-colors"
         >
           {linkMatch[1]}
         </a>
@@ -170,9 +170,9 @@ const renderHeader = (level: number, content: string, key: string): React.ReactN
     case 2:
       return <h2 key={key} className="text-xl font-semibold text-white mt-6 mb-3">{processedContent}</h2>;
     case 3:
-      return <h3 key={key} className="text-lg font-semibold text-teal-400 mt-5 mb-2">{processedContent}</h3>;
+      return <h3 key={key} className="text-lg font-semibold text-amber-400 mt-5 mb-2">{processedContent}</h3>;
     case 4:
-      return <h4 key={key} className="text-base font-semibold text-teal-300 mt-4 mb-2">{processedContent}</h4>;
+      return <h4 key={key} className="text-base font-semibold text-amber-300 mt-4 mb-2">{processedContent}</h4>;
     case 5:
       return <h5 key={key} className="text-sm font-semibold text-gray-300 mt-3 mb-1">{processedContent}</h5>;
     case 6:

@@ -50,6 +50,7 @@ worktrees/
 
 # Living wallpaper capture output (frames, traces)
 .wallpaper-shots/
+.site-shots/
 
 # build output and dependencies
 website/src/node_modules/

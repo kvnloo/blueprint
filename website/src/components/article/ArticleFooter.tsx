@@ -17,9 +17,9 @@ const ArticleFooter: React.FC<ArticleFooterProps> = ({ onBack }) => {
       <div className="flex justify-between items-center mb-8">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 text-sm text-gray-500 hover:text-teal-400 transition-colors"
+          className="flex items-center gap-2 text-sm text-gray-500 hover:text-amber-400 transition-colors"
         >
-          <ArrowLeft size={16} /> Back to Hub
+          <ArrowLeft size={16} /> Back to Writing
         </button>
         <div className="text-xs text-gray-600 font-mono">
           END OF TRANSMISSION

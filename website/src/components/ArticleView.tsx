@@ -175,7 +175,7 @@ const ArticleView = ({ articleId, onBack }: { articleId: string, onBack: () => v
           id={`section-${i}`}
           className="text-3xl font-display font-bold text-white mt-16 mb-8 flex items-center gap-3 scroll-mt-24"
         >
-          <span className="text-teal-500 opacity-50">#</span> {processMarkdown(blockText)}
+          <span className="text-amber-500 opacity-50">#</span> {processMarkdown(blockText)}
         </h2>
       );
     }
@@ -185,7 +185,7 @@ const ArticleView = ({ articleId, onBack }: { articleId: string, onBack: () => v
         <h3
           key={i}
           id={`section-${i}`}
-          className="text-xl font-bold text-teal-100 mt-12 mb-4 scroll-mt-24"
+          className="text-xl font-bold text-amber-100 mt-12 mb-4 scroll-mt-24"
         >
           {processMarkdown(blockText)}
         </h3>
@@ -270,12 +270,12 @@ const ArticleView = ({ articleId, onBack }: { articleId: string, onBack: () => v
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="text-2xl font-display font-medium text-center text-teal-200 my-16 max-w-2xl mx-auto leading-normal"
+          className="text-2xl font-display font-medium text-center text-amber-200 my-16 max-w-2xl mx-auto leading-normal"
         >
           "{processMarkdown(blockText)}"
           {block.author && (
             <footer className="text-base text-gray-400 mt-4 font-normal">
-              — <span className="text-teal-400">{block.author}</span>
+              — <span className="text-amber-400">{block.author}</span>
               {block.source && <span className="text-gray-500 italic"> ({block.source})</span>}
             </footer>
           )}

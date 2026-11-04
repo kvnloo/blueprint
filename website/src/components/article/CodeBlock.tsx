@@ -29,36 +29,36 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language = 'bash', code, title })
       <div ref={ref} className="my-10 overflow-hidden">
         {title && (
           <div className="flex items-center justify-between mb-2">
-            <h4 className="text-sm font-mono text-teal-500 uppercase tracking-wider">
+            <h4 className="text-sm font-mono text-amber-500 uppercase tracking-wider">
               {title}
             </h4>
             <button
               onClick={handleCopy}
               className="text-gray-500 hover:text-white transition-colors p-1"
             >
-              {copied ? <Check size={14} className="text-teal-400" /> : <Copy size={14} />}
+              {copied ? <Check size={14} className="text-amber-400" /> : <Copy size={14} />}
             </button>
           </div>
         )}
 
-        <div className="relative rounded-xl border border-teal-500/20 bg-gradient-to-br from-[#0a0a0a] to-[#050505] overflow-hidden">
+        <div className="relative rounded-xl border border-amber-500/20 bg-gradient-to-br from-[#0a0a0a] to-[#050505] overflow-hidden">
           {/* Decorative corner accents */}
-          <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-teal-500/30 rounded-tl-xl" />
-          <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-teal-500/30 rounded-tr-xl" />
-          <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-teal-500/30 rounded-bl-xl" />
-          <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-teal-500/30 rounded-br-xl" />
+          <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-amber-500/30 rounded-tl-xl" />
+          <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-amber-500/30 rounded-tr-xl" />
+          <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-amber-500/30 rounded-bl-xl" />
+          <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-amber-500/30 rounded-br-xl" />
 
           {isLong && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="absolute top-2 right-2 z-10 flex items-center gap-1 px-2 py-1 bg-teal-500/20 rounded text-xs text-teal-400 hover:bg-teal-500/30 transition-colors"
+              className="absolute top-2 right-2 z-10 flex items-center gap-1 px-2 py-1 bg-amber-500/20 rounded text-xs text-amber-400 hover:bg-amber-500/30 transition-colors"
             >
               {isExpanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
               {isExpanded ? 'Collapse' : 'Expand'}
             </button>
           )}
 
-          <div className={`p-6 overflow-x-auto ${isLong && !isExpanded ? 'max-h-[400px] overflow-y-hidden' : ''}`}>
+          <div tabIndex={0} className={`p-6 overflow-x-auto ${isLong && !isExpanded ? 'max-h-[400px] overflow-y-hidden' : ''}`}>
             <pre className="font-mono text-xs md:text-sm leading-relaxed">
               {lines.map((line, i) => (
                 <motion.div
@@ -66,7 +66,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language = 'bash', code, title })
                   initial={{ opacity: 0, x: -10 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: Math.min(i * 0.01, 0.5), duration: 0.2 }}
-                  className="text-teal-400/90 whitespace-pre hover:text-teal-300 transition-colors"
+                  className="text-amber-400/90 whitespace-pre hover:text-amber-300 transition-colors"
                 >
                   {line || '\u00A0'}
                 </motion.div>
@@ -91,10 +91,10 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language = 'bash', code, title })
           onClick={handleCopy}
           className="text-gray-400 hover:text-white transition-colors"
         >
-          {copied ? <Check size={14} className="text-teal-400" /> : <Copy size={14} />}
+          {copied ? <Check size={14} className="text-amber-400" /> : <Copy size={14} />}
         </button>
       </div>
-      <div className="p-4 overflow-x-auto">
+      <div tabIndex={0} className="p-4 overflow-x-auto">
         <pre className="font-mono text-sm leading-relaxed text-gray-300">
           <code>{code}</code>
         </pre>

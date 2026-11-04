@@ -54,7 +54,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
 
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs md:text-sm text-gray-500 font-mono border-t border-b border-white/10 py-6">
           <span className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center text-[10px] text-white font-bold">Z0</div>
+            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center text-[10px] text-white font-bold">Z0</div>
             zer0 LLC
           </span>
           <span className="hidden md:inline text-gray-700">•</span>
@@ -64,7 +64,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
           <span className="hidden md:inline text-gray-700">•</span>
 
           {/* Verification Stat */}
-          <div className={`flex items-center gap-2 px-2 py-1 rounded bg-white/5 border ${verificationStatus === 'truncated' ? 'border-red-500/50 text-red-400' : 'border-teal-500/20 text-teal-500/80'}`}>
+          <div className={`flex items-center gap-2 px-2 py-1 rounded bg-white/5 border ${verificationStatus === 'truncated' ? 'border-red-500/50 text-red-400' : 'border-amber-500/20 text-amber-500/80'}`}>
             {verificationStatus === 'truncated' ? <AlertTriangle size={14} /> : <FileText size={14} />}
             <span>{renderedWordCount.toLocaleString()} words</span>
           </div>
@@ -79,7 +79,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="bg-gradient-to-r from-teal-500/10 to-transparent border-l-2 border-teal-500 p-8 rounded-r-xl mb-16 italic text-gray-300 leading-relaxed text-lg"
+        className="bg-gradient-to-r from-amber-500/10 to-transparent border-l-2 border-amber-500 p-8 rounded-r-xl mb-16 italic text-gray-300 leading-relaxed text-lg"
       >
         {description}
       </motion.div>

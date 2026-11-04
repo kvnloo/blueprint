@@ -1,14 +1,13 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Pipeline from './components/Pipeline';
-import Products from './components/Products';
-import Showcase from './components/Showcase';
-import SuccessStories from './components/SuccessStories';
-import Footer from './components/Footer';
-import ResearchHub from './components/ResearchHub';
+import SiteNav from './components/site/SiteNav';
+import SiteFooter from './components/site/SiteFooter';
+import HomePage from './components/site/HomePage';
+import WorkPage from './components/site/WorkPage';
+import ResearchPage from './components/site/ResearchPage';
+import AboutPage from './components/site/AboutPage';
+import OssPage from './components/site/OssPage';
 import ArticleView from './components/ArticleView';
+import { href, useRoute } from './lib/route';
 import { BackgroundControls } from './components/ui';
 import { ANIMATIONS_KEY, QUALITY_KEY } from './components/ui/BackgroundControls';
 import WallpaperHotspots from './components/wallpaper/WallpaperHotspots';
@@ -18,7 +17,7 @@ import { detectWallpaperTier, tierFromUrl, type WallpaperTier } from './lib/wall
 // Lazy load the WebGL wallpaper player; the static poster (index.html) is the LCP.
 const LivingWallpaper = lazy(() => import('./components/wallpaper/LivingWallpaper'));
 
-// ViewState type for routing between views
+// Legacy view id still used by ResearchHub ('article:<id>').
 export type ViewState = 'home' | 'research' | string;
 
 export default function App() {
@@ -31,13 +30,7 @@ export default function App() {
   const [forcedTier] = useState(() => tierFromUrl());
   const [tier, setTier] = useState<WallpaperTier>('poster');
   const [webglFailed, setWebglFailed] = useState(false);
-  const [currentView, setCurrentView] = useState<ViewState>('home');
-
-  // Navigation function for view changes
-  const navigate = (view: ViewState) => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setCurrentView(view);
-  };
+  const route = useRoute();
 
   useEffect(() => {
     // Hide loading overlay once React has mounted
@@ -80,7 +73,7 @@ export default function App() {
     tier === 'webgl' && loadWebGL && animationsEnabled && !webglFailed && !prefersReducedMotion;
 
   return (
-    <div className="relative min-h-screen overflow-hidden text-white selection:bg-teal-500/30 selection:text-teal-200">
+    <div className="relative min-h-screen overflow-hidden text-white selection:bg-amber-500/30 selection:text-amber-100">
       {/* Living Ruins wallpaper. The static poster and the readability veil
           live in index.html (LCP, works without JS); the WebGL layer sits
           between them and crossfades in after its first frame. */}
@@ -93,36 +86,20 @@ export default function App() {
 
       {/* Accessibility: Animation pause control */}
       <BackgroundControls />
-      <Navbar currentView={currentView} onNavigate={navigate} />
+      <SiteNav route={route} />
 
       <main>
-        {/* Home View */}
-        {currentView === 'home' && (
-          <>
-            <Hero />
-            <Products />
-            <About />
-            <Pipeline />
-            <Showcase />
-            <SuccessStories />
-          </>
-        )}
-
-        {/* Research Hub View */}
-        {currentView === 'research' && (
-          <ResearchHub onNavigate={navigate} />
-        )}
-
-        {/* Article View */}
-        {currentView.startsWith('article:') && (
-          <ArticleView
-            articleId={currentView.split(':')[1]}
-            onBack={() => navigate('research')}
-          />
+        {route.page === 'home' && <HomePage />}
+        {route.page === 'work' && <WorkPage />}
+        {route.page === 'research' && <ResearchPage />}
+        {route.page === 'about' && <AboutPage />}
+        {route.page === 'oss' && <OssPage />}
+        {route.page === 'article' && (
+          <ArticleView articleId={route.id} onBack={() => { window.location.hash = href({ page: 'research' }); }} />
         )}
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

@@ -10,6 +10,7 @@
     "test": "playwright test",
     "test:unit": "node --import tsx --test --test-concurrency=1 tests/unit/*.test.ts",
     "test:wallpaper": "node ../node_modules/@playwright/test/cli.js test --config ../tests/wallpaper.config.ts --workers=1",
+    "test:site": "node ../node_modules/@playwright/test/cli.js test --config ../tests/site.config.ts --workers=1",
     "typecheck": "tsc --noEmit",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",

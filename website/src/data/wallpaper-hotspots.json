@@ -4,8 +4,8 @@
     {
       "id": "greenhouse",
       "label": "Greenhouse",
-      "sub": "Products",
-      "href": "#products",
+      "sub": "Tools for growing",
+      "href": "#/work",
       "x": 0.234,
       "y": 0.3,
       "depth": 0.369
@@ -13,8 +13,8 @@
     {
       "id": "observatory",
       "label": "Observatory",
-      "sub": "About",
-      "href": "#about",
+      "sub": "Research",
+      "href": "#/research",
       "x": 0.762,
       "y": 0.105,
       "depth": 0.243
@@ -22,8 +22,8 @@
     {
       "id": "waterwheel",
       "label": "Water wheel",
-      "sub": "Pipeline",
-      "href": "#pipeline",
+      "sub": "About",
+      "href": "#/about",
       "x": 0.52,
       "y": 0.5,
       "depth": 0.576
@@ -31,8 +31,8 @@
     {
       "id": "workshop",
       "label": "Workshop",
-      "sub": "Showcase",
-      "href": "#showcase",
+      "sub": "Open source",
+      "href": "#/oss",
       "x": 0.914,
       "y": 0.555,
       "depth": 0.624

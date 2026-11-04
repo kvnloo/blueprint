@@ -25,7 +25,7 @@ export const ASCIIArtVis: React.FC<VisProps> = ({ data, className = '' }) => {
         </h4>
       )}
 
-      <div className="p-6 bg-[#0a0a0a] border border-white/10 rounded-xl overflow-x-auto">
+      <div tabIndex={0} className="p-6 bg-[#0a0a0a] border border-white/10 rounded-xl overflow-x-auto">
         <pre className="font-mono text-xs md:text-sm leading-relaxed">
           {lines.map((line, i) => (
             <motion.div

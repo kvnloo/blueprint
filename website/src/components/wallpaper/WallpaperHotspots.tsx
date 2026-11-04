@@ -74,9 +74,10 @@ const WallpaperHotspots: React.FC = () => {
   const go = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
     setWallpaperState({ exploring: false });
-    // let the content fade back in, then scroll to the section
+    // let the content fade back in, then open the page (or scroll to an in-page section)
     window.setTimeout(() => {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (href.startsWith('#/')) window.location.hash = href;
+      else document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 350);
   };
 
