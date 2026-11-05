@@ -223,6 +223,30 @@ export function generateRippleNormals(size = 256, seed = 7): Uint8Array {
 
 const isSmallScreen = () => typeof window !== 'undefined' && Math.min(window.innerWidth, window.innerHeight) <= 768;
 
+/**
+ * Screens that would upscale the 1920x1080 plate get the 4K plate (cut from the
+ * 7680x4320 master). Portrait phones crop the plate to a narrow column, so they need
+ * it most. Keep in sync with the poster's <source media> in index.html so the poster
+ * and the texture share one download.
+ */
+export const PLATE_4K_MEDIA = '(max-aspect-ratio: 1/1), (min-height: 1200px), (min-resolution: 1.5dppx) and (min-width: 1200px)';
+
+/**
+ * WebGL1 only mipmaps power-of-two textures, and an un-mipmapped 4K plate shimmers
+ * when minified. The plate is sampled by UV, so resampling it to a POT size changes
+ * no geometry; it just lets the GPU filter it properly at every canvas size.
+ */
+function potPlate(img: HTMLImageElement, maxSize: number): HTMLCanvasElement {
+  const pot = (n: number) => Math.min(maxSize, 2 ** Math.round(Math.log2(n)));
+  const c = document.createElement('canvas');
+  c.width = pot(img.naturalWidth);
+  c.height = pot(img.naturalHeight);
+  const ctx = c.getContext('2d')!;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, 0, 0, c.width, c.height);
+  return c;
+}
+
 export class LivingPlayer {
   readonly gl: GL;
   private opts: LivingPlayerOptions;
@@ -311,7 +335,8 @@ export class LivingPlayer {
     // 1. start the network fetches first, 2. queue shader compiles (parallel where the
     //    driver supports KHR_parallel_shader_compile), 3. only then block on results.
     const base = this.opts.assetBase.replace(/\/?$/, '/');
-    const images = Promise.all(['base.webp', 'masks.webp', 'flow.webp', 'depth.webp'].map((f) => loadImage(base + f)));
+    const plate = this.quality === 'high' && window.matchMedia(PLATE_4K_MEDIA).matches ? 'base-4k.webp' : 'base.webp';
+    const images = Promise.all([plate, 'masks.webp', 'flow.webp', 'depth.webp'].map((f) => loadImage(base + f)));
     gl.getExtension('KHR_parallel_shader_compile');
     const plateU = ['u_view', 'u_par', 'u_depth'];
     const pending = this.pendingPrograms = [
@@ -363,7 +388,10 @@ export class LivingPlayer {
       return t;
     };
     gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.BROWSER_DEFAULT_WEBGL);
-    this.texBase = upload(imgBase);
+    this.texBase = texture(gl);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, potPlate(imgBase, gl.getParameter(gl.MAX_TEXTURE_SIZE)));
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
     gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
     this.texMasks = upload(imgMasks);
     this.texFlow = upload(imgFlow);
@@ -436,8 +464,10 @@ export class LivingPlayer {
     if (this.disposed || !this.ready) return;
     const canvas = this.opts.canvas;
     const small = isSmallScreen();
-    const maxDpr = this.quality === 'low' ? 1 : 1.5;
-    const maxDim = (this.quality === 'low' || small ? 1280 : 1920) * this.renderScale;
+    // High quality renders near device resolution (phones too); adaptive
+    // degradation lowers renderScale if the GPU can't keep up.
+    const maxDpr = this.quality === 'low' ? 1 : 2;
+    const maxDim = (this.quality === 'low' ? 1280 : small ? 2400 : 2560) * this.renderScale;
     const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
     let w = Math.max(1, Math.floor(canvas.clientWidth * dpr * this.renderScale));
     let h = Math.max(1, Math.floor(canvas.clientHeight * dpr * this.renderScale));

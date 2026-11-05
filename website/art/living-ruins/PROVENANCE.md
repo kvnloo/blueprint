@@ -5,8 +5,15 @@
   (`.design/concepts/concept-01-ruins-hud.png`, `concept-03-explorable-world.png`).
 - No Wallpaper Engine / Forgotten Ruins art, masks, textures or base images were used or copied. Only the
   abstract effect structure (layer types, passes, uniforms) informed the layer plan.
-- Generator output was 1672x941; `base.png` / `base.webp` are a Lanczos upscale to 1920x1080 of the chosen candidate
-  (`candidates/plate-01.png`). `base.jpg` is a 1280x720 LCP poster.
+- Generator output was 1672x941; `base.png` is a Lanczos upscale to 1920x1080 of the chosen candidate
+  (`candidates/plate-01.png`) and stays the source for the masks.
+- Runtime plates (2026-11-05) are cut from the 7680x4320 dream-loop reconstruction master
+  (SHA256 `e89588bf31e1d3263c50f122703022f43da60c3ecc412ca961813a96a33378a4`, 30 overlapping ChatGPT/ComfyUI
+  tiles over a RealESRGAN geometry control; RealESRGAN x4plus, x4plus-anime and animevideov3 were trialled after it
+  and rejected). The master is kept outside git (39 MB, `/mnt/zer0models/tmp/living-ruins-sol-20261028/`).
+  Its fine detail is generated, not observed native 8K. Same composition as `base.png`, so the masks still register.
+  - `base-4k.webp` 3840x2160: portrait phones, tall or high-DPI screens (WebGL texture and poster).
+  - `base.webp` 1920x1080 and `base.jpg` 1920x1080: everything else, plus the og:image.
 - Masks in `masks/` are derived deterministically from the plate by
   `website/scripts/wallpaper/derive_masks.py` with the hand-authored flow polylines in `river.json`.
 

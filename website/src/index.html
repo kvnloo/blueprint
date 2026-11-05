@@ -163,7 +163,7 @@
         background:
           linear-gradient(180deg, rgba(6, 8, 10, 0.6) 0px, rgba(6, 8, 10, 0) 140px),
           linear-gradient(0deg, rgba(6, 8, 10, 0.6) 0%, rgba(6, 8, 10, 0.2) 16%, rgba(6, 8, 10, 0) 32%),
-          linear-gradient(90deg, rgba(6, 8, 10, 0.74) 0%, rgba(6, 8, 10, 0.66) 30%, rgba(6, 8, 10, 0.42) 45%, rgba(6, 8, 10, 0.16) 56%, rgba(6, 8, 10, 0.1) 100%);
+          linear-gradient(90deg, rgba(6, 8, 10, 0.74) 0%, rgba(6, 8, 10, 0.66) 30%, rgba(6, 8, 10, 0.5) 45%, rgba(6, 8, 10, 0.26) 56%, rgba(6, 8, 10, 0.1) 70%);
         transition: opacity 0.6s ease;
       }
     </style>
@@ -182,6 +182,8 @@
 </head>
   <body>
     <picture id="wallpaper-poster" aria-hidden="true">
+      <!-- media must match PLATE_4K_MEDIA in src/lib/wallpaper/livingPlayer.ts (shared download) -->
+      <source type="image/webp" media="(max-aspect-ratio: 1/1), (min-height: 1200px), (min-resolution: 1.5dppx) and (min-width: 1200px)" srcset="/wallpaper/living-ruins/base-4k.webp" />
       <source type="image/webp" srcset="/wallpaper/living-ruins/base.webp" />
       <img src="/wallpaper/living-ruins/base.jpg" alt="" width="1920" height="1080" fetchpriority="high" decoding="async" />
     </picture>

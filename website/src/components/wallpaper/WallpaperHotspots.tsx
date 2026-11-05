@@ -16,7 +16,8 @@ const HOTSPOTS = (hotspotData as { hotspots: Hotspot[] }).hotspots;
  * Portrait screens only see about a quarter of the plate, so Explore mode also
  * shows a bottom row of landmark chips: a chip pans the camera to its landmark
  * (the live player eases there, the poster tier re-crops), where the marker
- * link to the section is then on screen.
+ * link to the section is then on screen. Tapping the focused chip again opens
+ * its page, so the chip row alone is enough to navigate.
  */
 const WallpaperHotspots: React.FC = () => {
   const { exploring, live } = useWallpaperState();
@@ -71,8 +72,8 @@ const WallpaperHotspots: React.FC = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [exploring]);
 
-  const go = (e: React.MouseEvent, href: string) => {
-    e.preventDefault();
+  const go = (e: React.MouseEvent | null, href: string) => {
+    e?.preventDefault();
     setWallpaperState({ exploring: false });
     // let the content fade back in, then open the page (or scroll to an in-page section)
     window.setTimeout(() => {
@@ -113,10 +114,11 @@ const WallpaperHotspots: React.FC = () => {
             data-chip={h.id}
             aria-pressed={focused === h.id}
             tabIndex={exploring ? 0 : -1}
-            onClick={() => focus(focused === h.id ? null : h)}
+            aria-label={focused === h.id ? `Go to ${h.sub}` : `${h.label}: ${h.sub}`}
+            onClick={() => (focused === h.id ? go(null, h.href) : focus(h))}
           >
             <span className="wallpaper-chip__name">{h.label}</span>
-            <span className="wallpaper-chip__sub">{h.sub}</span>
+            <span className="wallpaper-chip__sub">{focused === h.id ? <>Go to {h.sub} &rarr;</> : h.sub}</span>
           </button>
         ))}
       </nav>

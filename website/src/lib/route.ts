@@ -29,7 +29,8 @@ export function useRoute(): Route {
   useEffect(() => {
     const onHash = () => {
       setRoute(parseRoute(window.location.hash));
-      window.scrollTo({ top: 0 });
+      // A new page starts at its top immediately; html's smooth scroll is for in-page anchors.
+      window.scrollTo({ top: 0, behavior: 'instant' });
     };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);

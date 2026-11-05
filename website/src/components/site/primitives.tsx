@@ -13,7 +13,7 @@ export const AREA_TONE: Record<Area, { text: string; rim: string; dot: string }>
 
 /** Small uppercase label above a section heading. */
 export const Eyebrow: React.FC<{ children: React.ReactNode; tone?: string }> = ({ children, tone = 'z-text-amber' }) => (
-  <div className={`text-[11px] font-semibold tracking-[0.18em] uppercase mb-4 ${tone}`}>{children}</div>
+  <div className={`text-xs font-semibold tracking-[0.14em] uppercase mb-4 ${tone}`}>{children}</div>
 );
 
 /** Section shell with consistent spacing; `id` makes it addressable. */
@@ -27,7 +27,7 @@ export const Section: React.FC<{ id?: string; className?: string; children: Reac
 export const SectionHeading: React.FC<{ eyebrow: string; title: string; lede?: string; tone?: string; level?: 1 | 2 }> = ({ eyebrow, title, lede, tone, level = 2 }) => {
   const H = level === 1 ? 'h1' : 'h2';
   return (
-  <div className="max-w-3xl mb-12">
+  <div className="max-w-3xl mb-12 z-onart">
     <Eyebrow tone={tone}>{eyebrow}</Eyebrow>
     <H className="font-serif-display text-4xl md:text-6xl leading-[1.02] z-text-ink z-legible">{title}</H>
     {lede && <p className="mt-5 text-base md:text-lg z-text-dim leading-relaxed z-legible">{lede}</p>}

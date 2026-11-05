@@ -11,7 +11,7 @@ const Toggle: React.FC<{ pressed: boolean; onClick: () => void; children: React.
     type="button"
     aria-pressed={pressed}
     onClick={onClick}
-    className={`z-chip !text-xs !py-1.5 !px-3 transition-colors ${pressed ? '!border-[color:var(--z-amber)] !bg-white/10' : 'hover:!border-white/30'} ${className}`}
+    className={`z-chip !text-xs !py-1.5 !px-3 transition-colors ${pressed ? '!border-[color:var(--z-amber)] !bg-[rgba(52,40,20,0.85)]' : 'hover:!border-white/30'} ${className}`}
   >
     {children}
   </button>
@@ -34,7 +34,7 @@ const WorkPage: React.FC = () => {
           title="Everything public, labelled honestly."
           lede="Every project here is a public repository. Status says how far along it is, not how much it is worked on."
         />
-        <div className="flex flex-col gap-3 mb-10" role="group" aria-label="Filter projects">
+        <div className="flex flex-col gap-3 mb-10 z-onart" role="group" aria-label="Filter projects">
           <div className="flex flex-wrap gap-2 items-center">
             <span className="text-xs z-text-faint w-14">Area</span>
             <Toggle pressed={!area} onClick={() => setArea(null)} className="z-text-ink">All</Toggle>
@@ -55,7 +55,7 @@ const WorkPage: React.FC = () => {
             ))}
           </div>
         </div>
-        <p className="text-sm z-text-faint mb-5" aria-live="polite" data-testid="work-count">
+        <p className="text-sm z-text-dim mb-5 z-legible" aria-live="polite" data-testid="work-count">
           {shown.length} of {PROJECTS.length} projects
         </p>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

@@ -31,6 +31,21 @@ test.describe('routes', () => {
     });
   }
 
+  // Worst case for copy on the wallpaper: swap the plate for pure white (brighter
+  // than any sky or waterfall pixel in it). On phones every on-art block carries its
+  // own panel, so axe contrast must pass even then.
+  for (const hash of ['', '#/work', '#/research', '#/about', '#/oss']) {
+    test(`${hash || 'home'} on-art copy stays AA over a white plate on phones`, async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await go(page, hash);
+      await page.addStyleTag({ content: '#wallpaper-poster{display:none!important} html,body{background:#fff!important}' });
+      await expect(page.locator('.z-onart').first()).toBeVisible();
+      const results = await new AxeBuilder({ page }).include('.z-onart').withRules(['color-contrast']).analyze();
+      const bad = results.violations.flatMap((v) => v.nodes.map((n) => `${n.target.join(' ')}: ${n.any[0]?.message ?? ''}`));
+      expect(bad).toEqual([]);
+    });
+  }
+
   test('unknown hashes fall back to home', async ({ page }) => {
     await go(page, '#/nope');
     await expect(page.getByRole('heading', { level: 1, name: 'Engineering for human flourishing.' })).toBeVisible();
@@ -110,6 +125,17 @@ test.describe('writing', () => {
     await expect(page).toHaveURL(/#\/article\//);
     await page.getByRole('button', { name: 'Back to Writing' }).last().click();
     await expect(page).toHaveURL(/#\/research$/);
+  });
+
+  test('Writing lists every essay on first paint, and search narrows it', async ({ page }) => {
+    await go(page, '#/research');
+    const writing = page.locator('#writing');
+    await expect(writing.getByText('No articles found')).toHaveCount(0);
+    await expect(writing.getByText('Read Article')).toHaveCount(9);
+    await writing.locator('input').first().fill('brain');
+    await expect(writing.getByText(/Showing [1-8] of 9 articles/)).toBeVisible();
+    await expect.poll(() => writing.getByText('Read Article').count()).toBeLessThan(9);
+    expect(await writing.getByText('Read Article').count()).toBeGreaterThan(0);
   });
 
   test('article deep links load directly', async ({ page }) => {

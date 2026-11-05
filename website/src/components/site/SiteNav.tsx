@@ -45,7 +45,7 @@ const SiteNav: React.FC<{ route: Route }> = ({ route }) => {
               <a
                 href={href(item.route)}
                 aria-current={isActive(route, item.route) ? 'page' : undefined}
-                className={`z-legible transition-colors ${isActive(route, item.route) ? 'z-text-amber' : 'z-text-dim hover:text-white'}`}
+                className={`z-legible transition-colors ${isActive(route, item.route) ? 'z-text-amber' : 'z-text-ink hover:text-white'} font-medium`}
               >
                 {item.label}
               </a>
