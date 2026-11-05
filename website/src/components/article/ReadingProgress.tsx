@@ -8,7 +8,7 @@ interface ReadingProgressProps {
 const ReadingProgress: React.FC<ReadingProgressProps> = ({ scaleX }) => {
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 to-emerald-400 origin-left z-50"
+      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 to-emerald-400 origin-left z-50"
       style={{ scaleX }}
     />
   );

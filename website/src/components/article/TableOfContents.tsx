@@ -21,7 +21,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ items, activeId }) =>
                 block text-sm transition-colors duration-200
                 ${item.level === 1 ? 'pl-0' : 'pl-4'}
                 ${activeId === item.id
-                  ? 'text-teal-400 border-l-2 border-teal-400 pl-3'
+                  ? 'text-amber-400 border-l-2 border-amber-400 pl-3'
                   : 'text-gray-500 hover:text-gray-300 border-l-2 border-transparent hover:border-gray-600 pl-3'
                 }
               `}

@@ -1,0 +1,29 @@
+# zer0
+
+> zer0 is Kevin Rajan's studio for autonomous systems: agent infrastructure, reproducible evaluations, digital twins of the real world, and tools that protect flow. Built in public, with evidence.
+
+Canonical site: https://kvnloo.github.io/blueprint/
+Founder: Kevin Rajan (GitHub kvnloo, X @_kvnloo)
+Thesis: Engineering for human flourishing.
+
+## Pages
+
+- [Home](https://kvnloo.github.io/blueprint/#/): thesis, pillars, featured work, proof.
+- [Work](https://kvnloo.github.io/blueprint/#/work): every public project with area and status.
+- [Research](https://kvnloo.github.io/blueprint/#/research): z0evals, writing, research we build on.
+- [About](https://kvnloo.github.io/blueprint/#/about): principles, claim labels, timeline.
+- [Open source](https://kvnloo.github.io/blueprint/#/oss): upstream projects, credited to their maintainers.
+
+## How to read claims
+
+- Status labels (live, active, prototype, early, archived) describe maturity, not activity.
+- Claim labels: verified (checked against a receipt), reported, provisional, deprecated.
+- A fork, draft or review is not an upstream merge. Only merged work counts as a contribution.
+- 2025 essays under Writing are vision pieces; their numbers are not measured results.
+
+## Sources of truth
+
+- [Build log (boplog)](https://kvnloo.github.io/boplog/llms.txt): authoritative project archive and counts.
+- [z0evals](https://kvnloo.github.io/z0evals/): frozen evaluation reports.
+- [Contribution archive](https://kvnloo.github.io/gh-contrib-archive/): public issues, PRs and commits.
+- [GitHub](https://github.com/kvnloo)

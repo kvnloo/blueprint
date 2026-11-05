@@ -9,7 +9,7 @@ import type { Page, CDPSession } from '@playwright/test';
  * - Core Web Vitals (FCP, LCP, TTI)
  * - JavaScript bundle size
  * - Image lazy loading
- * - WebGL background lazy loading with Suspense
+ * - WebGL wallpaper lazy loading with Suspense (static poster first)
  * - Navigation performance
  * - Scroll performance
  * - Memory leak detection
@@ -263,33 +263,19 @@ test.describe('Performance Tests', () => {
   test('7. WebGL background lazy loading with Suspense', async ({ page }) => {
     await page.goto('/');
 
-    // Check initial state - should show fallback (BackgroundGrid)
-    const hasFallback = await page.evaluate(() => {
-      // Look for BackgroundGrid component before WebGL loads
-      return document.querySelector('[class*="grid"]') !== null;
-    });
+    // The static Living Ruins poster is painted by index.html before any JS runs
+    const hasPoster = await page.evaluate(() => document.querySelector('#wallpaper-poster img') !== null);
+    console.log(`Static poster present: ${hasPoster}`);
+    expect(hasPoster).toBeTruthy();
 
-    console.log(`Fallback background visible: ${hasFallback}`);
-
-    // Wait for WebGL to lazy load (using requestIdleCallback with 2s timeout)
+    // Wait for the WebGL wallpaper to lazy load (requestIdleCallback with 2s timeout)
     await page.waitForTimeout(3000);
 
-    // Check if WebGL background loaded
-    const hasWebGL = await page.evaluate(() => {
-      // WebGL creates a canvas element
-      const canvas = document.querySelector('canvas');
-      if (!canvas) return false;
+    const hasWebGL = await page.evaluate(() => document.querySelector('canvas[data-testid="living-wallpaper"]') !== null);
+    console.log(`WebGL wallpaper mounted: ${hasWebGL}`);
 
-      // Verify it's a WebGL context
-      const gl = (canvas as HTMLCanvasElement).getContext('webgl') ||
-                 (canvas as HTMLCanvasElement).getContext('webgl2');
-      return gl !== null;
-    });
-
-    console.log(`WebGL background loaded: ${hasWebGL}`);
-
-    // WebGL should eventually load (unless animations disabled)
-    expect(hasWebGL || hasFallback).toBeTruthy();
+    // Either the WebGL layer mounted, or the device/browser was gated to the poster tier
+    expect(hasWebGL || hasPoster).toBeTruthy();
   });
 
   test('8. Navigation performance between views', async ({ page }) => {

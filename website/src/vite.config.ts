@@ -11,19 +11,7 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
       },
       plugins: [
-        createHtmlPlugin({
-          minify: true,
-          inject: {
-            data: {
-              meticulousScript:
-                `<script
-                  data-recording-token="UBZxdxK9jcB2WFbzX2TSxvpFAzfTj6cOW6Gm1ZNO"
-                  data-is-production-environment="true"
-                  src="https://snippet.meticulous.ai/v1/meticulous.js"
-                ></script>`,
-            },
-          },
-        }),
+        createHtmlPlugin({ minify: true }),
         react()
       ],
       define: {

@@ -9,14 +9,14 @@ interface VisProps {
 export const TimelineVis: React.FC<VisProps> = ({ data }) => {
   if (!data?.steps?.length) return null;
   return (
-    <div className="my-12 p-8 bg-white/5 border border-white/10 rounded-xl overflow-x-auto">
+    <div tabIndex={0} className="my-12 p-8 bg-white/5 border border-white/10 rounded-xl overflow-x-auto">
       <div className="min-w-[600px] flex items-center justify-between relative">
         <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-800 -z-10" />
         {data.steps.map((step: any, i: number) => (
           <div key={i} className="flex flex-col items-center gap-4 relative z-10">
-            <div className="w-4 h-4 rounded-full bg-teal-500 border-4 border-[#050505] shadow-[0_0_15px_rgba(20,184,166,0.5)]" />
+            <div className="w-4 h-4 rounded-full bg-amber-500 border-4 border-[#050505] shadow-[0_0_15px_rgba(20,184,166,0.5)]" />
             <div className="text-center">
-              <div className="text-xs font-bold text-teal-400 mb-1 uppercase tracking-wider">{step.label}</div>
+              <div className="text-xs font-bold text-amber-400 mb-1 uppercase tracking-wider">{step.label}</div>
               <div className="text-sm font-medium text-gray-300 bg-[#0A0A0A] px-3 py-1 rounded border border-white/10">{step.value}</div>
             </div>
           </div>
@@ -37,14 +37,14 @@ export const BarChartVis: React.FC<VisProps> = ({ data }) => {
           <div key={i} className="group">
             <div className="flex justify-between text-sm mb-1">
               <span className="text-gray-300 font-medium">{item.label}</span>
-              <span className="text-teal-400 font-mono">{item.value}%</span>
+              <span className="text-amber-400 font-mono">{item.value}%</span>
             </div>
             <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: `${item.value}%` }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="h-full bg-gradient-to-r from-teal-600 to-emerald-400 rounded-full group-hover:shadow-[0_0_10px_rgba(20,184,166,0.3)] transition-all"
+                className="h-full bg-gradient-to-r from-amber-600 to-emerald-400 rounded-full group-hover:shadow-[0_0_10px_rgba(20,184,166,0.3)] transition-all"
               />
             </div>
           </div>
@@ -65,12 +65,12 @@ export const SystemStackVis: React.FC<VisProps> = ({ data }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: i * 0.1 }}
-          className="p-4 rounded-lg border border-teal-500/20 bg-teal-900/10 text-center relative overflow-hidden group hover:bg-teal-900/20 transition-colors"
+          className="p-4 rounded-lg border border-amber-500/20 bg-amber-900/10 text-center relative overflow-hidden group hover:bg-amber-900/20 transition-colors"
         >
-          <div className="text-xs font-mono text-teal-500 mb-1">{layer.type}</div>
+          <div className="text-xs font-mono text-amber-500 mb-1">{layer.type}</div>
           <div className="font-bold text-white">{layer.label}</div>
           {i < data.layers.length - 1 && (
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full w-px h-4 bg-teal-500/30" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full w-px h-4 bg-amber-500/30" />
           )}
         </motion.div>
       ))}
@@ -105,7 +105,7 @@ export const ComparisonVis: React.FC<VisProps> = ({ data }) => {
                   cat.color === 'purple' ? 'bg-purple-500/20' :
                   cat.color === 'blue' ? 'bg-blue-500/20' :
                   cat.color === 'green' ? 'bg-green-500/20' :
-                  'bg-teal-500/20'
+                  'bg-amber-500/20'
                 }`}>
                   <span className="text-lg">{cat.icon === 'zap' ? '⚡' : cat.icon === 'brain' ? '🧠' : '📊'}</span>
                 </div>
@@ -124,7 +124,7 @@ export const ComparisonVis: React.FC<VisProps> = ({ data }) => {
                       'bg-gray-400'
                     }`} />
                     <div>
-                      <span className="text-sm font-medium text-teal-400">{item.name}</span>
+                      <span className="text-sm font-medium text-amber-400">{item.name}</span>
                       {item.description && (
                         <span className="text-sm text-gray-400"> — {item.description}</span>
                       )}
@@ -187,7 +187,7 @@ export const ComparisonVis: React.FC<VisProps> = ({ data }) => {
 
           return (
             <div key={i} className={`grid grid-cols-3 p-4 text-sm hover:bg-white/5 transition-colors ${getStatusColor(row.status)}`}>
-              <div className="text-teal-400 font-medium">{col1}</div>
+              <div className="text-amber-400 font-medium">{col1}</div>
               <div className="text-gray-300">{col2}</div>
               <div className="text-gray-500">{col3}</div>
             </div>
@@ -207,8 +207,8 @@ export const PyramidVis: React.FC<VisProps> = ({ data }) => {
         const width = 100 - (i * 20) + '%';
         return (
           <div key={i} className="relative group" style={{ width: width, maxWidth: '600px' }}>
-            <div className="bg-gradient-to-r from-teal-900/40 to-emerald-900/40 border border-teal-500/30 text-center py-3 rounded-sm hover:bg-teal-500/20 transition-colors cursor-default">
-              <div className="text-xs text-teal-400 uppercase tracking-widest font-mono mb-1">{level.category}</div>
+            <div className="bg-gradient-to-r from-amber-900/40 to-emerald-900/40 border border-amber-500/30 text-center py-3 rounded-sm hover:bg-amber-500/20 transition-colors cursor-default">
+              <div className="text-xs text-amber-400 uppercase tracking-widest font-mono mb-1">{level.category}</div>
               <div className="font-bold text-white text-sm">{level.label}</div>
             </div>
           </div>

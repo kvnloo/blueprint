@@ -1,36 +1,36 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Pipeline from './components/Pipeline';
-import Products from './components/Products';
-import Showcase from './components/Showcase';
-import SuccessStories from './components/SuccessStories';
-import Footer from './components/Footer';
-import BackgroundGrid from './components/BackgroundGrid';
-import ResearchHub from './components/ResearchHub';
+import SiteNav from './components/site/SiteNav';
+import SiteFooter from './components/site/SiteFooter';
+import HomePage from './components/site/HomePage';
+import WorkPage from './components/site/WorkPage';
+import ResearchPage from './components/site/ResearchPage';
+import AboutPage from './components/site/AboutPage';
+import OssPage from './components/site/OssPage';
 import ArticleView from './components/ArticleView';
+import { href, useRoute } from './lib/route';
 import { BackgroundControls } from './components/ui';
+import { ANIMATIONS_KEY, QUALITY_KEY } from './components/ui/BackgroundControls';
+import WallpaperHotspots from './components/wallpaper/WallpaperHotspots';
 import { useReducedMotion, useLocalStorage } from './hooks';
-import backgroundImage from './assets/background.png';
+import { detectWallpaperTier, tierFromUrl, type WallpaperTier } from './lib/wallpaper/capability';
 
-// Lazy load WebGL background for performance
-const WebGLBackground = lazy(() => import('./components/WebGLBackground'));
+// Lazy load the WebGL wallpaper player; the static poster (index.html) is the LCP.
+const LivingWallpaper = lazy(() => import('./components/wallpaper/LivingWallpaper'));
 
-// ViewState type for routing between views
+// Legacy view id still used by ResearchHub ('article:<id>').
 export type ViewState = 'home' | 'research' | string;
 
 export default function App() {
   const [loadWebGL, setLoadWebGL] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const [animationsEnabled] = useLocalStorage('bg-animations-enabled', true);
-  const [currentView, setCurrentView] = useState<ViewState>('home');
-
-  // Navigation function for view changes
-  const navigate = (view: ViewState) => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setCurrentView(view);
-  };
+  const [animationsEnabled] = useLocalStorage(ANIMATIONS_KEY, true);
+  const [quality] = useLocalStorage<'high' | 'low'>(QUALITY_KEY, 'high');
+  // Capability gate, decided once: reduced motion / Save-Data / slow network /
+  // low memory / no WebGL keep the static poster. `?wallpaper=` forces a tier.
+  const [forcedTier] = useState(() => tierFromUrl());
+  const [tier, setTier] = useState<WallpaperTier>('poster');
+  const [webglFailed, setWebglFailed] = useState(false);
+  const route = useRoute();
 
   useEffect(() => {
     // Hide loading overlay once React has mounted
@@ -48,77 +48,58 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    let cancelled = false;
+    void detectWallpaperTier({ forceTier: forcedTier }).then((result) => {
+      if (!cancelled) setTier(result);
+    });
+    return () => { cancelled = true; };
+  }, [forcedTier]);
+
+  useEffect(() => {
     // Don't load WebGL if user prefers reduced motion or has disabled animations
-    if (prefersReducedMotion || !animationsEnabled) return;
+    if (tier !== 'webgl' || prefersReducedMotion || !animationsEnabled) return;
 
     // Lazy load WebGL after initial render
-    if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(() => setLoadWebGL(true), { timeout: 2000 });
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(() => setLoadWebGL(true), { timeout: 2000 });
+      return () => window.cancelIdleCallback(id);
     } else {
-      setTimeout(() => setLoadWebGL(true), 1000);
+      const id = setTimeout(() => setLoadWebGL(true), 1000);
+      return () => clearTimeout(id);
     }
-  }, [prefersReducedMotion, animationsEnabled]);
+  }, [tier, prefersReducedMotion, animationsEnabled]);
+
+  const showWebGL =
+    tier === 'webgl' && loadWebGL && animationsEnabled && !webglFailed && !prefersReducedMotion;
 
   return (
-    <div className="relative min-h-screen overflow-hidden text-white selection:bg-teal-500/30 selection:text-teal-200">
-      {/* Background image layer */}
-      <div
-        className="fixed inset-0 -z-20 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-        aria-hidden="true"
-      />
-
-      {/* Dark vignette overlay for text readability - loads with background */}
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          zIndex: -15,
-          background: 'radial-gradient(ellipse 70% 40% at 50% 20%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.92) 100%)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* WebGL wisps overlay */}
-      {loadWebGL && animationsEnabled ? (
-        <Suspense fallback={<BackgroundGrid />}>
-          <WebGLBackground />
+    <div className="relative min-h-screen overflow-hidden text-white selection:bg-amber-500/30 selection:text-amber-100">
+      {/* Living Ruins wallpaper. The static poster and the readability veil
+          live in index.html (LCP, works without JS); the WebGL layer sits
+          between them and crossfades in after its first frame. */}
+      {showWebGL && (
+        <Suspense fallback={null}>
+          <LivingWallpaper quality={quality} adaptive={forcedTier !== 'webgl'} onFail={() => setWebglFailed(true)} />
         </Suspense>
-      ) : (
-        <BackgroundGrid />
       )}
+      <WallpaperHotspots />
 
       {/* Accessibility: Animation pause control */}
       <BackgroundControls />
-      <Navbar currentView={currentView} onNavigate={navigate} />
+      <SiteNav route={route} />
 
       <main>
-        {/* Home View */}
-        {currentView === 'home' && (
-          <>
-            <Hero />
-            <Products />
-            <About />
-            <Pipeline />
-            <Showcase />
-            <SuccessStories />
-          </>
-        )}
-
-        {/* Research Hub View */}
-        {currentView === 'research' && (
-          <ResearchHub onNavigate={navigate} />
-        )}
-
-        {/* Article View */}
-        {currentView.startsWith('article:') && (
-          <ArticleView
-            articleId={currentView.split(':')[1]}
-            onBack={() => navigate('research')}
-          />
+        {route.page === 'home' && <HomePage />}
+        {route.page === 'work' && <WorkPage />}
+        {route.page === 'research' && <ResearchPage />}
+        {route.page === 'about' && <AboutPage />}
+        {route.page === 'oss' && <OssPage />}
+        {route.page === 'article' && (
+          <ArticleView articleId={route.id} onBack={() => { window.location.hash = href({ page: 'research' }); }} />
         )}
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

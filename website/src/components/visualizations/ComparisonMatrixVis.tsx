@@ -21,7 +21,7 @@ export const ComparisonMatrixVis: React.FC<VisProps> = ({ data, className = '' }
         </div>
       )}
 
-      <div className="overflow-x-auto">
+      <div tabIndex={0} className="overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="bg-white/5">

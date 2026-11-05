@@ -132,7 +132,7 @@ npx playwright test --debug path/to/test.spec.ts
 tests/
 ├── playwright.config.ts    # Main configuration
 ├── e2e/                    # Test files
-│   ├── example.spec.ts
+│   ├── site.spec.ts        # company site: routes, nav, filters, honesty rules (npm run test:site)
 │   └── *.spec.ts
 ├── test-results/           # Test artifacts (gitignored)
 ├── playwright-report/      # HTML reports (gitignored)

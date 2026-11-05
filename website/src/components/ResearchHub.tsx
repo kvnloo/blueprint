@@ -60,35 +60,16 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
   };
 
   return (
-    <section className="pt-32 pb-24 px-6 relative z-10 min-h-screen">
+    <section id="writing" className="pt-8 pb-24 px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-teal-400 uppercase mb-4"
-          >
-            <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            SCIENTIFIC DEEP DIVES & GUIDES
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-display font-bold mb-6"
-          >
-            Research <span className="text-gray-600">Hub</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-gray-400 max-w-2xl"
-          >
-            Explore our latest whitepapers on autonomous systems, biophilic design, and human performance optimization.
-          </motion.p>
+        <div className="mb-12 max-w-3xl">
+          <div className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-4 text-amber-400">Writing</div>
+          <h2 className="font-serif-display text-4xl md:text-6xl leading-[1.02] text-white">Essays and roadmaps.</h2>
+          <p className="mt-5 text-lg text-gray-400">
+            Written in 2025 for the Blueprint pretotype. They are vision essays, labelled provisional: the ideas still guide the work, but the numbers in them are not measured results.
+          </p>
         </div>
 
         {/* Search and Filter Bar */}
@@ -107,7 +88,7 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-10 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-teal-500/50 focus:bg-white/[0.07] transition-all"
+                className="w-full pl-12 pr-10 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.07] transition-all"
               />
               {searchQuery && (
                 <button
@@ -124,14 +105,14 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
               onClick={() => setShowFilters(!showFilters)}
               className={`flex items-center gap-2 px-4 py-3 rounded-xl border transition-all ${
                 showFilters || hasActiveFilters
-                  ? 'bg-teal-500/20 border-teal-500/50 text-teal-400'
+                  ? 'bg-amber-500/20 border-amber-500/50 text-amber-400'
                   : 'bg-white/5 border-white/10 text-gray-400 hover:border-white/20 hover:text-white'
               }`}
             >
               <Filter size={18} />
               <span className="font-medium">Filters</span>
               {hasActiveFilters && (
-                <span className="ml-1 px-2 py-0.5 rounded-full bg-teal-500 text-white text-xs font-bold">
+                <span className="ml-1 px-2 py-0.5 rounded-full bg-amber-500 text-white text-xs font-bold">
                   {selectedTracks.length + selectedTypes.length + (searchQuery ? 1 : 0)}
                 </span>
               )}
@@ -199,7 +180,7 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
                               onClick={() => toggleType(type)}
                               className={`px-3 py-2 rounded-lg border transition-all text-sm font-medium ${
                                 isSelected
-                                  ? 'bg-teal-500/20 border-teal-500/50 text-teal-400'
+                                  ? 'bg-amber-500/20 border-amber-500/50 text-amber-400'
                                   : 'bg-white/5 border-white/10 text-gray-400 hover:border-white/20 hover:text-white'
                               }`}
                             >
@@ -221,7 +202,7 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
               {hasActiveFilters ? (
                 <span>
                   Showing {results.length} of {researchData.length} articles
-                  {isSearching && <span className="ml-2 text-teal-400 animate-pulse">searching...</span>}
+                  {isSearching && <span className="ml-2 text-amber-400 animate-pulse">searching...</span>}
                 </span>
               ) : (
                 <span>{researchData.length} articles</span>
@@ -260,7 +241,7 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
               <p className="text-gray-500 mb-6">Try adjusting your search or filters</p>
               <button
                 onClick={clearFilters}
-                className="px-4 py-2 bg-teal-500/20 border border-teal-500/50 text-teal-400 rounded-lg hover:bg-teal-500/30 transition-colors"
+                className="px-4 py-2 bg-amber-500/20 border border-amber-500/50 text-amber-400 rounded-lg hover:bg-amber-500/30 transition-colors"
               >
                 Clear all filters
               </button>
@@ -321,7 +302,7 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
                         </span>
                         {/* Search relevance score badge */}
                         {searchMeta && (
-                          <span className="px-2 py-1 rounded bg-teal-500/20 border border-teal-500/30 text-teal-400 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+                          <span className="px-2 py-1 rounded bg-amber-500/20 border border-amber-500/30 text-amber-400 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                             <Search size={8} /> {searchMeta.score}pts
                           </span>
                         )}
@@ -342,7 +323,7 @@ const ResearchHub = ({ onNavigate }: { onNavigate: (view: ViewState) => void }) 
                   {/* Search Match Highlights */}
                   {searchMeta && searchMeta.matchedFields.includes('content') && searchMeta.highlights.content && searchMeta.highlights.content.length > 0 && (
                     <div className="mb-6 relative z-10">
-                      <div className="text-[10px] text-teal-400 uppercase tracking-wider font-bold mb-2 flex items-center gap-1">
+                      <div className="text-[10px] text-amber-400 uppercase tracking-wider font-bold mb-2 flex items-center gap-1">
                         <FileText size={10} /> Content matches
                       </div>
                       <div className="space-y-1">
