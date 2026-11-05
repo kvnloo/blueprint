@@ -28,10 +28,10 @@ function useBoplogCount(): string | null {
 const Hero = () => (
   <section className="relative min-h-[100svh] flex items-center pt-24 pb-16">
     <div className="max-w-7xl mx-auto px-6 w-full">
-      <div className="max-w-3xl">
-        <p className="text-[11px] font-semibold tracking-[0.22em] uppercase z-text-amber mb-6 z-legible">zer0 · studio for autonomous systems</p>
+      <div className="max-w-3xl z-onart">
+        <p className="text-xs font-semibold tracking-[0.14em] uppercase z-text-amber mb-6 z-legible">zer0 · studio for autonomous systems</p>
         <h1 className="font-serif-display text-5xl sm:text-6xl md:text-8xl leading-[0.98] z-text-ink z-legible">{THESIS}</h1>
-        <p className="mt-6 text-lg md:text-xl z-text-dim leading-relaxed max-w-2xl z-legible">{SUBHEAD}</p>
+        <p className="mt-6 text-lg md:text-xl z-text-dim leading-relaxed max-w-xl z-legible">{SUBHEAD}</p>
         <div className="mt-10 flex flex-wrap gap-3">
           <a href="#/work" className="z-btn z-btn-primary">See the work <ArrowRight size={16} aria-hidden /></a>
           <a href={LINKS.boplog} target="_blank" rel="noopener noreferrer" className="z-btn z-btn-ghost">Read the evidence <ArrowUpRight size={16} aria-hidden /></a>
@@ -65,7 +65,7 @@ const Pillars = () => (
         const tone = PILLAR_TONE[p.tone];
         return (
           <article key={p.title} className={`z-glass ${tone.rim} rounded-2xl p-7 flex flex-col gap-4`} data-pillar={p.tone}>
-            <span className={`text-[11px] font-semibold tracking-[0.18em] uppercase ${tone.text}`}>{tone.label}</span>
+            <span className={`text-xs font-semibold tracking-[0.14em] uppercase ${tone.text}`}>{tone.label}</span>
             <h3 className="font-serif-display text-3xl z-text-ink leading-tight">{p.title}</h3>
             <p className="text-sm z-text-dim leading-relaxed flex-1">{p.body}</p>
             <p className="text-xs z-text-faint">{p.projects.join(' · ')}</p>
@@ -74,7 +74,7 @@ const Pillars = () => (
       })}
     </div>
     <div className="mt-5 z-glass z-rim-gold rounded-2xl px-7 py-5 flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
-      <span className="text-[11px] font-semibold tracking-[0.18em] uppercase z-text-ink">Flow</span>
+      <span className="text-xs font-semibold tracking-[0.14em] uppercase z-text-ink">Flow</span>
       <span className="z-text-dim text-sm flex-1">The best tools fade into the background.</span>
       <span className="text-xs z-text-faint">.files · Dash · z0live · tmux-agent-fleet</span>
     </div>

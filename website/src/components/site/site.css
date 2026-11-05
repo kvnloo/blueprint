@@ -5,8 +5,9 @@
 
 :root {
   --z-ink: #f3eee3;
-  --z-dim: rgba(243, 238, 227, 0.68);
-  --z-faint: rgba(243, 238, 227, 0.46);
+  /* Secondary text stays >= 4.5:1 on a glass panel even over the plate's brightest sky. */
+  --z-dim: rgba(243, 238, 227, 0.86);
+  --z-faint: rgba(243, 238, 227, 0.76);
   --z-amber: #f5a524;
   --z-ember: #ea580c;
   --z-green: #5fd38d;
@@ -50,9 +51,10 @@
   gap: 6px;
   padding: 3px 10px;
   border-radius: 9999px;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.04em;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 10, 12, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(8, 10, 12, 0.55);
   white-space: nowrap;
 }
@@ -89,6 +91,9 @@
 }
 .z-btn-primary:hover { background: linear-gradient(180deg, #ffc35c, #f0861f); }
 .z-btn-ghost {
+  background: rgba(8, 10, 12, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--z-gold);
   color: var(--z-ink);
   background: rgba(8, 10, 12, 0.45);
@@ -97,7 +102,22 @@
 
 /* Readable copy over a busy wallpaper without a full-page scrim. */
 .z-legible {
-  text-shadow: 0 0 2px rgba(6, 8, 10, 0.9), 0 0 10px rgba(6, 8, 10, 0.75), 0 0 26px rgba(6, 8, 10, 0.55);
+  text-shadow: 0 1px 2px rgba(6, 8, 10, 0.95), 0 0 10px rgba(6, 8, 10, 0.8), 0 0 26px rgba(6, 8, 10, 0.6);
+}
+
+/* Copy that sits straight on the wallpaper. Wide screens get the left-weighted
+   veil (index.html); narrower screens put the plate's brightest areas (sky,
+   waterfall, river) behind the text, so the copy gets its own frosted panel. */
+@media (max-width: 1023px) {
+  .z-onart {
+    background: rgba(6, 8, 10, 0.78);
+    backdrop-filter: blur(14px) saturate(115%);
+    -webkit-backdrop-filter: blur(14px) saturate(115%);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.25rem;
+    margin-inline: -0.5rem;
+  }
 }
 
 .z-hairline {

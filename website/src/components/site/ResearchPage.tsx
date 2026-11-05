@@ -18,7 +18,7 @@ const ResearchPage: React.FC = () => (
       <div className="grid gap-5 md:grid-cols-[1.2fr_1fr]">
         <article className="z-glass z-rim-amber rounded-2xl p-7">
           <div className="flex items-center justify-between gap-3">
-            <span className="text-[11px] font-semibold tracking-[0.18em] uppercase z-text-amber">z0evals</span>
+            <span className="text-xs font-semibold tracking-[0.14em] uppercase z-text-amber">z0evals</span>
             <span className="z-chip z-text-dim font-mono uppercase">In progress</span>
           </div>
           <h3 className="mt-4 text-2xl font-semibold z-text-ink">slm-router-v0</h3>
@@ -30,7 +30,7 @@ const ResearchPage: React.FC = () => (
           </a>
         </article>
         <article className="z-glass z-rim-gold rounded-2xl p-7">
-          <span className="text-[11px] font-semibold tracking-[0.18em] uppercase z-text-ink">The evidence chain</span>
+          <span className="text-xs font-semibold tracking-[0.14em] uppercase z-text-ink">The evidence chain</span>
           <ol className="mt-4 space-y-2 text-sm">
             {PIPELINE.map((s, i) => (
               <li key={s.name} className="flex gap-3">

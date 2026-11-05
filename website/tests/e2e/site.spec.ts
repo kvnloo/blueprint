@@ -31,6 +31,21 @@ test.describe('routes', () => {
     });
   }
 
+  // Worst case for copy on the wallpaper: swap the plate for pure white (brighter
+  // than any sky or waterfall pixel in it). On phones every on-art block carries its
+  // own panel, so axe contrast must pass even then.
+  for (const hash of ['', '#/work', '#/research', '#/about', '#/oss']) {
+    test(`${hash || 'home'} on-art copy stays AA over a white plate on phones`, async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await go(page, hash);
+      await page.addStyleTag({ content: '#wallpaper-poster{display:none!important} html,body{background:#fff!important}' });
+      await expect(page.locator('.z-onart').first()).toBeVisible();
+      const results = await new AxeBuilder({ page }).include('.z-onart').withRules(['color-contrast']).analyze();
+      const bad = results.violations.flatMap((v) => v.nodes.map((n) => `${n.target.join(' ')}: ${n.any[0]?.message ?? ''}`));
+      expect(bad).toEqual([]);
+    });
+  }
+
   test('unknown hashes fall back to home', async ({ page }) => {
     await go(page, '#/nope');
     await expect(page.getByRole('heading', { level: 1, name: 'Engineering for human flourishing.' })).toBeVisible();

@@ -41,7 +41,7 @@ export const BackgroundControls: React.FC = () => {
           <button
             type="button"
             onClick={() => setQuality(quality === 'high' ? 'low' : 'high')}
-            className={`${chip} font-mono text-[11px] leading-5 w-11 h-11 p-0`}
+            className={`${chip} font-mono text-xs leading-5 w-11 h-11 p-0`}
             aria-label={`Wallpaper quality: ${quality}. Switch to ${quality === 'high' ? 'low' : 'high'}`}
             title={`Quality: ${quality === 'high' ? 'High' : 'Low'}`}
             data-quality={quality}

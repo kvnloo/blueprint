@@ -26,7 +26,7 @@ const SiteFooter: React.FC = () => (
           </div>
         </div>
         <div>
-          <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase z-text-amber mb-4">Contact</h2>
+          <h2 className="text-xs font-semibold tracking-[0.14em] uppercase z-text-amber mb-4">Contact</h2>
           <ul className="divide-y divide-white/10">
             {CONTACTS.map((c) => (
               <li key={c.label}>
