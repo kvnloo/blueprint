@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect } from 'react';
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import SiteNav from './components/site/SiteNav';
 import SiteFooter from './components/site/SiteFooter';
 import HomePage from './components/site/HomePage';
@@ -16,6 +16,8 @@ import { detectWallpaperTier, tierFromUrl, type WallpaperTier } from './lib/wall
 
 // Lazy load the WebGL wallpaper player; the static poster (index.html) is the LCP.
 const LivingWallpaper = lazy(() => import('./components/wallpaper/LivingWallpaper'));
+type WallpaperFailure = 'error' | 'slow';
+const MAX_WALLPAPER_RETRIES = 3;
 
 // Legacy view id still used by ResearchHub ('article:<id>').
 export type ViewState = 'home' | 'research' | string;
@@ -29,7 +31,7 @@ export default function App() {
   // low memory / no WebGL keep the static poster. `?wallpaper=` forces a tier.
   const [forcedTier] = useState(() => tierFromUrl());
   const [tier, setTier] = useState<WallpaperTier>('poster');
-  const [webglFailed, setWebglFailed] = useState(false);
+  const [webglFailed, setWebglFailed] = useState<false | WallpaperFailure>(false);
   const route = useRoute();
 
   useEffect(() => {
@@ -69,6 +71,31 @@ export default function App() {
     }
   }, [tier, prefersReducedMotion, animationsEnabled]);
 
+  // Self-healing: a failed player (lost context that never came back, init
+  // error, adaptive give-up) is not final for the session. Errors retry once the
+  // page is visible; a give-up for low fps retries on the next return to the
+  // tab or route change. Bounded so a weak GPU settles on the poster.
+  const wallpaperRetries = useRef(0);
+  useEffect(() => {
+    if (!webglFailed) return;
+    let timer = 0;
+    const retry = () => {
+      if (document.hidden || wallpaperRetries.current >= MAX_WALLPAPER_RETRIES) return;
+      wallpaperRetries.current += 1;
+      setWebglFailed(false);
+    };
+    if (webglFailed === 'error') timer = window.setTimeout(retry, 1500);
+    document.addEventListener('visibilitychange', retry);
+    window.addEventListener('pageshow', retry);
+    window.addEventListener('hashchange', retry);
+    return () => {
+      window.clearTimeout(timer);
+      document.removeEventListener('visibilitychange', retry);
+      window.removeEventListener('pageshow', retry);
+      window.removeEventListener('hashchange', retry);
+    };
+  }, [webglFailed]);
+
   const showWebGL =
     tier === 'webgl' && loadWebGL && animationsEnabled && !webglFailed && !prefersReducedMotion;
 
@@ -79,7 +106,7 @@ export default function App() {
           between them and crossfades in after its first frame. */}
       {showWebGL && (
         <Suspense fallback={null}>
-          <LivingWallpaper quality={quality} adaptive={forcedTier !== 'webgl'} onFail={() => setWebglFailed(true)} />
+          <LivingWallpaper quality={quality} adaptive={forcedTier !== 'webgl'} onFail={(reason) => setWebglFailed(reason)} />
         </Suspense>
       )}
       <WallpaperHotspots />

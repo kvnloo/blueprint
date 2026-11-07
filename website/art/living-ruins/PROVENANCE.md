@@ -10,7 +10,11 @@
 - Runtime plates (2026-11-05) are cut from the 7680x4320 dream-loop reconstruction master
   (SHA256 `e89588bf31e1d3263c50f122703022f43da60c3ecc412ca961813a96a33378a4`, 30 overlapping ChatGPT/ComfyUI
   tiles over a RealESRGAN geometry control; RealESRGAN x4plus, x4plus-anime and animevideov3 were trialled after it
-  and rejected). The master is kept outside git (39 MB, `/mnt/zer0models/tmp/living-ruins-sol-20261028/`).
+  and rejected). The master is kept outside git (39 MB): published as the
+  [`living-ruins-8k-v1` release asset](https://github.com/kvnloo/blueprint/releases/tag/living-ruins-8k-v1), with
+  the standalone player that produced it in the private `kvnloo/living-ruins` repo.
+  - `src/public/wallpaper/living-ruins/art/` is the 7680x4320 DZI pyramid (512 px WebP tiles, 7.4 MB) cut from that
+    master. The Explore mode "Inspect 8K" chip opens it in OpenSeadragon, loaded on demand.
   Its fine detail is generated, not observed native 8K. Same composition as `base.png`, so the masks still register.
   - `base-4k.webp` 3840x2160: portrait phones, tall or high-DPI screens (WebGL texture and poster).
   - `base.webp` 1920x1080 and `base.jpg` 1920x1080: everything else, plus the og:image.

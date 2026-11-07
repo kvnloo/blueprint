@@ -39,9 +39,9 @@ export function webglHarness() {
   mock.method(performance, 'now', () => now);
   mock.method(globalThis, 'setTimeout', globalThis.setTimeout);
   Object.assign(globalThis, {
-    window: { innerWidth: 800, innerHeight: 600, devicePixelRatio: 1 },
-    document: { hidden: false },
-    Image: class { decode() { return Promise.resolve(); } },
+    window: { innerWidth: 800, innerHeight: 600, devicePixelRatio: 1, matchMedia: () => ({ matches: false }) },
+    document: { hidden: false, createElement: () => ({ width: 0, height: 0, getContext: () => ({ drawImage() {} }) }) },
+    Image: class { naturalWidth = 1920; naturalHeight = 1080; decode() { return Promise.resolve(); } },
     requestAnimationFrame: (fn: FrameRequestCallback) => { frames.set(++rafId, fn); return rafId; },
     cancelAnimationFrame: (n: number) => frames.delete(n),
   });

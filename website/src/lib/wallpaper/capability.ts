@@ -28,11 +28,10 @@ export async function detectWallpaperTier(opts: CapabilityOptions = {}): Promise
   if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return 'poster';
 
   const nav = navigator as NavigatorExtras;
+  // Save-Data opts out. Bandwidth estimates do not: the player reuses the poster
+  // plate already in cache and adds ~0.4 MB of maps, while Chrome's downlink
+  // estimate dips on any slow first fetch and used to pin the poster for the session.
   if (nav.connection?.saveData) return 'poster';
-  const et = nav.connection?.effectiveType;
-  if (et === 'slow-2g' || et === '2g') return 'poster';
-  const downlink = nav.connection?.downlink;
-  if (typeof downlink === 'number' && downlink > 0 && downlink < 1.5) return 'poster';
   if (typeof nav.deviceMemory === 'number' && nav.deviceMemory > 0 && nav.deviceMemory <= 2) return 'poster';
 
   // No WebGL, or a CPU rasteriser (SwiftShader, llvmpipe, WARP) that would starve the page.

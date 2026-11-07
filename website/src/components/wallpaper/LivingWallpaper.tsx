@@ -6,11 +6,12 @@ type Props = {
   quality: WallpaperQuality;
   /** Degrade and finally fall back to the poster when fps stays low. */
   adaptive?: boolean;
-  /** WebGL failed, the context was lost, or adaptive degradation gave up: keep the poster. */
-  onFail: () => void;
+  /** WebGL failed or the context never came back ('error'), or adaptive degradation gave up ('slow'). */
+  onFail: (reason: 'error' | 'slow') => void;
 };
 
-export const WALLPAPER_ASSET_BASE = `${import.meta.env.BASE_URL}wallpaper/living-ruins/`;
+import { WALLPAPER_ASSET_BASE } from '../../lib/wallpaper/assets';
+export { WALLPAPER_ASSET_BASE };
 
 /**
  * Living Ruins WebGL layer. Sits above the static poster (painted by
@@ -21,7 +22,7 @@ export const WALLPAPER_ASSET_BASE = `${import.meta.env.BASE_URL}wallpaper/living
 const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) => {
   const hostRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<LivingPlayer | null>(null);
-  const { exploring } = useWallpaperState();
+  const { exploring, inspecting } = useWallpaperState();
   const failRef = useRef(onFail);
   failRef.current = onFail;
 
@@ -49,11 +50,11 @@ const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) 
       cleanups.push(() => target.removeEventListener(type, fn, opts));
     };
 
-    const fail = () => {
+    const fail = (reason: 'error' | 'slow') => {
       if (cancelled) return;
       cancelled = true;
       setWallpaperState({ live: false });
-      failRef.current();
+      failRef.current(reason);
     };
 
     (async () => {
@@ -80,7 +81,7 @@ const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) 
           onFps: (fps) => {
             canvas.dataset.fps = fps.toFixed(1);
           },
-          onGiveUp: fail,
+          onGiveUp: () => fail('slow'),
         });
         playerRef.current = player;
         await player.init();
@@ -94,7 +95,7 @@ const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) 
       } catch (err) {
         console.warn('[wallpaper] WebGL player unavailable, keeping the poster:', err);
         player?.dispose();
-        fail();
+        fail('error');
       }
     })();
 
@@ -103,12 +104,24 @@ const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) 
       ro.observe(canvas!);
       cleanups.push(() => ro.disconnect());
 
-      const io = new IntersectionObserver(([entry]) => p.setVisible(entry.isIntersecting && !document.hidden), {
+      const io = new IntersectionObserver(([entry]) => p.setVisible(entry.isIntersecting && !document.hidden && !getWallpaperState().inspecting), {
         threshold: 0.01,
       });
       io.observe(canvas!);
       cleanups.push(() => io.disconnect());
-      on(document, 'visibilitychange', () => p.setVisible(!document.hidden));
+      let lostTimer = 0;
+      cleanups.push(() => window.clearTimeout(lostTimer));
+      on(document, 'visibilitychange', () => {
+        p.setVisible(!document.hidden && !getWallpaperState().inspecting);
+        // Mobile browsers drop GPU contexts of background tabs and do not
+        // always restore them. Back in view with no frames: rebuild from scratch.
+        window.clearTimeout(lostTimer);
+        if (!document.hidden && canvas.dataset.ready === '0') {
+          lostTimer = window.setTimeout(() => {
+            if (!document.hidden && canvas.dataset.ready === '0') fail('error');
+          }, 3000);
+        }
+      });
 
       // scroll-linked camera drift; scrollHeight is cached and refreshed on resize
       let maxScroll = 1;
@@ -185,6 +198,11 @@ const LivingWallpaper: React.FC<Props> = ({ quality, adaptive = true, onFail }) 
   useEffect(() => {
     playerRef.current?.setExplore(exploring);
   }, [exploring]);
+
+  // The 8K inspector covers the scene: stop drawing under it.
+  useEffect(() => {
+    playerRef.current?.setVisible(!inspecting && !document.hidden);
+  }, [inspecting]);
 
   return <div ref={hostRef} aria-hidden="true" />;
 };
