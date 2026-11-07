@@ -10,6 +10,8 @@ export type WallpaperState = {
   tiltActive: boolean;
   /** iOS-style permission gate is required before tilt can be used. */
   tiltNeedsPermission: boolean;
+  /** The 8K deep-zoom inspector is open over the scene. */
+  inspecting: boolean;
   fps: number;
 };
 
@@ -18,6 +20,7 @@ let state: WallpaperState = {
   exploring: false,
   tiltActive: false,
   tiltNeedsPermission: false,
+  inspecting: false,
   fps: 0,
 };
 const listeners = new Set<() => void>();

@@ -59,3 +59,16 @@ test('poster policy skips probing entirely', async () => {
   assert.equal(await h.capability.detectWallpaperTier({ forceTier: 'poster' }), 'poster');
   assert.equal(h.contexts(), 0);
 });
+
+test('a low bandwidth estimate keeps the live tier; Save-Data still opts out', async () => {
+  const h = await fixture('downlink');
+  const nav = (connection: object) => Object.defineProperty(globalThis, 'navigator', {
+    value: { connection, deviceMemory: 8 }, configurable: true,
+  });
+  nav({ downlink: 0.4, effectiveType: '2g', saveData: false });
+  const live = h.capability.detectWallpaperTier();
+  h.run();
+  assert.equal(await live, 'webgl');
+  nav({ downlink: 10, effectiveType: '4g', saveData: true });
+  assert.equal(await h.capability.detectWallpaperTier(), 'poster');
+});

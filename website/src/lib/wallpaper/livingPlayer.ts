@@ -258,6 +258,8 @@ export class LivingPlayer {
   private startedAt = 0;
   private lastNow = 0;
   private fpsWindowStart = 0;
+  /** Start of the current settle window (start, resume, context restore): no degradation inside it. */
+  private settleFrom = 0;
   private fpsFrames = 0;
   private slowSamples = 0;
   private firstFrame = false;
@@ -450,7 +452,7 @@ export class LivingPlayer {
 
   setVisible(v: boolean) {
     if (v) {
-      this.lastNow = this.fpsWindowStart = performance.now();
+      this.lastNow = this.fpsWindowStart = this.settleFrom = performance.now();
       this.fpsFrames = this.slowSamples = 0;
       this.fps = 0;
     }
@@ -518,7 +520,7 @@ export class LivingPlayer {
     const generation = this.generation;
     void restored.then(() => {
       if (!this.ready || this.disposed || generation !== this.generation) return;
-      this.lastNow = this.fpsWindowStart = performance.now();
+      this.lastNow = this.fpsWindowStart = this.settleFrom = performance.now();
       this.fpsFrames = this.slowSamples = 0;
       if (this.running && this.visible && !document.hidden && !this.raf) {
         this.raf = requestAnimationFrame(this.loop);
@@ -601,7 +603,8 @@ export class LivingPlayer {
     this.fpsFrames = 0;
     this.fpsWindowStart = now;
     this.opts.onFps?.(this.fps);
-    if (!this.opts.adaptive || now - this.startedAt < 3000) return;
+    // Texture re-uploads and shader warm-up after start, resume or restore are not steady-state fps.
+    if (!this.opts.adaptive || now - Math.max(this.startedAt, this.settleFrom) < 3000) return;
     // under 24 fps for 2 s -> degrade: resolution first, then extras, then poster
     this.slowSamples = this.fps < 24 ? this.slowSamples + 1 : 0;
     if (this.slowSamples < 4) return;
