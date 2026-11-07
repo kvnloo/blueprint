@@ -1,0 +1,10 @@
+.ruins-inspection { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; box-sizing: border-box; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); background: #06080a; color: #f3eee3; }
+.ruins-inspection__view { position: relative; flex: 1 1 0; min-height: 0; touch-action: none; }
+.ruins-inspection__bar { flex: 0 1 auto; box-sizing: border-box; max-height: 45%; overflow-y: auto; overscroll-behavior: contain; margin: 8px 12px 12px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 10px; border: 1px solid rgba(232, 199, 122, 0.45); border-radius: 14px; background: rgba(6, 8, 10, 0.82); backdrop-filter: blur(12px); }
+.ruins-inspection__bar strong { margin-right: auto; color: #e8c77a; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.1em; text-transform: uppercase; }
+.ruins-inspection__bar button, .ruins-inspection__bar a { min-height: 44px; padding: 8px 12px; border: 1px solid rgba(232, 199, 122, 0.45); border-radius: 9999px; background: rgba(8, 10, 12, 0.6); color: #f3eee3; font: inherit; cursor: pointer; }
+.ruins-inspection__bar a { display: inline-flex; align-items: center; text-decoration: none; }
+.ruins-inspection__bar [hidden] { display: none; }
+.ruins-inspection__bar :focus-visible, .ruins-inspection__view:focus-visible { outline: 2px solid #f5a524; outline-offset: 2px; }
+.ruins-inspection__status { font-size: 12px; color: rgba(243, 238, 227, 0.86); }
+@media (max-width: 700px) { .ruins-inspection__status { flex-basis: 100%; } }

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import hotspotData from '../../data/wallpaper-hotspots.json';
 import { plateToScreen, publishCamera, setPanFocus, staticCamera, subscribeCamera } from '../../lib/wallpaper/view';
-import { setWallpaperState, useWallpaperState } from '../../lib/wallpaper/store';
+import { getWallpaperState, setWallpaperState, useWallpaperState } from '../../lib/wallpaper/store';
+import { WALLPAPER_ASSET_BASE } from '../../lib/wallpaper/assets';
 import './wallpaper.css';
 
 type Hotspot = { id: string; label: string; sub: string; href: string; x: number; y: number; depth: number };
@@ -72,6 +73,26 @@ const WallpaperHotspots: React.FC = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [exploring]);
 
+  // 8K deep zoom: framed on the focused landmark, or the whole painting.
+  const inspect = async () => {
+    if (getWallpaperState().inspecting) return;
+    setWallpaperState({ inspecting: true });
+    const h = HOTSPOTS.find((x) => x.id === focused);
+    try {
+      const { openInspection } = await import('../../lib/wallpaper/inspection');
+      openInspection({
+        assetBase: WALLPAPER_ASSET_BASE,
+        landmark: h ? { label: h.label, sub: h.sub, href: h.href, x: h.x, y: h.y } : undefined,
+        onClose: (href) => {
+          setWallpaperState({ inspecting: false });
+          if (href) go(null, href);
+        },
+      });
+    } catch {
+      setWallpaperState({ inspecting: false });
+    }
+  };
+
   const go = (e: React.MouseEvent | null, href: string) => {
     e?.preventDefault();
     setWallpaperState({ exploring: false });
@@ -121,6 +142,17 @@ const WallpaperHotspots: React.FC = () => {
             <span className="wallpaper-chip__sub">{focused === h.id ? <>Go to {h.sub} &rarr;</> : h.sub}</span>
           </button>
         ))}
+        <button
+          type="button"
+          className="wallpaper-chip wallpaper-chip--inspect"
+          data-chip="inspect"
+          tabIndex={exploring ? 0 : -1}
+          aria-label={focused ? 'Zoom into this landmark in 8K' : 'Zoom into the painting in 8K'}
+          onClick={() => void inspect()}
+        >
+          <span className="wallpaper-chip__name">Inspect 8K</span>
+          <span className="wallpaper-chip__sub">{focused ? 'Zoom in here' : 'Pinch to zoom'}</span>
+        </button>
       </nav>
     </div>
   );

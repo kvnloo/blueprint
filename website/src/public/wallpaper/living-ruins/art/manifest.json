@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "width": 7680,
+  "height": 4320,
+  "tileSize": 512,
+  "overlap": 1,
+  "format": "webp",
+  "dzi": "scene.dzi",
+  "master8k": "https://github.com/kvnloo/blueprint/releases/download/living-ruins-8k-v1/living-ruins-8k.png",
+  "master8kBytes": 40912176,
+  "provenance": "https://github.com/kvnloo/blueprint/blob/dev/website/art/living-ruins/PROVENANCE.md",
+  "master8kSha256": "e89588bf31e1d3263c50f122703022f43da60c3ecc412ca961813a96a33378a4"
+}

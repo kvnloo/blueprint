@@ -106,9 +106,19 @@
   top: 40px;
 }
 
-/* Portrait: landmark chips along the bottom (Explore mode only). */
+/* Portrait: landmark chips along the bottom (Explore mode only).
+   Landscape keeps only the 8K inspect chip, bottom-left. */
 .wallpaper-chips {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+}
+.wallpaper-chip:not(.wallpaper-chip--inspect) {
   display: none;
+}
+.wallpaper-hud[data-active='1'] .wallpaper-chip {
+  pointer-events: auto;
 }
 @media (max-aspect-ratio: 1/1) {
   .wallpaper-chips {
@@ -125,8 +135,8 @@
   .wallpaper-chips::-webkit-scrollbar {
     display: none;
   }
-  .wallpaper-hud[data-active='1'] .wallpaper-chip {
-    pointer-events: auto;
+  .wallpaper-chip:not(.wallpaper-chip--inspect) {
+    display: flex;
   }
 }
 .wallpaper-chip {
