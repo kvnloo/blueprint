@@ -123,6 +123,37 @@ test.describe('writing', () => {
     expect(await writing.getByText('Read Article').count()).toBeGreaterThan(0);
   });
 
+  test('held-out search negative control returns no cards and clears back to nine', async ({ page }) => {
+    await go(page, '#/research');
+    const writing = page.locator('#writing');
+    await expect(writing.getByText('Read Article')).toHaveCount(9);
+    await writing.getByPlaceholder('Search articles...').fill('qjvkxpmztrw');
+    await expect(writing.getByText('No articles found', { exact: true })).toBeVisible();
+    await expect(writing.getByText('Read Article')).toHaveCount(0);
+    await expect(writing.getByText('Showing 0 of 9 articles')).toBeVisible();
+    await writing.getByRole('button', { name: 'Clear all filters', exact: true }).click();
+    await expect(writing.getByPlaceholder('Search articles...')).toHaveValue('');
+    await expect(writing.getByText('No articles found', { exact: true })).toHaveCount(0);
+    await expect(writing.getByText('Read Article')).toHaveCount(9);
+  });
+
+  test('held-out navigation negative control rejects a missing article and recovers', async ({ page }) => {
+    await go(page, '#/article/o01-nonexistent-qjvkxpmztrw');
+    await expect(page.getByText('Article not found', { exact: true })).toBeVisible();
+    await expect(page.locator('main').getByRole('heading', { level: 1 })).toHaveCount(0);
+    const menu = page.getByRole('button', { name: 'Open menu' });
+    if (await menu.isVisible()) {
+      await menu.click();
+      await page.locator('#mobile-menu').getByRole('link', { name: 'Research' }).click();
+    } else {
+      await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Research' }).click();
+    }
+    await expect(page).toHaveURL(/#\/research$/);
+    await expect(page.locator('#writing').getByText('Read Article')).toHaveCount(9);
+    await page.goBack();
+    await expect(page.getByText('Article not found', { exact: true })).toBeVisible();
+  });
+
   test('article deep links load directly', async ({ page }) => {
     await go(page, '#/article/limitless-protocol');
     await expect(page.getByRole('heading', { name: /Limitless Protocol/i }).first()).toBeVisible();
